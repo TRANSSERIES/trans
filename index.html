@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TRANS</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -12,7 +14,7 @@
         }
 
         body {
-            font-family: 'Helvetica Neue', Arial, sans-serif;
+            font-family: 'Inter', sans-serif;
             background: #000;
             color: #fff;
             overflow-x: hidden;
@@ -23,32 +25,39 @@
             position: fixed;
             top: 0;
             width: 100%;
-            padding: 30px 60px;
+            padding: 25px 60px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             z-index: 1000;
-            background: rgba(0,0,0,0.95);
+            background: rgba(0,0,0,0.98);
             border-bottom: 1px solid #222;
         }
 
         .logo {
-            font-size: 28px;
+            font-family: 'Playfair Display', serif;
+            font-size: 32px;
             font-weight: 700;
-            letter-spacing: 4px;
+            letter-spacing: 6px;
             cursor: pointer;
+            transition: opacity 0.3s;
+        }
+
+        .logo:hover {
+            opacity: 0.7;
         }
 
         nav {
             display: flex;
-            gap: 40px;
+            gap: 50px;
         }
 
         nav a {
             color: #fff;
             text-decoration: none;
-            font-size: 13px;
+            font-size: 12px;
             letter-spacing: 2px;
+            font-weight: 500;
             transition: opacity 0.3s;
         }
 
@@ -74,55 +83,74 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
+            gap: 30px;
         }
 
         .home-hero h1 {
-            font-size: 100px;
+            font-family: 'Playfair Display', serif;
+            font-size: 120px;
             font-weight: 700;
-            letter-spacing: 20px;
-            margin-bottom: 20px;
+            letter-spacing: 8px;
         }
 
         .home-hero p {
-            font-size: 16px;
-            letter-spacing: 4px;
+            font-size: 14px;
+            letter-spacing: 3px;
+            opacity: 0.6;
+            font-weight: 300;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 25px;
+            margin-top: 40px;
+        }
+
+        .social-icons a {
+            color: #fff;
+            font-size: 18px;
+            transition: all 0.3s;
             opacity: 0.7;
+        }
+
+        .social-icons a:hover {
+            opacity: 1;
+            transform: scale(1.2);
         }
 
         /* 공통 페이지 스타일 */
         .page-content {
-            max-width: 1200px;
+            max-width: 1000px;
             margin: 0 auto;
-            padding: 60px;
+            padding: 80px 60px;
         }
 
         .page-title {
-            font-size: 48px;
-            letter-spacing: 8px;
-            margin-bottom: 60px;
+            font-family: 'Playfair Display', serif;
+            font-size: 52px;
+            letter-spacing: 4px;
+            margin-bottom: 80px;
             text-align: center;
+            font-weight: 700;
         }
 
         /* ABOUT 페이지 */
-        .about-main {
-            text-align: center;
-            margin-bottom: 60px;
-        }
-
         .about-main h2 {
-            font-size: 28px;
-            font-weight: 500;
-            letter-spacing: 2px;
+            font-size: 20px;
+            font-weight: 400;
+            letter-spacing: 1px;
             line-height: 1.8;
-            margin-bottom: 20px;
+            margin-bottom: 40px;
+            text-align: center;
+            opacity: 0.9;
         }
 
         .about-text {
-            max-width: 900px;
+            max-width: 800px;
             margin: 0 auto;
-            line-height: 2;
-            font-size: 15px;
-            opacity: 0.85;
+            line-height: 1.8;
+            font-size: 14px;
+            opacity: 0.8;
             text-align: left;
         }
 
@@ -137,7 +165,7 @@
         }
 
         .project-item {
-            padding: 40px 0;
+            padding: 35px 0;
             border-bottom: 1px solid #333;
         }
 
@@ -146,30 +174,30 @@
         }
 
         .project-title {
-            font-size: 22px;
+            font-size: 18px;
             font-weight: 500;
-            letter-spacing: 1px;
-            margin-bottom: 15px;
+            letter-spacing: 0.5px;
+            margin-bottom: 12px;
         }
 
         .project-info {
-            font-size: 14px;
-            opacity: 0.7;
+            font-size: 12px;
+            opacity: 0.6;
             letter-spacing: 0.5px;
-            margin-bottom: 20px;
         }
 
         /* 갤러리 슬라이더 */
         .gallery-section {
-            margin-bottom: 80px;
+            margin-bottom: 100px;
         }
 
         .gallery-year {
-            font-size: 24px;
-            letter-spacing: 3px;
+            font-size: 20px;
+            letter-spacing: 2px;
             margin-bottom: 30px;
             text-align: center;
-            opacity: 0.8;
+            opacity: 0.7;
+            font-weight: 300;
         }
 
         .slider-container {
@@ -180,7 +208,7 @@
 
         .slider {
             overflow: hidden;
-            border-radius: 4px;
+            border-radius: 2px;
         }
 
         .slides {
@@ -204,26 +232,26 @@
             position: absolute;
             top: 50%;
             transform: translateY(-50%);
-            background: rgba(255,255,255,0.1);
+            background: rgba(255,255,255,0.08);
             border: none;
             color: #fff;
-            font-size: 24px;
-            padding: 15px 20px;
+            font-size: 20px;
+            padding: 12px 16px;
             cursor: pointer;
             transition: background 0.3s;
             z-index: 10;
         }
 
         .slider-btn:hover {
-            background: rgba(255,255,255,0.2);
+            background: rgba(255,255,255,0.15);
         }
 
         .slider-btn.prev {
-            left: 10px;
+            left: 15px;
         }
 
         .slider-btn.next {
-            right: 10px;
+            right: 15px;
         }
 
         .slider-dots {
@@ -233,11 +261,11 @@
 
         .dot {
             display: inline-block;
-            width: 8px;
-            height: 8px;
+            width: 6px;
+            height: 6px;
             border-radius: 50%;
-            background: #555;
-            margin: 0 5px;
+            background: #444;
+            margin: 0 6px;
             cursor: pointer;
             transition: background 0.3s;
         }
@@ -248,74 +276,160 @@
 
         /* TICKET 페이지 */
         .ticket-content {
-            text-align: center;
-            max-width: 800px;
+            max-width: 600px;
             margin: 0 auto;
         }
 
         .ticket-info {
-            margin-bottom: 40px;
+            margin-bottom: 50px;
             padding: 40px;
-            background: #1a1a1a;
-            border-radius: 8px;
+            background: #0a0a0a;
+            border: 1px solid #222;
+            border-radius: 2px;
         }
 
         .ticket-info h3 {
-            font-size: 24px;
-            letter-spacing: 2px;
+            font-size: 20px;
+            letter-spacing: 1px;
             margin-bottom: 20px;
+            font-weight: 600;
         }
 
         .ticket-info p {
-            font-size: 15px;
-            line-height: 2;
-            opacity: 0.8;
+            font-size: 13px;
+            line-height: 1.8;
+            opacity: 0.75;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 12px;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+            opacity: 0.7;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 10px 12px;
+            background: #1a1a1a;
+            border: 1px solid #333;
+            color: #fff;
+            font-size: 13px;
+            border-radius: 2px;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #666;
+            background: #252525;
         }
 
         .ticket-btn {
             display: inline-block;
-            padding: 20px 50px;
+            width: 100%;
+            padding: 14px;
             background: #fff;
             color: #000;
             text-decoration: none;
-            letter-spacing: 2px;
-            font-size: 14px;
+            letter-spacing: 1.5px;
+            font-size: 13px;
             font-weight: 600;
-            border-radius: 4px;
+            border-radius: 2px;
             transition: all 0.3s;
+            border: none;
+            cursor: pointer;
         }
 
         .ticket-btn:hover {
             background: #ccc;
-            transform: scale(1.05);
+            transform: scale(1.02);
+        }
+
+        .ticket-btn.disabled {
+            background: #444;
+            color: #999;
+            cursor: not-allowed;
+            opacity: 0.5;
+        }
+
+        .coming-soon {
+            text-align: center;
+            padding: 40px;
+            opacity: 0.5;
+            font-size: 14px;
+            letter-spacing: 2px;
         }
 
         /* CONTACT 페이지 */
         .contact-content {
-            max-width: 600px;
+            max-width: 500px;
             margin: 0 auto;
             text-align: center;
-            line-height: 2.5;
-            font-size: 16px;
         }
 
-        .contact-content a {
+        .contact-icons {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-bottom: 50px;
+        }
+
+        .contact-item {
+            text-align: center;
+        }
+
+        .contact-icon {
+            font-size: 32px;
+            margin-bottom: 15px;
+            opacity: 0.8;
+            transition: all 0.3s;
+        }
+
+        .contact-item a {
             color: #fff;
             text-decoration: none;
-            border-bottom: 1px solid #fff;
+            font-size: 13px;
+            letter-spacing: 1px;
             transition: opacity 0.3s;
         }
 
-        .contact-content a:hover {
+        .contact-item a:hover {
             opacity: 0.6;
+        }
+
+        .contact-item a:hover .contact-icon {
+            opacity: 1;
+            transform: scale(1.1);
+        }
+
+        .contact-divider {
+            width: 40px;
+            height: 1px;
+            background: #333;
+            margin: 50px auto;
+        }
+
+        .contact-text {
+            font-size: 13px;
+            line-height: 2;
+            opacity: 0.7;
         }
 
         /* Footer */
         footer {
             padding: 40px;
             text-align: center;
-            opacity: 0.5;
-            font-size: 12px;
+            opacity: 0.4;
+            font-size: 11px;
             letter-spacing: 2px;
             border-top: 1px solid #333;
         }
@@ -327,28 +441,36 @@
             }
 
             nav {
-                gap: 20px;
+                gap: 25px;
             }
 
             nav a {
-                font-size: 11px;
+                font-size: 10px;
+            }
+
+            .logo {
+                font-size: 24px;
             }
 
             .home-hero h1 {
-                font-size: 50px;
-                letter-spacing: 10px;
+                font-size: 60px;
+                letter-spacing: 4px;
             }
 
             .page-content {
-                padding: 40px 30px;
+                padding: 60px 30px;
             }
 
             .page-title {
                 font-size: 36px;
             }
 
-            .slider-container {
-                max-width: 100%;
+            .contact-icons {
+                gap: 30px;
+            }
+
+            .contact-icon {
+                font-size: 24px;
             }
         }
     </style>
@@ -371,6 +493,17 @@
         <div class="home-hero">
             <h1>TRANS</h1>
             <p>SERIES</p>
+            <div class="social-icons">
+                <a href="https://www.instagram.com/trans_series" target="_blank" title="Instagram">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="https://www.youtube.com/@transseries" target="_blank" title="YouTube">
+                    <i class="fab fa-youtube"></i>
+                </a>
+                <a href="mailto:trans0819@naver.com" title="Email">
+                    <i class="fas fa-envelope"></i>
+                </a>
+            </div>
         </div>
     </div>
 
@@ -382,7 +515,7 @@
                 <h2>TRANS = 變(변)<br>우리는 고정되기를 거부한다.<br>우리는 만남과 충돌을 상상한다.</h2>
             </div>
             <div class="about-text">
-                <p>TRANS는 '변(變)–'의 뜻처럼, 고정되지 않고 끊임없이 움직이며 확장하는 예술 프로젝트입니다. 다양한 예술 장르가 만나 서로를 변화시키며, 공동창작(co-creation)의 진짜 가능성을 탐구하고 있습니다.</p>
+                <p>TRANS는 '변(變)'의 뜻처럼, 고정되지 않고 느슨함에 이 움직임이며 확장하는 예술 프로젝트입니다. 다양한 예술 장르가 만나 서로를 변화시키며, 공동창작(co-creation)의 진짜 가능성을 탐구하고 있습니다.</p>
                 <p>단순한 협업을 넘어, 각자의 고유성이 충돌하고 교차하는 과정을 통해 '공존 가능한 예술 생태계'를 상상합니다. TRANS는 하나의 완성된 형태가 아닙니다. 과정 속에서 피어나는 질문, 실패, 충돌, 변화를 그대로 껴안으며 '어디로 튈지 모르는 가능성의 공간'을 확장해 나갑니다.</p>
             </div>
         </div>
@@ -451,10 +584,10 @@
             </div>
 
             <!-- 2026 Upcoming -->
-            <div class="projects-list" style="margin-top: 40px;">
+            <div class="projects-list" style="margin-top: 60px;">
                 <div class="project-item">
                     <div class="project-title">"포옹 / Embrace"</div>
-                    <div class="project-info" style="opacity: 0.9;">SeMA West Seoul Museum of Art · 2026 (Upcoming)</div>
+                    <div class="project-info" style="opacity: 0.6;">SeMA West Seoul Museum of Art · 2026 (Upcoming)</div>
                 </div>
             </div>
         </div>
@@ -465,7 +598,10 @@
         <div class="page-content">
             <h1 class="page-title">TICKET</h1>
             <div class="ticket-content">
-                <div class="ticket-info">
+                <div class="coming-soon">
+                    COMING SOON
+                </div>
+                <div class="ticket-info" style="opacity: 0.5;">
                     <h3>TRANS III: 주어 없는 움직임</h3>
                     <p>
                         2025년 8월 5일 - 8월 6일<br>
@@ -473,7 +609,7 @@
                         티켓 예매는 추후 공지됩니다.
                     </p>
                 </div>
-                <a href="#" class="ticket-btn">예매 안내 받기</a>
+                <button class="ticket-btn disabled">예매하기</button>
             </div>
         </div>
     </div>
@@ -483,11 +619,33 @@
         <div class="page-content">
             <h1 class="page-title">CONTACT</h1>
             <div class="contact-content">
-                <p>공연 문의 및 협업 제안</p>
-                <p><a href="mailto:trans0819@naver.com">trans0819@naver.com</a></p>
-                <br><br>
-                <p>Instagram: <a href="https://www.instagram.com/trans_series" target="_blank">@trans_series</a></p>
-                <p>Youtube: <a href="https://www.youtube.com/@transseries" target="_blank">@transseries</a></p>
+                <div class="contact-icons">
+                    <a href="mailto:trans0819@naver.com" class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div>EMAIL</div>
+                    </a>
+                    <a href="https://www.instagram.com/trans_series" target="_blank" class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fab fa-instagram"></i>
+                        </div>
+                        <div>INSTAGRAM</div>
+                    </a>
+                    <a href="https://www.youtube.com/@transseries" target="_blank" class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fab fa-youtube"></i>
+                        </div>
+                        <div>YOUTUBE</div>
+                    </a>
+                </div>
+                
+                <div class="contact-divider"></div>
+                
+                <div class="contact-text">
+                    <p>공연 문의 및 협업 제안</p>
+                    <p style="margin-top: 15px;">trans0819@naver.com</p>
+                </div>
             </div>
         </div>
     </div>
@@ -582,7 +740,18 @@
             });
             document.getElementById(pageId).classList.add('active');
             window.scrollTo(0, 0);
+            
+            // URL 히스토리 업데이트
+            window.history.pushState({ page: pageId }, '', `#${pageId}`);
         }
+
+        // 페이지 로드시 URL에서 페이지 복원
+        window.addEventListener('load', () => {
+            const hash = window.location.hash.substring(1);
+            if (hash && document.getElementById(hash)) {
+                showPage(hash);
+            }
+        });
 
         // 초기화
         initSlider('2023');
