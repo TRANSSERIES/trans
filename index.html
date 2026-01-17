@@ -60,8 +60,35 @@
         .project-tab:hover { opacity: 0.8; }
         .project-section { display: none; }
         .project-section.active { display: block; }
-        .project-item { padding: 30px 0; border-bottom: 1px solid #222; }
+        .project-item {
+            padding: 30px 0;
+            border-bottom: 1px solid #222;
+            position: relative;
+        }
         .project-item:last-child { border-bottom: none; }
+        .project-status {
+            position: absolute;
+            right: 0;
+            top: 35px;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+        .sold-out { color: #ff3333; }
+        .buy-link {
+            color: #fff;
+            text-decoration: none;
+            padding: 8px 20px;
+            border: 1px solid #fff;
+            border-radius: 2px;
+            transition: all 0.3s;
+            font-size: 11px;
+            letter-spacing: 1px;
+        }
+        .buy-link:hover {
+            background: #fff;
+            color: #000;
+        }
         .project-year { font-size: 11px; opacity: 0.5; letter-spacing: 1px; margin-bottom: 8px; }
         .project-title { font-size: 17px; font-weight: 500; letter-spacing: 0.3px; margin-bottom: 10px; }
         .project-info { font-size: 11px; opacity: 0.55; letter-spacing: 0.3px; line-height: 1.6; }
@@ -265,18 +292,55 @@
             </div>
 
             <div id="archive-section" class="project-section">
-                <div class="projects-list">
-                    <div class="project-item">
-                        <div class="project-year">2024</div>
-                        <div class="project-title">도록 - WORKS V.1 TRANS</div>
+                <!-- WORKS V.1 -->
+                <div class="gallery-section">
+                    <div class="projects-list">
+                        <div class="project-item">
+                            <div class="project-year">2024</div>
+                            <div class="project-title">WORKS V.1 TRANS</div>
+                            <div class="project-status sold-out">SOLD OUT</div>
+                        </div>
                     </div>
-                    <div class="project-item">
-                        <div class="project-year">2025</div>
-                        <div class="project-title">도록 - WORKS V.2 TRANS III : Gesture of the Lost Subject</div>
+                    <div class="slider-container">
+                        <div class="slider"><div class="slides" id="slides-archive1"></div></div>
+                        <button class="slider-btn prev" onclick="changeSlide('archive1', -1)">‹</button>
+                        <button class="slider-btn next" onclick="changeSlide('archive1', 1)">›</button>
+                        <div class="slider-dots" id="dots-archive1"></div>
                     </div>
-                    <div class="project-item">
-                        <div class="project-year">2025</div>
-                        <div class="project-title">다큐멘터리 상영회 및 애프터 토크<br>TRANS III : 주어 없는 움직임 — After Talk & Screening</div>
+                </div>
+
+                <!-- WORKS V.2 -->
+                <div class="gallery-section">
+                    <div class="projects-list">
+                        <div class="project-item">
+                            <div class="project-year">2025</div>
+                            <div class="project-title">WORKS V.2 TRANS III : Gesture of the Lost Subject</div>
+                            <div class="project-status">
+                                <a href="https://docs.google.com/forms/d/e/1FAIpQLScMUcb01CuLRD90xjreMD3NTxgekUis2CbytDm3yPYPvtcEiA/viewform" target="_blank" class="buy-link">구매하기</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="slider-container">
+                        <div class="slider"><div class="slides" id="slides-archive2"></div></div>
+                        <button class="slider-btn prev" onclick="changeSlide('archive2', -1)">‹</button>
+                        <button class="slider-btn next" onclick="changeSlide('archive2', 1)">›</button>
+                        <div class="slider-dots" id="dots-archive2"></div>
+                    </div>
+                </div>
+
+                <!-- 상영회 및 애프터토크 -->
+                <div class="gallery-section">
+                    <div class="projects-list">
+                        <div class="project-item">
+                            <div class="project-year">2025</div>
+                            <div class="project-title">TRANS III : 주어 없는 움직임 — After Talk & Screening</div>
+                        </div>
+                    </div>
+                    <div class="slider-container">
+                        <div class="slider"><div class="slides" id="slides-archive3"></div></div>
+                        <button class="slider-btn prev" onclick="changeSlide('archive3', -1)">‹</button>
+                        <button class="slider-btn next" onclick="changeSlide('archive3', 1)">›</button>
+                        <div class="slider-dots" id="dots-archive3"></div>
                     </div>
                 </div>
             </div>
@@ -321,9 +385,12 @@
         const images = {
             '2023': ['1A6OYBqS6dh-zixzP5P3gNNESJNvQkhwD', '1v4yWOcdDdzpBelwkDlSdZljjj4TBvKWa', '1Fkb0DjnWlliJkO-yNi82CLbFrJsCrnB5', '1FqqYWbcCBWCbrJmLoskQWJmBKF3mWXw2', '1kNZawehpgYM04EeUh6enaJn0DRYXpADZ', '1gL2bWHyu5Mb1qs2-j9JJihk9ugDZ2Feh', '1D4ql49weDALXXD6t_mPm3MIkGAjj7she', '1IbV9uQi_QCrmQajH4dplBmj1wZA8B5uw', '1UjjOzHIrM0T3Z0fDH5_S2rLhx02uYCvE', '1WjNG3al6ski5SO9CUeXGuo4R3wabYLEA', '1eHEBjPFHk53bVOofcpx_74jEi1fgsqPZ'],
             '2024': ['1b2b0193SPKSjowd4bzgUG181aJAkZMgV', '1d-4RFdUMHrToQB4wSDusp-5DDjibk_XE', '1KZV5ZYlnP5yHZRNd2d0Uk5bNtnTJtehf', '1DnRcrdCethVq4XlStVayoPI3NWLGxrv3', '1g3owEbMmqoKOEqgovhfHFgWHynHl10fD', '1IuQls4deH68za6UGpj7YD2KxMWuQFt3X', '1O2zIp4V5igJGwfhMlk8bPA84wwJUBTS5', '1SuuPoDIH0957T-M6o_yCXxAwBGLRJaVc', '1GIMcg8xLbsjm6gbg6yQ-Ty8qQdeo7q6T', '1eJEaTVuwcIeqvx2v4lvn7tbqDYCuO5oA'],
-            '2025': ['1SExUhJi5j9xB8B2fAjvjCPdIE9HcGcAQ', '1J6K57vgL64EucawpJnzGdgm3iv5VH1b9', '1-ZFsQIpb0Vye7HG57i8pfjQmdIVELU-8', '1YYOeTRwycu-5B9gKL8iKwe9m6Ts_M9oX', '1EWcIXXNvhOfz44C9MxOv0oOHWuybNLGS', '1v1cBL4ezqcrcVs8JSptgFrJPHZDgBA9a', '1gTL6LtKrl5yjdKV9Njk7_s3FbuKcGz9P', '1f0SNXBAdSbvW_U0WIVb94Ks3tsJGYPr7', '1rgMAosKzYg_XXlUHoHN-faQqAQyquron', '137GHjXfJbbAJDqQMYv0sMNSOi7sKticE']
+            '2025': ['1SExUhJi5j9xB8B2fAjvjCPdIE9HcGcAQ', '1J6K57vgL64EucawpJnzGdgm3iv5VH1b9', '1-ZFsQIpb0Vye7HG57i8pfjQmdIVELU-8', '1YYOeTRwycu-5B9gKL8iKwe9m6Ts_M9oX', '1EWcIXXNvhOfz44C9MxOv0oOHWuybNLGS', '1v1cBL4ezqcrcVs8JSptgFrJPHZDgBA9a', '1gTL6LtKrl5yjdKV9Njk7_s3FbuKcGz9P', '1f0SNXBAdSbvW_U0WIVb94Ks3tsJGYPr7', '1rgMAosKzYg_XXlUHoHN-faQqAQyquron', '137GHjXfJbbAJDqQMYv0sMNSOi7sKticE'],
+            'archive1': ['1MAYaGvQPsIXep2PSDkapEmwd0IDEOJn1'],
+            'archive2': ['1O8qzW_pcVueHXnxW3SAQsPyECqkWccQV', '1ndZm00JgrSbLV5X60g9ghhwC_TghG2xz'],
+            'archive3': ['1UDsZvYvuBZoKK03ktF2aPp8aOo1InO13', '1mykK9gS-tPRrwDKXok5of2aoycBy16q5', '1eMS71XiPyjo0R1jXygWCQ2rk8Cmm2p7y', '1I9NQow5hn7AjlZuFefJsB_a0k8VZtqpg', '1vHLew2wbkfv1A_hjhc_vm_HJsuVjIZP8', '1CugG4SVtKBx2anrparYrzCdB8nvF9--T', '1a0U4mKRUIoBFZl7mmi4Nq1CIxMB3jHZb']
         };
-        let currentSlide = { '2023': 0, '2024': 0, '2025': 0 };
+        let currentSlide = { '2023': 0, '2024': 0, '2025': 0, 'archive1': 0, 'archive2': 0, 'archive3': 0 };
         let touchStartX = 0, touchEndX = 0;
 
         function initSlider(year) {
