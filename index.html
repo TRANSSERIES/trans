@@ -38,7 +38,7 @@
         .home-hero h1 {
             font-size: 140px;
             font-weight: 900;
-            letter-spacing: -2px;
+            letter-spacing: -8px;
             cursor: pointer;
             transition: opacity 0.3s;
         }
@@ -297,6 +297,7 @@
                     <div class="projects-list">
                         <div class="project-item">
                             <div class="project-year">2024</div>
+                            <span class="project-category">book</span>
                             <div class="project-title">WORKS V.1 TRANS</div>
                             <div class="project-status sold-out">SOLD OUT</div>
                         </div>
@@ -314,6 +315,7 @@
                     <div class="projects-list">
                         <div class="project-item">
                             <div class="project-year">2025</div>
+                            <span class="project-category">book</span>
                             <div class="project-title">WORKS V.2 TRANS III : Gesture of the Lost Subject</div>
                             <div class="project-status">
                                 <a href="https://docs.google.com/forms/d/e/1FAIpQLScMUcb01CuLRD90xjreMD3NTxgekUis2CbytDm3yPYPvtcEiA/viewform" target="_blank" class="buy-link">구매하기</a>
@@ -333,7 +335,8 @@
                     <div class="projects-list">
                         <div class="project-item">
                             <div class="project-year">2025</div>
-                            <div class="project-title">TRANS III : 주어 없는 움직임 — After Talk & Screening</div>
+                            <span class="project-category">Artist Talk (Streaming)</span>
+                            <div class="project-title">TRANS III : 주어 없는 움직임</div>
                         </div>
                     </div>
                     <div class="slider-container">
@@ -451,6 +454,9 @@
         initSlider('2023');
         initSlider('2024');
         initSlider('2025');
+        initSlider('archive1');
+        initSlider('archive2');
+        initSlider('archive3');
 
         function showProjectTab(tab) {
             document.querySelectorAll('.project-tab').forEach(t => t.classList.remove('active'));
