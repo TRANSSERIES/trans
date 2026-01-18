@@ -470,7 +470,7 @@
         </div>
     </div>
 
-    <footer><p>© 2026 TRANS. ALL RIGHTS RESERVED.</p></footer>
+    <footer><p>© 2025 TRANS. ALL RIGHTS RESERVED.</p></footer>
 
     <script>
         // 인트로 애니메이션
@@ -493,6 +493,26 @@
         const introText = document.getElementById('introText');
         const intro = document.getElementById('intro');
         
+        // 타이핑 사운드 생성 (Web Audio API)
+        const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+        
+        function playTypeSound() {
+            const oscillator = audioContext.createOscillator();
+            const gainNode = audioContext.createGain();
+            
+            oscillator.connect(gainNode);
+            gainNode.connect(audioContext.destination);
+            
+            oscillator.frequency.value = isDeleting ? 400 : 600;
+            oscillator.type = 'sine';
+            
+            gainNode.gain.setValueAtTime(0.1, audioContext.currentTime);
+            gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.05);
+            
+            oscillator.start(audioContext.currentTime);
+            oscillator.stop(audioContext.currentTime + 0.05);
+        }
+        
         function typeWriter() {
             const currentWord = words[currentWordIndex];
             
@@ -500,17 +520,23 @@
                 // 타이핑 중
                 currentText = currentWord.substring(0, charIndex + 1);
                 charIndex++;
+                playTypeSound();
                 
                 if (charIndex === currentWord.length) {
                     // 단어 완성
                     if (currentWordIndex === words.length - 1) {
                         // 마지막 단어 (TRANS)
                         introText.textContent = currentText;
-                        setTimeout(endIntro, 1500);
+                        setTimeout(() => {
+                            endIntro();
+                            setTimeout(() => {
+                                showPage('home');
+                            }, 800);
+                        }, 1500);
                         return;
                     }
                     isDeleting = true;
-                    setTimeout(typeWriter, 800); // 완성 후 대기
+                    setTimeout(typeWriter, 800);
                     introText.textContent = currentText;
                     return;
                 }
@@ -518,8 +544,9 @@
                 // 삭제 중
                 currentText = currentWord.substring(0, charIndex - 1);
                 charIndex--;
+                playTypeSound();
                 
-                if (charIndex === 5) { // "TRANS"만 남김
+                if (charIndex === 5) {
                     isDeleting = false;
                     charIndex = 5;
                     currentWordIndex++;
@@ -530,7 +557,7 @@
             }
             
             introText.textContent = currentText;
-            const speed = isDeleting ? 50 : 80; // 삭제는 더 빠르게
+            const speed = isDeleting ? 50 : 80;
             setTimeout(typeWriter, speed);
         }
         
@@ -546,15 +573,44 @@
             charIndex = words[words.length - 1].length;
             isDeleting = false;
             introText.textContent = 'TRANS';
-            setTimeout(endIntro, 500);
+            endIntro();
+            setTimeout(() => {
+                showPage('home');
+            }, 800);
         }
         
-        // 인트로 시작
+        // 인트로 시작 (사용자 인터랙션 후 오디오 활성화)
         window.addEventListener('load', () => {
-            setTimeout(typeWriter, 500);
+            // 클릭이나 터치로 오디오 컨텍스트 활성화
+            const startIntro = () => {
+                if (audioContext.state === 'suspended') {
+                    audioContext.resume();
+                }
+                setTimeout(typeWriter, 500);
+                document.removeEventListener('click', startIntro);
+                document.removeEventListener('touchstart', startIntro);
+            };
+            
+            // 자동 시작 시도
+            setTimeout(() => {
+                if (audioContext.state === 'suspended') {
+                    audioContext.resume().then(() => {
+                        typeWriter();
+                    }).catch(() => {
+                        // 오디오 없이 시작
+                        typeWriter();
+                    });
+                } else {
+                    typeWriter();
+                }
+            }, 500);
+            
+            // 사용자 인터랙션 대기
+            document.addEventListener('click', startIntro, { once: true });
+            document.addEventListener('touchstart', startIntro, { once: true });
         });
 
-        const images = {
+       const images = {
             '2023': ['1p6PZxTKRD5CD7Bsn-4GBIdua8SXnq2X2', '1oicnoeqiKautvJ9Jigldh3hjmmV2J77R', '18iFtU2OafU-eO98C7qQwayWHOD-9ioBM', '1KrXSX_kHJHCdmL_AWy9oBgFX5t9L9gTy', '1gSV6heehSsdV1TE-kA_-iZpoUrCMWxgW', '1XvIE7-Pj8aBBav6tapT-kPAmye4BhNug', '17LebIxJA3-25Zv0jLDqcEm8q-9T6ScpY', '1Jzj6AAypp4RrprUgG1v-R8kJgx5R_dk1', '1dn8-Ln36lha5NolxOpVP5scmMht9prLG', '1xNpvPaixBtGmoDuFfI7uoYVGHq8OIJPj', '10awSVGmK6Eiq6oPmUwZP_PHzFxozEzIw'],
             '2024': ['1k_3_z8ujfQfRGfqJHVnr5oG2WwRSLbgm', '1LXw5_AaX6qyrVrVrMTLiaI9tAsrQ7uMf', '1djqpX29I4MYvbOZUxWUw-vghvA9yXoxX', '1w49od96-CG_MCxvxhI7ajGGG4MvghofB', '1LFswUDUn8K9FiD7KD4Mc7CvjO6WPEBh9', '1RMQPja41SnwPu-4xcAZmTMiOicxBibio', '1Z1CMv2bCFjaXev0FP5VJzGy-f27S-3y9', '1NI7ElywBHX4Tg-yTbL3eCfJ0al9zIJ6S', '1br82iSJieixG3RBqeIDFL7WutD4uAvIU', '1O7C54rCzHRTU2MCcOJu0l2lXBOPSG0BP'],
             '2025': ['1WklQ1hmqxJDgI0XLaRvNk8hxLsDM7_1P', '1mB2_LN1QDE46J8loHGWGp6zKRRmpxeob', '1hO-NBfLS6J92SJqN3Nq49jm0ZLgtnSUB', '1xftK0qkdlEPxk5u1s_rglzjCArRAU4-C', '1fSKmyOI4knyCSwM57ck7nCTC4wa2Eo4Q', '1ysgAVxUPYOAFnZNC6s1jiof36d_04JHL', '1BJ-rCrvTUkDpiAxmX7X3hcbH3y7tgXFc', '16xxo4XJMBGm6T9e8uRgx4CuGT0Xh3K0N', '1EC5J9RPJ3GXXTMxS5-OWmmLBoIcY_e0T', '1W560zMNkxmCypqcnQlKVr7EDp8cvyN70'],
