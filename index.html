@@ -139,6 +139,29 @@
         nav { display: flex; gap: 50px; }
         nav a { color: #fff; text-decoration: none; font-size: 12px; letter-spacing: 2px; font-weight: 500; transition: opacity 0.3s; }
         nav a:hover { opacity: 0.6; }
+        .home-btn {
+            display: none;
+            width: 40px;
+            height: 40px;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            opacity: 0.7;
+            transition: opacity 0.3s;
+        }
+        .home-btn:hover {
+            opacity: 1;
+        }
+        .home-btn svg {
+            width: 20px;
+            height: 20px;
+            fill: #fff;
+        }
+        @media (max-width: 768px) {
+            .home-btn.show {
+                display: flex;
+            }
+        }
         .menu-button { display: none; font-size: 24px; cursor: pointer; opacity: 0.8; transition: opacity 0.3s; }
         .menu-button:hover { opacity: 1; }
         .mobile-menu { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100vh; background: rgba(0,0,0,0.98); z-index: 2000; padding: 80px 40px; }
@@ -304,6 +327,11 @@
         </div>
         <div class="logo" onclick="showPage('home')">
             <img src="https://lh3.googleusercontent.com/d/1F_94TKqnY_R5JDh1AFkEeEv3aO2Dl8mM=w400" alt="TRANS">
+        </div>
+        <div class="home-btn" id="homeBtn" onclick="showPage('home')">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
+            </svg>
         </div>
         <nav>
             <a href="#" onclick="showPage('home'); return false;">HOME</a>
@@ -547,8 +575,7 @@
             'TRANSLATION',
             'TRANSPORTATION',
             'TRANSITORY',
-            'TRANSMUTATION',
-            'TRANS'
+            'TRANSMUTATION'
         ];
         
         let currentWordIndex = 0;
@@ -636,10 +663,12 @@
             }
         }, { passive: true });
         
-        // 클릭 및 키보드 감지 (데스크톱)
-        intro.addEventListener('click', goToHome);
+        // 클릭 및 키보드 감지 (데스크톱만)
+        if (window.innerWidth > 768) {
+            intro.addEventListener('click', goToHome);
+        }
         document.addEventListener('keydown', (e) => {
-            if (intro.style.display !== 'none') {
+            if (intro.style.display !== 'none' && window.innerWidth > 768) {
                 goToHome();
             }
         });
@@ -657,13 +686,13 @@
             setTimeout(typeWriter, 500);
         });
 
-        const images = {
+         const images = {
             '2023': ['1p6PZxTKRD5CD7Bsn-4GBIdua8SXnq2X2', '1oicnoeqiKautvJ9Jigldh3hjmmV2J77R', '18iFtU2OafU-eO98C7qQwayWHOD-9ioBM', '1KrXSX_kHJHCdmL_AWy9oBgFX5t9L9gTy', '1gSV6heehSsdV1TE-kA_-iZpoUrCMWxgW', '1XvIE7-Pj8aBBav6tapT-kPAmye4BhNug', '17LebIxJA3-25Zv0jLDqcEm8q-9T6ScpY', '1Jzj6AAypp4RrprUgG1v-R8kJgx5R_dk1', '1dn8-Ln36lha5NolxOpVP5scmMht9prLG', '1xNpvPaixBtGmoDuFfI7uoYVGHq8OIJPj', '10awSVGmK6Eiq6oPmUwZP_PHzFxozEzIw'],
-            '2024': ['1br82iSJieixG3RBqeIDFL7WutD4uAvIU', '1O7C54rCzHRTU2MCcOJu0l2lXBOPSG0BP', '1NI7ElywBHX4Tg-yTbL3eCfJ0al9zIJ6S', '1Z1CMv2bCFjaXev0FP5VJzGy-f27S-3y9', '1RMQPja41SnwPu-4xcAZmTMiOicxBibio', '1LFswUDUn8K9FiD7KD4Mc7CvjO6WPEBh9', '1w49od96-CG_MCxvxhI7ajGGG4MvghofB', '1djqpX29I4MYvbOZUxWUw-vghvA9yXoxX', '1LXw5_AaX6qyrVrVrMTLiaI9tAsrQ7uMf', '1k_3_z8ujfQfRGfqJHVnr5oG2WwRSLbgm'],
-            '2025': ['16xxo4XJMBGm6T9e8uRgx4CuGT0Xh3K0N', '1BJ-rCrvTUkDpiAxmX7X3hcbH3y7tgXFc', '1EC5J9RPJ3GXXTMxS5-OWmmLBoIcY_e0T', '1W560zMNkxmCypqcnQlKVr7EDp8cvyN70', '1WklQ1hmqxJDgI0XLaRvNk8hxLsDM7_1P', '1fSKmyOI4knyCSwM57ck7nCTC4wa2Eo4Q', '1hO-NBfLS6J92SJqN3Nq49jm0ZLgtnSUB', '1mB2_LN1QDE46J8loHGWGp6zKRRmpxeob', '1xftK0qkdlEPxk5u1s_rglzjCArRAU4-C', '1ysgAVxUPYOAFnZNC6s1jiof36d_04JHL'],
+            '2024': ['1k_3_z8ujfQfRGfqJHVnr5oG2WwRSLbgm', '1LXw5_AaX6qyrVrVrMTLiaI9tAsrQ7uMf', '1djqpX29I4MYvbOZUxWUw-vghvA9yXoxX', '1w49od96-CG_MCxvxhI7ajGGG4MvghofB', '1LFswUDUn8K9FiD7KD4Mc7CvjO6WPEBh9', '1RMQPja41SnwPu-4xcAZmTMiOicxBibio', '1Z1CMv2bCFjaXev0FP5VJzGy-f27S-3y9', '1NI7ElywBHX4Tg-yTbL3eCfJ0al9zIJ6S', '1br82iSJieixG3RBqeIDFL7WutD4uAvIU', '1O7C54rCzHRTU2MCcOJu0l2lXBOPSG0BP'],
+            '2025': ['1WklQ1hmqxJDgI0XLaRvNk8hxLsDM7_1P', '1mB2_LN1QDE46J8loHGWGp6zKRRmpxeob', '1hO-NBfLS6J92SJqN3Nq49jm0ZLgtnSUB', '1xftK0qkdlEPxk5u1s_rglzjCArRAU4-C', '1fSKmyOI4knyCSwM57ck7nCTC4wa2Eo4Q', '1ysgAVxUPYOAFnZNC6s1jiof36d_04JHL', '1BJ-rCrvTUkDpiAxmX7X3hcbH3y7tgXFc', '16xxo4XJMBGm6T9e8uRgx4CuGT0Xh3K0N', '1EC5J9RPJ3GXXTMxS5-OWmmLBoIcY_e0T', '1W560zMNkxmCypqcnQlKVr7EDp8cvyN70'],
             'archive1': ['1Jv1kgdVE-LT7bJy51OJBN00LvyNXG5qs'],
-            'archive2': ['1SXz_MbKx6tJFd2k07qwc7XF1B1uo_1JV', '1DGVQTrzpeb0psf20F44_gggRQMfQdgsx'],
-            'archive3': ['1j_apQ91rLKbG5P35ux9nc5LWNOvPVfJe', '1oK1Vh4WDft35bvj2SIu70hH3SszpNsBG', '183Rwo2bBl6IyMOpsaS_OhOkCdgYFFLhU', '1r8omgtSLCfdmQmLDSRGGHRlDoyaOserc', '1q5OY9iHulyUTKa3nSoqjLe36Ckwxl92C', '1MRBbo1LSXifJ3_q19sopqShsedYHyBEp', '1flTZVeux92GsaHcs1MOcBMuM08_QZICV']
+            'archive2': ['1DGVQTrzpeb0psf20F44_gggRQMfQdgsx', '1SXz_MbKx6tJFd2k07qwc7XF1B1uo_1JV'],
+            'archive3': ['1flTZVeux92GsaHcs1MOcBMuM08_QZICV', '1MRBbo1LSXifJ3_q19sopqShsedYHyBEp', '1q5OY9iHulyUTKa3nSoqjLe36Ckwxl92C', '1r8omgtSLCfdmQmLDSRGGHRlDoyaOserc', '183Rwo2bBl6IyMOpsaS_OhOkCdgYFFLhU', '1oK1Vh4WDft35bvj2SIu70hH3SszpNsBG', '1j_apQ91rLKbG5P35ux9nc5LWNOvPVfJe']
         };
         let currentSlide = { '2023': 0, '2024': 0, '2025': 0, 'archive1': 0, 'archive2': 0, 'archive3': 0 };
         let touchStartX = 0, touchEndX = 0;
@@ -718,6 +747,16 @@
                 window.scrollTo({ top: 0, behavior: 'smooth' });
             }, 50);
             window.history.pushState({ page: id }, '', `#${id}`);
+            
+            // 모바일 홈 버튼 표시/숨김
+            const homeBtn = document.getElementById('homeBtn');
+            if (window.innerWidth <= 768) {
+                if (id === 'home') {
+                    homeBtn.classList.remove('show');
+                } else {
+                    homeBtn.classList.add('show');
+                }
+            }
         }
 
         window.addEventListener('load', () => {
