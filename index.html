@@ -893,3 +893,13 @@
         document.addEventListener('selectstart', e => {
             if (e.target.tagName === 'IMG') e.preventDefault();
         });
+        
+        // iOS Safari 이미지 저장 방지
+        document.querySelectorAll('img').forEach(img => {
+            img.addEventListener('contextmenu', e => e.preventDefault());
+            img.style.webkitUserSelect = 'none';
+            img.style.webkitTouchCallout = 'none';
+        });
+    </script>
+</body>
+
