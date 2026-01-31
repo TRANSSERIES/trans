@@ -127,7 +127,7 @@
             .tap-indicator { display: none; }
             .swipe-text { font-size: 10px; letter-spacing: 2px; }
             .swipe-arrow { font-size: 18px; }
-            .home-nav-buttons { bottom: 20px !important; }
+            .home-nav-buttons { bottom: 70px !important; }
         }
         @media (min-width: 769px) {
             .swipe-indicator { display: none; }
@@ -195,7 +195,10 @@
         @media (min-width: 769px) {
             .home-hero h1 { letter-spacing: -15px; }
         }
-        .social-icons { display: flex; gap: 25px; margin-top: 100px; position: absolute; bottom: 60px; }
+        .social-icons { display: flex; gap: 25px; position: fixed; bottom: 260px; left: 50%; transform: translateX(-50%); margin-top: 0; z-index: 499; }
+        @media (max-width: 768px) {
+            .social-icons { bottom: 200px; }
+        }
         .social-icons a { color: #fff; font-size: 18px; transition: all 0.3s; opacity: 0.7; }
         .social-icons a:hover { opacity: 1; transform: scale(1.2); }
         
@@ -411,7 +414,7 @@
             header { padding: 15px 20px; }
             .menu-button { display: block; }
             .logo { display: none; }
-            nav { gap: 20px; }
+            nav { display: none; gap: 20px; }
             nav a { font-size: 11px; letter-spacing: 1.5px; }
             nav a:not(.show-mobile) { display: none; }
             .home-hero { padding-top: 100px; }
@@ -692,6 +695,7 @@
 
     <div class="mobile-menu" id="mobileMenu">
         <div class="close-menu" onclick="toggleMenu()">✕</div>
+        <a href="#" onclick="showPage('contact'); toggleMenu(); return false;" style="position: absolute; top: 30px; right: 80px; font-size: 12px;">CONTACT US</a>
         <a href="#" onclick="showPage('about'); toggleMenu(); return false;">ABOUT</a>
         <a href="#" onclick="showPage('projects'); toggleMenu(); return false;">PROJECTS</a>
         <a href="#" onclick="showPage('ticket'); toggleMenu(); return false;">TICKET</a>
