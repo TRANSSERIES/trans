@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -127,7 +128,6 @@
             .tap-indicator { display: none; }
             .swipe-text { font-size: 10px; letter-spacing: 2px; }
             .swipe-arrow { font-size: 18px; }
-            .home-nav-buttons { bottom: 70px !important; }
         }
         @media (min-width: 769px) {
             .swipe-indicator { display: none; }
@@ -182,7 +182,7 @@
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
         }
-        .home-hero { height: auto; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; padding-top: 180px; padding-bottom: 200px; gap: 5px; position: relative; }
+        .home-hero { height: calc(100vh - 100px); display: flex; flex-direction: column; align-items: center; justify-content: flex-start; padding-top: 180px; gap: 5px; position: relative; }
         .home-hero h1 {
             font-size: 140px;
             font-weight: 900;
@@ -195,14 +195,9 @@
         @media (min-width: 769px) {
             .home-hero h1 { letter-spacing: -15px; }
         }
-        .social-icons { display: flex; gap: 25px; position: fixed; bottom: 260px; left: 50%; transform: translateX(-50%); margin-top: 0; z-index: 499; }
-        @media (max-width: 768px) {
-            .social-icons { bottom: 200px; }
-        }
+        .social-icons { display: flex; gap: 25px; margin-top: 100px; position: absolute; bottom: 60px; }
         .social-icons a { color: #fff; font-size: 18px; transition: all 0.3s; opacity: 0.7; }
         .social-icons a:hover { opacity: 1; transform: scale(1.2); }
-        .home-contact-btn { position: fixed !important; top: 30px !important; right: 60px !important; color: #fff !important; text-decoration: none !important; font-size: 11px !important; letter-spacing: 1.3px !important; font-weight: 500 !important; opacity: 0.7 !important; transition: opacity 0.3s !important; text-align: center !important; z-index: 999 !important; display: block !important; line-height: 1.2 !important; }
-        .home-contact-btn:hover { opacity: 1 !important; }
         
         /* 고정 네비게이션 버튼 */
         .home-nav-buttons { 
@@ -218,7 +213,7 @@
             position: fixed !important;
             bottom: 130px !important;
             left: 50% !important;
-            margin-left: -145px !important;
+            transform: translateX(-50%) !important;
             z-index: 500 !important;
             margin-top: 0 !important;
             height: auto !important;
@@ -235,15 +230,12 @@
             transition: color 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
             flex: 0 0 90px !important;
             width: 90px !important;
-            height: 32px !important;
             position: relative !important;
             z-index: 1 !important;
             display: flex !important;
             align-items: center !important;
             justify-content: center !important;
             white-space: nowrap !important;
-            line-height: 1 !important;
-            min-height: 0 !important;
         }
         .home-nav-btn:hover {
             color: rgba(255, 255, 255, 0.7) !important;
@@ -258,7 +250,7 @@
             top: 4px !important;
             left: 4px !important;
             height: calc(100% - 8px) !important;
-            width: 90px !important;
+            width: 82px !important;
             background: #fff !important;
             border-radius: 6px !important;
             transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
@@ -271,22 +263,22 @@
         }
         .home-nav-buttons.state-1::before {
             opacity: 1 !important;
-            left: calc(94px + 4px) !important;
+            left: calc(90px + 4px) !important;
         }
         .home-nav-buttons.state-2::before {
             opacity: 1 !important;
-            left: calc(188px + 4px) !important;
+            left: calc(180px + 4px) !important;
         }
 
-        .page-content { max-width: none; width: 100%; display: flex; flex-direction: column; align-items: center; padding: 80px 60px; }
+        .page-content { max-width: 1000px; margin: 0 auto; padding: 80px 60px; }
         .page-title { font-size: 36px; letter-spacing: 3px; margin-bottom: 60px; text-align: center; font-weight: 600; }
-        .about-main { max-width: 800px; width: 100%; margin: 0 auto 50px; text-align: center; }
+        .about-main { max-width: 700px; margin: 0 auto 50px; text-align: center; }
         .about-main h2 { font-size: 16px; font-weight: 500; letter-spacing: 0.5px; line-height: 1.9; margin-bottom: 35px; opacity: 0.95; }
-        .about-text { max-width: 800px; width: 100%; margin: 0 auto; line-height: 1.9; font-size: 13px; opacity: 0.75; text-align: left; }
+        .about-text { max-width: 700px; margin: 0 auto; line-height: 1.9; font-size: 13px; opacity: 0.75; text-align: left; }
         .about-text p { margin-bottom: 18px; }
         
         /* Performance 섹션 */
-        .performance-section { max-width: 800px; width: 100%; margin: 80px auto 0; text-align: left; }
+        .performance-section { max-width: 700px; margin: 80px auto 0; text-align: left; }
         .performance-title { font-size: 18px; font-weight: 600; letter-spacing: 2px; margin-bottom: 40px; opacity: 0.9; }
         .performance-list { display: flex; flex-direction: column; gap: 0; }
         .perf-list-item { 
@@ -398,7 +390,7 @@
         .project-description p { font-size: 12px; line-height: 1.8; opacity: 0.7; margin-bottom: 12px; }
         .project-description p:last-child { margin-bottom: 0; }
         .project-highlight { font-size: 11px; opacity: 0.5; margin-top: 15px; font-style: italic; }
-        .ticket-content { max-width: 800px; width: 100%; margin: 0 auto; }
+        .ticket-content { max-width: 600px; margin: 0 auto; }
         .ticket-info { margin-bottom: 50px; padding: 40px; background: #0a0a0a; border: 1px solid #222; border-radius: 2px; }
         .ticket-info h3 { font-size: 20px; letter-spacing: 1px; margin-bottom: 20px; font-weight: 600; }
         .ticket-info p { font-size: 13px; line-height: 1.8; opacity: 0.75; }
@@ -416,7 +408,7 @@
             header { padding: 15px 20px; }
             .menu-button { display: block; }
             .logo { display: none; }
-            nav { display: none; gap: 20px; }
+            nav { gap: 20px; }
             nav a { font-size: 11px; letter-spacing: 1.5px; }
             nav a:not(.show-mobile) { display: none; }
             .home-hero { padding-top: 100px; }
@@ -645,7 +637,7 @@
             opacity: 0.6; 
         }
         
-        .ticket-content { max-width: 800px; width: 100%; margin: 0 auto; }
+        .ticket-content { max-width: 600px; margin: 0 auto; }
         .ticket-info { margin-bottom: 50px; padding: 40px; background: #0a0a0a; border: 1px solid #222; border-radius: 2px; }
         .ticket-info h3 { font-size: 20px; letter-spacing: 1px; margin-bottom: 20px; font-weight: 600; }
         .ticket-info p { font-size: 13px; line-height: 1.8; opacity: 0.75; }
@@ -700,18 +692,16 @@
         <a href="#" onclick="showPage('about'); toggleMenu(); return false;">ABOUT</a>
         <a href="#" onclick="showPage('projects'); toggleMenu(); return false;">PROJECTS</a>
         <a href="#" onclick="showPage('ticket'); toggleMenu(); return false;">TICKET</a>
-        <a href="#" onclick="showPage('contact'); toggleMenu(); return false;">CONTACT US</a>
     </div>
 
     <div id="home" class="page active">
         <div class="home-hero">
             <h1 onclick="showPage('projects')">TRANS</h1>
             <p>SERIES</p>
-            <a href="#" onclick="showPage('contact'); return false;" class="home-contact-btn">CONTACT<br>US</a>
             <div class="social-icons">
                 <a href="https://www.instagram.com/trans_series" target="_blank"><i class="fab fa-instagram"></i></a>
                 <a href="https://www.youtube.com/@transseries" target="_blank"><i class="fab fa-youtube"></i></a>
-                <a href="/cdn-cgi/l/email-protection#a8dcdac9c6db98909991e8c6c9decdda86cbc7c5"><i class="fas fa-envelope"></i></a>
+                <a href="mailto:trans0819@naver.com"><i class="fas fa-envelope"></i></a>
             </div>
         </div>
     </div>
@@ -1006,22 +996,22 @@
             <h1 class="page-title">CONTACT</h1>
             <div class="contact-content">
                 <div class="contact-icons">
-                    <a href="/cdn-cgi/l/email-protection#285c5a49465b181019116846495e4d5a064b4745" class="contact-item"><div class="contact-icon"><i class="fas fa-envelope"></i></div></a>
+                    <a href="mailto:trans0819@naver.com" class="contact-item"><div class="contact-icon"><i class="fas fa-envelope"></i></div></a>
                     <a href="https://www.instagram.com/trans_series" target="_blank" class="contact-item"><div class="contact-icon"><i class="fab fa-instagram"></i></div></a>
                     <a href="https://www.youtube.com/@transseries" target="_blank" class="contact-item"><div class="contact-icon"><i class="fab fa-youtube"></i></div></a>
                 </div>
                 <div class="contact-divider"></div>
                 <div class="contact-text">
                     <p>공연 문의 및 협업 제안</p>
-                    <p style="margin-top: 15px;"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="4e3a3c2f203d7e767f770e202f382b3c602d2123">[email&#160;protected]</a></p>
+                    <p style="margin-top: 15px;">trans0819@naver.com</p>
                 </div>
             </div>
         </div>
     </div>
 
-    <footer><p>© 2026 TRANS. ALL RIGHTS RESERVED.</p></footer>
+    <footer><p>© 2026년 TRANS. ALL RIGHTS RESERVED.</p></footer>
 
-    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+    <script>
         // 인트로 애니메이션
         const words = [
             'TRANSITION',
