@@ -2,7 +2,7 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=1000, initial-scale=1.0, user-scalable=no">
     <title>TRANS</title>
     
     <!-- Favicon -->
@@ -121,13 +121,6 @@
             0%, 100% { transform: translateY(0); opacity: 0.4; }
             50% { transform: translateY(-8px); opacity: 0.8; }
         }
-        @media (max-width: 768px) {
-            .intro-text { font-size: 40px; letter-spacing: -2px; }
-            .swipe-indicator { display: flex; bottom: 100px; }
-            .tap-indicator { display: none; }
-            .swipe-text { font-size: 10px; letter-spacing: 2px; }
-            .swipe-arrow { font-size: 18px; }
-        }
         @media (min-width: 769px) {
             .swipe-indicator { display: none; }
             .tap-indicator { display: flex; }
@@ -186,11 +179,6 @@
             height: 20px;
             fill: #fff;
         }
-        @media (max-width: 768px) {
-            .home-btn.show {
-                display: flex;
-            }
-        }
         .menu-button { display: none; font-size: 24px; cursor: pointer; opacity: 0.8; transition: opacity 0.3s; }
         .menu-button:hover { opacity: 1; }
         .mobile-menu { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100vh; background: rgba(0,0,0,0.98); z-index: 2000; padding: 80px 40px; }
@@ -223,43 +211,50 @@
         @media (min-width: 769px) {
             .home-hero h1 { letter-spacing: -15px; }
         }
-        .social-icons { display: flex; gap: 25px; margin-top: 100px; position: absolute; bottom: 60px; }
+        .social-icons { display: flex; gap: 25px; margin-top: 100px; position: absolute; bottom: 40px; }
         .social-icons a { color: #fff; font-size: 18px; transition: all 0.3s; opacity: 0.7; }
         .social-icons a:hover { opacity: 1; transform: scale(1.2); }
         .home-nav-buttons { 
-            display: flex; 
-            gap: 0;
-            justify-content: center;
-            flex-wrap: wrap;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 8px;
-            padding: 4px;
-            width: fit-content;
-            position: fixed;
-            bottom: 80px;
-            left: 50%;
-            transform: translateX(-50%);
-            z-index: 500;
-            margin-top: 0;
+            display: flex !important; 
+            gap: 0 !important;
+            justify-content: center !important;
+            flex-wrap: wrap !important;
+            background: rgba(255, 255, 255, 0.05) !important;
+            border: 1px solid rgba(255, 255, 255, 0.1) !important;
+            border-radius: 8px !important;
+            padding: 4px !important;
+            width: fit-content !important;
+            position: fixed !important;
+            bottom: 130px !important;
+            left: 50% !important;
+            transform: translateX(-50%) !important;
+            z-index: 500 !important;
+            margin-top: 0 !important;
+            height: auto !important;
+            min-width: auto !important;
+            max-width: none !important;
         }
         .home-nav-btn {
-            padding: 12px 28px;
-            background: transparent;
-            border: none;
-            color: rgba(255, 255, 255, 0.4);
-            font-size: 12px;
-            letter-spacing: 1.5px;
-            font-weight: 500;
-            cursor: pointer;
-            transition: color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            flex: 1;
-            min-width: 100px;
-            position: relative;
-            z-index: 1;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            padding: 10px 24px !important;
+            background: transparent !important;
+            border: none !important;
+            color: rgba(255, 255, 255, 0.4) !important;
+            font-size: 11px !important;
+            letter-spacing: 1.3px !important;
+            font-weight: 500 !important;
+            cursor: pointer !important;
+            transition: color 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+            flex: 0 0 auto !important;
+            width: 90px !important;
+            position: relative !important;
+            z-index: 1 !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            white-space: nowrap !important;
+            height: auto !important;
+            min-height: auto !important;
+            line-height: normal !important;
         }
         .home-nav-btn:hover {
             color: rgba(255, 255, 255, 0.7);
@@ -269,29 +264,29 @@
             z-index: 2;
         }
         .home-nav-buttons::before {
-            content: '';
-            position: absolute;
-            top: 4px;
-            left: 4px;
-            height: calc(100% - 8px);
-            width: calc(33.333333% - 8px);
-            background: #fff;
-            border-radius: 6px;
-            transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            z-index: 0;
-            opacity: 0;
+            content: '' !important;
+            position: absolute !important;
+            top: 4px !important;
+            left: 4px !important;
+            height: calc(100% - 8px) !important;
+            width: 82px !important;
+            background: #fff !important;
+            border-radius: 6px !important;
+            transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+            z-index: 0 !important;
+            opacity: 0 !important;
         }
         .home-nav-buttons.state-0::before {
-            opacity: 1;
-            left: 4px;
+            opacity: 1 !important;
+            left: 4px !important;
         }
         .home-nav-buttons.state-1::before {
-            opacity: 1;
-            left: calc(33.333333% + 4px);
+            opacity: 1 !important;
+            left: calc(90px + 4px) !important;
         }
         .home-nav-buttons.state-2::before {
-            opacity: 1;
-            left: calc(66.666666% + 4px);
+            opacity: 1 !important;
+            left: calc(180px + 4px) !important;
         }
         .page-content { max-width: 1000px; margin: 0 auto; padding: 80px 60px; }
         .page-title { font-size: 36px; letter-spacing: 3px; margin-bottom: 60px; text-align: center; font-weight: 600; }
@@ -696,98 +691,6 @@
         .contact-text a { color: #fff; text-decoration: none; transition: opacity 0.3s ease; }
         .contact-text a:hover { opacity: 0.8; }
         footer { padding: 40px; text-align: center; opacity: 0.4; font-size: 11px; letter-spacing: 2px; border-top: 1px solid rgba(255, 255, 255, 0.05); }
-        @media (max-width: 768px) {
-            header { padding: 15px 20px; }
-            .menu-button { display: block; }
-            .logo { display: none; }
-            nav { gap: 15px; }
-            nav a { font-size: 11px; letter-spacing: 1.5px; }
-            nav a:not(.show-mobile) { display: none; }
-            
-            /* 홈 페이지 */
-            .home-hero { padding-top: 80px; }
-            .home-hero h1 { font-size: 48px; letter-spacing: -8px; }
-            .home-hero p { font-size: 12px; }
-            .social-icons { gap: 20px; bottom: 40px; }
-            .social-icons a { font-size: 16px; }
-            
-            /* 모바일 고정 버튼 - 웹과 동일한 디자인 */
-            .home-nav-buttons { 
-                bottom: 60px;
-                padding: 3px;
-                gap: 0;
-                width: auto;
-                transform: translateX(-50%);
-            }
-            .home-nav-btn {
-                padding: 10px 18px;
-                font-size: 10px;
-                letter-spacing: 1.2px;
-                min-width: auto;
-                flex: 0;
-            }
-            .home-nav-buttons::before {
-                height: calc(100% - 6px);
-                width: calc(33.333333% - 6px);
-                top: 3px;
-                left: 3px;
-            }
-            .home-nav-buttons.state-1::before {
-                left: calc(33.333333% + 3px);
-            }
-            .home-nav-buttons.state-2::before {
-                left: calc(66.666666% + 3px);
-            }
-            
-            /* 페이지 콘텐츠 */
-            .page-content { padding: 50px 20px; }
-            .page-title { font-size: 24px; margin-bottom: 40px; }
-            
-            /* About 섹션 */
-            .about-main { margin-bottom: 35px; }
-            .about-main h2 { font-size: 14px; }
-            .about-text { max-width: 100%; font-size: 12px; }
-            .performance-section { max-width: 100%; margin-top: 50px; }
-            .performance-title { font-size: 16px; margin-bottom: 30px; }
-            .perf-list-item { padding: 12px 0; }
-            .perf-list-title { font-size: 13px; }
-            .perf-list-year { font-size: 11px; }
-            
-            /* 프로젝트 */
-            .project-tabs { gap: 25px; margin-bottom: 35px; }
-            .project-tab { font-size: 12px; padding: 12px 0; }
-            .project-item { padding: 25px 0; }
-            .project-year { font-size: 10px; }
-            .project-title { font-size: 18px; }
-            .project-info { font-size: 10px; }
-            
-            /* 갤러리 */
-            .gallery-section { margin-bottom: 80px; }
-            .slider-container { max-width: 100%; }
-            .slider-btn { font-size: 16px; padding: 8px 12px; }
-            .slider-dots { margin-top: 18px; gap: 6px; }
-            .dot { width: 5px; height: 5px; }
-            .dot.active { width: 20px; }
-            
-            /* 아코디언 */
-            .accordion-header { padding: 16px 0; }
-            .accordion-title { font-size: 11px; }
-            .gallery-slider-wrapper { padding: 40px 0 50px 0; }
-            
-            /* 메타 정보 */
-            .project-meta { padding: 16px; margin-bottom: 15px; }
-            .project-description p { font-size: 12px; }
-            
-            /* Contact */
-            .contact-content { max-width: 100%; }
-            .contact-icons { gap: 35px; margin-bottom: 40px; }
-            .contact-icon { font-size: 28px; }
-            .contact-divider { margin: 40px auto; }
-            .contact-text { font-size: 12px; }
-            
-            /* 슬라이더 */
-            .slider-btn.prev { left: 8px; }
-            .slider-btn.next { right: 8px; }
         }
     </style>
 </head>
@@ -836,7 +739,7 @@
             <div class="social-icons">
                 <a href="https://www.instagram.com/trans_series" target="_blank"><i class="fab fa-instagram"></i></a>
                 <a href="https://www.youtube.com/@transseries" target="_blank"><i class="fab fa-youtube"></i></a>
-                <a href="mailto:trans0819@naver.com"><i class="fas fa-envelope"></i></a>
+                <a href="/cdn-cgi/l/email-protection#dda9afbcb3aeede5ece49db3bcabb8aff3beb2b0"><i class="fas fa-envelope"></i></a>
             </div>
         </div>
     </div>
@@ -1124,14 +1027,14 @@
             <h1 class="page-title">CONTACT US</h1>
             <div class="contact-content">
                 <div class="contact-icons">
-                    <a href="mailto:trans0819@naver.com" class="contact-item"><div class="contact-icon"><i class="fas fa-envelope"></i></div></a>
+                    <a href="/cdn-cgi/l/email-protection#304442515e4300080109705e514655421e535f5d" class="contact-item"><div class="contact-icon"><i class="fas fa-envelope"></i></div></a>
                     <a href="https://www.instagram.com/trans_series" target="_blank" class="contact-item"><div class="contact-icon"><i class="fab fa-instagram"></i></div></a>
                     <a href="https://www.youtube.com/@transseries" target="_blank" class="contact-item"><div class="contact-icon"><i class="fab fa-youtube"></i></div></a>
                 </div>
                 <div class="contact-divider"></div>
                 <div class="contact-text">
                     <p>공연 문의 및 협업 제안</p>
-                    <p style="margin-top: 15px;"><a href="mailto:trans0819@naver.com">trans0819@naver.com</a></p>
+                    <p style="margin-top: 15px;"><a href="/cdn-cgi/l/email-protection#a2d6d0c3ccd1929a939be2ccc3d4c7d08cc1cdcf"><span class="__cf_email__" data-cfemail="6f1b1d0e011c5f575e562f010e190a1d410c0002">[email&#160;protected]</span></a></p>
                 </div>
             </div>
         </div>
@@ -1146,7 +1049,7 @@
 
     <footer><p>© 2026년 TRANS. ALL RIGHTS RESERVED.</p></footer>
 
-    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
         // 인트로 애니메이션
         const words = [
             'TRANSITION',
