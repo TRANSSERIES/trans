@@ -341,6 +341,61 @@
                 transform: translateY(0);
             }
         }
+        .youtube-player {
+            position: relative;
+            max-width: 1000px;
+            margin: 0 auto;
+            aspect-ratio: 16/9;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5);
+            cursor: pointer;
+            background: #000;
+        }
+        .youtube-thumbnail {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+        .play-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+        }
+        .youtube-player:hover .play-overlay {
+            background: rgba(0, 0, 0, 0.4);
+        }
+        .play-btn-large {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: rgba(255, 0, 0, 0.9);
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+        .play-btn-large:hover {
+            background: #ff0000;
+            transform: scale(1.1);
+        }
+        .play-btn-large::after {
+            content: '▶';
+            color: #fff;
+            font-size: 32px;
+            margin-left: 4px;
+        }
         .youtube-embed {
             max-width: 1000px;
             margin: 0 auto;
@@ -602,10 +657,13 @@
                     </div>
                 </div>
                 
-                <!-- YouTube 임베드 플레이어 -->
+                <!-- YouTube 썸네일과 재생 버튼 -->
                 <div class="video-section">
-                    <div class="youtube-embed">
-                        <iframe src="https://www.youtube.com/embed/P4DBM_5QQqc" allowfullscreen="" loading="lazy"></iframe>
+                    <div class="youtube-player" id="video-2023">
+                        <img src="https://img.youtube.com/vi/P4DBM_5QQqc/maxresdefault.jpg" alt="TRANS" class="youtube-thumbnail">
+                        <div class="play-overlay">
+                            <button class="play-btn-large" onclick="playVideo('video-2023', 'P4DBM_5QQqc')"></button>
+                        </div>
                     </div>
                 </div>
                 
@@ -648,10 +706,13 @@
                     </div>
                 </div>
                 
-                <!-- YouTube 임베드 플레이어 -->
+                <!-- YouTube 썸네일과 재생 버튼 -->
                 <div class="video-section">
-                    <div class="youtube-embed">
-                        <iframe src="https://www.youtube.com/embed/wQN7NHKapJY" allowfullscreen="" loading="lazy"></iframe>
+                    <div class="youtube-player" id="video-2024">
+                        <img src="https://img.youtube.com/vi/wQN7NHKapJY/maxresdefault.jpg" alt="TRANS vol.2" class="youtube-thumbnail">
+                        <div class="play-overlay">
+                            <button class="play-btn-large" onclick="playVideo('video-2024', 'wQN7NHKapJY')"></button>
+                        </div>
                     </div>
                 </div>
                 
@@ -693,10 +754,13 @@
                     </div>
                 </div>
                 
-                <!-- YouTube 임베드 플레이어 -->
+                <!-- YouTube 썸네일과 재생 버튼 -->
                 <div class="video-section">
-                    <div class="youtube-embed">
-                        <iframe src="https://www.youtube.com/embed/rFx1kIEh1rQ" allowfullscreen="" loading="lazy"></iframe>
+                    <div class="youtube-player" id="video-2025">
+                        <img src="https://img.youtube.com/vi/rFx1kIEh1rQ/maxresdefault.jpg" alt="TRANS III: 주어 없는 움직임" class="youtube-thumbnail">
+                        <div class="play-overlay">
+                            <button class="play-btn-large" onclick="playVideo('video-2025', 'rFx1kIEh1rQ')"></button>
+                        </div>
                     </div>
                 </div>
                 
@@ -822,7 +886,7 @@
                 <div class="contact-divider"></div>
                 <div class="contact-text">
                     <p>공연 문의 및 협업 제안</p>
-                    <p style="margin-top: 15px;"><a href="mailto:trans0819@naver.com">trans0819@naver.com</a></p>
+                    <p style="margin-top: 15px;"><a href="/cdn-cgi/l/email-protection#2d595f4c435e1d151c146d434c5b485f034e4240"><span class="__cf_email__" data-cfemail="fd898f9c938ecdc5ccc4bd939c8b988fd39e9290">[email&#160;protected]</span></a></p>
                 </div>
             </div>
         </div>
@@ -830,7 +894,7 @@
 
     <footer><p>© 2026년 TRANS. ALL RIGHTS RESERVED.</p></footer>
 
-    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
         // 인트로 애니메이션
         const words = [
             'TRANSITION',
@@ -1004,6 +1068,53 @@
             slides.style.transform = `translateX(-${currentSlide[year] * 100}%)`;
             dots.forEach((d, i) => d.className = i === currentSlide[year] ? 'dot active' : 'dot');
         }
+        
+        // 비디오 재생 함수
+        function playVideo(playerId, videoId) {
+            const playerDiv = document.getElementById(playerId);
+            playerDiv.innerHTML = `<iframe src="https://www.youtube.com/embed/${videoId}?autoplay=1" allow="autoplay; encrypted-media" allowfullscreen="" loading="lazy"></iframe>`;
+        }
+        
+        // 비디오가 보이지 않으면 자동으로 정지 (Intersection Observer)
+        let videoObserver;
+        function initVideoObserver() {
+            videoObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (!entry.isIntersecting) {
+                        // 비디오가 뷰포트에서 벗어나면 정지
+                        const iframe = entry.target.querySelector('iframe');
+                        if (iframe) {
+                            iframe.src = iframe.src.replace('?autoplay=1', '');
+                        }
+                    }
+                });
+            }, { threshold: 0.5 });
+            
+            document.querySelectorAll('.youtube-player, .youtube-embed').forEach(el => {
+                videoObserver.observe(el);
+            });
+        }
+        
+        // 사진 갤러리가 스크롤되면 자동으로 닫기
+        function initGalleryAutoClose() {
+            let lastScrollPos = window.scrollY;
+            window.addEventListener('scroll', () => {
+                const currentScrollPos = window.scrollY;
+                const isScrollingDown = currentScrollPos > lastScrollPos;
+                
+                // 아래로 스크롤할 때 열려있는 갤러리 닫기
+                if (isScrollingDown) {
+                    document.querySelectorAll('.accordion-content.active').forEach(content => {
+                        const header = content.previousElementSibling;
+                        const icon = header.querySelector('.accordion-icon');
+                        content.classList.remove('active');
+                        icon.classList.remove('active');
+                    });
+                }
+                
+                lastScrollPos = currentScrollPos <= 0 ? 0 : currentScrollPos;
+            }, { passive: true });
+        }
 
         function showPage(id) {
             document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
@@ -1035,6 +1146,10 @@
         initSlider('archive1');
         initSlider('archive2');
         initSlider('archive3');
+        
+        // 비디오 Intersection Observer와 갤러리 자동 닫기 초기화
+        initVideoObserver();
+        initGalleryAutoClose();
 
         function showProjectTab(tab) {
             document.querySelectorAll('.project-tab').forEach(t => t.classList.remove('active'));
