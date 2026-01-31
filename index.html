@@ -241,15 +241,6 @@
         }
         .project-year { font-size: 11px; opacity: 0.5; letter-spacing: 1px; margin-bottom: 8px; }
         .project-title { font-size: 17px; font-weight: 500; letter-spacing: 0.3px; margin-bottom: 10px; }
-        .project-title-link { 
-            color: #fff; 
-            text-decoration: none; 
-            display: inline-block;
-            transition: opacity 0.3s;
-        }
-        .project-title-link:hover { 
-            opacity: 0.6; 
-        }
         .project-info { font-size: 11px; opacity: 0.55; letter-spacing: 0.3px; line-height: 1.6; }
         .gallery-section { margin-bottom: 80px; }
         .slider-container {
@@ -341,6 +332,15 @@
         .video-container:hover .play-button {
             background: #fff;
             transform: scale(1.1);
+        }
+        .project-title-link { 
+            color: #fff; 
+            text-decoration: none; 
+            display: inline-block;
+            transition: opacity 0.3s;
+        }
+        .project-title-link:hover { 
+            opacity: 0.6; 
         }
         
         .ticket-content { max-width: 600px; margin: 0 auto; }
@@ -467,7 +467,7 @@
                 </div>
                 <div class="video-section">
                     <a href="https://youtu.be/P4DBM_5QQqc" target="_blank" class="video-container" title="영상 보기">
-                        <img src="https://img.youtube.com/vi/P4DBM_5QQqc/maxresdefault.jpg" alt="TRANS 1 영상" class="video-thumbnail">
+                        <img src="https://img.youtube.com/vi/P4DBM_5QQqc/maxresdefault.jpg" alt="TRANS 1 영상" class="video-thumbnail" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 1280 720%22%3E%3Crect fill=%22%230a0a0a%22 width=%221280%22 height=%22720%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2236%22 fill=%22%23666%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22%3EVIDEO%3C/text%3E%3C/svg%3E'">
                         <div class="video-overlay">
                             <div class="play-button">▶</div>
                         </div>
@@ -502,7 +502,7 @@
                 </div>
                 <div class="video-section">
                     <a href="https://youtu.be/wQN7NHKapJY" target="_blank" class="video-container" title="영상 보기">
-                        <img src="https://img.youtube.com/vi/wQN7NHKapJY/maxresdefault.jpg" alt="TRANS2 vol.2 영상" class="video-thumbnail">
+                        <img src="https://img.youtube.com/vi/wQN7NHKapJY/maxresdefault.jpg" alt="TRANS2 vol.2 영상" class="video-thumbnail" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 1280 720%22%3E%3Crect fill=%22%230a0a0a%22 width=%221280%22 height=%22720%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2236%22 fill=%22%23666%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22%3EVIDEO%3C/text%3E%3C/svg%3E'">
                         <div class="video-overlay">
                             <div class="play-button">▶</div>
                         </div>
@@ -536,7 +536,7 @@
                 </div>
                 <div class="video-section">
                     <a href="https://youtu.be/rFx1kIEh1rQ" target="_blank" class="video-container" title="영상 보기">
-                        <img src="https://img.youtube.com/vi/rFx1kIEh1rQ/maxresdefault.jpg" alt="TRANS3 주어 없는 움직임 영상" class="video-thumbnail">
+                        <img src="https://img.youtube.com/vi/rFx1kIEh1rQ/maxresdefault.jpg" alt="TRANS3 주어 없는 움직임 영상" class="video-thumbnail" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 1280 720%22%3E%3Crect fill=%22%230a0a0a%22 width=%221280%22 height=%22720%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2236%22 fill=%22%23666%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22%3EVIDEO%3C/text%3E%3C/svg%3E'">
                         <div class="video-overlay">
                             <div class="play-button">▶</div>
                         </div>
@@ -783,12 +783,6 @@
             'archive1': ['1Jv1kgdVE-LT7bJy51OJBN00LvyNXG5qs'],
             'archive2': ['1DGVQTrzpeb0psf20F44_gggRQMfQdgsx', '1SXz_MbKx6tJFd2k07qwc7XF1B1uo_1JV'],
             'archive3': ['1flTZVeux92GsaHcs1MOcBMuM08_QZICV', '1MRBbo1LSXifJ3_q19sopqShsedYHyBEp', '1q5OY9iHulyUTKa3nSoqjLe36Ckwxl92C', '1r8omgtSLCfdmQmLDSRGGHRlDoyaOserc', '183Rwo2bBl6IyMOpsaS_OhOkCdgYFFLhU', '1oK1Vh4WDft35bvj2SIu70hH3SszpNsBG', '1j_apQ91rLKbG5P35ux9nc5LWNOvPVfJe']
-        };
-        
-        const videos = {
-            '2023': { url: 'https://youtu.be/P4DBM_5QQqc', id: 'P4DBM_5QQqc', title: 'TRANS 1' },
-            '2024': { url: 'https://youtu.be/wQN7NHKapJY', id: 'wQN7NHKapJY', title: 'TRANS2 vol.2' },
-            '2025': { url: 'https://youtu.be/rFx1kIEh1rQ', id: 'rFx1kIEh1rQ', title: 'TRANS3 주어 없는 움직임' }
         };
         let currentSlide = { '2023': 0, '2024': 0, '2025': 0, 'archive1': 0, 'archive2': 0, 'archive3': 0 };
         let touchStartX = 0, touchEndX = 0;
