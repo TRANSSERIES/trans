@@ -150,6 +150,70 @@
                 display: flex;
             }
         }
+        @media (max-width: 999px) {
+            header { padding: 15px 20px; }
+            .menu-button { display: block; }
+            .logo { display: none; }
+            nav a { font-size: 11px; letter-spacing: 1.5px; }
+            .home-hero { padding-top: 80px; }
+            .home-hero h1 { font-size: 48px; letter-spacing: -8px; }
+            .home-hero p { font-size: 12px; }
+            .social-icons { gap: 20px; bottom: 100px; }
+            .social-icons a { font-size: 16px; }
+            
+            /* 모바일 고정 버튼 */
+            .home-nav-buttons { 
+                bottom: 50px !important;
+                width: 145px !important;
+                padding: 2px !important;
+                transform: translateX(-50%) !important;
+            }
+            .home-nav-btn {
+                padding: 5px 12px !important;
+                font-size: 9px !important;
+                width: 45px !important;
+                flex: 0 0 45px !important;
+            }
+            .home-nav-buttons::before {
+                width: 41px !important;
+                height: calc(100% - 4px) !important;
+                top: 2px !important;
+                left: 2px !important;
+            }
+            .home-nav-buttons.state-1::before {
+                left: calc(45px + 2px) !important;
+            }
+            .home-nav-buttons.state-2::before {
+                left: calc(90px + 2px) !important;
+            }
+            
+            .page-content { padding: 50px 20px; }
+            .page-title { font-size: 24px; margin-bottom: 40px; }
+            .about-main { margin-bottom: 35px; }
+            .about-main h2 { font-size: 14px; }
+            .about-text { max-width: 100%; font-size: 12px; }
+            .performance-section { max-width: 100%; margin-top: 50px; }
+            .performance-title { font-size: 16px; margin-bottom: 30px; }
+            .perf-list-item { padding: 12px 0; }
+            .perf-list-title { font-size: 13px; }
+            .perf-list-year { font-size: 11px; }
+            .project-tabs { gap: 25px; margin-bottom: 35px; }
+            .project-tab { font-size: 12px; padding: 12px 0; }
+            .project-item { padding: 25px 0; }
+            .project-year { font-size: 10px; }
+            .project-title { font-size: 18px; }
+            .slider-btn { font-size: 16px; padding: 8px 12px; }
+            .slider-dots { margin-top: 18px; gap: 6px; }
+            .dot { width: 5px; height: 5px; }
+            .dot.active { width: 20px; }
+            .accordion-header { padding: 16px 0; }
+            .accordion-title { font-size: 11px; }
+            .project-description { padding: 20px; }
+            .contact-content { max-width: 100%; }
+            .contact-icons { gap: 35px; margin-bottom: 40px; }
+            .contact-icon { font-size: 28px; }
+            .contact-text { font-size: 12px; }
+        }
         nav a { 
             color: #fff; 
             text-decoration: none; 
@@ -232,13 +296,10 @@
             position: fixed !important;
             bottom: 130px !important;
             left: 50% !important;
-            transform: translateX(-50%) scale(0.5) !important;
-            transform-origin: center bottom !important;
+            transform: translateX(-50%) !important;
             z-index: 500 !important;
             margin-top: 0 !important;
             height: auto !important;
-            min-width: auto !important;
-            max-width: none !important;
         }
         .home-nav-btn {
             padding: 10px 24px !important;
@@ -258,9 +319,6 @@
             align-items: center !important;
             justify-content: center !important;
             white-space: nowrap !important;
-            height: auto !important;
-            min-height: auto !important;
-            line-height: normal !important;
         }
         .home-nav-btn:hover {
             color: rgba(255, 255, 255, 0.7);
