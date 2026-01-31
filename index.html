@@ -229,16 +229,13 @@
         .home-nav-buttons { 
             display: flex; 
             gap: 0;
-            margin-top: 100px;
             justify-content: center;
             flex-wrap: wrap;
-            background: rgba(255, 255, 255, 0.08);
-            border: 1px solid rgba(255, 255, 255, 0.15);
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
             border-radius: 8px;
-            padding: 0;
+            padding: 4px;
             width: fit-content;
-            margin-left: auto;
-            margin-right: auto;
             position: fixed;
             bottom: 80px;
             left: 50%;
@@ -247,29 +244,54 @@
             margin-top: 0;
         }
         .home-nav-btn {
-            padding: 14px 32px;
+            padding: 12px 28px;
             background: transparent;
             border: none;
-            border-right: 1px solid rgba(255, 255, 255, 0.15);
             color: rgba(255, 255, 255, 0.4);
             font-size: 12px;
             letter-spacing: 1.5px;
             font-weight: 500;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             flex: 1;
             min-width: 100px;
-        }
-        .home-nav-btn:last-child {
-            border-right: none;
+            position: relative;
+            z-index: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
         .home-nav-btn:hover {
-            background: rgba(255, 255, 255, 0.08);
             color: rgba(255, 255, 255, 0.7);
         }
         .home-nav-btn.active {
-            background: transparent;
-            color: #fff;
+            color: #000;
+            z-index: 2;
+        }
+        .home-nav-buttons::before {
+            content: '';
+            position: absolute;
+            top: 4px;
+            left: 4px;
+            height: calc(100% - 8px);
+            width: calc(33.333333% - 8px);
+            background: #fff;
+            border-radius: 6px;
+            transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 0;
+            opacity: 0;
+        }
+        .home-nav-buttons.state-0::before {
+            opacity: 1;
+            left: 4px;
+        }
+        .home-nav-buttons.state-1::before {
+            opacity: 1;
+            left: calc(33.333333% + 4px);
+        }
+        .home-nav-buttons.state-2::before {
+            opacity: 1;
+            left: calc(66.666666% + 4px);
         }
         .page-content { max-width: 1000px; margin: 0 auto; padding: 80px 60px; }
         .page-title { font-size: 36px; letter-spacing: 3px; margin-bottom: 60px; text-align: center; font-weight: 600; }
@@ -281,57 +303,40 @@
         /* Performance 섹션 */
         .performance-section { max-width: 700px; margin: 80px auto 0; text-align: left; }
         .performance-title { font-size: 18px; font-weight: 600; letter-spacing: 2px; margin-bottom: 40px; opacity: 0.9; }
-        .performance-list { display: flex; flex-direction: column; gap: 28px; }
-        .performance-item { 
+        .performance-list { display: flex; flex-direction: column; gap: 0; }
+        .perf-list-item { 
             display: flex; 
-            align-items: flex-start; 
-            gap: 20px;
+            justify-content: space-between;
+            align-items: center;
             padding: 16px 0;
             border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            cursor: pointer;
+            transition: all 0.3s ease;
         }
-        .performance-item:last-child { border-bottom: none; }
-        .perf-year { 
-            font-size: 11px; 
-            opacity: 0.5; 
-            letter-spacing: 1px; 
-            font-weight: 600;
-            min-width: 45px;
+        .perf-list-item:last-child { border-bottom: none; }
+        .perf-list-item.disabled {
+            cursor: not-allowed;
+            opacity: 0.6;
         }
-        .perf-content { flex: 1; }
-        .perf-title-text { 
-            font-size: 14px; 
-            font-weight: 500; 
-            margin-bottom: 6px;
+        .perf-list-item:hover:not(.disabled) {
+            opacity: 0.8;
+            padding-left: 12px;
+        }
+        .perf-list-content {
+            flex: 1;
+        }
+        .perf-list-title {
+            font-size: 14px;
+            font-weight: 500;
             opacity: 0.95;
         }
-        .perf-info { 
-            font-size: 11px; 
-            opacity: 0.6; 
-            line-height: 1.6;
-        }
-        .perf-btn { 
-            padding: 8px 16px;
-            background: transparent;
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            color: #fff;
-            cursor: pointer;
-            font-size: 11px;
-            letter-spacing: 1px;
-            border-radius: 4px;
-            transition: all 0.3s ease;
-            white-space: nowrap;
-        }
-        .perf-btn:hover {
-            background: rgba(255, 255, 255, 0.1);
-            border-color: rgba(255, 255, 255, 0.6);
-        }
-        .perf-btn:disabled {
+        .perf-list-year {
+            font-size: 12px;
             opacity: 0.5;
-            cursor: not-allowed;
-        }
-        .perf-btn:disabled:hover {
-            background: transparent;
-            border-color: rgba(255, 255, 255, 0.3);
+            letter-spacing: 1px;
+            font-weight: 600;
+            min-width: 50px;
+            text-align: right;
         }
         .projects-list { max-width: 900px; margin: 0 auto; }
         .project-tabs { display: flex; justify-content: center; gap: 40px; margin-bottom: 50px; border-bottom: 1px solid rgba(255, 255, 255, 0.1); }
@@ -771,37 +776,29 @@
             <div class="performance-section">
                 <h3 class="performance-title">PERFORMANCE</h3>
                 <div class="performance-list">
-                    <div class="performance-item">
-                        <div class="perf-year">2023</div>
-                        <div class="perf-content">
-                            <p class="perf-title-text">"TRANS"</p>
-                            <p class="perf-info">Studio Mong, Seoul</p>
+                    <div class="perf-list-item" onclick="goToProject('2023')">
+                        <div class="perf-list-content">
+                            <div class="perf-list-title">"TRANS" - Studio Mong, Seoul</div>
                         </div>
-                        <button class="perf-btn" onclick="goToProject('2023')">보기</button>
+                        <div class="perf-list-year">2023</div>
                     </div>
-                    <div class="performance-item">
-                        <div class="perf-year">2024</div>
-                        <div class="perf-content">
-                            <p class="perf-title-text">"TRANS vol.2"</p>
-                            <p class="perf-info">Seoul Art Space Mullae Box Theater, Seoul</p>
+                    <div class="perf-list-item" onclick="goToProject('2024')">
+                        <div class="perf-list-content">
+                            <div class="perf-list-title">"TRANS vol.2" - Seoul Art Space Mullae Box Theater, Seoul</div>
                         </div>
-                        <button class="perf-btn" onclick="goToProject('2024')">보기</button>
+                        <div class="perf-list-year">2024</div>
                     </div>
-                    <div class="performance-item">
-                        <div class="perf-year">2025</div>
-                        <div class="perf-content">
-                            <p class="perf-title-text">"TRANS III: 주어 없는 움직임"</p>
-                            <p class="perf-info">Sogang Univ. Mary Hall Grand Theater, Seoul</p>
+                    <div class="perf-list-item" onclick="goToProject('2025')">
+                        <div class="perf-list-content">
+                            <div class="perf-list-title">"TRANS III: 주어 없는 움직임" - Sogang Univ. Mary Hall Grand Theater, Seoul</div>
                         </div>
-                        <button class="perf-btn" onclick="goToProject('2025')">보기</button>
+                        <div class="perf-list-year">2025</div>
                     </div>
-                    <div class="performance-item">
-                        <div class="perf-year">2026</div>
-                        <div class="perf-content">
-                            <p class="perf-title-text">"포옹(Embrace)"</p>
-                            <p class="perf-info">SeMA Seoseoul Art Museum, Seoul</p>
+                    <div class="perf-list-item disabled">
+                        <div class="perf-list-content">
+                            <div class="perf-list-title">"포옹(Embrace)" - SeMA Seoseoul Art Museum 호흡, Seoul</div>
                         </div>
-                        <button class="perf-btn" disabled>Coming Soon</button>
+                        <div class="perf-list-year">2026</div>
                     </div>
                 </div>
             </div>
@@ -1048,14 +1045,14 @@
             <h1 class="page-title">CONTACT US</h1>
             <div class="contact-content">
                 <div class="contact-icons">
-                    <a href="/cdn-cgi/l/email-protection#5e2a2c3f302d6e666f671e303f283b2c703d3133" class="contact-item"><div class="contact-icon"><i class="fas fa-envelope"></i></div></a>
+                    <a href="mailto:trans0819@naver.com" class="contact-item"><div class="contact-icon"><i class="fas fa-envelope"></i></div></a>
                     <a href="https://www.instagram.com/trans_series" target="_blank" class="contact-item"><div class="contact-icon"><i class="fab fa-instagram"></i></div></a>
                     <a href="https://www.youtube.com/@transseries" target="_blank" class="contact-item"><div class="contact-icon"><i class="fab fa-youtube"></i></div></a>
                 </div>
                 <div class="contact-divider"></div>
                 <div class="contact-text">
                     <p>공연 문의 및 협업 제안</p>
-                    <p style="margin-top: 15px;"><a href="/cdn-cgi/l/email-protection#d0a4a2b1bea3e0e8e1e990beb1a6b5a2feb3bfbd"><span class="__cf_email__" data-cfemail="740006151a07444c454d341a150211065a171b19">[email&#160;protected]</span></a></p>
+                    <p style="margin-top: 15px;"><a href="mailto:trans0819@naver.com">trans0819@naver.com</a></p>
                 </div>
             </div>
         </div>
@@ -1149,9 +1146,7 @@
             intro.classList.add('swipe-up');
             setTimeout(() => {
                 intro.style.display = 'none';
-                document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-                document.getElementById('home').classList.add('active');
-                window.scrollTo(0, 0);
+                showPage('home');
             }, 600);
         }
         
@@ -1304,12 +1299,23 @@
             
             // 홈 네비게이션 버튼 active 상태 업데이트
             const pageMap = { 'about': 0, 'projects': 1, 'ticket': 2 };
+            const navButtons = document.querySelector('.home-nav-buttons');
             document.querySelectorAll('.home-nav-btn').forEach((btn, index) => {
                 btn.classList.remove('active');
-                if (pageMap[id] === index) {
+                if (id !== 'home' && pageMap[id] === index) {
                     btn.classList.add('active');
+                    // 슬라이딩 배경 위치 업데이트
+                    if (navButtons) {
+                        navButtons.classList.remove('state-0', 'state-1', 'state-2');
+                        navButtons.classList.add(`state-${index}`);
+                    }
                 }
             });
+            
+            // 홈 페이지일 때는 상태 클래스 제거
+            if (id === 'home' && navButtons) {
+                navButtons.classList.remove('state-0', 'state-1', 'state-2');
+            }
             
             document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
             setTimeout(() => {
@@ -1331,7 +1337,15 @@
 
         window.addEventListener('load', () => {
             const hash = window.location.hash.substring(1);
-            if (hash && document.getElementById(hash)) showPage(hash);
+            if (hash && document.getElementById(hash)) {
+                showPage(hash);
+            } else {
+                // 기본 상태(홈 페이지)에서는 어떤 버튼도 활성화하지 않음
+                const navButtons = document.querySelector('.home-nav-buttons');
+                if (navButtons) {
+                    navButtons.classList.remove('state-0', 'state-1', 'state-2');
+                }
+            }
         });
 
         initSlider('2023');
