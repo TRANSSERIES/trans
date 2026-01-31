@@ -277,6 +277,70 @@
         .project-description p { font-size: 12px; line-height: 1.8; opacity: 0.7; margin-bottom: 12px; }
         .project-description p:last-child { margin-bottom: 0; }
         .project-highlight { font-size: 11px; opacity: 0.5; margin-top: 15px; font-style: italic; }
+        
+        /* 영상 관련 스타일 */
+        .video-section { margin: 40px 0; }
+        .video-container {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto 30px;
+            aspect-ratio: 16/9;
+            background: #0a0a0a;
+            border-radius: 2px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 1px solid #1a1a1a;
+        }
+        .video-container:hover {
+            border-color: #333;
+            transform: scale(1.02);
+        }
+        .video-thumbnail {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+        .video-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.3s;
+        }
+        .video-container:hover .video-overlay {
+            background: rgba(0, 0, 0, 0.5);
+        }
+        .play-button {
+            width: 60px;
+            height: 60px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            color: #000;
+            transition: all 0.3s;
+        }
+        .video-container:hover .play-button {
+            background: #fff;
+            transform: scale(1.1);
+        }
+        .project-title-link {
+            cursor: pointer;
+            transition: opacity 0.3s;
+        }
+        .project-title-link:hover {
+            opacity: 0.6;
+        }
+        
         .ticket-content { max-width: 600px; margin: 0 auto; }
         .ticket-info { margin-bottom: 50px; padding: 40px; background: #0a0a0a; border: 1px solid #222; border-radius: 2px; }
         .ticket-info h3 { font-size: 20px; letter-spacing: 1px; margin-bottom: 20px; font-weight: 600; }
@@ -358,7 +422,7 @@
             <div class="social-icons">
                 <a href="https://www.instagram.com/trans_series" target="_blank"><i class="fab fa-instagram"></i></a>
                 <a href="https://www.youtube.com/@transseries" target="_blank"><i class="fab fa-youtube"></i></a>
-                <a href="mailto:trans0819@naver.com"><i class="fas fa-envelope"></i></a>
+                <a href="/cdn-cgi/l/email-protection#780c0a19160b484049413816190e1d0a561b1715"><i class="fas fa-envelope"></i></a>
             </div>
         </div>
     </div>
@@ -390,7 +454,7 @@
                 <div class="projects-list">
                     <div class="project-item">
                         <div class="project-year">2023</div>
-                        <div class="project-title">TRANS</div>
+                        <a href="https://youtu.be/P4DBM_5QQqc" target="_blank" class="project-title project-title-link">TRANS</a>
                     </div>
                 </div>
                 <div class="slider-container">
@@ -398,6 +462,14 @@
                     <button class="slider-btn prev" onclick="changeSlide('2023', -1)">‹</button>
                     <button class="slider-btn next" onclick="changeSlide('2023', 1)">›</button>
                     <div class="slider-dots" id="dots-2023"></div>
+                </div>
+                <div class="video-section">
+                    <a href="https://youtu.be/P4DBM_5QQqc" target="_blank" class="video-container" title="영상 보기">
+                        <img src="https://img.youtube.com/vi/P4DBM_5QQqc/maxresdefault.jpg" alt="TRANS 1 영상" class="video-thumbnail">
+                        <div class="video-overlay">
+                            <div class="play-button">▶</div>
+                        </div>
+                    </a>
                 </div>
                 <div class="project-description">
                     <div class="project-meta">
@@ -417,7 +489,7 @@
                 <div class="projects-list">
                     <div class="project-item">
                         <div class="project-year">2024</div>
-                        <div class="project-title">TRANS vol.2</div>
+                        <a href="https://youtu.be/wQN7NHKapJY" target="_blank" class="project-title project-title-link">TRANS vol.2</a>
                     </div>
                 </div>
                 <div class="slider-container">
@@ -425,6 +497,14 @@
                     <button class="slider-btn prev" onclick="changeSlide('2024', -1)">‹</button>
                     <button class="slider-btn next" onclick="changeSlide('2024', 1)">›</button>
                     <div class="slider-dots" id="dots-2024"></div>
+                </div>
+                <div class="video-section">
+                    <a href="https://youtu.be/wQN7NHKapJY" target="_blank" class="video-container" title="영상 보기">
+                        <img src="https://img.youtube.com/vi/wQN7NHKapJY/maxresdefault.jpg" alt="TRANS2 vol.2 영상" class="video-thumbnail">
+                        <div class="video-overlay">
+                            <div class="play-button">▶</div>
+                        </div>
+                    </a>
                 </div>
                 <div class="project-description">
                     <div class="project-meta">
@@ -443,7 +523,7 @@
                 <div class="projects-list">
                     <div class="project-item">
                         <div class="project-year">2025</div>
-                        <div class="project-title">TRANS III: 주어 없는 움직임</div>
+                        <a href="https://youtu.be/rFx1kIEh1rQ" target="_blank" class="project-title project-title-link">TRANS III: 주어 없는 움직임</a>
                     </div>
                 </div>
                 <div class="slider-container">
@@ -451,6 +531,14 @@
                     <button class="slider-btn prev" onclick="changeSlide('2025', -1)">‹</button>
                     <button class="slider-btn next" onclick="changeSlide('2025', 1)">›</button>
                     <div class="slider-dots" id="dots-2025"></div>
+                </div>
+                <div class="video-section">
+                    <a href="https://youtu.be/rFx1kIEh1rQ" target="_blank" class="video-container" title="영상 보기">
+                        <img src="https://img.youtube.com/vi/rFx1kIEh1rQ/maxresdefault.jpg" alt="TRANS3 주어 없는 움직임 영상" class="video-thumbnail">
+                        <div class="video-overlay">
+                            <div class="play-button">▶</div>
+                        </div>
+                    </a>
                 </div>
                 <div class="project-description">
                     <div class="project-meta">
@@ -550,14 +638,14 @@
             <h1 class="page-title">CONTACT</h1>
             <div class="contact-content">
                 <div class="contact-icons">
-                    <a href="mailto:trans0819@naver.com" class="contact-item"><div class="contact-icon"><i class="fas fa-envelope"></i></div></a>
+                    <a href="/cdn-cgi/l/email-protection#7e0a0c1f100d4e464f473e101f081b0c501d1113" class="contact-item"><div class="contact-icon"><i class="fas fa-envelope"></i></div></a>
                     <a href="https://www.instagram.com/trans_series" target="_blank" class="contact-item"><div class="contact-icon"><i class="fab fa-instagram"></i></div></a>
                     <a href="https://www.youtube.com/@transseries" target="_blank" class="contact-item"><div class="contact-icon"><i class="fab fa-youtube"></i></div></a>
                 </div>
                 <div class="contact-divider"></div>
                 <div class="contact-text">
                     <p>공연 문의 및 협업 제안</p>
-                    <p style="margin-top: 15px;">trans0819@naver.com</p>
+                    <p style="margin-top: 15px;"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="601412010e1350585159200e011605124e030f0d">[email&#160;protected]</a></p>
                 </div>
             </div>
         </div>
@@ -565,7 +653,7 @@
 
     <footer><p>© 2026년 TRANS. ALL RIGHTS RESERVED.</p></footer>
 
-    <script>
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
         // 인트로 애니메이션
         const words = [
             'TRANSITION',
@@ -694,6 +782,12 @@
             'archive2': ['1DGVQTrzpeb0psf20F44_gggRQMfQdgsx', '1SXz_MbKx6tJFd2k07qwc7XF1B1uo_1JV'],
             'archive3': ['1flTZVeux92GsaHcs1MOcBMuM08_QZICV', '1MRBbo1LSXifJ3_q19sopqShsedYHyBEp', '1q5OY9iHulyUTKa3nSoqjLe36Ckwxl92C', '1r8omgtSLCfdmQmLDSRGGHRlDoyaOserc', '183Rwo2bBl6IyMOpsaS_OhOkCdgYFFLhU', '1oK1Vh4WDft35bvj2SIu70hH3SszpNsBG', '1j_apQ91rLKbG5P35ux9nc5LWNOvPVfJe']
         };
+        
+        const videos = {
+            '2023': { url: 'https://youtu.be/P4DBM_5QQqc', id: 'P4DBM_5QQqc', title: 'TRANS 1' },
+            '2024': { url: 'https://youtu.be/wQN7NHKapJY', id: 'wQN7NHKapJY', title: 'TRANS2 vol.2' },
+            '2025': { url: 'https://youtu.be/rFx1kIEh1rQ', id: 'rFx1kIEh1rQ', title: 'TRANS3 주어 없는 움직임' }
+        };
         let currentSlide = { '2023': 0, '2024': 0, '2025': 0, 'archive1': 0, 'archive2': 0, 'archive3': 0 };
         let touchStartX = 0, touchEndX = 0;
 
@@ -803,12 +897,3 @@
         document.addEventListener('selectstart', e => {
             if (e.target.tagName === 'IMG') e.preventDefault();
         });
-        
-        // iOS Safari 이미지 저장 방지
-        document.querySelectorAll('img').forEach(img => {
-            img.addEventListener('contextmenu', e => e.preventDefault());
-            img.style.webkitUserSelect = 'none';
-            img.style.webkitTouchCallout = 'none';
-        });
-    </script>
-</body>
