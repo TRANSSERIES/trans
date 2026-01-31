@@ -279,7 +279,70 @@
         .project-highlight { font-size: 11px; opacity: 0.5; margin-top: 15px; font-style: italic; }
         
         /* 영상 관련 스타일 */
-        .video-section { margin: 40px 0; }
+        .video-section { margin: 40px 0 60px 0; }
+        .youtube-embed {
+            max-width: 800px;
+            margin: 0 auto;
+            aspect-ratio: 16/9;
+            border-radius: 2px;
+            border: 1px solid #1a1a1a;
+            overflow: hidden;
+        }
+        .youtube-embed iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        
+        /* 갤러리 서랍(아코디언) 스타일 */
+        .gallery-accordion {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .accordion-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 15px 20px;
+            background: #0a0a0a;
+            border: 1px solid #1a1a1a;
+            cursor: pointer;
+            transition: all 0.3s;
+            user-select: none;
+        }
+        .accordion-header:hover {
+            background: #111;
+            border-color: #333;
+        }
+        .accordion-title {
+            font-size: 14px;
+            letter-spacing: 1px;
+            font-weight: 500;
+        }
+        .accordion-icon {
+            font-size: 18px;
+            transition: transform 0.3s;
+            opacity: 0.7;
+        }
+        .accordion-icon.active {
+            transform: rotate(180deg);
+        }
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease;
+            border-bottom: 1px solid #1a1a1a;
+            border-left: 1px solid #1a1a1a;
+            border-right: 1px solid #1a1a1a;
+        }
+        .accordion-content.active {
+            max-height: 1000px;
+        }
+        .gallery-slider-wrapper {
+            padding: 20px;
+            background: #0a0a0a;
+        }
+        
         .video-container {
             position: relative;
             max-width: 800px;
@@ -456,22 +519,33 @@
                 <div class="projects-list">
                     <div class="project-item">
                         <div class="project-year">2023</div>
-                        <a href="https://youtu.be/P4DBM_5QQqc" target="_blank" class="project-title project-title-link">TRANS</a>
+                        <div class="project-title">TRANS</div>
                     </div>
                 </div>
-                <div class="slider-container">
-                    <div class="slider"><div class="slides" id="slides-2023"></div></div>
-                    <button class="slider-btn prev" onclick="changeSlide('2023', -1)">‹</button>
-                    <button class="slider-btn next" onclick="changeSlide('2023', 1)">›</button>
-                    <div class="slider-dots" id="dots-2023"></div>
-                </div>
+                
+                <!-- YouTube 임베드 플레이어 -->
                 <div class="video-section">
-                    <a href="https://youtu.be/P4DBM_5QQqc" target="_blank" class="video-container" title="영상 보기">
-                        <img src="https://img.youtube.com/vi/P4DBM_5QQqc/maxresdefault.jpg" alt="TRANS 1 영상" class="video-thumbnail" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 1280 720%22%3E%3Crect fill=%22%230a0a0a%22 width=%221280%22 height=%22720%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2236%22 fill=%22%23666%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22%3EVIDEO%3C/text%3E%3C/svg%3E'">
-                        <div class="video-overlay">
-                            <div class="play-button">▶</div>
+                    <div class="youtube-embed">
+                        <iframe src="https://www.youtube.com/embed/P4DBM_5QQqc" allowfullscreen="" loading="lazy"></iframe>
+                    </div>
+                </div>
+                
+                <!-- 갤러리 아코디언 -->
+                <div class="gallery-accordion">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <span class="accordion-title">📸 갤러리 보기</span>
+                        <span class="accordion-icon">▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="gallery-slider-wrapper">
+                            <div class="slider-container">
+                                <div class="slider"><div class="slides" id="slides-2023"></div></div>
+                                <button class="slider-btn prev" onclick="changeSlide('2023', -1)">‹</button>
+                                <button class="slider-btn next" onclick="changeSlide('2023', 1)">›</button>
+                                <div class="slider-dots" id="dots-2023"></div>
+                            </div>
                         </div>
-                    </a>
+                    </div>
                 </div>
                 <div class="project-description">
                     <div class="project-meta">
@@ -491,22 +565,33 @@
                 <div class="projects-list">
                     <div class="project-item">
                         <div class="project-year">2024</div>
-                        <a href="https://youtu.be/wQN7NHKapJY" target="_blank" class="project-title project-title-link">TRANS vol.2</a>
+                        <div class="project-title">TRANS vol.2</div>
                     </div>
                 </div>
-                <div class="slider-container">
-                    <div class="slider"><div class="slides" id="slides-2024"></div></div>
-                    <button class="slider-btn prev" onclick="changeSlide('2024', -1)">‹</button>
-                    <button class="slider-btn next" onclick="changeSlide('2024', 1)">›</button>
-                    <div class="slider-dots" id="dots-2024"></div>
-                </div>
+                
+                <!-- YouTube 임베드 플레이어 -->
                 <div class="video-section">
-                    <a href="https://youtu.be/wQN7NHKapJY" target="_blank" class="video-container" title="영상 보기">
-                        <img src="https://img.youtube.com/vi/wQN7NHKapJY/maxresdefault.jpg" alt="TRANS2 vol.2 영상" class="video-thumbnail" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 1280 720%22%3E%3Crect fill=%22%230a0a0a%22 width=%221280%22 height=%22720%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2236%22 fill=%22%23666%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22%3EVIDEO%3C/text%3E%3C/svg%3E'">
-                        <div class="video-overlay">
-                            <div class="play-button">▶</div>
+                    <div class="youtube-embed">
+                        <iframe src="https://www.youtube.com/embed/wQN7NHKapJY" allowfullscreen="" loading="lazy"></iframe>
+                    </div>
+                </div>
+                
+                <!-- 갤러리 아코디언 -->
+                <div class="gallery-accordion">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <span class="accordion-title">📸 갤러리 보기</span>
+                        <span class="accordion-icon">▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="gallery-slider-wrapper">
+                            <div class="slider-container">
+                                <div class="slider"><div class="slides" id="slides-2024"></div></div>
+                                <button class="slider-btn prev" onclick="changeSlide('2024', -1)">‹</button>
+                                <button class="slider-btn next" onclick="changeSlide('2024', 1)">›</button>
+                                <div class="slider-dots" id="dots-2024"></div>
+                            </div>
                         </div>
-                    </a>
+                    </div>
                 </div>
                 <div class="project-description">
                     <div class="project-meta">
@@ -525,22 +610,33 @@
                 <div class="projects-list">
                     <div class="project-item">
                         <div class="project-year">2025</div>
-                        <a href="https://youtu.be/rFx1kIEh1rQ" target="_blank" class="project-title project-title-link">TRANS III: 주어 없는 움직임</a>
+                        <div class="project-title">TRANS III: 주어 없는 움직임</div>
                     </div>
                 </div>
-                <div class="slider-container">
-                    <div class="slider"><div class="slides" id="slides-2025"></div></div>
-                    <button class="slider-btn prev" onclick="changeSlide('2025', -1)">‹</button>
-                    <button class="slider-btn next" onclick="changeSlide('2025', 1)">›</button>
-                    <div class="slider-dots" id="dots-2025"></div>
-                </div>
+                
+                <!-- YouTube 임베드 플레이어 -->
                 <div class="video-section">
-                    <a href="https://youtu.be/rFx1kIEh1rQ" target="_blank" class="video-container" title="영상 보기">
-                        <img src="https://img.youtube.com/vi/rFx1kIEh1rQ/maxresdefault.jpg" alt="TRANS3 주어 없는 움직임 영상" class="video-thumbnail" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 1280 720%22%3E%3Crect fill=%22%230a0a0a%22 width=%221280%22 height=%22720%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2236%22 fill=%22%23666%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22%3EVIDEO%3C/text%3E%3C/svg%3E'">
-                        <div class="video-overlay">
-                            <div class="play-button">▶</div>
+                    <div class="youtube-embed">
+                        <iframe src="https://www.youtube.com/embed/rFx1kIEh1rQ" allowfullscreen="" loading="lazy"></iframe>
+                    </div>
+                </div>
+                
+                <!-- 갤러리 아코디언 -->
+                <div class="gallery-accordion">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <span class="accordion-title">📸 갤러리 보기</span>
+                        <span class="accordion-icon">▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="gallery-slider-wrapper">
+                            <div class="slider-container">
+                                <div class="slider"><div class="slides" id="slides-2025"></div></div>
+                                <button class="slider-btn prev" onclick="changeSlide('2025', -1)">‹</button>
+                                <button class="slider-btn next" onclick="changeSlide('2025', 1)">›</button>
+                                <div class="slider-dots" id="dots-2025"></div>
+                            </div>
                         </div>
-                    </a>
+                    </div>
                 </div>
                 <div class="project-description">
                     <div class="project-meta">
@@ -873,6 +969,25 @@
                 document.getElementById('archive-section').classList.add('active');
             }
         }
+        
+        // 아코디언 토글 함수
+        function toggleAccordion(header) {
+            const content = header.nextElementSibling;
+            const icon = header.querySelector('.accordion-icon');
+            
+            // 다른 아코디언이 열려있으면 닫기
+            const allContents = document.querySelectorAll('.accordion-content.active');
+            allContents.forEach(c => {
+                if (c !== content) {
+                    c.classList.remove('active');
+                    c.previousElementSibling.querySelector('.accordion-icon').classList.remove('active');
+                }
+            });
+            
+            // 현재 아코디언 토글
+            content.classList.toggle('active');
+            icon.classList.toggle('active');
+        }
 
         function toggleMenu() {
             const menu = document.getElementById('mobileMenu');
@@ -889,7 +1004,7 @@
             }
         }, { passive: true });
         
-        // 이미지 선택 방지
+               // 이미지 선택 방지
         document.addEventListener('selectstart', e => {
             if (e.target.tagName === 'IMG') e.preventDefault();
         });
