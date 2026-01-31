@@ -132,13 +132,42 @@
             .swipe-indicator { display: none; }
             .tap-indicator { display: flex; }
         }
-        header { position: fixed; top: 0; width: 100%; padding: 20px 60px; display: flex; justify-content: space-between; align-items: center; z-index: 1000; background: rgba(0,0,0,0.98); border-bottom: 1px solid #222; }
+        header { 
+            position: fixed; 
+            top: 0; 
+            width: 100%; 
+            padding: 20px 60px; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            z-index: 1000; 
+            background: rgba(0,0,0,0.98); 
+            border-bottom: none;
+        }
         .logo { height: 50px; cursor: pointer; transition: opacity 0.3s; }
         .logo img { height: 100%; width: auto; max-width: 250px; }
         .logo:hover { opacity: 0.7; }
-        nav { display: flex; gap: 50px; }
-        nav a { color: #fff; text-decoration: none; font-size: 12px; letter-spacing: 2px; font-weight: 500; transition: opacity 0.3s; }
-        nav a:hover { opacity: 0.6; }
+        nav { 
+            display: flex; 
+            gap: 30px;
+            align-items: center;
+        }
+        nav a { 
+            color: #fff; 
+            text-decoration: none; 
+            font-size: 12px; 
+            letter-spacing: 1.5px; 
+            font-weight: 500; 
+            transition: all 0.3s ease;
+            padding: 10px 18px;
+            border-radius: 6px;
+            background: transparent;
+            border: 1px solid transparent;
+        }
+        nav a:hover { 
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 255, 255, 0.3);
+        }
         .home-btn {
             display: none;
             width: 40px;
@@ -197,6 +226,51 @@
         .social-icons { display: flex; gap: 25px; margin-top: 100px; position: absolute; bottom: 60px; }
         .social-icons a { color: #fff; font-size: 18px; transition: all 0.3s; opacity: 0.7; }
         .social-icons a:hover { opacity: 1; transform: scale(1.2); }
+        .home-nav-buttons { 
+            display: flex; 
+            gap: 0;
+            margin-top: 100px;
+            justify-content: center;
+            flex-wrap: wrap;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 8px;
+            padding: 0;
+            width: fit-content;
+            margin-left: auto;
+            margin-right: auto;
+            position: fixed;
+            bottom: 80px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 500;
+            margin-top: 0;
+        }
+        .home-nav-btn {
+            padding: 14px 32px;
+            background: transparent;
+            border: none;
+            border-right: 1px solid rgba(255, 255, 255, 0.15);
+            color: rgba(255, 255, 255, 0.4);
+            font-size: 12px;
+            letter-spacing: 1.5px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            flex: 1;
+            min-width: 100px;
+        }
+        .home-nav-btn:last-child {
+            border-right: none;
+        }
+        .home-nav-btn:hover {
+            background: rgba(255, 255, 255, 0.08);
+            color: rgba(255, 255, 255, 0.7);
+        }
+        .home-nav-btn.active {
+            background: transparent;
+            color: #fff;
+        }
         .page-content { max-width: 1000px; margin: 0 auto; padding: 80px 60px; }
         .page-title { font-size: 36px; letter-spacing: 3px; margin-bottom: 60px; text-align: center; font-weight: 600; }
         .about-main { max-width: 700px; margin: 0 auto 50px; text-align: center; }
@@ -660,21 +734,15 @@
             </svg>
         </div>
         <nav>
-            <a href="#" onclick="showPage('home'); return false;">HOME</a>
-            <a href="#" onclick="showPage('about'); return false;">ABOUT</a>
-            <a href="#" onclick="showPage('projects'); return false;" class="show-mobile">PROJECTS</a>
-            <a href="#" onclick="showPage('ticket'); return false;">TICKET</a>
-            <a href="#" onclick="showPage('contact'); return false;" class="show-mobile">CONTACT</a>
+            <a href="#" onclick="showPage('contact'); return false;">CONTACT US</a>
         </nav>
     </header>
 
     <div class="mobile-menu" id="mobileMenu">
         <div class="close-menu" onclick="toggleMenu()">✕</div>
-        <a href="#" onclick="showPage('home'); toggleMenu(); return false;">HOME</a>
         <a href="#" onclick="showPage('about'); toggleMenu(); return false;">ABOUT</a>
         <a href="#" onclick="showPage('projects'); toggleMenu(); return false;">PROJECTS</a>
         <a href="#" onclick="showPage('ticket'); toggleMenu(); return false;">TICKET</a>
-        <a href="#" onclick="showPage('contact'); toggleMenu(); return false;">CONTACT</a>
     </div>
 
     <div id="home" class="page active">
@@ -684,7 +752,7 @@
             <div class="social-icons">
                 <a href="https://www.instagram.com/trans_series" target="_blank"><i class="fab fa-instagram"></i></a>
                 <a href="https://www.youtube.com/@transseries" target="_blank"><i class="fab fa-youtube"></i></a>
-                <a href="/cdn-cgi/l/email-protection#780c0a19160b484049413816190e1d0a561b1715"><i class="fas fa-envelope"></i></a>
+                <a href="mailto:trans0819@naver.com"><i class="fas fa-envelope"></i></a>
             </div>
         </div>
     </div>
@@ -977,25 +1045,32 @@
 
     <div id="contact" class="page">
         <div class="page-content">
-            <h1 class="page-title">CONTACT</h1>
+            <h1 class="page-title">CONTACT US</h1>
             <div class="contact-content">
                 <div class="contact-icons">
-                    <a href="/cdn-cgi/l/email-protection#7e0a0c1f100d4e464f473e101f081b0c501d1113" class="contact-item"><div class="contact-icon"><i class="fas fa-envelope"></i></div></a>
+                    <a href="/cdn-cgi/l/email-protection#5e2a2c3f302d6e666f671e303f283b2c703d3133" class="contact-item"><div class="contact-icon"><i class="fas fa-envelope"></i></div></a>
                     <a href="https://www.instagram.com/trans_series" target="_blank" class="contact-item"><div class="contact-icon"><i class="fab fa-instagram"></i></div></a>
                     <a href="https://www.youtube.com/@transseries" target="_blank" class="contact-item"><div class="contact-icon"><i class="fab fa-youtube"></i></div></a>
                 </div>
                 <div class="contact-divider"></div>
                 <div class="contact-text">
                     <p>공연 문의 및 협업 제안</p>
-                    <p style="margin-top: 15px;"><a href="/cdn-cgi/l/email-protection#2d595f4c435e1d151c146d434c5b485f034e4240"><span class="__cf_email__" data-cfemail="fd898f9c938ecdc5ccc4bd939c8b988fd39e9290">[email&#160;protected]</span></a></p>
+                    <p style="margin-top: 15px;"><a href="/cdn-cgi/l/email-protection#d0a4a2b1bea3e0e8e1e990beb1a6b5a2feb3bfbd"><span class="__cf_email__" data-cfemail="740006151a07444c454d341a150211065a171b19">[email&#160;protected]</span></a></p>
                 </div>
             </div>
         </div>
     </div>
 
+    <!-- 고정 네비게이션 버튼 -->
+    <div class="home-nav-buttons">
+        <button class="home-nav-btn" onclick="showPage('about')">ABOUT</button>
+        <button class="home-nav-btn" onclick="showPage('projects')">PROJECTS</button>
+        <button class="home-nav-btn" onclick="showPage('ticket')">TICKET</button>
+    </div>
+
     <footer><p>© 2026년 TRANS. ALL RIGHTS RESERVED.</p></footer>
 
-    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
         // 인트로 애니메이션
         const words = [
             'TRANSITION',
@@ -1225,6 +1300,15 @@
             // 모든 재생 중인 영상 정지
             document.querySelectorAll('.youtube-player iframe, .youtube-embed iframe').forEach(iframe => {
                 iframe.src = iframe.src.split('?')[0];
+            });
+            
+            // 홈 네비게이션 버튼 active 상태 업데이트
+            const pageMap = { 'about': 0, 'projects': 1, 'ticket': 2 };
+            document.querySelectorAll('.home-nav-btn').forEach((btn, index) => {
+                btn.classList.remove('active');
+                if (pageMap[id] === index) {
+                    btn.classList.add('active');
+                }
             });
             
             document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
