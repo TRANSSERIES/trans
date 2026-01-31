@@ -203,6 +203,62 @@
         .about-main h2 { font-size: 16px; font-weight: 500; letter-spacing: 0.5px; line-height: 1.9; margin-bottom: 35px; opacity: 0.95; }
         .about-text { max-width: 700px; margin: 0 auto; line-height: 1.9; font-size: 13px; opacity: 0.75; text-align: left; }
         .about-text p { margin-bottom: 18px; }
+        
+        /* Performance 섹션 */
+        .performance-section { max-width: 700px; margin: 80px auto 0; text-align: left; }
+        .performance-title { font-size: 18px; font-weight: 600; letter-spacing: 2px; margin-bottom: 40px; opacity: 0.9; }
+        .performance-list { display: flex; flex-direction: column; gap: 28px; }
+        .performance-item { 
+            display: flex; 
+            align-items: flex-start; 
+            gap: 20px;
+            padding: 16px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .performance-item:last-child { border-bottom: none; }
+        .perf-year { 
+            font-size: 11px; 
+            opacity: 0.5; 
+            letter-spacing: 1px; 
+            font-weight: 600;
+            min-width: 45px;
+        }
+        .perf-content { flex: 1; }
+        .perf-title-text { 
+            font-size: 14px; 
+            font-weight: 500; 
+            margin-bottom: 6px;
+            opacity: 0.95;
+        }
+        .perf-info { 
+            font-size: 11px; 
+            opacity: 0.6; 
+            line-height: 1.6;
+        }
+        .perf-btn { 
+            padding: 8px 16px;
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: #fff;
+            cursor: pointer;
+            font-size: 11px;
+            letter-spacing: 1px;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+        .perf-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.6);
+        }
+        .perf-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        .perf-btn:disabled:hover {
+            background: transparent;
+            border-color: rgba(255, 255, 255, 0.3);
+        }
         .projects-list { max-width: 900px; margin: 0 auto; }
         .project-tabs { display: flex; justify-content: center; gap: 40px; margin-bottom: 50px; border-bottom: 1px solid rgba(255, 255, 255, 0.1); }
         .project-tab { padding: 15px 0; font-size: 14px; letter-spacing: 1.5px; cursor: pointer; opacity: 0.5; transition: all 0.3s ease; border-bottom: 2px solid transparent; }
@@ -642,6 +698,44 @@
             <div class="about-text">
                 <p>TRANS는 '변(變)–'의 뜻처럼, 고정되지 않고 끊임없이 움직이며 확장하는 예술 프로젝트입니다. 다양한 예술 장르가 만나 서로를 변화시키며, <strong>공명작업(Resonant Work)</strong>의 가능성을 탐구하고 있습니다.</p>
                 <p>단순한 협업을 넘어, 각자의 고유성이 충돌하고 교차하는 과정을 통해 '공존 가능한 예술 생태계'를 상상합니다. TRANS는 하나의 완성된 형태가 아닙니다. 과정 속에서 피어나는 질문, 실패, 충돌, 변화를 그대로 껴안으며 '어디로 튈지 모르는 가능성의 공간'을 확장해 나갑니다.</p>
+            </div>
+            
+            <div class="performance-section">
+                <h3 class="performance-title">PERFORMANCE</h3>
+                <div class="performance-list">
+                    <div class="performance-item">
+                        <div class="perf-year">2023</div>
+                        <div class="perf-content">
+                            <p class="perf-title-text">"TRANS"</p>
+                            <p class="perf-info">Studio Mong, Seoul</p>
+                        </div>
+                        <button class="perf-btn" onclick="goToProject('2023')">보기</button>
+                    </div>
+                    <div class="performance-item">
+                        <div class="perf-year">2024</div>
+                        <div class="perf-content">
+                            <p class="perf-title-text">"TRANS vol.2"</p>
+                            <p class="perf-info">Seoul Art Space Mullae Box Theater, Seoul</p>
+                        </div>
+                        <button class="perf-btn" onclick="goToProject('2024')">보기</button>
+                    </div>
+                    <div class="performance-item">
+                        <div class="perf-year">2025</div>
+                        <div class="perf-content">
+                            <p class="perf-title-text">"TRANS III: 주어 없는 움직임"</p>
+                            <p class="perf-info">Sogang Univ. Mary Hall Grand Theater, Seoul</p>
+                        </div>
+                        <button class="perf-btn" onclick="goToProject('2025')">보기</button>
+                    </div>
+                    <div class="performance-item">
+                        <div class="perf-year">2026</div>
+                        <div class="perf-content">
+                            <p class="perf-title-text">"포옹(Embrace)"</p>
+                            <p class="perf-info">SeMA Seoseoul Art Museum, Seoul</p>
+                        </div>
+                        <button class="perf-btn" disabled>Coming Soon</button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -1128,6 +1222,11 @@
         }
 
         function showPage(id) {
+            // 모든 재생 중인 영상 정지
+            document.querySelectorAll('.youtube-player iframe, .youtube-embed iframe').forEach(iframe => {
+                iframe.src = iframe.src.split('?')[0];
+            });
+            
             document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
             setTimeout(() => {
                 document.getElementById(id).classList.add('active');
@@ -1161,6 +1260,19 @@
         // 비디오 Intersection Observer와 갤러리 자동 닫기 초기화
         initVideoObserver();
         initGalleryAutoClose();
+        
+        // 프로젝트로 이동하는 함수
+        function goToProject(year) {
+            showPage('projects');
+            showProjectTab('works');
+            setTimeout(() => {
+                const target = document.querySelector(`[id*="slides-${year}"]`);
+                if (target) {
+                    const section = target.closest('.gallery-section');
+                    section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            }, 100);
+        }
 
         function showProjectTab(tab) {
             document.querySelectorAll('.project-tab').forEach(t => t.classList.remove('active'));
