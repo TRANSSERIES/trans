@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -197,12 +198,124 @@
         .social-icons { display: flex; gap: 25px; margin-top: 100px; position: absolute; bottom: 60px; }
         .social-icons a { color: #fff; font-size: 18px; transition: all 0.3s; opacity: 0.7; }
         .social-icons a:hover { opacity: 1; transform: scale(1.2); }
+        
+        /* 고정 네비게이션 버튼 */
+        .home-nav-buttons { 
+            display: flex !important; 
+            gap: 0 !important;
+            justify-content: center !important;
+            flex-wrap: wrap !important;
+            background: rgba(255, 255, 255, 0.05) !important;
+            border: 1px solid rgba(255, 255, 255, 0.1) !important;
+            border-radius: 8px !important;
+            padding: 4px !important;
+            width: 290px !important;
+            position: fixed !important;
+            bottom: 130px !important;
+            left: 50% !important;
+            transform: translateX(-50%) !important;
+            z-index: 500 !important;
+            margin-top: 0 !important;
+            height: auto !important;
+        }
+        .home-nav-btn {
+            padding: 10px 24px !important;
+            background: transparent !important;
+            border: none !important;
+            color: rgba(255, 255, 255, 0.4) !important;
+            font-size: 11px !important;
+            letter-spacing: 1.3px !important;
+            font-weight: 500 !important;
+            cursor: pointer !important;
+            transition: color 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+            flex: 0 0 90px !important;
+            width: 90px !important;
+            position: relative !important;
+            z-index: 1 !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            white-space: nowrap !important;
+        }
+        .home-nav-btn:hover {
+            color: rgba(255, 255, 255, 0.7) !important;
+        }
+        .home-nav-btn.active {
+            color: #000 !important;
+            z-index: 2 !important;
+        }
+        .home-nav-buttons::before {
+            content: '' !important;
+            position: absolute !important;
+            top: 4px !important;
+            left: 4px !important;
+            height: calc(100% - 8px) !important;
+            width: 82px !important;
+            background: #fff !important;
+            border-radius: 6px !important;
+            transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+            z-index: 0 !important;
+            opacity: 0 !important;
+        }
+        .home-nav-buttons.state-0::before {
+            opacity: 1 !important;
+            left: 4px !important;
+        }
+        .home-nav-buttons.state-1::before {
+            opacity: 1 !important;
+            left: calc(90px + 4px) !important;
+        }
+        .home-nav-buttons.state-2::before {
+            opacity: 1 !important;
+            left: calc(180px + 4px) !important;
+        }
+
         .page-content { max-width: 1000px; margin: 0 auto; padding: 80px 60px; }
         .page-title { font-size: 36px; letter-spacing: 3px; margin-bottom: 60px; text-align: center; font-weight: 600; }
         .about-main { max-width: 700px; margin: 0 auto 50px; text-align: center; }
         .about-main h2 { font-size: 16px; font-weight: 500; letter-spacing: 0.5px; line-height: 1.9; margin-bottom: 35px; opacity: 0.95; }
         .about-text { max-width: 700px; margin: 0 auto; line-height: 1.9; font-size: 13px; opacity: 0.75; text-align: left; }
         .about-text p { margin-bottom: 18px; }
+        
+        /* Performance 섹션 */
+        .performance-section { max-width: 700px; margin: 80px auto 0; text-align: left; }
+        .performance-title { font-size: 18px; font-weight: 600; letter-spacing: 2px; margin-bottom: 40px; opacity: 0.9; }
+        .performance-list { display: flex; flex-direction: column; gap: 0; }
+        .perf-list-item { 
+            display: flex; 
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .perf-list-item:last-child { border-bottom: none; }
+        .perf-list-item.disabled {
+            cursor: not-allowed;
+            opacity: 0.6;
+        }
+        .perf-list-item:hover:not(.disabled) {
+            opacity: 0.8;
+            padding-left: 12px;
+        }
+        .perf-list-content {
+            flex: 1;
+        }
+        .perf-list-title {
+            font-size: 14px;
+            font-weight: 500;
+            opacity: 0.95;
+        }
+        .perf-list-year {
+            font-size: 12px;
+            opacity: 0.5;
+            letter-spacing: 1px;
+            font-weight: 600;
+            min-width: 50px;
+            text-align: right;
+        }
+
         .projects-list { max-width: 800px; margin: 0 auto; }
         .project-tabs { display: flex; justify-content: center; gap: 40px; margin-bottom: 50px; border-bottom: 1px solid #222; }
         .project-tab { padding: 15px 0; font-size: 14px; letter-spacing: 1.5px; cursor: pointer; opacity: 0.5; transition: opacity 0.3s; border-bottom: 2px solid transparent; }
@@ -305,6 +418,242 @@
             .slider-btn { font-size: 16px; padding: 8px 12px; }
             .project-description { padding: 20px; }
         }
+          /* 영상 관련 스타일 */
+        .video-section { 
+            margin: 60px 0 100px 0;
+            animation: fadeInUp 0.8s ease;
+        }
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .youtube-player {
+            position: relative;
+            max-width: 1000px;
+            margin: 0 auto;
+            aspect-ratio: 16/9;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5);
+            cursor: pointer;
+            background: #000;
+        }
+        .youtube-thumbnail {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+        .play-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+        }
+        .youtube-player:hover .play-overlay {
+            background: rgba(0, 0, 0, 0.4);
+        }
+        .play-btn-large {
+            width: auto;
+            height: auto;
+            border-radius: 0;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            padding: 0;
+        }
+        .play-btn-large:hover {
+            background: transparent;
+            border-color: transparent;
+            transform: scale(1.15);
+        }
+        .play-btn-large::after {
+            content: '▶';
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 48px;
+            margin-left: 0;
+            transition: color 0.3s ease;
+        }
+        .play-btn-large:hover::after {
+            color: rgba(255, 255, 255, 1);
+        }
+        .youtube-embed {
+            max-width: 1000px;
+            margin: 0 auto;
+            aspect-ratio: 16/9;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5);
+        }
+        .youtube-embed iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        
+        /* 갤러리 서랍(아코디언) 스타일 */
+        .gallery-accordion {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        .accordion-header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 25px 0;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            user-select: none;
+            width: 100%;
+        }
+        .accordion-header:hover {
+            transform: scale(1.02);
+        }
+        .accordion-title {
+            font-size: 12px;
+            letter-spacing: 3px;
+            font-weight: 600;
+            opacity: 0.6;
+            transition: all 0.3s ease;
+        }
+        .accordion-header:hover .accordion-title {
+            opacity: 1;
+        }
+        .accordion-icon {
+            font-size: 12px;
+            margin-left: 12px;
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            opacity: 0.6;
+        }
+        .accordion-header:hover .accordion-icon {
+            opacity: 1;
+        }
+        .accordion-icon.active {
+            transform: rotate(180deg);
+        }
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .accordion-content.active {
+            max-height: 1200px;
+        }
+        .gallery-slider-wrapper {
+            padding: 60px 0 80px 0;
+            background: transparent;
+            animation: slideDown 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .video-container {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto 30px;
+            aspect-ratio: 16/9;
+            background: #0a0a0a;
+            border-radius: 2px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 1px solid #1a1a1a;
+        }
+        .video-container:hover {
+            border-color: #333;
+            transform: scale(1.02);
+        }
+        .video-thumbnail {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+        .video-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.3s;
+        }
+        .video-container:hover .video-overlay {
+            background: rgba(0, 0, 0, 0.5);
+        }
+        .play-button {
+            width: 60px;
+            height: 60px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            color: #000;
+            transition: all 0.3s;
+        }
+        .video-container:hover .play-button {
+            background: #fff;
+            transform: scale(1.1);
+        }
+        .project-title-link { 
+            color: #fff; 
+            text-decoration: none; 
+            display: inline-block;
+            transition: opacity 0.3s;
+        }
+        .project-title-link:hover { 
+            opacity: 0.6; 
+        }
+        
+        .ticket-content { max-width: 600px; margin: 0 auto; }
+        .ticket-info { margin-bottom: 50px; padding: 40px; background: #0a0a0a; border: 1px solid #222; border-radius: 2px; }
+        .ticket-info h3 { font-size: 20px; letter-spacing: 1px; margin-bottom: 20px; font-weight: 600; }
+        .ticket-info p { font-size: 13px; line-height: 1.8; opacity: 0.75; }
+        .ticket-btn { display: inline-block; width: 100%; padding: 14px; background: #fff; color: #000; text-decoration: none; letter-spacing: 1.5px; font-size: 13px; font-weight: 600; border-radius: 2px; transition: all 0.3s; border: none; cursor: pointer; }
+        .ticket-btn.disabled { background: #444; color: #999; cursor: not-allowed; opacity: 0.5; }
+        .coming-soon { text-align: center; padding: 40px; opacity: 0.5; font-size: 14px; letter-spacing: 2px; }
+        .contact-content { max-width: 600px; margin: 0 auto; text-align: center; }
+        .contact-icons { display: flex; justify-content: center; gap: 50px; margin-bottom: 60px; }
+        .contact-icon { font-size: 36px; margin-bottom: 15px; opacity: 0.7; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); color: #fff; }
+        .contact-item a:hover .contact-icon { opacity: 1; transform: scale(1.15); }
+        .contact-divider { width: 50px; height: 1px; background: rgba(255, 255, 255, 0.1); margin: 60px auto; }
+        .contact-text { font-size: 13px; line-height: 2; opacity: 0.75; }
+        .contact-text a { color: #fff; text-decoration: none; transition: opacity 0.3s ease; }
+        .contact-text a:hover { opacity: 0.8; }
+        footer { padding: 40px; text-align: center; opacity: 0.4; font-size: 11px; letter-spacing: 2px; border-top: 1px solid rgba(255, 255, 255, 0.05); }
+        }
     </style>
 </head>
 <body>
@@ -334,21 +683,15 @@
             </svg>
         </div>
         <nav>
-            <a href="#" onclick="showPage('home'); return false;">HOME</a>
-            <a href="#" onclick="showPage('about'); return false;">ABOUT</a>
-            <a href="#" onclick="showPage('projects'); return false;" class="show-mobile">PROJECTS</a>
-            <a href="#" onclick="showPage('ticket'); return false;">TICKET</a>
-            <a href="#" onclick="showPage('contact'); return false;" class="show-mobile">CONTACT</a>
+            <a href="#" onclick="showPage('contact'); return false;">CONTACT US</a>
         </nav>
     </header>
 
     <div class="mobile-menu" id="mobileMenu">
         <div class="close-menu" onclick="toggleMenu()">✕</div>
-        <a href="#" onclick="showPage('home'); toggleMenu(); return false;">HOME</a>
         <a href="#" onclick="showPage('about'); toggleMenu(); return false;">ABOUT</a>
         <a href="#" onclick="showPage('projects'); toggleMenu(); return false;">PROJECTS</a>
         <a href="#" onclick="showPage('ticket'); toggleMenu(); return false;">TICKET</a>
-        <a href="#" onclick="showPage('contact'); toggleMenu(); return false;">CONTACT</a>
     </div>
 
     <div id="home" class="page active">
@@ -363,6 +706,13 @@
         </div>
     </div>
 
+    <!-- 고정 네비게이션 버튼 -->
+    <div class="home-nav-buttons">
+        <button class="home-nav-btn" onclick="showPage('about')">ABOUT</button>
+        <button class="home-nav-btn" onclick="showPage('projects')">PROJECTS</button>
+        <button class="home-nav-btn" onclick="showPage('ticket')">TICKET</button>
+    </div>
+
     <div id="about" class="page">
         <div class="page-content">
             <h1 class="page-title">ABOUT</h1>
@@ -372,6 +722,36 @@
             <div class="about-text">
                 <p>TRANS는 '변(變)–'의 뜻처럼, 고정되지 않고 끊임없이 움직이며 확장하는 예술 프로젝트입니다. 다양한 예술 장르가 만나 서로를 변화시키며, <strong>공명작업(Resonant Work)</strong>의 가능성을 탐구하고 있습니다.</p>
                 <p>단순한 협업을 넘어, 각자의 고유성이 충돌하고 교차하는 과정을 통해 '공존 가능한 예술 생태계'를 상상합니다. TRANS는 하나의 완성된 형태가 아닙니다. 과정 속에서 피어나는 질문, 실패, 충돌, 변화를 그대로 껴안으며 '어디로 튈지 모르는 가능성의 공간'을 확장해 나갑니다.</p>
+            </div>
+            
+            <div class="performance-section">
+                <h3 class="performance-title">PERFORMANCE</h3>
+                <div class="performance-list">
+                    <div class="perf-list-item" onclick="showPage('projects')">
+                        <div class="perf-list-content">
+                            <div class="perf-list-title">"TRANS" - Studio Mong, Seoul</div>
+                        </div>
+                        <div class="perf-list-year">2023</div>
+                    </div>
+                    <div class="perf-list-item" onclick="showPage('projects')">
+                        <div class="perf-list-content">
+                            <div class="perf-list-title">"TRANS vol.2" - Seoul Art Space Mullae Box Theater, Seoul</div>
+                        </div>
+                        <div class="perf-list-year">2024</div>
+                    </div>
+                    <div class="perf-list-item" onclick="showPage('projects')">
+                        <div class="perf-list-content">
+                            <div class="perf-list-title">"TRANS III: 주어 없는 움직임" - Sogang Univ. Mary Hall Grand Theater, Seoul</div>
+                        </div>
+                        <div class="perf-list-year">2025</div>
+                    </div>
+                    <div class="perf-list-item disabled">
+                        <div class="perf-list-content">
+                            <div class="perf-list-title">"포옹(Embrace)" - SeMA Seoseoul Art Museum 호흡, Seoul</div>
+                        </div>
+                        <div class="perf-list-year">2026</div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -392,12 +772,34 @@
                         <div class="project-year">2023</div>
                         <div class="project-title">TRANS</div>
                     </div>
+                               </div>
+                
+                <!-- YouTube 썸네일과 재생 버튼 -->
+                <div class="video-section">
+                    <div class="youtube-player" id="video-2023">
+                        <img src="https://img.youtube.com/vi/P4DBM_5QQqc/maxresdefault.jpg" alt="TRANS" class="youtube-thumbnail">
+                        <div class="play-overlay">
+                            <button class="play-btn-large" onclick="playVideo('video-2023', 'P4DBM_5QQqc')"></button>
+                        </div>
+                    </div>
                 </div>
-                <div class="slider-container">
-                    <div class="slider"><div class="slides" id="slides-2023"></div></div>
-                    <button class="slider-btn prev" onclick="changeSlide('2023', -1)">‹</button>
-                    <button class="slider-btn next" onclick="changeSlide('2023', 1)">›</button>
-                    <div class="slider-dots" id="dots-2023"></div>
+                
+                <!-- 갤러리 아코디언 -->
+                <div class="gallery-accordion">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <span class="accordion-title">OPEN</span>
+                        <span class="accordion-icon">▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="gallery-slider-wrapper">
+                            <div class="slider-container">
+                                <div class="slider"><div class="slides" id="slides-2023"></div></div>
+                                <button class="slider-btn prev" onclick="changeSlide('2023', -1)">‹</button>
+                                <button class="slider-btn next" onclick="changeSlide('2023', 1)">›</button>
+                                <div class="slider-dots" id="dots-2023"></div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="project-description">
                     <div class="project-meta">
@@ -420,11 +822,33 @@
                         <div class="project-title">TRANS vol.2</div>
                     </div>
                 </div>
-                <div class="slider-container">
-                    <div class="slider"><div class="slides" id="slides-2024"></div></div>
-                    <button class="slider-btn prev" onclick="changeSlide('2024', -1)">‹</button>
-                    <button class="slider-btn next" onclick="changeSlide('2024', 1)">›</button>
-                    <div class="slider-dots" id="dots-2024"></div>
+                
+                <!-- YouTube 썸네일과 재생 버튼 -->
+                <div class="video-section">
+                    <div class="youtube-player" id="video-2024">
+                        <img src="https://img.youtube.com/vi/wQN7NHKapJY/maxresdefault.jpg" alt="TRANS vol.2" class="youtube-thumbnail">
+                        <div class="play-overlay">
+                            <button class="play-btn-large" onclick="playVideo('video-2024', 'wQN7NHKapJY')"></button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 갤러리 아코디언 -->
+                <div class="gallery-accordion">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <span class="accordion-title">OPEN</span>
+                        <span class="accordion-icon">▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="gallery-slider-wrapper">
+                            <div class="slider-container">
+                                <div class="slider"><div class="slides" id="slides-2024"></div></div>
+                                <button class="slider-btn prev" onclick="changeSlide('2024', -1)">‹</button>
+                                <button class="slider-btn next" onclick="changeSlide('2024', 1)">›</button>
+                                <div class="slider-dots" id="dots-2024"></div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="project-description">
                     <div class="project-meta">
@@ -446,11 +870,33 @@
                         <div class="project-title">TRANS III: 주어 없는 움직임</div>
                     </div>
                 </div>
-                <div class="slider-container">
-                    <div class="slider"><div class="slides" id="slides-2025"></div></div>
-                    <button class="slider-btn prev" onclick="changeSlide('2025', -1)">‹</button>
-                    <button class="slider-btn next" onclick="changeSlide('2025', 1)">›</button>
-                    <div class="slider-dots" id="dots-2025"></div>
+                
+                <!-- YouTube 썸네일과 재생 버튼 -->
+                <div class="video-section">
+                    <div class="youtube-player" id="video-2025">
+                        <img src="https://img.youtube.com/vi/rFx1kIEh1rQ/maxresdefault.jpg" alt="TRANS III: 주어 없는 움직임" class="youtube-thumbnail">
+                        <div class="play-overlay">
+                            <button class="play-btn-large" onclick="playVideo('video-2025', 'rFx1kIEh1rQ')"></button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 갤러리 아코디언 -->
+                <div class="gallery-accordion">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <span class="accordion-title">OPEN</span>
+                        <span class="accordion-icon">▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="gallery-slider-wrapper">
+                            <div class="slider-container">
+                                <div class="slider"><div class="slides" id="slides-2025"></div></div>
+                                <button class="slider-btn prev" onclick="changeSlide('2025', -1)">‹</button>
+                                <button class="slider-btn next" onclick="changeSlide('2025', 1)">›</button>
+                                <div class="slider-dots" id="dots-2025"></div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="project-description">
                     <div class="project-meta">
@@ -547,20 +993,27 @@
 
     <div id="contact" class="page">
         <div class="page-content">
-            <h1 class="page-title">CONTACT</h1>
+            <h1 class="page-title">CONTACT US</h1>
             <div class="contact-content">
                 <div class="contact-icons">
-                    <a href="mailto:trans0819@naver.com" class="contact-item"><div class="contact-icon"><i class="fas fa-envelope"></i></div></a>
+                    <a href="/cdn-cgi/l/email-protection#304442515e4300080109705e514655421e535f5d" class="contact-item"><div class="contact-icon"><i class="fas fa-envelope"></i></div></a>
                     <a href="https://www.instagram.com/trans_series" target="_blank" class="contact-item"><div class="contact-icon"><i class="fab fa-instagram"></i></div></a>
                     <a href="https://www.youtube.com/@transseries" target="_blank" class="contact-item"><div class="contact-icon"><i class="fab fa-youtube"></i></div></a>
                 </div>
                 <div class="contact-divider"></div>
                 <div class="contact-text">
                     <p>공연 문의 및 협업 제안</p>
-                    <p style="margin-top: 15px;">trans0819@naver.com</p>
+                    <p style="margin-top: 15px;"><a href="/cdn-cgi/l/email-protection#a2d6d0c3ccd1929a939be2ccc3d4c7d08cc1cdcf"><span class="__cf_email__" data-cfemail="6f1b1d0e011c5f575e562f010e190a1d410c0002">[email&#160;protected]</span></a></p>
                 </div>
             </div>
         </div>
+    </div>
+
+    <!-- 고정 네비게이션 버튼 -->
+    <div class="home-nav-buttons">
+        <button class="home-nav-btn" onclick="showPage('about')">ABOUT</button>
+        <button class="home-nav-btn" onclick="showPage('projects')">PROJECTS</button>
+        <button class="home-nav-btn" onclick="showPage('ticket')">TICKET</button>
     </div>
 
     <footer><p>© 2026년 TRANS. ALL RIGHTS RESERVED.</p></footer>
@@ -644,9 +1097,7 @@
             intro.classList.add('swipe-up');
             setTimeout(() => {
                 intro.style.display = 'none';
-                document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-                document.getElementById('home').classList.add('active');
-                window.scrollTo(0, 0);
+                showPage('home');
             }, 600);
         }
         
@@ -686,7 +1137,7 @@
             setTimeout(typeWriter, 500);
         });
 
-         const images = {
+        const images = {
             '2023': ['1p6PZxTKRD5CD7Bsn-4GBIdua8SXnq2X2', '1oicnoeqiKautvJ9Jigldh3hjmmV2J77R', '18iFtU2OafU-eO98C7qQwayWHOD-9ioBM', '1KrXSX_kHJHCdmL_AWy9oBgFX5t9L9gTy', '1gSV6heehSsdV1TE-kA_-iZpoUrCMWxgW', '1XvIE7-Pj8aBBav6tapT-kPAmye4BhNug', '17LebIxJA3-25Zv0jLDqcEm8q-9T6ScpY', '1Jzj6AAypp4RrprUgG1v-R8kJgx5R_dk1', '1dn8-Ln36lha5NolxOpVP5scmMht9prLG', '1xNpvPaixBtGmoDuFfI7uoYVGHq8OIJPj', '10awSVGmK6Eiq6oPmUwZP_PHzFxozEzIw'],
             '2024': ['1k_3_z8ujfQfRGfqJHVnr5oG2WwRSLbgm', '1LXw5_AaX6qyrVrVrMTLiaI9tAsrQ7uMf', '1djqpX29I4MYvbOZUxWUw-vghvA9yXoxX', '1w49od96-CG_MCxvxhI7ajGGG4MvghofB', '1LFswUDUn8K9FiD7KD4Mc7CvjO6WPEBh9', '1RMQPja41SnwPu-4xcAZmTMiOicxBibio', '1Z1CMv2bCFjaXev0FP5VJzGy-f27S-3y9', '1NI7ElywBHX4Tg-yTbL3eCfJ0al9zIJ6S', '1br82iSJieixG3RBqeIDFL7WutD4uAvIU', '1O7C54rCzHRTU2MCcOJu0l2lXBOPSG0BP'],
             '2025': ['1WklQ1hmqxJDgI0XLaRvNk8hxLsDM7_1P', '1mB2_LN1QDE46J8loHGWGp6zKRRmpxeob', '1hO-NBfLS6J92SJqN3Nq49jm0ZLgtnSUB', '1xftK0qkdlEPxk5u1s_rglzjCArRAU4-C', '1fSKmyOI4knyCSwM57ck7nCTC4wa2Eo4Q', '1ysgAVxUPYOAFnZNC6s1jiof36d_04JHL', '1BJ-rCrvTUkDpiAxmX7X3hcbH3y7tgXFc', '16xxo4XJMBGm6T9e8uRgx4CuGT0Xh3K0N', '1EC5J9RPJ3GXXTMxS5-OWmmLBoIcY_e0T', '1W560zMNkxmCypqcnQlKVr7EDp8cvyN70'],
@@ -702,9 +1153,7 @@
             images[year].forEach((id, i) => {
                 const s = document.createElement('div');
                 s.className = 'slide';
-                // 모바일에서는 작은 이미지 로드
-                const size = window.innerWidth <= 768 ? 'w800' : 'w1200';
-                s.innerHTML = `<img src="https://drive.google.com/thumbnail?id=${id}&sz=${size}" alt="${year} ${i + 1}" loading="lazy">`;
+                s.innerHTML = `<img src="https://drive.google.com/thumbnail?id=${id}&sz=w1200" alt="${year} ${i + 1}" loading="lazy">`;
                 sc.appendChild(s);
                 const d = document.createElement('span');
                 d.className = `dot ${i === 0 ? 'active' : ''}`;
@@ -739,8 +1188,84 @@
             slides.style.transform = `translateX(-${currentSlide[year] * 100}%)`;
             dots.forEach((d, i) => d.className = i === currentSlide[year] ? 'dot active' : 'dot');
         }
+        
+        // 비디오 재생 함수
+        function playVideo(playerId, videoId) {
+            const playerDiv = document.getElementById(playerId);
+            // 기존 innerHTML을 유지하면서 iframe만 추가
+            playerDiv.innerHTML = `<iframe style="width: 100%; height: 100%; border: none;" src="https://www.youtube.com/embed/${videoId}?autoplay=1" allow="autoplay; encrypted-media" allowfullscreen="" loading="lazy"></iframe>`;
+        }
+        
+        // 비디오가 보이지 않으면 자동으로 정지 (Intersection Observer)
+        let videoObserver;
+        function initVideoObserver() {
+            videoObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (!entry.isIntersecting) {
+                        // 비디오가 뷰포트에서 벗어나면 정지
+                        const iframe = entry.target.querySelector('iframe');
+                        if (iframe) {
+                            iframe.src = iframe.src.replace('?autoplay=1', '');
+                        }
+                    }
+                });
+            }, { threshold: 0.5 });
+            
+            document.querySelectorAll('.youtube-player, .youtube-embed').forEach(el => {
+                videoObserver.observe(el);
+            });
+        }
+        
+        // 사진 갤러리가 스크롤되면 자동으로 닫기
+        function initGalleryAutoClose() {
+            // 각 섹션이 완전히 벗어나면 갤러리 닫기
+            const galleryObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (!entry.isIntersecting) {
+                        // 갤러리 섹션이 보이지 않으면 자동으로 닫기
+                        const accordion = entry.target.querySelector('.accordion-content.active');
+                        if (accordion) {
+                            const header = accordion.previousElementSibling;
+                            const icon = header.querySelector('.accordion-icon');
+                            accordion.classList.remove('active');
+                            icon.classList.remove('active');
+                        }
+                    }
+                });
+            }, { threshold: 0 });
+            
+            // 모든 갤러리 섹션을 옵저버
+            document.querySelectorAll('.gallery-section').forEach(section => {
+                galleryObserver.observe(section);
+            });
+        }
 
         function showPage(id) {
+            // 모든 재생 중인 영상 정지
+            document.querySelectorAll('.youtube-player iframe, .youtube-embed iframe').forEach(iframe => {
+                iframe.src = iframe.src.split('?')[0];
+            });
+            
+            // 홈 네비게이션 버튼 active 상태 업데이트
+            const pageMap = { 'about': 0, 'projects': 1, 'ticket': 2 };
+            const navButtons = document.querySelector('.home-nav-buttons');
+            document.querySelectorAll('.home-nav-btn').forEach((btn, index) => {
+                btn.classList.remove('active');
+                if (id !== 'home' && pageMap[id] === index) {
+                    btn.classList.add('active');
+                    // 슬라이딩 배경 위치 업데이트
+                    if (navButtons) {
+                        navButtons.classList.remove('state-0', 'state-1', 'state-2');
+                        navButtons.classList.add(`state-${index}`);
+                    }
+                }
+            });
+            
+            // 홈 페이지일 때는 상태 클래스 제거
+            if (id === 'home' && navButtons) {
+                navButtons.classList.remove('state-0', 'state-1', 'state-2');
+            }
+            
             document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
             setTimeout(() => {
                 document.getElementById(id).classList.add('active');
@@ -761,7 +1286,15 @@
 
         window.addEventListener('load', () => {
             const hash = window.location.hash.substring(1);
-            if (hash && document.getElementById(hash)) showPage(hash);
+            if (hash && document.getElementById(hash)) {
+                showPage(hash);
+            } else {
+                // 기본 상태(홈 페이지)에서는 어떤 버튼도 활성화하지 않음
+                const navButtons = document.querySelector('.home-nav-buttons');
+                if (navButtons) {
+                    navButtons.classList.remove('state-0', 'state-1', 'state-2');
+                }
+            }
         });
 
         initSlider('2023');
@@ -770,6 +1303,23 @@
         initSlider('archive1');
         initSlider('archive2');
         initSlider('archive3');
+        
+        // 비디오 Intersection Observer와 갤러리 자동 닫기 초기화
+        initVideoObserver();
+        initGalleryAutoClose();
+        
+        // 프로젝트로 이동하는 함수
+        function goToProject(year) {
+            showPage('projects');
+            showProjectTab('works');
+            setTimeout(() => {
+                const target = document.querySelector(`[id*="slides-${year}"]`);
+                if (target) {
+                    const section = target.closest('.gallery-section');
+                    section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            }, 100);
+        }
 
         function showProjectTab(tab) {
             document.querySelectorAll('.project-tab').forEach(t => t.classList.remove('active'));
@@ -781,6 +1331,37 @@
             } else {
                 document.querySelector('.project-tab:last-child').classList.add('active');
                 document.getElementById('archive-section').classList.add('active');
+            }
+        }
+        
+        // 아코디언 토글 함수
+        function toggleAccordion(header) {
+            const content = header.nextElementSibling;
+            const icon = header.querySelector('.accordion-icon');
+            
+            // 다른 아코디언이 열려있으면 닫기
+            const allContents = document.querySelectorAll('.accordion-content.active');
+            allContents.forEach(c => {
+                if (c !== content) {
+                    c.classList.remove('active');
+                    c.previousElementSibling.querySelector('.accordion-icon').classList.remove('active');
+                }
+            });
+            
+            // 현재 아코디언 토글
+            const isOpening = !content.classList.contains('active');
+            content.classList.toggle('active');
+            icon.classList.toggle('active');
+            
+            // 아코디언이 열릴 때 자동으로 스크롤
+            if (isOpening) {
+                setTimeout(() => {
+                    const headerPosition = header.getBoundingClientRect().top + window.pageYOffset;
+                    window.scrollTo({
+                        top: headerPosition - 100,
+                        behavior: 'smooth'
+                    });
+                }, 100);
             }
         }
 
@@ -812,3 +1393,4 @@
         });
     </script>
 </body>
+</html>
