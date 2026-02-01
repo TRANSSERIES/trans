@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -128,6 +127,30 @@
             .tap-indicator { display: none; }
             .swipe-text { font-size: 10px; letter-spacing: 2px; }
             .swipe-arrow { font-size: 18px; }
+            .home-nav-buttons {
+                bottom: 15px !important;
+                padding: 4px !important;
+                border-radius: 14px !important;
+            }
+            .home-nav-buttons::before {
+                width: calc(33.333% - 2.5px) !important;
+                height: calc(100% - 8px) !important;
+                top: 4px !important;
+                left: 4px !important;
+                border-radius: 10px !important;
+            }
+            .home-nav-buttons.state-1::before {
+                transform: translateX(calc(100% + 2.5px)) !important;
+            }
+            .home-nav-buttons.state-2::before {
+                transform: translateX(calc(200% + 5px)) !important;
+            }
+            .home-nav-btn {
+                padding: 11px 26px !important;
+                font-size: 10.5px !important;
+                min-width: 95px !important;
+                letter-spacing: 2px !important;
+            }
         }
         @media (min-width: 769px) {
             .swipe-indicator { display: none; }
@@ -199,75 +222,82 @@
         .social-icons a { color: #fff; font-size: 18px; transition: all 0.3s; opacity: 0.7; }
         .social-icons a:hover { opacity: 1; transform: scale(1.2); }
         
-        /* 고정 네비게이션 버튼 */
+        /* 고정 네비게이션 버튼 - 둥근 사각형 바 형식 */
         .home-nav-buttons { 
-            display: flex !important; 
-            gap: 0 !important;
-            justify-content: center !important;
-            flex-wrap: wrap !important;
-            background: rgba(255, 255, 255, 0.05) !important;
-            border: 1px solid rgba(255, 255, 255, 0.1) !important;
-            border-radius: 8px !important;
-            padding: 4px !important;
-            width: 290px !important;
             position: fixed !important;
-            bottom: 130px !important;
+            bottom: 20px !important;
             left: 50% !important;
             transform: translateX(-50%) !important;
-            z-index: 500 !important;
-            margin-top: 0 !important;
-            height: auto !important;
-        }
-        .home-nav-btn {
-            padding: 10px 24px !important;
-            background: transparent !important;
-            border: none !important;
-            color: rgba(255, 255, 255, 0.4) !important;
-            font-size: 11px !important;
-            letter-spacing: 1.3px !important;
-            font-weight: 500 !important;
-            cursor: pointer !important;
-            transition: color 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
-            flex: 0 0 90px !important;
-            width: 90px !important;
-            position: relative !important;
-            z-index: 1 !important;
             display: flex !important;
-            align-items: center !important;
-            justify-content: center !important;
-            white-space: nowrap !important;
-        }
-        .home-nav-btn:hover {
-            color: rgba(255, 255, 255, 0.7) !important;
-        }
-        .home-nav-btn.active {
-            color: #000 !important;
-            z-index: 2 !important;
+            background: rgba(25, 25, 25, 0.98) !important;
+            border-radius: 16px !important;
+            padding: 5px !important;
+            gap: 0 !important;
+            z-index: 500 !important;
+            backdrop-filter: blur(20px) !important;
+            border: 1px solid rgba(255,255,255,0.12) !important;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.5) !important;
         }
         .home-nav-buttons::before {
             content: '' !important;
             position: absolute !important;
-            top: 4px !important;
-            left: 4px !important;
-            height: calc(100% - 8px) !important;
-            width: 82px !important;
-            background: #fff !important;
-            border-radius: 6px !important;
-            transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
-            z-index: 0 !important;
+            background: #ffffff !important;
+            border-radius: 12px !important;
+            transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1) !important;
+            z-index: 1 !important;
             opacity: 0 !important;
+            width: calc(33.333% - 3.5px) !important;
+            height: calc(100% - 10px) !important;
+            top: 5px !important;
+            left: 5px !important;
+            display: block !important;
+            pointer-events: none !important;
         }
         .home-nav-buttons.state-0::before {
             opacity: 1 !important;
-            left: 4px !important;
+            transform: translateX(0) !important;
+            display: block !important;
         }
         .home-nav-buttons.state-1::before {
             opacity: 1 !important;
-            left: calc(90px + 4px) !important;
+            transform: translateX(calc(100% + 3.5px)) !important;
+            display: block !important;
         }
         .home-nav-buttons.state-2::before {
             opacity: 1 !important;
-            left: calc(180px + 4px) !important;
+            transform: translateX(calc(200% + 7px)) !important;
+            display: block !important;
+        }
+        .home-nav-btn {
+            padding: 13px 36px !important;
+            background: transparent !important;
+            color: rgba(255,255,255,0.45) !important;
+            border: none !important;
+            font-size: 11.5px !important;
+            letter-spacing: 2.5px !important;
+            font-weight: 600 !important;
+            cursor: pointer !important;
+            transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1) !important;
+            position: relative !important;
+            z-index: 2 !important;
+            flex: 1 !important;
+            text-align: center !important;
+            min-width: 105px !important;
+            white-space: nowrap !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+        }
+        .home-nav-btn:hover {
+            color: rgba(255,255,255,0.85) !important;
+        }
+        .home-nav-buttons .home-nav-btn.active,
+        button.home-nav-btn.active,
+        .home-nav-btn.active,
+        .home-nav-btn.active:hover {
+            color: #000000 !important;
+            font-weight: 600 !important;
+            opacity: 1 !important;
         }
 
         .page-content { max-width: 1000px; margin: 0 auto; padding: 80px 60px; }
@@ -403,7 +433,7 @@
         .contact-item a:hover .contact-icon { opacity: 1; transform: scale(1.1); }
         .contact-divider { width: 40px; height: 1px; background: #333; margin: 50px auto; }
         .contact-text { font-size: 13px; line-height: 2; opacity: 0.7; }
-        footer { padding: 40px; text-align: center; opacity: 0.4; font-size: 11px; letter-spacing: 2px; border-top: 1px solid #333; }
+        footer { padding: 40px 40px 80px 40px; text-align: center; opacity: 0.4; font-size: 11px; letter-spacing: 2px; border-top: 1px solid #333; margin-bottom: 20px; }
         @media (max-width: 768px) {
             header { padding: 15px 20px; }
             .menu-button { display: block; }
@@ -652,7 +682,7 @@
         .contact-text { font-size: 13px; line-height: 2; opacity: 0.75; }
         .contact-text a { color: #fff; text-decoration: none; transition: opacity 0.3s ease; }
         .contact-text a:hover { opacity: 0.8; }
-        footer { padding: 40px; text-align: center; opacity: 0.4; font-size: 11px; letter-spacing: 2px; border-top: 1px solid rgba(255, 255, 255, 0.05); }
+        footer { padding: 40px 40px 80px 40px; text-align: center; opacity: 0.4; font-size: 11px; letter-spacing: 2px; border-top: 1px solid rgba(255, 255, 255, 0.05); margin-bottom: 20px; }
         }
     </style>
 </head>
@@ -701,7 +731,7 @@
             <div class="social-icons">
                 <a href="https://www.instagram.com/trans_series" target="_blank"><i class="fab fa-instagram"></i></a>
                 <a href="https://www.youtube.com/@transseries" target="_blank"><i class="fab fa-youtube"></i></a>
-                <a href="mailto:trans0819@naver.com"><i class="fas fa-envelope"></i></a>
+                <a href="/cdn-cgi/l/email-protection#a4d0d6c5cad7949c959de4cac5d2c1d68ac7cbc9"><i class="fas fa-envelope"></i></a>
             </div>
         </div>
     </div>
@@ -1016,9 +1046,9 @@
         <button class="home-nav-btn" onclick="showPage('ticket')">TICKET</button>
     </div>
 
-    <footer><p>© 2026년 TRANS. ALL RIGHTS RESERVED.</p></footer>
+    <footer><p>© 2026 TRANS. ALL RIGHTS RESERVED.</p></footer>
 
-    <script>
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
         // 인트로 애니메이션
         const words = [
             'TRANSITION',
@@ -1241,6 +1271,8 @@
         }
 
         function showPage(id) {
+            console.log('showPage called with id:', id); // 디버깅용
+            
             // 모든 재생 중인 영상 정지
             document.querySelectorAll('.youtube-player iframe, .youtube-embed iframe').forEach(iframe => {
                 iframe.src = iframe.src.split('?')[0];
@@ -1249,21 +1281,38 @@
             // 홈 네비게이션 버튼 active 상태 업데이트
             const pageMap = { 'about': 0, 'projects': 1, 'ticket': 2 };
             const navButtons = document.querySelector('.home-nav-buttons');
-            document.querySelectorAll('.home-nav-btn').forEach((btn, index) => {
+            const allButtons = document.querySelectorAll('.home-nav-btn');
+            
+            console.log('Total buttons found:', allButtons.length); // 디버깅용
+            
+            // 먼저 모든 버튼의 active 제거
+            allButtons.forEach((btn, idx) => {
                 btn.classList.remove('active');
-                if (id !== 'home' && pageMap[id] === index) {
-                    btn.classList.add('active');
-                    // 슬라이딩 배경 위치 업데이트
-                    if (navButtons) {
-                        navButtons.classList.remove('state-0', 'state-1', 'state-2');
-                        navButtons.classList.add(`state-${index}`);
-                    }
-                }
+                console.log(`Button ${idx} active removed`); // 디버깅용
             });
             
-            // 홈 페이지일 때는 상태 클래스 제거
-            if (id === 'home' && navButtons) {
-                navButtons.classList.remove('state-0', 'state-1', 'state-2');
+            // 현재 페이지에 해당하는 버튼 활성화
+            if (id !== 'home' && pageMap[id] !== undefined) {
+                const activeIndex = pageMap[id];
+                
+                // 해당 인덱스의 버튼에 active 클래스 추가
+                if (allButtons[activeIndex]) {
+                    allButtons[activeIndex].classList.add('active');
+                    console.log('Button activated at index:', activeIndex); // 디버깅용
+                    console.log('Button has active class:', allButtons[activeIndex].classList.contains('active')); // 디버깅용
+                }
+                
+                // 슬라이딩 배경 위치 업데이트
+                if (navButtons) {
+                    navButtons.classList.remove('state-0', 'state-1', 'state-2');
+                    navButtons.classList.add(`state-${activeIndex}`);
+                    console.log('State class added:', `state-${activeIndex}`); // 디버깅용
+                }
+            } else {
+                // 홈 페이지일 때는 상태 클래스 제거
+                if (navButtons) {
+                    navButtons.classList.remove('state-0', 'state-1', 'state-2');
+                }
             }
             
             document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
@@ -1388,8 +1437,6 @@
         // iOS Safari 이미지 저장 방지
         document.querySelectorAll('img').forEach(img => {
             img.addEventListener('contextmenu', e => e.preventDefault());
-            img.style.webkitUserSelect = 'none';
-            img.style.webkitTouchCallout = 'none';
         });
     </script>
 </body>
