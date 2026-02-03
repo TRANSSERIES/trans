@@ -390,6 +390,46 @@
         .project-title { font-size: 17px; font-weight: 500; letter-spacing: 0.3px; margin-bottom: 10px; }
         .project-info { font-size: 11px; opacity: 0.55; letter-spacing: 0.3px; line-height: 1.6; }
         .gallery-section { margin-bottom: 80px; }
+        /* 1장짜리 이미지 */
+        .slide.single-image {
+            position: relative;
+            width: 600px;
+            height: 400px;
+            margin: 0 auto;
+            transform: none;
+            opacity: 1;
+            filter: blur(0);
+            z-index: 10;
+            pointer-events: auto;
+        }
+        
+        /* 아코디언 안의 슬라이더 */
+        .accordion-content .slider-container {
+            max-width: 100%;
+            padding: 60px 0;
+        }
+        
+        .accordion-content .slider {
+            height: 500px;
+        }
+        
+        .accordion-content .slide {
+            width: 750px;
+            height: 500px;
+        }
+        
+        .accordion-content .slide.active {
+            transform: translate(-50%, -50%) scale(1);
+        }
+        
+        .accordion-content .slide.prev {
+            transform: translate(-150%, -50%) scale(0.7);
+        }
+        
+        .accordion-content .slide.next {
+            transform: translate(50%, -50%) scale(0.7);
+        }
+        
         .slider-container {
             position: relative;
             max-width: 1000px;
@@ -553,17 +593,40 @@
                 padding: 40px 0;
             }
             .slider {
-                height: 280px;
+                height: 240px;
             }
             .slide {
-                width: 400px;
-                height: 280px;
+                width: 320px;
+                height: 240px;
+            }
+            .slide.active {
+                transform: translate(-50%, -50%) scale(1);
             }
             .slide.prev {
-                transform: translate(-130%, -50%) scale(0.65);
+                transform: translate(-115%, -50%) scale(0.6);
             }
             .slide.next {
-                transform: translate(30%, -50%) scale(0.65);
+                transform: translate(15%, -50%) scale(0.6);
+            }
+            .slide.single-image {
+                width: 100%;
+                max-width: 400px;
+                height: auto;
+                aspect-ratio: 3/2;
+            }
+            /* 아코디언 안의 슬라이더 모바일 */
+            .accordion-content .slider {
+                height: 280px;
+            }
+            .accordion-content .slide {
+                width: 380px;
+                height: 280px;
+            }
+            .accordion-content .slide.prev {
+                transform: translate(-120%, -50%) scale(0.65);
+            }
+            .accordion-content .slide.next {
+                transform: translate(20%, -50%) scale(0.65);
             }
             .project-description { padding: 20px; }
             .project-status {
@@ -1299,6 +1362,20 @@ US</a>
         
         function initSlider(year) {
             const sc = document.getElementById(`slides-${year}`), dc = document.getElementById(`dots-${year}`);
+            const imageCount = images[year].length;
+            
+            // 이미지가 1장인 경우
+            if (imageCount === 1) {
+                const s = document.createElement('div');
+                s.className = 'slide active single-image';
+                s.innerHTML = `<img src="https://drive.google.com/thumbnail?id=${images[year][0]}&sz=w1200" alt="${year}" loading="lazy">`;
+                sc.appendChild(s);
+                // dots 숨기기
+                if (dc) dc.style.display = 'none';
+                return;
+            }
+            
+            // 이미지가 여러 장인 경우
             images[year].forEach((id, i) => {
                 const s = document.createElement('div');
                 s.className = 'slide';
@@ -1311,11 +1388,13 @@ US</a>
                     goToSlide(year, i);
                     resetAutoplay(year);
                 };
-                // 호버 이벤트 추가
-                d.onmouseenter = () => {
-                    goToSlide(year, i);
-                    resetAutoplay(year);
-                };
+                // 호버 이벤트 추가 (데스크탑만)
+                if (window.innerWidth > 768) {
+                    d.onmouseenter = () => {
+                        goToSlide(year, i);
+                        resetAutoplay(year);
+                    };
+                }
                 dc.appendChild(d);
             });
             
@@ -1333,26 +1412,28 @@ US</a>
                 }
             }, { passive: true });
             
-            // 마우스 드래그 지원 (웹)
-            let isDragging = false;
-            let startX = 0;
-            sliderEl.addEventListener('mousedown', e => {
-                isDragging = true;
-                startX = e.clientX;
-            });
-            sliderEl.addEventListener('mousemove', e => {
-                if (!isDragging) return;
-                e.preventDefault();
-            });
-            sliderEl.addEventListener('mouseup', e => {
-                if (!isDragging) return;
-                isDragging = false;
-                const diff = startX - e.clientX;
-                if (Math.abs(diff) > 50) {
-                    changeSlide(year, diff > 0 ? 1 : -1);
-                    resetAutoplay(year);
-                }
-            });
+            // 마우스 드래그 지원 (웹만)
+            if (window.innerWidth > 768) {
+                let isDragging = false;
+                let startX = 0;
+                sliderEl.addEventListener('mousedown', e => {
+                    isDragging = true;
+                    startX = e.clientX;
+                });
+                sliderEl.addEventListener('mousemove', e => {
+                    if (!isDragging) return;
+                    e.preventDefault();
+                });
+                sliderEl.addEventListener('mouseup', e => {
+                    if (!isDragging) return;
+                    isDragging = false;
+                    const diff = startX - e.clientX;
+                    if (Math.abs(diff) > 50) {
+                        changeSlide(year, diff > 0 ? 1 : -1);
+                        resetAutoplay(year);
+                    }
+                });
+            }
             
             // 자동 재생 시작
             startAutoplay(year);
