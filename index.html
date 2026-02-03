@@ -222,7 +222,7 @@
         @media (min-width: 769px) {
             .home-hero h1 { letter-spacing: -15px; }
         }
-        .social-icons { display: flex; gap: 25px; margin-top: 100px; position: absolute; bottom: 60px; }
+        .social-icons { display: flex; gap: 25px; margin-top: 100px; position: absolute; bottom: 110px; }
         .social-icons a { color: #fff; font-size: 18px; transition: all 0.3s; opacity: 0.7; }
         .social-icons a:hover { opacity: 1; transform: scale(1.2); }
         
@@ -439,10 +439,28 @@
         .contact-text { font-size: 13px; line-height: 2; opacity: 0.7; }
         footer { padding: 40px 40px 80px 40px; text-align: center; opacity: 0.4; font-size: 11px; letter-spacing: 2px; border-top: 1px solid #333; margin-bottom: 20px; }
         @media (max-width: 768px) {
-            header { padding: 15px 20px; }
-            .menu-button { display: block; }
+            header { 
+                padding: 15px 20px; 
+                display: grid;
+                grid-template-columns: auto auto 1fr;
+                gap: 15px;
+                align-items: center;
+            }
+            .menu-button { 
+                display: block; 
+                order: 1;
+            }
+            .home-btn.show {
+                display: flex;
+                order: 2;
+            }
             .logo { display: none; }
-            nav { gap: 20px; display: flex !important; }
+            nav { 
+                gap: 20px; 
+                display: flex !important; 
+                order: 3;
+                justify-self: end;
+            }
             nav a { 
                 font-size: 8px; 
                 letter-spacing: 1.2px; 
@@ -461,6 +479,13 @@
             .page-title { font-size: 28px; }
             .slider-btn { font-size: 16px; padding: 8px 12px; }
             .project-description { padding: 20px; }
+            .project-status {
+                top: 28px;
+            }
+            .buy-link {
+                font-size: 10px;
+                padding: 6px 16px;
+            }
         }
           /* 영상 관련 스타일 */
         .video-section { 
