@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -391,16 +390,91 @@
         .project-title { font-size: 17px; font-weight: 500; letter-spacing: 0.3px; margin-bottom: 10px; }
         .project-info { font-size: 11px; opacity: 0.55; letter-spacing: 0.3px; line-height: 1.6; }
         .gallery-section { margin-bottom: 80px; }
-        .slider-container {
-            position: relative;
-            max-width: 650px;
-            margin: 30px auto 0;
-            touch-action: pan-y;
+        /* 1장짜리 이미지 */
+        .slide.single-image {
+            position: static;
+            width: 100%;
+            max-width: 600px;
+            height: auto;
+            margin: 0 auto;
+            transform: none;
+            opacity: 1;
+            filter: blur(0);
+            z-index: 10;
             pointer-events: auto;
         }
-        .slider { overflow: hidden; border-radius: 2px; }
-        .slides { display: flex; transition: transform 0.4s ease; }
-        .slide { min-width: 100%; aspect-ratio: 3/2; }
+        
+        .slide.single-image img {
+            aspect-ratio: 3/2;
+            width: 100%;
+            height: auto;
+        }
+        
+        .slider-container {
+            position: relative;
+            max-width: 1000px;
+            margin: 30px auto 0;
+            touch-action: pan-x;
+            pointer-events: auto;
+            padding: 60px 0;
+            overflow: visible;
+        }
+        .slider { 
+            position: relative;
+            height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            perspective: 1000px;
+        }
+        .slides { 
+            position: relative;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: none;
+        }
+        .slide { 
+            position: absolute;
+            width: 600px;
+            height: 400px;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            opacity: 0;
+            pointer-events: none;
+        }
+        
+        /* 중앙 이미지 (active) */
+        .slide.active {
+            transform: translate(-50%, -50%) scale(1);
+            opacity: 1;
+            filter: blur(0);
+            z-index: 10;
+            pointer-events: auto;
+        }
+        
+        /* 왼쪽 이미지 (이전) */
+        .slide.prev {
+            transform: translate(-150%, -50%) scale(0.7);
+            opacity: 0.4;
+            filter: blur(3px);
+            z-index: 5;
+            pointer-events: auto;
+        }
+        
+        /* 오른쪽 이미지 (다음) */
+        .slide.next {
+            transform: translate(50%, -50%) scale(0.7);
+            opacity: 0.4;
+            filter: blur(3px);
+            z-index: 5;
+            pointer-events: auto;
+        }
+        
         .slide img {
             width: 100%;
             height: 100%;
@@ -410,14 +484,30 @@
             -webkit-user-select: none;
             -webkit-user-drag: none;
             -webkit-touch-callout: none;
+            border-radius: 4px;
         }
-        .slider-btn { pointer-events: auto; }
-        .slider-btn { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(255,255,255,0.06); border: none; color: #fff; font-size: 18px; padding: 10px 14px; cursor: pointer; transition: background 0.3s; z-index: 10; }
-        .slider-btn:hover { background: rgba(255,255,255,0.12); }
-        .slider-btn.prev { left: 12px; }
-        .slider-btn.next { right: 12px; }
-        .slider-dots { text-align: center; margin-top: 18px; }
-        .dot { display: inline-block; width: 5px; height: 5px; border-radius: 50%; background: #333; margin: 0 5px; cursor: pointer; transition: background 0.3s; }
+        .slider-btn { 
+            display: none;
+        }
+        .slider-dots { text-align: center; margin-top: 25px; }
+        .dot { 
+            display: inline-block; 
+            width: 6px; 
+            height: 6px; 
+            border-radius: 50%; 
+            background: #333; 
+            margin: 0 6px; 
+            cursor: pointer; 
+            transition: all 0.3s;
+        }
+        .dot:hover {
+            background: #666;
+            transform: scale(1.2);
+        }
+        .dot.active { 
+            background: #999; 
+            transform: scale(1.3); 
+        }
         .dot.active { background: #999; }
         .project-description { max-width: 800px; margin: 30px auto 40px; padding: 0; background: transparent; border: none; border-radius: 0; }
         .project-meta { font-size: 11px; opacity: 0.6; margin-bottom: 25px; line-height: 1.8; padding: 20px; background: #0a0a0a; border: 1px solid #1a1a1a; border-radius: 2px; }
@@ -442,25 +532,26 @@
         @media (max-width: 768px) {
             header { 
                 padding: 15px 20px; 
-                display: grid;
-                grid-template-columns: auto auto 1fr;
-                gap: 15px;
-                align-items: center;
             }
             .menu-button { 
-                display: block; 
-                order: 1;
+                display: block;
+                position: absolute;
+                left: 20px;
+                top: 50%;
+                transform: translateY(-50%);
             }
             .home-btn.show {
                 display: flex;
-                order: 2;
+                position: absolute;
+                left: 70px;
+                top: 50%;
+                transform: translateY(-50%);
             }
             .logo { display: none; }
             nav { 
                 gap: 20px; 
-                display: flex !important; 
-                order: 3;
-                justify-self: end;
+                display: flex !important;
+                margin-left: auto;
             }
             nav a { 
                 font-size: 8px; 
@@ -478,7 +569,34 @@
             .home-hero h1 { font-size: 60px; }
             .page-content { padding: 60px 20px; }
             .page-title { font-size: 28px; }
-            .slider-btn { font-size: 16px; padding: 8px 12px; }
+            .slider-container {
+                padding: 40px 0;
+            }
+            .slider {
+                height: 240px;
+            }
+            .slide {
+                width: 320px;
+                height: 240px;
+            }
+            .slide.active {
+                transform: translate(-50%, -50%) scale(1);
+            }
+            .slide.prev {
+                transform: translate(-115%, -50%) scale(0.6);
+            }
+            .slide.next {
+                transform: translate(15%, -50%) scale(0.6);
+            }
+            .slide.single-image {
+                width: 100%;
+                max-width: 100%;
+                padding: 0 20px;
+            }
+            .slide.single-image img {
+                width: 100%;
+                height: auto;
+            }
             .project-description { padding: 20px; }
             .project-status {
                 top: 28px;
@@ -866,8 +984,6 @@ US</a>
                         <div class="gallery-slider-wrapper">
                             <div class="slider-container">
                                 <div class="slider"><div class="slides" id="slides-2023"></div></div>
-                                <button class="slider-btn prev" onclick="changeSlide('2023', -1)">‹</button>
-                                <button class="slider-btn next" onclick="changeSlide('2023', 1)">›</button>
                                 <div class="slider-dots" id="dots-2023"></div>
                             </div>
                         </div>
@@ -915,8 +1031,6 @@ US</a>
                         <div class="gallery-slider-wrapper">
                             <div class="slider-container">
                                 <div class="slider"><div class="slides" id="slides-2024"></div></div>
-                                <button class="slider-btn prev" onclick="changeSlide('2024', -1)">‹</button>
-                                <button class="slider-btn next" onclick="changeSlide('2024', 1)">›</button>
                                 <div class="slider-dots" id="dots-2024"></div>
                             </div>
                         </div>
@@ -963,8 +1077,6 @@ US</a>
                         <div class="gallery-slider-wrapper">
                             <div class="slider-container">
                                 <div class="slider"><div class="slides" id="slides-2025"></div></div>
-                                <button class="slider-btn prev" onclick="changeSlide('2025', -1)">‹</button>
-                                <button class="slider-btn next" onclick="changeSlide('2025', 1)">›</button>
                                 <div class="slider-dots" id="dots-2025"></div>
                             </div>
                         </div>
@@ -1005,8 +1117,6 @@ US</a>
                     </div>
                     <div class="slider-container">
                         <div class="slider"><div class="slides" id="slides-archive1"></div></div>
-                        <button class="slider-btn prev" onclick="changeSlide('archive1', -1)">‹</button>
-                        <button class="slider-btn next" onclick="changeSlide('archive1', 1)">›</button>
                         <div class="slider-dots" id="dots-archive1"></div>
                     </div>
                 </div>
@@ -1024,8 +1134,6 @@ US</a>
                     </div>
                     <div class="slider-container">
                         <div class="slider"><div class="slides" id="slides-archive2"></div></div>
-                        <button class="slider-btn prev" onclick="changeSlide('archive2', -1)">‹</button>
-                        <button class="slider-btn next" onclick="changeSlide('archive2', 1)">›</button>
                         <div class="slider-dots" id="dots-archive2"></div>
                     </div>
                 </div>
@@ -1040,8 +1148,6 @@ US</a>
                     </div>
                     <div class="slider-container">
                         <div class="slider"><div class="slides" id="slides-archive3"></div></div>
-                        <button class="slider-btn prev" onclick="changeSlide('archive3', -1)">‹</button>
-                        <button class="slider-btn next" onclick="changeSlide('archive3', 1)">›</button>
                         <div class="slider-dots" id="dots-archive3"></div>
                     </div>
                 </div>
@@ -1220,8 +1326,25 @@ US</a>
         let currentSlide = { '2023': 0, '2024': 0, '2025': 0, 'archive1': 0, 'archive2': 0, 'archive3': 0 };
         let touchStartX = 0, touchEndX = 0;
 
+        // 자동 재생 타이머 객체
+        const autoplayTimers = {};
+        
         function initSlider(year) {
             const sc = document.getElementById(`slides-${year}`), dc = document.getElementById(`dots-${year}`);
+            const imageCount = images[year].length;
+            
+            // 이미지가 1장인 경우
+            if (imageCount === 1) {
+                const s = document.createElement('div');
+                s.className = 'slide active single-image';
+                s.innerHTML = `<img src="https://drive.google.com/thumbnail?id=${images[year][0]}&sz=w1200" alt="${year}" loading="lazy">`;
+                sc.appendChild(s);
+                // dots 숨기기
+                if (dc) dc.style.display = 'none';
+                return;
+            }
+            
+            // 이미지가 여러 장인 경우
             images[year].forEach((id, i) => {
                 const s = document.createElement('div');
                 s.className = 'slide';
@@ -1229,16 +1352,83 @@ US</a>
                 sc.appendChild(s);
                 const d = document.createElement('span');
                 d.className = `dot ${i === 0 ? 'active' : ''}`;
-                d.onclick = () => goToSlide(year, i);
+                // 클릭 이벤트
+                d.onclick = () => {
+                    goToSlide(year, i);
+                    resetAutoplay(year);
+                };
+                // 호버 이벤트 추가 (데스크탑만)
+                if (window.innerWidth > 768) {
+                    d.onmouseenter = () => {
+                        goToSlide(year, i);
+                        resetAutoplay(year);
+                    };
+                }
                 dc.appendChild(d);
             });
+            
+            // 초기 상태 설정
+            updateSlider(year);
+            
             const sliderEl = sc.parentElement;
             sliderEl.addEventListener('touchstart', e => touchStartX = e.changedTouches[0].screenX, { passive: true });
             sliderEl.addEventListener('touchend', e => {
                 touchEndX = e.changedTouches[0].screenX;
                 const diff = touchStartX - touchEndX;
-                if (Math.abs(diff) > 50) changeSlide(year, diff > 0 ? 1 : -1);
+                if (Math.abs(diff) > 50) {
+                    changeSlide(year, diff > 0 ? 1 : -1);
+                    resetAutoplay(year);
+                }
             }, { passive: true });
+            
+            // 마우스 드래그 지원 (웹만)
+            if (window.innerWidth > 768) {
+                let isDragging = false;
+                let startX = 0;
+                sliderEl.addEventListener('mousedown', e => {
+                    isDragging = true;
+                    startX = e.clientX;
+                });
+                sliderEl.addEventListener('mousemove', e => {
+                    if (!isDragging) return;
+                    e.preventDefault();
+                });
+                sliderEl.addEventListener('mouseup', e => {
+                    if (!isDragging) return;
+                    isDragging = false;
+                    const diff = startX - e.clientX;
+                    if (Math.abs(diff) > 50) {
+                        changeSlide(year, diff > 0 ? 1 : -1);
+                        resetAutoplay(year);
+                    }
+                });
+            }
+            
+            // 자동 재생 시작
+            startAutoplay(year);
+        }
+        
+        function startAutoplay(year) {
+            // 기존 타이머가 있으면 제거
+            if (autoplayTimers[year]) {
+                clearInterval(autoplayTimers[year]);
+            }
+            // 5초마다 다음 슬라이드로
+            autoplayTimers[year] = setInterval(() => {
+                changeSlide(year, 1);
+            }, 5000);
+        }
+        
+        function resetAutoplay(year) {
+            // 사용자가 조작하면 타이머 리셋
+            startAutoplay(year);
+        }
+        
+        function stopAutoplay(year) {
+            if (autoplayTimers[year]) {
+                clearInterval(autoplayTimers[year]);
+                delete autoplayTimers[year];
+            }
         }
 
         function changeSlide(year, dir) {
@@ -1247,6 +1437,7 @@ US</a>
             if (currentSlide[year] < 0) currentSlide[year] = total - 1;
             if (currentSlide[year] >= total) currentSlide[year] = 0;
             updateSlider(year);
+            resetAutoplay(year);
         }
 
         function goToSlide(year, i) {
@@ -1256,9 +1447,29 @@ US</a>
 
         function updateSlider(year) {
             const slides = document.getElementById(`slides-${year}`);
+            const slideElements = slides.querySelectorAll('.slide');
             const dots = document.querySelectorAll(`#dots-${year} .dot`);
-            slides.style.transform = `translateX(-${currentSlide[year] * 100}%)`;
-            dots.forEach((d, i) => d.className = i === currentSlide[year] ? 'dot active' : 'dot');
+            const total = slideElements.length;
+            const current = currentSlide[year];
+            
+            // 모든 슬라이드에 클래스 제거
+            slideElements.forEach(slide => {
+                slide.classList.remove('active', 'prev', 'next');
+            });
+            
+            // 현재 슬라이드
+            slideElements[current].classList.add('active');
+            
+            // 이전 슬라이드
+            const prevIndex = (current - 1 + total) % total;
+            slideElements[prevIndex].classList.add('prev');
+            
+            // 다음 슬라이드
+            const nextIndex = (current + 1) % total;
+            slideElements[nextIndex].classList.add('next');
+            
+            // dots 업데이트
+            dots.forEach((d, i) => d.className = i === current ? 'dot active' : 'dot');
         }
         
         // 비디오 재생 함수
