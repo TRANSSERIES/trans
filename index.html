@@ -390,29 +390,23 @@
         .project-title { font-size: 17px; font-weight: 500; letter-spacing: 0.3px; margin-bottom: 10px; }
         .project-info { font-size: 11px; opacity: 0.55; letter-spacing: 0.3px; line-height: 1.6; }
         .gallery-section { margin-bottom: 80px; }
-        /* 1장짜리 이미지 */
-        .slide.single-image {
-            position: static;
+        /* 단순 이미지 컨테이너 */
+        .simple-image-container {
+            max-width: 800px;
+            margin: 40px auto;
+        }
+        .simple-image-container img {
             width: 100%;
-            max-width: 600px;
             height: auto;
-            margin: 0 auto;
-            transform: none;
-            opacity: 1;
-            filter: blur(0);
-            z-index: 10;
-            pointer-events: auto;
+            border-radius: 4px;
+            display: block;
         }
         
-        .slide.single-image img {
-            aspect-ratio: 3/2;
-            width: 100%;
-            height: auto;
-        }
+        /* 1장짜리 이미지 (사용 안함 - 제거됨) */
         
         .slider-container {
             position: relative;
-            max-width: 1000px;
+            max-width: 900px;
             margin: 30px auto 0;
             touch-action: pan-x;
             pointer-events: auto;
@@ -425,7 +419,6 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            perspective: 1000px;
         }
         .slides { 
             position: relative;
@@ -443,7 +436,7 @@
             left: 50%;
             top: 50%;
             transform: translate(-50%, -50%);
-            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
             opacity: 0;
             pointer-events: none;
         }
@@ -457,22 +450,22 @@
             pointer-events: auto;
         }
         
-        /* 왼쪽 이미지 (이전) */
+        /* 왼쪽 이미지 (이전) - 간소화 */
         .slide.prev {
-            transform: translate(-150%, -50%) scale(0.7);
-            opacity: 0.4;
-            filter: blur(3px);
+            transform: translate(-140%, -50%) scale(0.75);
+            opacity: 0.25;
+            filter: blur(2px);
             z-index: 5;
-            pointer-events: auto;
+            pointer-events: none;
         }
         
-        /* 오른쪽 이미지 (다음) */
+        /* 오른쪽 이미지 (다음) - 간소화 */
         .slide.next {
-            transform: translate(50%, -50%) scale(0.7);
-            opacity: 0.4;
-            filter: blur(3px);
+            transform: translate(40%, -50%) scale(0.75);
+            opacity: 0.25;
+            filter: blur(2px);
             z-index: 5;
-            pointer-events: auto;
+            pointer-events: none;
         }
         
         .slide img {
@@ -569,34 +562,36 @@
             .home-hero h1 { font-size: 60px; }
             .page-content { padding: 60px 20px; }
             .page-title { font-size: 28px; }
+            
+            /* 단순 이미지 */
+            .simple-image-container {
+                margin: 30px auto;
+                padding: 0 20px;
+            }
+            
+            /* 슬라이더 */
             .slider-container {
                 padding: 40px 0;
             }
             .slider {
-                height: 240px;
+                height: 250px;
             }
             .slide {
-                width: 320px;
-                height: 240px;
+                width: 340px;
+                height: 250px;
             }
             .slide.active {
                 transform: translate(-50%, -50%) scale(1);
             }
             .slide.prev {
-                transform: translate(-115%, -50%) scale(0.6);
+                transform: translate(-120%, -50%) scale(0.7);
+                opacity: 0.2;
             }
             .slide.next {
-                transform: translate(15%, -50%) scale(0.6);
+                transform: translate(20%, -50%) scale(0.7);
+                opacity: 0.2;
             }
-            .slide.single-image {
-                width: 100%;
-                max-width: 100%;
-                padding: 0 20px;
-            }
-            .slide.single-image img {
-                width: 100%;
-                height: auto;
-            }
+            
             .project-description { padding: 20px; }
             .project-status {
                 top: 28px;
@@ -1115,9 +1110,8 @@ US</a>
                             <div class="project-status sold-out">SOLD OUT</div>
                         </div>
                     </div>
-                    <div class="slider-container">
-                        <div class="slider"><div class="slides" id="slides-archive1"></div></div>
-                        <div class="slider-dots" id="dots-archive1"></div>
+                    <div class="simple-image-container">
+                        <img src="https://drive.google.com/thumbnail?id=1Jv1kgdVE-LT7bJy51OJBN00LvyNXG5qs&sz=w1200" alt="WORKS V.1 TRANS" loading="lazy">
                     </div>
                 </div>
 
@@ -1330,21 +1324,14 @@ US</a>
         const autoplayTimers = {};
         
         function initSlider(year) {
-            const sc = document.getElementById(`slides-${year}`), dc = document.getElementById(`dots-${year}`);
+            const sc = document.getElementById(`slides-${year}`);
+            const dc = document.getElementById(`dots-${year}`);
+            
+            if (!sc || !dc) return;
+            
             const imageCount = images[year].length;
             
-            // 이미지가 1장인 경우
-            if (imageCount === 1) {
-                const s = document.createElement('div');
-                s.className = 'slide active single-image';
-                s.innerHTML = `<img src="https://drive.google.com/thumbnail?id=${images[year][0]}&sz=w1200" alt="${year}" loading="lazy">`;
-                sc.appendChild(s);
-                // dots 숨기기
-                if (dc) dc.style.display = 'none';
-                return;
-            }
-            
-            // 이미지가 여러 장인 경우
+            // 이미지 생성
             images[year].forEach((id, i) => {
                 const s = document.createElement('div');
                 s.className = 'slide';
@@ -1357,7 +1344,7 @@ US</a>
                     goToSlide(year, i);
                     resetAutoplay(year);
                 };
-                // 호버 이벤트 추가 (데스크탑만)
+                // 호버 이벤트 (데스크탑만)
                 if (window.innerWidth > 768) {
                     d.onmouseenter = () => {
                         goToSlide(year, i);
@@ -1370,38 +1357,64 @@ US</a>
             // 초기 상태 설정
             updateSlider(year);
             
-            const sliderEl = sc.parentElement;
-            sliderEl.addEventListener('touchstart', e => touchStartX = e.changedTouches[0].screenX, { passive: true });
+            // 터치 이벤트 (모바일 최적화)
+            const sliderEl = sc.parentElement.parentElement;
+            let startX = 0;
+            let isDragging = false;
+            
+            sliderEl.addEventListener('touchstart', e => {
+                startX = e.touches[0].clientX;
+                isDragging = true;
+            }, { passive: true });
+            
+            sliderEl.addEventListener('touchmove', e => {
+                if (!isDragging) return;
+            }, { passive: true });
+            
             sliderEl.addEventListener('touchend', e => {
-                touchEndX = e.changedTouches[0].screenX;
-                const diff = touchStartX - touchEndX;
-                if (Math.abs(diff) > 50) {
+                if (!isDragging) return;
+                isDragging = false;
+                const endX = e.changedTouches[0].clientX;
+                const diff = startX - endX;
+                if (Math.abs(diff) > 30) {
                     changeSlide(year, diff > 0 ? 1 : -1);
                     resetAutoplay(year);
                 }
             }, { passive: true });
             
-            // 마우스 드래그 지원 (웹만)
+            // 마우스 드래그 (데스크탑만)
             if (window.innerWidth > 768) {
-                let isDragging = false;
-                let startX = 0;
+                let mouseDown = false;
+                let mouseStartX = 0;
+                
                 sliderEl.addEventListener('mousedown', e => {
-                    isDragging = true;
-                    startX = e.clientX;
+                    mouseDown = true;
+                    mouseStartX = e.clientX;
+                    sliderEl.style.cursor = 'grabbing';
                 });
+                
                 sliderEl.addEventListener('mousemove', e => {
-                    if (!isDragging) return;
+                    if (!mouseDown) return;
                     e.preventDefault();
                 });
+                
                 sliderEl.addEventListener('mouseup', e => {
-                    if (!isDragging) return;
-                    isDragging = false;
-                    const diff = startX - e.clientX;
+                    if (!mouseDown) return;
+                    mouseDown = false;
+                    sliderEl.style.cursor = 'grab';
+                    const diff = mouseStartX - e.clientX;
                     if (Math.abs(diff) > 50) {
                         changeSlide(year, diff > 0 ? 1 : -1);
                         resetAutoplay(year);
                     }
                 });
+                
+                sliderEl.addEventListener('mouseleave', () => {
+                    mouseDown = false;
+                    sliderEl.style.cursor = 'grab';
+                });
+                
+                sliderEl.style.cursor = 'grab';
             }
             
             // 자동 재생 시작
@@ -1603,7 +1616,6 @@ US</a>
         initSlider('2023');
         initSlider('2024');
         initSlider('2025');
-        initSlider('archive1');
         initSlider('archive2');
         initSlider('archive3');
         
