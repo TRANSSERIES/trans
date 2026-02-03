@@ -392,30 +392,33 @@
         .gallery-section { margin-bottom: 80px; }
         .slider-container {
             position: relative;
-            max-width: 900px;
+            max-width: 750px;
             margin: 30px auto 0;
             touch-action: pan-y;
             pointer-events: auto;
-            padding: 0 80px;
+            padding: 0;
         }
         .slider { 
-            overflow: visible; 
-            border-radius: 2px;
+            overflow: hidden;
+            border-radius: 4px;
             position: relative;
         }
         .slides { 
             display: flex; 
-            transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
             align-items: center;
+            padding: 0 15%;
+            margin: 0 -15%;
         }
         .slide { 
-            min-width: 100%; 
+            min-width: 70%; 
             aspect-ratio: 3/2;
             position: relative;
-            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-            transform: scale(0.85);
-            opacity: 0.3;
-            filter: blur(3px);
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            transform: scale(0.88);
+            opacity: 0.4;
+            filter: blur(4px);
+            margin: 0 15%;
         }
         .slide.active {
             transform: scale(1);
@@ -519,7 +522,7 @@
             .page-content { padding: 60px 20px; }
             .page-title { font-size: 28px; }
             .slider-container {
-                padding: 0 50px;
+                max-width: 100%;
             }
             .slider-btn { font-size: 16px; padding: 8px 12px; }
             .project-description { padding: 20px; }
@@ -1301,10 +1304,10 @@ US</a>
             if (autoplayTimers[year]) {
                 clearInterval(autoplayTimers[year]);
             }
-            // 3초마다 다음 슬라이드로
+            // 5초마다 다음 슬라이드로
             autoplayTimers[year] = setInterval(() => {
                 changeSlide(year, 1);
-            }, 3000);
+            }, 5000);
         }
         
         function resetAutoplay(year) {
@@ -1338,6 +1341,7 @@ US</a>
             const slideElements = slides.querySelectorAll('.slide');
             const dots = document.querySelectorAll(`#dots-${year} .dot`);
             
+            // 70% 너비 + 양쪽 15% 마진 = 100% per slide
             slides.style.transform = `translateX(-${currentSlide[year] * 100}%)`;
             
             // active 클래스 업데이트
