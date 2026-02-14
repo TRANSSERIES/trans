@@ -388,6 +388,13 @@
         }
         .project-year { font-size: 11px; opacity: 0.5; letter-spacing: 1px; margin-bottom: 8px; }
         .project-title { font-size: 17px; font-weight: 500; letter-spacing: 0.3px; margin-bottom: 10px; }
+        .project-type { 
+            font-size: 11px; 
+            font-weight: 400; 
+            opacity: 0.5; 
+            letter-spacing: 1px;
+            margin-left: 8px;
+        }
         .project-info { font-size: 11px; opacity: 0.55; letter-spacing: 0.3px; line-height: 1.6; }
         .gallery-section { margin-bottom: 80px; }
         .slider-container {
@@ -814,9 +821,9 @@ US</a>
                         </div>
                         <div class="perf-list-year">2025</div>
                     </div>
-                    <div class="perf-list-item disabled">
+                    <div class="perf-list-item" onclick="goToProject('2026')">
                         <div class="perf-list-content">
-                            <div class="perf-list-title">"포옹(Embrace)" - SeMA Seoseoul Art Museum 호흡, Seoul</div>
+                            <div class="perf-list-title">"포옹(Embrace)" - SeMA Seoseoul Art Museum, Seoul</div>
                         </div>
                         <div class="perf-list-year">2026</div>
                     </div>
@@ -839,7 +846,7 @@ US</a>
                 <div class="projects-list">
                     <div class="project-item">
                         <div class="project-year">2023</div>
-                        <div class="project-title">TRANS</div>
+                        <div class="project-title">TRANS <span class="project-type">performance</span></div>
                     </div>
                                </div>
                 
@@ -888,7 +895,7 @@ US</a>
                 <div class="projects-list">
                     <div class="project-item">
                         <div class="project-year">2024</div>
-                        <div class="project-title">TRANS vol.2</div>
+                        <div class="project-title">TRANS vol.2 <span class="project-type">performance</span></div>
                     </div>
                 </div>
                 
@@ -936,7 +943,7 @@ US</a>
                 <div class="projects-list">
                     <div class="project-item">
                         <div class="project-year">2025</div>
-                        <div class="project-title">TRANS III: 주어 없는 움직임</div>
+                        <div class="project-title">TRANS III: 주어 없는 움직임 <span class="project-type">performance</span></div>
                     </div>
                 </div>
                 
@@ -981,11 +988,58 @@ US</a>
                 </div>
             </div>
 
-            <div class="projects-list" style="margin-top: 40px;">
-                <div class="project-item">
-                    <div class="project-year">2026</div>
-                    <div class="project-title">포옹 / Embrace</div>
-                    <div class="project-info">SeMA West Seoul Museum of Art · Upcoming</div>
+            <div class="gallery-section">
+                <div class="projects-list">
+                    <div class="project-item">
+                        <div class="project-year">2026</div>
+                        <div class="project-title">포옹 / Embrace <span class="project-type">performance</span></div>
+                    </div>
+                </div>
+                
+                <!-- YouTube 썸네일과 재생 버튼 -->
+                <div class="video-section">
+                    <div class="youtube-player" id="video-2026">
+                        <img src="https://img.youtube.com/vi/placeholder/maxresdefault.jpg" alt="포옹 / Embrace" class="youtube-thumbnail" style="background: #1a1a1a;">
+                        <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 14px; opacity: 0.5;">Coming Soon</div>
+                    </div>
+                </div>
+                
+                <!-- 갤러리 아코디언 -->
+                <div class="gallery-accordion">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <span class="accordion-title">OPEN</span>
+                        <span class="accordion-icon">▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="project-description">
+                            <div class="project-meta">
+                                <span>일자: 2026년 3월 21-22일</span>
+                                <span>장소: 서서울미술관 지하1층 로비, 다목적홀</span>
+                                <span>소요시간: 40분</span>
+                                <span>참여자: 이현석, 윤혜진, 황숙영, 조선재, 류인웅, 배소현 (공하임)</span>
+                            </div>
+                            <p>《포옹》은 신체 접촉이 점차 낯설어지는 시대에서 몸이 닿을 때 발생하는 감정, 힘, 충돌을 탐구합니다. 작업은 무리를 이루는 신체들이 만들어내는 보호와 피보호, 위로와 억압, 친밀함과 거리감을 드러냅니다.</p>
+                            <p class="project-highlight">라이브 퍼포먼스</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="gallery-section">
+                <div class="projects-list">
+                    <div class="project-item">
+                        <div class="project-year">2026</div>
+                        <div class="project-title">On Body Senses <span class="project-type">exhibition</span></div>
+                    </div>
+                </div>
+                
+                <!-- 전시 정보 -->
+                <div class="project-description" style="margin-top: 40px;">
+                    <div class="project-meta">
+                        <span>장소: 문화살롱5120</span>
+                        <span style="font-style: italic; opacity: 0.8;">"공유시선"</span>
+                    </div>
+                    <p>전시 기간 및 자세한 일정은 추후 공지 예정입니다.</p>
                 </div>
             </div>
             </div>
@@ -1050,12 +1104,12 @@ US</a>
         <div class="page-content">
             <h1 class="page-title">TICKET</h1>
             <div class="ticket-content">
-                <div class="coming-soon">NOT AVAILABLE</div>
-                <div class="ticket-info" style="opacity: 0.5;">
-                    <h3>TRANS III: 주어 없는 움직임</h3>
-                    <p>2025년 8월 5일 - 8월 6일<br>서강대학교 메리홀 대극장<br><br>본 공연은 종료되었습니다.</p>
+                <div class="coming-soon">COMING SOON</div>
+                <div class="ticket-info">
+                    <h3>포옹 / Embrace <span class="project-type">performance</span></h3>
+                    <p>2026년 3월 21일 - 3월 22일<br>서서울미술관 지하1층 로비, 다목적홀<br><br>티켓 예매 정보는 추후 공지 예정입니다.</p>
                 </div>
-                <button class="ticket-btn disabled">예매하기</button>
+                <button class="ticket-btn disabled">예매 정보 준비중</button>
             </div>
         </div>
     </div>
