@@ -438,6 +438,21 @@
         .ticket-btn { display: inline-block; width: 100%; padding: 14px; background: #fff; color: #000; text-decoration: none; letter-spacing: 1.5px; font-size: 13px; font-weight: 600; border-radius: 2px; transition: all 0.3s; border: none; cursor: pointer; }
         .ticket-btn.disabled { background: #444; color: #999; cursor: not-allowed; opacity: 0.5; }
         .coming-soon { text-align: center; padding: 40px; opacity: 0.5; font-size: 14px; letter-spacing: 2px; }
+        .coming-soon-box {
+            max-width: 800px;
+            margin: 40px auto 60px;
+            padding: 60px 40px;
+            background: linear-gradient(135deg, rgba(255,255,255,0.02) 0%, rgba(255,255,255,0.01) 100%);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 8px;
+            text-align: center;
+        }
+        .coming-soon-text {
+            font-size: 16px;
+            letter-spacing: 4px;
+            font-weight: 600;
+            opacity: 0.6;
+        }
         .contact-content { max-width: 500px; margin: 0 auto; text-align: center; }
         .contact-icons { display: flex; justify-content: center; gap: 40px; margin-bottom: 50px; }
         .contact-icon { font-size: 32px; margin-bottom: 15px; opacity: 0.8; transition: all 0.3s; color: #fff; }
@@ -829,6 +844,18 @@ US</a>
                     </div>
                 </div>
             </div>
+            
+            <div class="performance-section">
+                <h3 class="performance-title">EXHIBITION</h3>
+                <div class="performance-list">
+                    <div class="perf-list-item disabled">
+                        <div class="perf-list-content">
+                            <div class="perf-list-title">"On Body Senses" - Culture Salon 5120, Seoul</div>
+                        </div>
+                        <div class="perf-list-year">2026</div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -996,12 +1023,10 @@ US</a>
                     </div>
                 </div>
                 
-                <!-- YouTube 썸네일과 재생 버튼 -->
-                <div class="video-section">
-                    <div class="youtube-player" id="video-2026">
-                        <img src="https://img.youtube.com/vi/placeholder/maxresdefault.jpg" alt="포옹 / Embrace" class="youtube-thumbnail" style="background: #1a1a1a;">
-                        <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 14px; opacity: 0.5;">Coming Soon</div>
-                    </div>
+                <!-- Coming Soon 표시 -->
+                <div class="coming-soon-box">
+                    <div class="coming-soon-text">COMING SOON</div>
+                    <p style="font-size: 12px; opacity: 0.5; margin-top: 10px;">영상 및 사진은 공연 후 공개 예정입니다</p>
                 </div>
                 
                 <!-- 갤러리 아코디언 -->
@@ -1030,16 +1055,8 @@ US</a>
                     <div class="project-item">
                         <div class="project-year">2026</div>
                         <div class="project-title">On Body Senses <span class="project-type">exhibition</span></div>
+                        <div class="project-info">Upcoming</div>
                     </div>
-                </div>
-                
-                <!-- 전시 정보 -->
-                <div class="project-description" style="margin-top: 40px;">
-                    <div class="project-meta">
-                        <span>장소: 문화살롱5120</span>
-                        <span style="font-style: italic; opacity: 0.8;">"공유시선"</span>
-                    </div>
-                    <p>전시 기간 및 자세한 일정은 추후 공지 예정입니다.</p>
                 </div>
             </div>
             </div>
@@ -1494,9 +1511,22 @@ US</a>
             showPage('projects');
             showProjectTab('works');
             setTimeout(() => {
-                const target = document.querySelector(`[id*="slides-${year}"]`);
+                // 슬라이더가 있는 프로젝트 찾기
+                let target = document.querySelector(`[id*="slides-${year}"]`);
+                
+                // 슬라이더가 없으면 연도로 찾기
+                if (!target) {
+                    const sections = document.querySelectorAll('#works-section .gallery-section');
+                    sections.forEach(section => {
+                        const yearEl = section.querySelector('.project-year');
+                        if (yearEl && yearEl.textContent.trim() === year) {
+                            target = section;
+                        }
+                    });
+                }
+                
                 if (target) {
-                    const section = target.closest('.gallery-section');
+                    const section = target.closest ? target.closest('.gallery-section') : target;
                     section.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 }
             }, 100);
