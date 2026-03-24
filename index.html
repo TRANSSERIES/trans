@@ -220,6 +220,959 @@
         }
         .home-hero h1:hover { opacity: 0.7; }
         .home-hero p { font-size: 14px; letter-spacing: 2px; opacity: 0.6; font-weight: 700; }
+        
+        /* RE:TRANS / EX:TRANS 엔트리 */
+        .trans-entries {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            gap: 80px;
+            margin-top: 44px;
+            margin-bottom: 10px;
+        }
+        .trans-entry {
+            display: block;
+            text-decoration: none;
+            color: #fff;
+            font-size: 16px;
+            letter-spacing: 4px;
+            font-weight: 400;
+            opacity: 0.3;
+            padding: 12px 0;
+            transition: opacity 0.4s ease, letter-spacing 0.4s ease;
+            position: relative;
+        }
+        .trans-entry::after {
+            content: '';
+            position: absolute;
+            bottom: 9px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: rgba(255,255,255,0.4);
+            transition: width 0.4s ease;
+        }
+        .trans-entry:hover {
+            opacity: 0.8;
+            letter-spacing: 5px;
+        }
+        .trans-entry:hover::after {
+            width: 100%;
+        }
+        .entry-prefix {
+            opacity: 0.5;
+        }
+        .entry-label {
+            opacity: 1;
+        }
+
+        /* RE:TRANS / EX:TRANS 서브 페이지 */
+        .sub-page-content {
+            max-width: 600px;
+            margin: 0 auto;
+            padding-top: 120px;
+        }
+        .sub-page-header {
+            font-size: 48px;
+            font-weight: 700;
+            letter-spacing: -1px;
+            line-height: 1;
+            margin-bottom: 30px;
+        }
+        .sub-page-prefix {
+            opacity: 0.4;
+        }
+        .sub-page-title {
+            opacity: 1;
+        }
+        .sub-page-divider {
+            width: 30px;
+            height: 1px;
+            background: rgba(255,255,255,0.25);
+            margin-bottom: 40px;
+        }
+        .sub-page-body {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        .sub-page-desc {
+            font-size: 14px;
+            line-height: 2;
+            opacity: 0.55;
+            letter-spacing: 0.3px;
+            font-weight: 300;
+        }
+        .sub-page-coming {
+            font-size: 11px;
+            letter-spacing: 3px;
+            opacity: 0.2;
+        }
+
+        /* Workshop Application Form */
+        .workshop-application {
+            margin-top: 80px;
+            padding-top: 60px;
+            border-top: 1px solid rgba(255,255,255,0.08);
+        }
+        
+        /* EX:TRANS Overview */
+        .extrans-overview {
+            margin-top: 50px;
+            max-width: 600px;
+        }
+        .overview-text {
+            font-size: 12px;
+            line-height: 2;
+            opacity: 0.6;
+            margin-bottom: 15px;
+        }
+        .overview-text:last-child {
+            margin-bottom: 0;
+        }
+        
+        /* Section Divider */
+        .section-divider {
+            width: 40px;
+            height: 1px;
+            background: rgba(255,255,255,0.2);
+            margin: 50px 0;
+        }
+        
+        /* Workshop Program Info */
+        .workshop-program {
+            max-width: 600px;
+        }
+        .program-main-title {
+            font-size: 18px;
+            font-weight: 500;
+            letter-spacing: -0.5px;
+            margin-bottom: 30px;
+            opacity: 0.85;
+        }
+        .program-toggle {
+            width: 100%;
+            background: transparent;
+            border: none;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            color: #fff;
+            font-family: inherit;
+            padding: 18px 0;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: border-color 0.3s ease;
+        }
+        .program-toggle:hover {
+            border-bottom-color: rgba(255,255,255,0.2);
+        }
+        .toggle-label {
+            font-size: 11px;
+            letter-spacing: 1px;
+            opacity: 0.5;
+            transition: opacity 0.3s ease;
+        }
+        .program-toggle:hover .toggle-label {
+            opacity: 0.7;
+        }
+        .toggle-arrow {
+            font-size: 9px;
+            opacity: 0.35;
+            transition: transform 0.3s ease;
+        }
+        .program-toggle.active .toggle-arrow {
+            transform: rotate(180deg);
+        }
+        .program-section {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease, opacity 0.4s ease, padding 0.4s ease;
+            opacity: 0;
+            padding: 0;
+        }
+        .program-section.open {
+            max-height: 1200px;
+            opacity: 1;
+            padding: 25px 0 30px;
+        }
+        .program-section p {
+            font-size: 11px;
+            line-height: 1.9;
+            opacity: 0.6;
+            margin-bottom: 15px;
+        }
+        .program-question {
+            opacity: 0.7 !important;
+            font-style: italic;
+            margin: 25px 0 !important;
+        }
+        .program-essence {
+            opacity: 0.65 !important;
+            margin-top: 25px !important;
+        }
+        .level-intro {
+            font-size: 10px !important;
+            opacity: 0.45 !important;
+            margin-bottom: 25px !important;
+        }
+        .level-item {
+            margin-bottom: 20px;
+        }
+        .level-item:last-child {
+            margin-bottom: 0;
+        }
+        .level-title {
+            font-size: 11px;
+            font-weight: 500;
+            opacity: 0.7;
+            margin-bottom: 10px;
+            letter-spacing: 0.3px;
+        }
+        .level-desc {
+            font-size: 10px !important;
+            line-height: 1.8 !important;
+            opacity: 0.55 !important;
+            margin-bottom: 8px !important;
+        }
+        .level-note {
+            font-size: 9px !important;
+            opacity: 0.4 !important;
+            margin: 0 !important;
+        }
+        .workshop-details {
+            margin-top: 35px;
+            padding: 25px 0 0;
+            border-top: 1px solid rgba(255,255,255,0.06);
+        }
+        .detail-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 15px;
+            gap: 20px;
+        }
+        .detail-row:last-child {
+            margin-bottom: 0;
+        }
+        .detail-label {
+            font-size: 10px;
+            letter-spacing: 0.5px;
+            opacity: 0.4;
+            white-space: nowrap;
+        }
+        .detail-value {
+            font-size: 11px;
+            opacity: 0.65;
+            text-align: right;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            align-items: flex-end;
+        }
+        .fee-option {
+            font-size: 10px;
+            opacity: 0.6;
+        }
+        
+        /* Form Contact Info */
+        .form-contact {
+            margin-top: 40px;
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255,255,255,0.06);
+        }
+        .contact-label {
+            font-size: 10px;
+            letter-spacing: 1px;
+            opacity: 0.3;
+            margin-bottom: 12px;
+        }
+        .contact-links {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        .contact-links a {
+            color: rgba(255,255,255,0.5);
+            text-decoration: none;
+            font-size: 11px;
+            border-bottom: 1px solid rgba(255,255,255,0.15);
+            transition: all 0.3s ease;
+        }
+        .contact-links a:hover {
+            opacity: 0.8;
+            border-bottom-color: rgba(255,255,255,0.3);
+        }
+        .contact-separator {
+            font-size: 9px;
+            opacity: 0.25;
+        }
+        
+        /* Workshop Program Info */
+        .detail-row:last-child {
+            margin-bottom: 0;
+        }
+        .detail-label {
+            font-size: 11px;
+            letter-spacing: 0.5px;
+            opacity: 0.35;
+            white-space: nowrap;
+        }
+        .detail-value {
+            font-size: 12px;
+            opacity: 0.6;
+            text-align: right;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            align-items: flex-end;
+        }
+        .fee-option {
+            font-size: 11px;
+            opacity: 0.5;
+        }
+        .contact-divider {
+            font-size: 10px;
+            opacity: 0.3;
+            margin: 4px 0;
+        }
+        .detail-value a {
+            color: rgba(255,255,255,0.6);
+            text-decoration: none;
+            border-bottom: 1px solid rgba(255,255,255,0.15);
+            transition: all 0.3s ease;
+            font-size: 11px;
+        }
+        .detail-value a:hover {
+            opacity: 1;
+            border-bottom-color: rgba(255,255,255,0.4);
+        }
+        
+        .workshop-application {
+            margin-top: 80px;
+            padding-top: 60px;
+            border-top: 1px solid rgba(255,255,255,0.08);
+        }
+        .workshop-section-title {
+            font-size: 13px;
+            letter-spacing: 2px;
+            opacity: 0.4;
+            margin-bottom: 60px;
+            font-weight: 400;
+        }
+        .workshop-form {
+            max-width: 500px;
+        }
+        .form-field {
+            margin-bottom: 50px;
+        }
+        .field-label {
+            display: block;
+            font-size: 11px;
+            letter-spacing: 1.5px;
+            opacity: 0.5;
+            margin-bottom: 15px;
+            font-weight: 400;
+        }
+        .field-input {
+            width: 100%;
+            background: transparent;
+            border: none;
+            border-bottom: 1px solid rgba(255,255,255,0.15);
+            color: #fff;
+            font-size: 14px;
+            padding: 10px 0;
+            outline: none;
+            font-family: inherit;
+            transition: border-color 0.3s ease, opacity 0.3s ease;
+            opacity: 0.7;
+        }
+        .field-input:focus {
+            border-bottom-color: rgba(255,255,255,0.4);
+            opacity: 1;
+        }
+        .field-input::placeholder {
+            color: rgba(255,255,255,0.2);
+            font-size: 13px;
+        }
+        .field-select {
+            width: 100%;
+            background: transparent;
+            border: none;
+            border-bottom: 1px solid rgba(255,255,255,0.15);
+            color: #fff;
+            font-size: 14px;
+            padding: 10px 0;
+            outline: none;
+            font-family: inherit;
+            transition: border-color 0.3s ease, opacity 0.3s ease;
+            opacity: 0.7;
+            cursor: pointer;
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' width='12' height='7' viewBox='0 0 12 7'%3e%3cpath fill='rgba(255,255,255,0.3)' d='M6 7L0 0h12z'/%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right center;
+            padding-right: 20px;
+        }
+        .field-select:focus {
+            border-bottom-color: rgba(255,255,255,0.4);
+            opacity: 1;
+        }
+        .field-select option {
+            background: #000;
+            color: #fff;
+        }
+        .radio-group {
+            display: flex;
+            gap: 35px;
+            flex-wrap: wrap;
+        }
+        .radio-option {
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+        }
+        .radio-option input[type="radio"] {
+            opacity: 0;
+            position: absolute;
+            width: 0;
+            height: 0;
+        }
+        .radio-text {
+            font-size: 13px;
+            opacity: 0.35;
+            letter-spacing: 1px;
+            transition: opacity 0.3s ease, letter-spacing 0.3s ease;
+            position: relative;
+            padding-left: 20px;
+        }
+        .radio-text::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 8px;
+            height: 8px;
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+        .radio-option:hover .radio-text {
+            opacity: 0.5;
+            letter-spacing: 1.5px;
+        }
+        .radio-option input[type="radio"]:checked + .radio-text {
+            opacity: 0.8;
+        }
+        .radio-option input[type="radio"]:checked + .radio-text::before {
+            background: rgba(255,255,255,0.8);
+            border-color: rgba(255,255,255,0.8);
+        }
+        .agreements {
+            margin-top: 60px;
+        }
+        .checkbox-option {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 20px;
+            cursor: pointer;
+        }
+        .checkbox-option input[type="checkbox"] {
+            opacity: 0;
+            position: absolute;
+            width: 0;
+            height: 0;
+        }
+        .checkbox-text {
+            font-size: 11px;
+            line-height: 1.7;
+            opacity: 0.45;
+            letter-spacing: 0.5px;
+            transition: opacity 0.3s ease;
+            position: relative;
+            padding-left: 22px;
+        }
+        .checkbox-text::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 4px;
+            width: 12px;
+            height: 12px;
+            border: 1px solid rgba(255,255,255,0.2);
+            transition: all 0.3s ease;
+        }
+        .checkbox-text::after {
+            content: '';
+            position: absolute;
+            left: 4px;
+            top: 7px;
+            width: 5px;
+            height: 3px;
+            border-left: 1px solid rgba(255,255,255,0.8);
+            border-bottom: 1px solid rgba(255,255,255,0.8);
+            transform: rotate(-45deg);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .checkbox-option:hover .checkbox-text {
+            opacity: 0.5;
+        }
+        .checkbox-option input[type="checkbox"]:checked + .checkbox-text {
+            opacity: 0.7;
+        }
+        .checkbox-option input[type="checkbox"]:checked + .checkbox-text::after {
+            opacity: 1;
+        }
+        .form-submit {
+            margin-top: 70px;
+        }
+        .submit-btn {
+            background: transparent;
+            border: none;
+            color: #fff;
+            font-size: 14px;
+            letter-spacing: 2px;
+            padding: 0;
+            cursor: pointer;
+            font-family: inherit;
+            position: relative;
+            opacity: 0.4;
+            transition: opacity 0.4s ease, letter-spacing 0.4s ease;
+        }
+        .submit-btn::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: rgba(255,255,255,0.6);
+            transition: width 0.4s ease;
+        }
+        .submit-btn:hover {
+            opacity: 0.9;
+            letter-spacing: 2.5px;
+        }
+        .submit-btn:hover::after {
+            width: 100%;
+        }
+        .submit-text {
+            display: inline-block;
+        }
+        
+        /* Agreement Toggle Details */
+        .agreement-section {
+            margin-bottom: 30px;
+        }
+        .toggle-details {
+            background: transparent;
+            border: none;
+            color: rgba(255,255,255,0.25);
+            font-size: 10px;
+            letter-spacing: 0.5px;
+            padding: 8px 0 0 22px;
+            cursor: pointer;
+            font-family: inherit;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: opacity 0.3s ease;
+        }
+        .toggle-details:hover {
+            opacity: 0.5;
+        }
+        .toggle-icon {
+            font-size: 8px;
+            transition: transform 0.3s ease;
+        }
+        .toggle-details.active .toggle-icon {
+            transform: rotate(180deg);
+        }
+        .agreement-details {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease, opacity 0.4s ease, margin-top 0.4s ease;
+            opacity: 0;
+            margin-top: 0;
+            padding-left: 22px;
+        }
+        .agreement-details.open {
+            max-height: 800px;
+            opacity: 1;
+            margin-top: 20px;
+        }
+        .detail-intro {
+            font-size: 10px;
+            line-height: 1.8;
+            opacity: 0.35;
+            margin-bottom: 20px;
+        }
+        .detail-section {
+            margin-bottom: 18px;
+        }
+        .detail-section h4 {
+            font-size: 10px;
+            font-weight: 600;
+            opacity: 0.4;
+            margin-bottom: 8px;
+            letter-spacing: 0.5px;
+        }
+        .detail-section ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .detail-section li {
+            font-size: 9px;
+            line-height: 1.8;
+            opacity: 0.3;
+            padding-left: 10px;
+            position: relative;
+        }
+        .detail-section li::before {
+            content: '−';
+            position: absolute;
+            left: 0;
+            opacity: 0.3;
+        }
+        .detail-section p {
+            font-size: 9px;
+            line-height: 1.8;
+            opacity: 0.3;
+        }
+        .detail-note {
+            font-size: 9px;
+            line-height: 1.7;
+            opacity: 0.25;
+            margin-top: 15px;
+            font-style: italic;
+        }
+        
+        /* Workshop Schedule Selection */
+        .practice-selection {
+            display: flex;
+            gap: 35px;
+            margin-bottom: 40px;
+        }
+        .practice-option {
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+        }
+        .practice-option input[type="radio"] {
+            opacity: 0;
+            position: absolute;
+            width: 0;
+            height: 0;
+        }
+        .practice-text {
+            font-size: 13px;
+            opacity: 0.25;
+            letter-spacing: 1px;
+            transition: opacity 0.3s ease, letter-spacing 0.3s ease;
+            position: relative;
+            padding-left: 20px;
+        }
+        .practice-text::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 8px;
+            height: 8px;
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+        .practice-option:hover .practice-text {
+            opacity: 0.5;
+            letter-spacing: 1.5px;
+        }
+        .practice-option input[type="radio"]:checked + .practice-text {
+            opacity: 0.8;
+        }
+        .practice-option input[type="radio"]:checked + .practice-text::before {
+            background: rgba(255,255,255,0.8);
+            border-color: rgba(255,255,255,0.8);
+        }
+        
+        .schedule-section {
+            margin-bottom: 30px;
+        }
+        .schedule-title {
+            font-size: 12px;
+            letter-spacing: 1px;
+            opacity: 0.5;
+            margin-bottom: 15px;
+            font-weight: 500;
+        }
+        .schedule-options {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .schedule-option {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+        }
+        .schedule-option input[type="checkbox"] {
+            opacity: 0;
+            position: absolute;
+            width: 0;
+            height: 0;
+        }
+        .schedule-text {
+            font-size: 12px;
+            opacity: 0.45;
+            letter-spacing: 0.5px;
+            transition: opacity 0.3s ease, letter-spacing 0.3s ease;
+            position: relative;
+            padding-left: 22px;
+        }
+        .schedule-text::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 4px;
+            width: 12px;
+            height: 12px;
+            border: 1px solid rgba(255,255,255,0.2);
+            transition: all 0.3s ease;
+        }
+        .schedule-text::after {
+            content: '';
+            position: absolute;
+            left: 4px;
+            top: 7px;
+            width: 5px;
+            height: 3px;
+            border-left: 1px solid rgba(255,255,255,0.8);
+            border-bottom: 1px solid rgba(255,255,255,0.8);
+            transform: rotate(-45deg);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .schedule-option:hover .schedule-text {
+            opacity: 0.5;
+        }
+        .schedule-option input[type="checkbox"]:checked + .schedule-text {
+            opacity: 0.7;
+            letter-spacing: 1px;
+        }
+        .schedule-option input[type="checkbox"]:checked + .schedule-text::after {
+            opacity: 1;
+        }
+        .schedule-error {
+            font-size: 10px;
+            color: rgba(255,100,100,0.7);
+            margin-top: 15px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .schedule-error.show {
+            opacity: 1;
+        }
+        
+        /* Bank Account Info */
+        .bank-info-field {
+            margin-top: 60px;
+            margin-bottom: 50px;
+        }
+        .bank-info-box {
+            padding: 25px 0;
+            border-top: 1px solid rgba(255,255,255,0.08);
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+        }
+        .bank-info-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        .bank-name {
+            font-size: 12px;
+            letter-spacing: 1px;
+            opacity: 0.5;
+        }
+        .bank-holder {
+            font-size: 11px;
+            opacity: 0.45;
+            letter-spacing: 0.5px;
+        }
+        .bank-account-row {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        .account-number {
+            font-size: 16px;
+            letter-spacing: 1px;
+            opacity: 0.8;
+            font-weight: 500;
+        }
+        .copy-btn {
+            background: transparent;
+            border: 1px solid rgba(255,255,255,0.15);
+            color: #fff;
+            font-size: 10px;
+            letter-spacing: 1px;
+            padding: 6px 12px;
+            cursor: pointer;
+            font-family: inherit;
+            transition: all 0.3s ease;
+            opacity: 0.3;
+        }
+        .copy-btn:hover {
+            opacity: 0.8;
+            border-color: rgba(255,255,255,0.3);
+        }
+        .copy-btn.copied {
+            opacity: 0.6;
+        }
+        
+        /* Workshop Success Page */
+        .success-header {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+        .success-icon {
+            font-size: 48px;
+            opacity: 0.3;
+            margin-bottom: 30px;
+        }
+        .success-title {
+            font-size: 24px;
+            font-weight: 500;
+            letter-spacing: -0.5px;
+            margin-bottom: 10px;
+            opacity: 0.8;
+        }
+        .success-subtitle {
+            font-size: 12px;
+            letter-spacing: 2px;
+            opacity: 0.3;
+        }
+        .payment-instruction {
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        .instruction-title {
+            font-size: 14px;
+            letter-spacing: 1.5px;
+            opacity: 0.4;
+            margin-bottom: 40px;
+            font-weight: 400;
+        }
+        .instruction-box {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 40px;
+            align-items: flex-start;
+        }
+        .instruction-number {
+            width: 28px;
+            height: 28px;
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+            opacity: 0.4;
+            flex-shrink: 0;
+        }
+        .instruction-content {
+            flex: 1;
+        }
+        .instruction-content h4 {
+            font-size: 13px;
+            font-weight: 500;
+            margin-bottom: 8px;
+            opacity: 0.6;
+            letter-spacing: 0.5px;
+        }
+        .instruction-content p {
+            font-size: 11px;
+            line-height: 1.8;
+            opacity: 0.4;
+            margin: 0;
+        }
+        .instruction-content p strong {
+            opacity: 0.8;
+        }
+        .payment-account {
+            margin-top: 20px;
+            padding: 20px;
+            background: rgba(255,255,255,0.02);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 2px;
+        }
+        .payment-bank {
+            font-size: 10px;
+            opacity: 0.35;
+            margin-bottom: 8px;
+            letter-spacing: 1px;
+        }
+        .payment-number {
+            font-size: 16px;
+            font-weight: 500;
+            opacity: 0.7;
+            margin-bottom: 8px;
+            letter-spacing: 1px;
+        }
+        .payment-holder {
+            font-size: 10px;
+            opacity: 0.35;
+            letter-spacing: 0.5px;
+        }
+        .success-footer {
+            margin-top: 80px;
+            text-align: center;
+            padding-top: 40px;
+            border-top: 1px solid rgba(255,255,255,0.08);
+        }
+        .success-footer p {
+            font-size: 10px;
+            line-height: 1.8;
+            opacity: 0.35;
+            margin-bottom: 30px;
+        }
+        .success-footer a {
+            color: rgba(255,255,255,0.5);
+            text-decoration: none;
+            border-bottom: 1px solid rgba(255,255,255,0.2);
+            transition: all 0.3s ease;
+        }
+        .success-footer a:hover {
+            opacity: 0.8;
+            border-bottom-color: rgba(255,255,255,0.4);
+        }
+        .back-home-btn {
+            background: transparent;
+            border: 1px solid rgba(255,255,255,0.15);
+            color: #fff;
+            font-size: 11px;
+            letter-spacing: 1.5px;
+            padding: 12px 30px;
+            cursor: pointer;
+            font-family: inherit;
+            transition: all 0.3s ease;
+            opacity: 0.4;
+        }
+        .back-home-btn:hover {
+            opacity: 0.8;
+            border-color: rgba(255,255,255,0.3);
+        }
         @media (min-width: 769px) {
             .home-hero h1 { letter-spacing: -15px; }
         }
@@ -498,6 +1451,20 @@
             .home-hero h1 { font-size: 60px; }
             .page-content { padding: 60px 20px; }
             .page-title { font-size: 28px; }
+            .trans-entries {
+                gap: 50px;
+            }
+            .trans-entry {
+                font-size: 13px;
+                letter-spacing: 3px;
+                padding: 10px 0;
+            }
+            .trans-entry::after {
+                bottom: 7px;
+            }
+            .trans-entry:hover {
+                letter-spacing: 4px;
+            }
             .slider-btn { font-size: 16px; padding: 8px 12px; }
             .project-description { padding: 20px; }
             .project-status {
@@ -790,10 +1757,20 @@ US</a>
         <div class="home-hero">
             <h1 onclick="showPage('projects')">TRANS</h1>
             <p>SERIES</p>
+            
+            <div class="trans-entries">
+                <a href="#" class="trans-entry" onclick="showPage('retrans'); return false;">
+                    <span class="entry-prefix">RE:</span><span class="entry-label">TRANS</span>
+                </a>
+                <a href="#" class="trans-entry" onclick="showPage('extrans'); return false;">
+                    <span class="entry-prefix">EX:</span><span class="entry-label">TRANS</span>
+                </a>
+            </div>
+
             <div class="social-icons">
                 <a href="https://www.instagram.com/trans_series" target="_blank"><i class="fab fa-instagram"></i></a>
                 <a href="https://www.youtube.com/@transseries" target="_blank"><i class="fab fa-youtube"></i></a>
-                <a href="/cdn-cgi/l/email-protection#a4d0d6c5cad7949c959de4cac5d2c1d68ac7cbc9"><i class="fas fa-envelope"></i></a>
+                <a href="/cdn-cgi/l/email-protection#becaccdfd0cd8e868f87fed0dfc8dbcc90ddd1d3"><i class="fas fa-envelope"></i></a>
             </div>
         </div>
     </div>
@@ -1024,10 +2001,27 @@ US</a>
                     </div>
                 </div>
                 
-                <!-- Coming Soon 표시 -->
-                <div class="coming-soon-box">
-                    <div class="coming-soon-text">COMING SOON</div>
-                    <p style="font-size: 12px; opacity: 0.5; margin-top: 10px;">영상 및 사진은 공연 후 공개 예정입니다</p>
+                <!-- 이미지 슬라이더 -->
+                <div class="slider-wrapper">
+                    <div class="slider" id="slider-2026">
+                        <div class="slides" id="slides-2026">
+                            <div class="slide"><img src="https://drive.google.com/uc?export=view&id=1-EpS-HjHegQtxWhvPQTdDpfunnOOI3Cj" alt="포옹 1"></div>
+                            <div class="slide"><img src="https://drive.google.com/uc?export=view&id=10qbNTLYUGfeSkiJL02gGAK4l-xUFwI4h" alt="포옹 2"></div>
+                            <div class="slide"><img src="https://drive.google.com/uc?export=view&id=1M43N2IC0KeBoUBizdLQL__UgYe5qBL6y" alt="포옹 3"></div>
+                            <div class="slide"><img src="https://drive.google.com/uc?export=view&id=1EtnblAWZ4DYN_gh2g14nytYsiWfeZvlh" alt="포옹 4"></div>
+                            <div class="slide"><img src="https://drive.google.com/uc?export=view&id=1G04DNnTVbvNk49b1mysCaqRIoEwMC2sq" alt="포옹 5"></div>
+                            <div class="slide"><img src="https://drive.google.com/uc?export=view&id=1ltqtGWsXEEiDt6My_N3vHRAAo265bbKT" alt="포옹 6"></div>
+                            <div class="slide"><img src="https://drive.google.com/uc?export=view&id=1RX1odDP93zZx1AkrYcyDwAtnGhdeyVqU" alt="포옹 7"></div>
+                            <div class="slide"><img src="https://drive.google.com/uc?export=view&id=1XcI4tRiWta0dZITXSysSlZ3Y8dujotH5" alt="포옹 8"></div>
+                            <div class="slide"><img src="https://drive.google.com/uc?export=view&id=1s37JsxQDvI8QrJtJ5bnDJIX3nRqktTZY" alt="포옹 9"></div>
+                            <div class="slide"><img src="https://drive.google.com/uc?export=view&id=1nB4NVYyFEqWEjTPzoeY7EPyzmimMix6r" alt="포옹 10"></div>
+                            <div class="slide"><img src="https://drive.google.com/uc?export=view&id=1xUSQG-KEVvwHhViKarAhwy-02ls8rqxj" alt="포옹 11"></div>
+                            <div class="slide"><img src="https://drive.google.com/uc?export=view&id=1vM7H9c6MzUrq-ymXpkln-E228rIHPJ74" alt="포옹 12"></div>
+                        </div>
+                        <button class="slider-btn prev" onclick="moveSlide('2026', -1)">‹</button>
+                        <button class="slider-btn next" onclick="moveSlide('2026', 1)">›</button>
+                    </div>
+                    <div class="slider-dots" id="dots-2026"></div>
                 </div>
                 
                 <!-- 갤러리 아코디언 -->
@@ -1132,19 +2126,343 @@ US</a>
         </div>
     </div>
 
+    <!-- RE:TRANS 페이지 -->
+    <div id="retrans" class="page">
+        <div class="page-content sub-page-content">
+            <div class="sub-page-header">
+                <span class="sub-page-prefix">RE:</span><span class="sub-page-title">TRANS</span>
+            </div>
+            <div class="sub-page-divider"></div>
+            <div class="sub-page-body">
+                <p class="sub-page-desc">RE:TRANS는 무용, 음악, 영상, 시각예술 등 서로 다른 예술장르의 작업자들이 사용하는 언어와 개념이 어떻게 어긋나고 충돌하는지를 탐구하는 리서치 및 스터디입니다.</p>
+                <p class="sub-page-desc">합의나 정답을 만드는 것이 아니라, 같은 단어를 다르게 이해하고 있는 상태 자체를 드러내고 유지하는 대화의 구조를 실험합니다.<br>신체를 공통의 기반으로 삼아, 각자의 조건과 언어가 어떻게 전이, 변형되는지를 함께 관찰하고 경험합니다.</p>
+                <div class="sub-page-coming">
+                    <span>COMING SOON</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- EX:TRANS 페이지 -->
+    <div id="extrans" class="page">
+        <div class="page-content sub-page-content">
+            <div class="sub-page-header">
+                <span class="sub-page-prefix">EX:</span><span class="sub-page-title">TRANS</span>
+            </div>
+            <div class="sub-page-divider"></div>
+            <div class="sub-page-body">
+                <p class="sub-page-desc">EX:TRANS는 TRANS 시리즈에서 축적해온 구조와 방식을 작품의 형식에 한정하지 않고, 실제 환경에서 실행하고 확장하는 프로그램입니다.</p>
+                <p class="sub-page-desc">'EX'는 Execute(실행하다), Experiment(실험하다), Expand(확장하다)의 의미를 담고 있습니다. TRANS 안에서 발전해온 시스템을 결과가 아닌 구조로 다루며, 이를 다양한 환경 속에서 작동시키는 프로그램입니다.</p>
+            </div>
+
+            <!-- Divider -->
+            <div class="section-divider"></div>
+
+            <!-- Workshop Program Info -->
+            <div class="workshop-program">
+                <h2 class="program-main-title">〈포옹의 구조 Embrace Structure〉</h2>
+                
+                <!-- Program Description Toggle -->
+                <button type="button" class="program-toggle" onclick="toggleProgramSection('program-desc')">
+                    <span class="toggle-label">프로그램 소개 About Program</span>
+                    <span class="toggle-arrow">▼</span>
+                </button>
+                <div class="program-section" id="program-desc">
+                    <p>TRANS 2와 TRANS 2.5를 통해 축적된 움직임의 구조를 바탕으로, 사랑과 폭력이라는 질문을 '포옹'이라는 단순한 행위로 압축했습니다. 그 안에서 발생하는 힘의 흐름과 관계의 변화를 단계적으로 다룹니다.</p>
+                    
+                    <p class="program-question">몸과 몸이 만나는 순간, 우리는 서로에게 어떤 힘을 전달하고 있을까요?</p>
+                    
+                    <p>EX:TRANS 〈포옹의 구조〉는 충돌, 보호와 피보호, 억압과 배려와 같은 관계의 상태를 '힘의 흐름'으로 경험하는 신체 기반 프로그램입니다.</p>
+                    
+                    <p>가볍게 닿는 순간부터 밀고, 기대고, 버티는 상태까지. 에너지의 밀도가 달라질수록 관계의 형태도 함께 변합니다.</p>
+                    
+                    <p class="program-essence">이 프로그램은 포옹을 감정이 아닌, 하나의 구조로 직접 경험하는 시간입니다.</p>
+                </div>
+
+                <!-- Practice Levels Toggle -->
+                <button type="button" class="program-toggle" onclick="toggleProgramSection('practice-levels')">
+                    <span class="toggle-label">참여 레벨 안내 Practice Levels</span>
+                    <span class="toggle-arrow">▼</span>
+                </button>
+                <div class="program-section" id="practice-levels">
+                    <p class="level-intro">참여자는 자신의 감각과 신체 상태에 따라 두 가지 방식 중 하나를 선택할 수 있습니다.</p>
+                    
+                    <div class="level-item">
+                        <h4 class="level-title">① Slow Practice — 감각을 세밀하게 배우는 과정</h4>
+                        <p class="level-desc">천천히 마주하고, 접촉하고, 중심을 탐색합니다. 힘의 전달을 미세하게 느끼며 움직임의 구조를 면밀하게 경험합니다. 처음 접하는 참여자에게 적합한 과정입니다.</p>
+                        <p class="level-note">※ 강한 충돌이나 고강도 움직임은 포함되지 않습니다.</p>
+                    </div>
+                    
+                    <div class="level-item">
+                        <h4 class="level-title">② Deep Practice — 퍼포머의 에너지에 가까워지는 과정</h4>
+                        <p class="level-desc">보다 강한 힘의 전달과 중심의 이동, 겹침과 충돌의 상태까지 확장합니다. 퍼포먼스에서 보여지는 밀도에 가까한 상태를 경험합니다.</p>
+                        <p class="level-note">※ 바닥 작업 및 높은 밀도의 에너지 확장이 포함됩니다.</p>
+                    </div>
+                </div>
+
+                <!-- Workshop Details -->
+                <div class="workshop-details">
+                    <div class="detail-row">
+                        <span class="detail-label">장소 Venue</span>
+                        <span class="detail-value">미정 TBD</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">모집 인원 Capacity</span>
+                        <span class="detail-value">10명 (선착순 마감)</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">비용 Fee</span>
+                        <span class="detail-value">
+                            <span class="fee-option">3DAY — 100,000원</span>
+                            <span class="fee-option">2DAY — 70,000원</span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Workshop Application Form -->
+            <div class="workshop-application">
+                <div class="workshop-section-title">워크숍 신청 Workshop Application</div>
+                
+                <form class="workshop-form" id="extransForm" action="https://formspree.io/f/mqedyvaz" method="POST">
+                    <!-- Name -->
+                    <div class="form-field">
+                        <label class="field-label">이름 Name</label>
+                        <input type="text" class="field-input" name="name" required>
+                    </div>
+
+                    <!-- Contact -->
+                    <div class="form-field">
+                        <label class="field-label">연락처 Contact</label>
+                        <input type="tel" class="field-input" name="phone" placeholder="010-0000-0000" required>
+                    </div>
+
+                    <!-- Workshop Schedule Selection -->
+                    <div class="form-field">
+                        <label class="field-label">워크숍 파트 선택 Select Practice (하나만 선택 가능)</label>
+                        <div class="practice-selection">
+                            <label class="practice-option">
+                                <input type="radio" name="practice_type" value="Slow Practice" required onchange="updateScheduleOptions('slow')">
+                                <span class="practice-text">Slow Practice</span>
+                            </label>
+                            <label class="practice-option">
+                                <input type="radio" name="practice_type" value="Deep Practice" onchange="updateScheduleOptions('deep')">
+                                <span class="practice-text">Deep Practice</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-field" id="scheduleField" style="display: none;">
+                        <label class="field-label">일정 선택 Schedule (최소 2회 이상 선택 필수)</label>
+                        
+                        <!-- Slow Practice Schedule -->
+                        <div class="schedule-section" id="slowSchedule" style="display: none;">
+                            <div class="schedule-options">
+                                <label class="schedule-option">
+                                    <input type="checkbox" name="schedule[]" value="Slow Practice - 3/13 (금) 19:00-21:00">
+                                    <span class="schedule-text">3월 13일 (금) 19:00-21:00</span>
+                                </label>
+                                <label class="schedule-option">
+                                    <input type="checkbox" name="schedule[]" value="Slow Practice - 3/14 (토) 11:00-13:00">
+                                    <span class="schedule-text">3월 14일 (토) 11:00-13:00</span>
+                                </label>
+                                <label class="schedule-option">
+                                    <input type="checkbox" name="schedule[]" value="Slow Practice - 3/15 (일) 11:00-13:00">
+                                    <span class="schedule-text">3월 15일 (일) 11:00-13:00</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Deep Practice Schedule -->
+                        <div class="schedule-section" id="deepSchedule" style="display: none;">
+                            <div class="schedule-options">
+                                <label class="schedule-option">
+                                    <input type="checkbox" name="schedule[]" value="Deep Practice - 3/27 (금) 19:00-21:00">
+                                    <span class="schedule-text">3월 27일 (금) 19:00-21:00</span>
+                                </label>
+                                <label class="schedule-option">
+                                    <input type="checkbox" name="schedule[]" value="Deep Practice - 3/28 (토) 11:00-13:00">
+                                    <span class="schedule-text">3월 28일 (토) 11:00-13:00</span>
+                                </label>
+                                <label class="schedule-option">
+                                    <input type="checkbox" name="schedule[]" value="Deep Practice - 3/29 (일) 11:00-13:00">
+                                    <span class="schedule-text">3월 29일 (일) 11:00-13:00</span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="schedule-error" id="scheduleError"></div>
+                    </div>
+
+                    <!-- Bank Account Info -->
+                    <div class="form-field bank-info-field">
+                        <label class="field-label">계좌 정보 Bank Account</label>
+                        <div class="bank-info-box">
+                            <div class="bank-info-row">
+                                <span class="bank-name">카카오뱅크</span>
+                                <span class="bank-holder">오현택(트랜스)</span>
+                            </div>
+                            <div class="bank-account-row">
+                                <span class="account-number" id="accountNumber">3333-19-4545273</span>
+                                <button type="button" class="copy-btn" onclick="copyAccount()">
+                                    <span class="copy-text">복사</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Agreements -->
+                    <div class="form-field agreements">
+                        <!-- 개인정보 동의 -->
+                        <div class="agreement-section">
+                            <label class="checkbox-option">
+                                <input type="checkbox" name="privacy" value="agreed" required>
+                                <span class="checkbox-text">개인정보 수집 및 이용에 동의합니다. (필수)</span>
+                            </label>
+                            <button type="button" class="toggle-details" onclick="toggleAgreement('privacy-details')">
+                                <span class="toggle-text">자세히 보기</span>
+                                <span class="toggle-icon">▼</span>
+                            </button>
+                            <div class="agreement-details" id="privacy-details">
+                                <p class="detail-intro">TRANS(이하 '대표')는 EX:TRANS 워크숍 운영을 위하여 다음과 같이 개인정보를 수집·이용합니다.</p>
+                                
+                                <div class="detail-section">
+                                    <h4>1. 수집 항목</h4>
+                                    <ul>
+                                        <li>성명</li>
+                                        <li>연락처(휴대전화 또는 이메일)</li>
+                                        <li>신청 클래스 및 일정</li>
+                                    </ul>
+                                </div>
+
+                                <div class="detail-section">
+                                    <h4>2. 수집 목적</h4>
+                                    <ul>
+                                        <li>워크숍 신청 접수 및 참가자 관리</li>
+                                        <li>일정 안내 및 공지 전달</li>
+                                        <li>프로그램 운영 및 관련 문의 응대</li>
+                                    </ul>
+                                </div>
+
+                                <div class="detail-section">
+                                    <h4>3. 보유 및 이용 기간</h4>
+                                    <p>워크숍 종료 후 3개월 이내 파기<br>
+                                    단, 관련 법령에 따라 보존이 필요한 경우 해당 기간 동안 보관합니다.</p>
+                                </div>
+
+                                <p class="detail-note">※ 귀하는 개인정보 수집·이용에 대한 동의를 거부할 권리가 있습니다.<br>
+                                다만, 동의를 거부할 경우 워크숍 신청이 제한될 수 있습니다.</p>
+                            </div>
+                        </div>
+
+                        <!-- 촬영 동의 -->
+                        <div class="agreement-section">
+                            <label class="checkbox-option">
+                                <input type="checkbox" name="documentation" value="agreed">
+                                <span class="checkbox-text">촬영 및 기록 활용에 동의합니다. (선택)</span>
+                            </label>
+                            <button type="button" class="toggle-details" onclick="toggleAgreement('doc-details')">
+                                <span class="toggle-text">자세히 보기</span>
+                                <span class="toggle-icon">▼</span>
+                            </button>
+                            <div class="agreement-details" id="doc-details">
+                                <div class="detail-section">
+                                    <p>EX:TRANS 워크숍 진행 중 사진 또는 영상 촬영이 이루어질 수 있습니다.<br>
+                                    촬영된 자료는 공식 웹사이트, SNS, 아카이브 및 홍보 목적 범위 내에서 활용될 수 있습니다.</p>
+                                </div>
+                                
+                                <p class="detail-note">동의하지 않을 경우 현장에서 촬영 제외 요청이 가능합니다.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Formspree Hidden Fields -->
+                    <input type="hidden" name="_subject" value="EX:TRANS 워크숍 신청">
+                    <input type="hidden" name="_cc" value="trans0819@naver.com">
+                    <input type="text" name="_gotcha" style="display:none">
+
+                    <!-- Submit -->
+                    <div class="form-submit">
+                        <button type="submit" class="submit-btn" id="submitBtn">
+                            <span class="submit-text">참여하기 Join Workshop</span>
+                        </button>
+                    </div>
+
+                    <!-- Contact Info Below Submit -->
+                    <div class="form-contact">
+                        <p class="contact-label">문의 Contact</p>
+                        <div class="contact-links">
+                            <a href="https://www.instagram.com/trans_series" target="_blank">@trans_series DM</a>
+                            <span class="contact-separator">또는</span>
+                            <a href="tel:010-4740-3107">010-4740-3107</a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Workshop Success Page -->
+    <div id="workshop-success" class="page">
+        <div class="page-content sub-page-content">
+            <div class="success-header">
+                <div class="success-icon">✓</div>
+                <h2 class="success-title">신청이 완료되었습니다</h2>
+                <p class="success-subtitle">Application Submitted</p>
+            </div>
+
+            <div class="payment-instruction">
+                <h3 class="instruction-title">다음 단계 Next Step</h3>
+                
+                <div class="instruction-box">
+                    <div class="instruction-number">1</div>
+                    <div class="instruction-content">
+                        <h4>계좌이체</h4>
+                        <p>아래 계좌로 참가비를 입금해주세요.</p>
+                        <div class="payment-account">
+                            <div class="payment-bank">카카오뱅크</div>
+                            <div class="payment-number">3333-19-4545273</div>
+                            <div class="payment-holder">오현택(트랜스)</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="instruction-box">
+                    <div class="instruction-number">2</div>
+                    <div class="instruction-content">
+                        <h4>입금 확인</h4>
+                        <p>입금자명과 입금액을 확인한 후<br>등록하신 연락처로 <strong>확인 문자를 개별 발송</strong>해드립니다.</p>
+                    </div>
+                </div>
+
+                <div class="instruction-box">
+                    <div class="instruction-number">3</div>
+                    <div class="instruction-content">
+                        <h4>워크숍 준비</h4>
+                        <p>워크숍 시작 1주일 전 상세 안내를 보내드립니다.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="success-footer">
+                <p>문의사항이 있으시면 <a href="/cdn-cgi/l/email-protection#ee9a9c8f809dded6dfd7ae808f988b9cc08d8183"><span class="__cf_email__" data-cfemail="205452414e5310181119604e415645520e434f4d">[email&#160;protected]</span></a>으로 연락주세요.</p>
+                <button class="back-home-btn" onclick="showPage('home')">홈으로 돌아가기 Back to Home</button>
+            </div>
+        </div>
+    </div>
+
     <div id="contact" class="page">
         <div class="page-content">
             <h1 class="page-title">CONTACT US</h1>
             <div class="contact-content">
                 <div class="contact-icons">
-                    <a href="mailto:trans0819@naver.com" class="contact-item"><div class="contact-icon"><i class="fas fa-envelope"></i></div></a>
+                    <a href="/cdn-cgi/l/email-protection#245056454a57141c151d644a455241560a474b49" class="contact-item"><div class="contact-icon"><i class="fas fa-envelope"></i></div></a>
                     <a href="https://www.instagram.com/trans_series" target="_blank" class="contact-item"><div class="contact-icon"><i class="fab fa-instagram"></i></div></a>
                     <a href="https://www.youtube.com/@transseries" target="_blank" class="contact-item"><div class="contact-icon"><i class="fab fa-youtube"></i></div></a>
                 </div>
                 <div class="contact-divider"></div>
                 <div class="contact-text">
                     <p>공연 문의 및 협업 제안</p>
-                    <p style="margin-top: 15px;"><a href="mailto:trans0819@naver.com">trans0819@naver.com</a></p>
+                    <p style="margin-top: 15px;"><a href="/cdn-cgi/l/email-protection#5a2e283b34296a626b631a343b2c3f2874393537"><span class="__cf_email__" data-cfemail="5f2b2d3e312c6f676e661f313e293a2d713c3032">[email&#160;protected]</span></a></p>
                 </div>
             </div>
         </div>
@@ -1159,7 +2477,7 @@ US</a>
 
     <footer><p>© 2026 TRANS. ALL RIGHTS RESERVED.</p></footer>
 
-    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
         // 인트로 애니메이션
         const words = [
             'TRANSITION',
@@ -1496,9 +2814,135 @@ US</a>
             }
         });
 
+        // Copy Account Number
+        function copyAccount() {
+            const accountNumber = document.getElementById('accountNumber').textContent;
+            navigator.clipboard.writeText(accountNumber).then(() => {
+                const btn = event.currentTarget;
+                const originalText = btn.querySelector('.copy-text').textContent;
+                btn.querySelector('.copy-text').textContent = '복사됨';
+                btn.classList.add('copied');
+                
+                setTimeout(() => {
+                    btn.querySelector('.copy-text').textContent = originalText;
+                    btn.classList.remove('copied');
+                }, 2000);
+            }).catch(err => {
+                console.error('복사 실패:', err);
+            });
+        }
+
+        // Update Schedule Options based on Practice Type
+        function updateScheduleOptions(type) {
+            const scheduleField = document.getElementById('scheduleField');
+            const slowSchedule = document.getElementById('slowSchedule');
+            const deepSchedule = document.getElementById('deepSchedule');
+            const errorDiv = document.getElementById('scheduleError');
+            
+            // Clear all checkboxes
+            document.querySelectorAll('input[name="schedule[]"]').forEach(cb => {
+                cb.checked = false;
+            });
+            
+            // Hide error
+            errorDiv.classList.remove('show');
+            
+            // Show schedule field
+            scheduleField.style.display = 'block';
+            
+            // Show appropriate schedule
+            if (type === 'slow') {
+                slowSchedule.style.display = 'block';
+                deepSchedule.style.display = 'none';
+            } else if (type === 'deep') {
+                slowSchedule.style.display = 'none';
+                deepSchedule.style.display = 'block';
+            }
+        }
+
+        // Workshop Schedule Validation and Form Submission
+        const extransForm = document.getElementById('extransForm');
+        if (extransForm) {
+            extransForm.addEventListener('submit', function(e) {
+                e.preventDefault(); // Prevent default form submission
+                
+                const checkedSchedules = document.querySelectorAll('input[name="schedule[]"]:checked').length;
+                const errorDiv = document.getElementById('scheduleError');
+                
+                if (checkedSchedules < 2) {
+                    errorDiv.textContent = '최소 2회 이상 선택해주세요.';
+                    errorDiv.classList.add('show');
+                    
+                    // 스크롤 to error
+                    errorDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    
+                    setTimeout(() => {
+                        errorDiv.classList.remove('show');
+                    }, 5000);
+                    return false;
+                } else {
+                    errorDiv.classList.remove('show');
+                    
+                    // Show loading state
+                    const submitBtn = document.getElementById('submitBtn');
+                    const originalText = submitBtn.querySelector('.submit-text').textContent;
+                    submitBtn.querySelector('.submit-text').textContent = '제출 중... Submitting...';
+                    submitBtn.disabled = true;
+                    submitBtn.style.opacity = '0.3';
+                    
+                    // Submit form via Ajax to Formspree
+                    const formData = new FormData(this);
+                    
+                    fetch(this.action, {
+                        method: 'POST',
+                        body: formData,
+                        headers: {
+                            'Accept': 'application/json'
+                        }
+                    }).then(response => {
+                        if (response.ok) {
+                            // Success - redirect to success page
+                            showPage('workshop-success');
+                        } else {
+                            // Error
+                            alert('신청 중 오류가 발생했습니다. 다시 시도해주세요.\nError occurred. Please try again.');
+                            submitBtn.querySelector('.submit-text').textContent = originalText;
+                            submitBtn.disabled = false;
+                            submitBtn.style.opacity = '0.4';
+                        }
+                    }).catch(error => {
+                        console.error('Error:', error);
+                        alert('신청 중 오류가 발생했습니다. 다시 시도해주세요.\nError occurred. Please try again.');
+                        submitBtn.querySelector('.submit-text').textContent = originalText;
+                        submitBtn.disabled = false;
+                        submitBtn.style.opacity = '0.4';
+                    });
+                }
+            });
+        }
+
+        // Agreement Toggle Function
+        function toggleAgreement(detailsId) {
+            const details = document.getElementById(detailsId);
+            const button = event.currentTarget;
+            
+            details.classList.toggle('open');
+            button.classList.toggle('active');
+        }
+
+        // Program Section Toggle Function
+        function toggleProgramSection(sectionId) {
+            const section = document.getElementById(sectionId);
+            const button = event.currentTarget;
+            
+            section.classList.toggle('open');
+            button.classList.toggle('active');
+        }
+
         initSlider('2023');
         initSlider('2024');
         initSlider('2025');
+        initSlider('2026');
         initSlider('archive1');
         initSlider('archive2');
         initSlider('archive3');
@@ -1592,12 +3036,6 @@ US</a>
             }
         }, { passive: true });
         
-        // 이미지 선택 방지
-        document.addEventListener('selectstart', e => {
-            if (e.target.tagName === 'IMG') e.preventDefault();
-        });
-        
-        // iOS Safari 이미지 저장 방지
         document.querySelectorAll('img').forEach(img => {
             img.addEventListener('contextmenu', e => e.preventDefault());
         });
