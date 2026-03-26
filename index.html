@@ -2775,6 +2775,9 @@ US</a>
             }, 50);
             window.history.pushState({ page: id }, '', `#${id}`);
             
+            // extrans 페이지 진입 시 폼 초기화
+            if (id === 'extrans') resetExtransForm();
+            
             // 모바일 홈 버튼 표시/숨김
             const homeBtn = document.getElementById('homeBtn');
             if (window.innerWidth <= 768) {
@@ -2798,6 +2801,106 @@ US</a>
                 });
             }
         });
+
+        // 브라우저 뒤로가기/앞으로가기 지원
+        window.addEventListener('popstate', (e) => {
+            if (e.state && e.state.page) {
+                const id = e.state.page;
+                // pushState 없이 UI만 업데이트
+                const pageMap = { 'about': 0, 'projects': 1, 'ticket': 2 };
+                const allNavButtonsContainers = document.querySelectorAll('.home-nav-buttons');
+                const allButtons = document.querySelectorAll('.home-nav-btn');
+                allButtons.forEach(btn => btn.classList.remove('active'));
+                if (id !== 'home' && pageMap[id] !== undefined) {
+                    const activeIndex = pageMap[id];
+                    allNavButtonsContainers.forEach(container => {
+                        const btns = container.querySelectorAll('.home-nav-btn');
+                        if (btns[activeIndex]) btns[activeIndex].classList.add('active');
+                        container.classList.remove('state-0', 'state-1', 'state-2');
+                        container.classList.add(`state-${activeIndex}`);
+                    });
+                } else {
+                    allNavButtonsContainers.forEach(container => {
+                        container.classList.remove('state-0', 'state-1', 'state-2');
+                    });
+                }
+                // 영상 정지
+                document.querySelectorAll('.youtube-player iframe, .youtube-embed iframe').forEach(iframe => {
+                    iframe.src = iframe.src.split('?')[0];
+                });
+                // 페이지 전환
+                document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+                setTimeout(() => {
+                    const target = document.getElementById(id);
+                    if (target) {
+                        target.classList.add('active');
+                        window.scrollTo({ top: 0, behavior: 'smooth' });
+                    }
+                }, 50);
+                // 모바일 홈 버튼
+                const homeBtn = document.getElementById('homeBtn');
+                if (window.innerWidth <= 768) {
+                    if (id === 'home') homeBtn.classList.remove('show');
+                    else homeBtn.classList.add('show');
+                }
+                // extrans 페이지로 뒤로가기 시 폼 초기화
+                if (id === 'extrans') resetExtransForm();
+            } else {
+                // 히스토리 state 없으면 홈으로
+                document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+                setTimeout(() => {
+                    document.getElementById('home').classList.add('active');
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                }, 50);
+                document.querySelectorAll('.home-nav-buttons').forEach(c => {
+                    c.classList.remove('state-0', 'state-1', 'state-2');
+                });
+                document.querySelectorAll('.home-nav-btn').forEach(b => b.classList.remove('active'));
+                const homeBtn = document.getElementById('homeBtn');
+                if (homeBtn) homeBtn.classList.remove('show');
+            }
+        });
+
+        // EX:TRANS 폼 초기화 함수
+        function resetExtransForm() {
+            const form = document.getElementById('extransForm');
+            if (!form) return;
+
+            // 라디오/체크박스/텍스트 전부 초기화
+            form.reset();
+
+            // 일정 선택 영역 숨기기
+            const scheduleField = document.getElementById('scheduleField');
+            const slowSchedule = document.getElementById('slowSchedule');
+            const deepSchedule = document.getElementById('deepSchedule');
+            if (scheduleField) scheduleField.style.display = 'none';
+            if (slowSchedule) slowSchedule.style.display = 'none';
+            if (deepSchedule) deepSchedule.style.display = 'none';
+
+            // 에러 메시지 숨기기
+            const errorDiv = document.getElementById('scheduleError');
+            if (errorDiv) errorDiv.classList.remove('show');
+
+            // 제출 버튼 상태 복구
+            const submitBtn = document.getElementById('submitBtn');
+            if (submitBtn) {
+                submitBtn.disabled = false;
+                submitBtn.style.opacity = '';
+                const submitText = submitBtn.querySelector('.submit-text');
+                if (submitText) submitText.textContent = '참여하기 Join Workshop';
+            }
+
+            // 열려있는 프로그램 토글 닫기
+            document.querySelectorAll('.program-section.open').forEach(s => s.classList.remove('open'));
+            document.querySelectorAll('.program-toggle.active').forEach(b => b.classList.remove('active'));
+
+            // 열려있는 동의 상세 닫기
+            document.querySelectorAll('.agreement-details.open').forEach(d => d.classList.remove('open'));
+            document.querySelectorAll('.toggle-details.active').forEach(b => b.classList.remove('active'));
+
+            // 스크롤 맨 위로
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
 
         // Copy Account Number
         function copyAccount() {
