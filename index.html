@@ -2258,7 +2258,7 @@ US</a>
                     <!-- Contact -->
                     <div class="form-field">
                         <label class="field-label">연락처 Contact</label>
-                        <input type="tel" class="field-input" name="phone" placeholder="010-0000-0000" required>
+                        <input type="tel" class="field-input" name="phone" id="phoneInput" placeholder="010-0000-0000" maxlength="13" required oninput="formatPhone(this)">
                     </div>
 
                     <!-- Performance Attendance -->
@@ -2961,6 +2961,20 @@ US</a>
         }
 
         // Copy Account Number
+        // 전화번호 자동 하이픈 포맷 (한국 3-4-4)
+        function formatPhone(input) {
+            let digits = input.value.replace(/\D/g, '').slice(0, 11);
+            let formatted = '';
+            if (digits.length <= 3) {
+                formatted = digits;
+            } else if (digits.length <= 7) {
+                formatted = digits.slice(0, 3) + '-' + digits.slice(3);
+            } else {
+                formatted = digits.slice(0, 3) + '-' + digits.slice(3, 7) + '-' + digits.slice(7);
+            }
+            input.value = formatted;
+        }
+
         function copyAccount() {
             const accountNumber = document.getElementById('accountNumber').textContent.trim();
             const btn = document.getElementById('copyBtn');
