@@ -2522,605 +2522,255 @@ US</a>
     <footer><p>© 2026 TRANS. ALL RIGHTS RESERVED.</p></footer>
 
     <script>
-        // 인트로 애니메이션
+
+        /* ================================================
+           1. 페이지 라우팅 (showPage)
+        ================================================ */
+        const PAGE_MAP = { about: 0, projects: 1, ticket: 2 };
+
+        function applyNavState(id) {
+            const containers = document.querySelectorAll('.home-nav-buttons');
+            const buttons    = document.querySelectorAll('.home-nav-btn');
+            buttons.forEach(b => b.classList.remove('active'));
+            containers.forEach(c => c.classList.remove('state-0','state-1','state-2'));
+
+            if (PAGE_MAP[id] !== undefined) {
+                const idx = PAGE_MAP[id];
+                containers.forEach(c => {
+                    const btns = c.querySelectorAll('.home-nav-btn');
+                    if (btns[idx]) btns[idx].classList.add('active');
+                    c.classList.add('state-' + idx);
+                });
+            }
+
+            const homeBtn = document.getElementById('homeBtn');
+            if (homeBtn) {
+                if (id === 'home') homeBtn.classList.remove('show');
+                else              homeBtn.classList.add('show');
+            }
+        }
+
+        function stopVideos() {
+            document.querySelectorAll('.youtube-player iframe, .youtube-embed iframe').forEach(iframe => {
+                iframe.src = iframe.src.split('?')[0];
+            });
+        }
+
+        function showPage(id) {
+            if (!document.getElementById(id)) return;
+
+            stopVideos();
+            applyNavState(id);
+
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+
+            // 히스토리에 현재 페이지 기록
+            if (!history.state || history.state.page !== id) {
+                window.history.pushState({ page: id }, '', '#' + id);
+            }
+
+            if (id === 'extrans') resetExtransForm();
+        }
+
+        // 브라우저 뒤로/앞으로가기
+        window.addEventListener('popstate', function(e) {
+            const id = (e.state && e.state.page) ? e.state.page : 'home';
+            if (!document.getElementById(id)) return;
+
+            stopVideos();
+            applyNavState(id);
+
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+
+            if (id === 'extrans') resetExtransForm();
+        });
+
+
+        /* ================================================
+           2. 인트로 애니메이션
+        ================================================ */
         const words = [
-            'TRANSITION',
-            'TRANSFORM', 
-            'TRANSCEND',
-            'TRANSGRESS',
-            'TRANSLATION',
-            'TRANSPORTATION',
-            'TRANSITORY',
-            'TRANSMUTATION'
+            'TRANSITION', 'TRANSFORM', 'TRANSCEND',
+            'TRANSGRESS', 'TRANSLATION', 'TRANSPORTATION',
+            'TRANSITORY', 'TRANSMUTATION'
         ];
-        
         let currentWordIndex = 0;
-        let isDeleting = false;
-        let currentText = '';
-        let charIndex = 0;
-        const introText = document.getElementById('introText');
-        const intro = document.getElementById('intro');
-        let touchStartY = 0;
-        let touchEndY = 0;
-        
-        // 각 단어별 속도 프리셋 (40% 더 빠르게)
+        let isDeleting      = false;
+        let currentText     = '';
+        let charIndex       = 0;
+        const introText     = document.getElementById('introText');
+        const intro         = document.getElementById('intro');
+        let touchStartY     = 0;
+
         const speedPresets = [
-            { type: 60, delete: 36, pause: 600 },   // 빠름
-            { type: 84, delete: 54, pause: 780 },   // 느림
-            { type: 72, delete: 42, pause: 660 },   // 중간
-            { type: 54, delete: 30, pause: 540 },   // 매우 빠름
-            { type: 96, delete: 60, pause: 840 },   // 매우 느림
+            { type: 60, delete: 36, pause: 600 },
+            { type: 84, delete: 54, pause: 780 },
+            { type: 72, delete: 42, pause: 660 },
+            { type: 54, delete: 30, pause: 540 },
+            { type: 96, delete: 60, pause: 840 },
         ];
-        
         let currentSpeed = speedPresets[0];
-        
+
         function getRandomSpeed() {
             currentSpeed = speedPresets[Math.floor(Math.random() * speedPresets.length)];
         }
-        
+
         function typeWriter() {
-            const currentWord = words[currentWordIndex];
-            
+            const word = words[currentWordIndex];
             if (!isDeleting) {
-                currentText = currentWord.substring(0, charIndex + 1);
+                currentText = word.substring(0, charIndex + 1);
                 charIndex++;
-                
-                if (charIndex === currentWord.length) {
+                if (charIndex === word.length) {
                     isDeleting = true;
-                    setTimeout(typeWriter, currentSpeed.pause);
                     introText.textContent = currentText;
+                    setTimeout(typeWriter, currentSpeed.pause);
                     return;
                 }
             } else {
-                currentText = currentWord.substring(0, charIndex - 1);
+                currentText = word.substring(0, charIndex - 1);
                 charIndex--;
-                
                 if (charIndex === 5) {
                     isDeleting = false;
-                    charIndex = 5;
-                    currentWordIndex++;
-                    if (currentWordIndex >= words.length) {
-                        currentWordIndex = 0;
-                    }
+                    charIndex  = 5;
+                    currentWordIndex = (currentWordIndex + 1) % words.length;
                     getRandomSpeed();
-                    setTimeout(typeWriter, 500);
                     introText.textContent = currentText;
+                    setTimeout(typeWriter, 500);
                     return;
                 }
             }
-            
             introText.textContent = currentText;
             const variation = Math.random() * 40 - 20;
             const speed = isDeleting ? currentSpeed.delete + variation : currentSpeed.type + variation;
             setTimeout(typeWriter, Math.max(50, speed));
         }
-        
+
         function goToHome() {
             sessionStorage.setItem('introSeen', 'true');
             intro.classList.add('swipe-up');
-            setTimeout(() => {
+            setTimeout(function() {
                 intro.style.display = 'none';
                 showPage('home');
             }, 600);
         }
-        
-        // 스와이프 감지 (모바일)
-        intro.addEventListener('touchstart', (e) => {
+
+        // 인트로 이벤트
+        intro.addEventListener('touchstart', function(e) {
             touchStartY = e.changedTouches[0].screenY;
         }, { passive: true });
-        
-        intro.addEventListener('touchend', (e) => {
-            touchEndY = e.changedTouches[0].screenY;
-            const swipeDistance = touchStartY - touchEndY;
-            if (swipeDistance > 80) {
-                goToHome();
-            }
+
+        intro.addEventListener('touchend', function(e) {
+            if (touchStartY - e.changedTouches[0].screenY > 80) goToHome();
         }, { passive: true });
-        
-        // 클릭 및 키보드 감지 (데스크톱만)
+
         if (window.innerWidth > 768) {
             intro.addEventListener('click', goToHome);
         }
-        document.addEventListener('keydown', (e) => {
-            if (intro.style.display !== 'none' && window.innerWidth > 768) {
-                goToHome();
-            }
+
+        document.addEventListener('keydown', function() {
+            if (intro.style.display !== 'none' && window.innerWidth > 768) goToHome();
         });
-        
-        // 인트로 시작
-        window.addEventListener('load', () => {
-            // 인트로를 이미 봤는지 확인
+
+
+        /* ================================================
+           3. 페이지 로드 — 라우팅 진입점
+        ================================================ */
+        window.addEventListener('load', function() {
+            const hash      = window.location.hash.substring(1);
             const introSeen = sessionStorage.getItem('introSeen');
-            if (introSeen === 'true') {
+
+            // ① 특정 페이지 URL 직접 접근 → 인트로 스킵, 바로 해당 페이지
+            if (hash && document.getElementById(hash)) {
                 intro.style.display = 'none';
+                sessionStorage.setItem('introSeen', 'true');
+                // pushState 없이 UI만 업데이트 (이미 URL에 hash 있음)
+                applyNavState(hash);
+                document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+                document.getElementById(hash).classList.add('active');
+                // 히스토리 state 설정 (뒤로가기 지원)
+                history.replaceState({ page: hash }, '', '#' + hash);
                 return;
             }
-            
+
+            // ② 인트로 이미 본 경우 → 홈 바로 표시
+            if (introSeen === 'true') {
+                intro.style.display = 'none';
+                history.replaceState({ page: 'home' }, '', '#home');
+                return;
+            }
+
+            // ③ 처음 방문 → 인트로 재생
+            history.replaceState({ page: 'intro' }, '', window.location.href);
             getRandomSpeed();
             setTimeout(typeWriter, 500);
         });
 
-        const images = {
-            '2023': ['1p6PZxTKRD5CD7Bsn-4GBIdua8SXnq2X2', '1oicnoeqiKautvJ9Jigldh3hjmmV2J77R', '18iFtU2OafU-eO98C7qQwayWHOD-9ioBM', '1KrXSX_kHJHCdmL_AWy9oBgFX5t9L9gTy', '1gSV6heehSsdV1TE-kA_-iZpoUrCMWxgW', '1XvIE7-Pj8aBBav6tapT-kPAmye4BhNug', '17LebIxJA3-25Zv0jLDqcEm8q-9T6ScpY', '1Jzj6AAypp4RrprUgG1v-R8kJgx5R_dk1', '1dn8-Ln36lha5NolxOpVP5scmMht9prLG', '1xNpvPaixBtGmoDuFfI7uoYVGHq8OIJPj', '10awSVGmK6Eiq6oPmUwZP_PHzFxozEzIw'],
-            '2024': ['1k_3_z8ujfQfRGfqJHVnr5oG2WwRSLbgm', '1LXw5_AaX6qyrVrVrMTLiaI9tAsrQ7uMf', '1djqpX29I4MYvbOZUxWUw-vghvA9yXoxX', '1w49od96-CG_MCxvxhI7ajGGG4MvghofB', '1LFswUDUn8K9FiD7KD4Mc7CvjO6WPEBh9', '1RMQPja41SnwPu-4xcAZmTMiOicxBibio', '1Z1CMv2bCFjaXev0FP5VJzGy-f27S-3y9', '1NI7ElywBHX4Tg-yTbL3eCfJ0al9zIJ6S', '1br82iSJieixG3RBqeIDFL7WutD4uAvIU', '1O7C54rCzHRTU2MCcOJu0l2lXBOPSG0BP'],
-            '2025': ['1WklQ1hmqxJDgI0XLaRvNk8hxLsDM7_1P', '1mB2_LN1QDE46J8loHGWGp6zKRRmpxeob', '1hO-NBfLS6J92SJqN3Nq49jm0ZLgtnSUB', '1xftK0qkdlEPxk5u1s_rglzjCArRAU4-C', '1fSKmyOI4knyCSwM57ck7nCTC4wa2Eo4Q', '1ysgAVxUPYOAFnZNC6s1jiof36d_04JHL', '1BJ-rCrvTUkDpiAxmX7X3hcbH3y7tgXFc', '16xxo4XJMBGm6T9e8uRgx4CuGT0Xh3K0N', '1EC5J9RPJ3GXXTMxS5-OWmmLBoIcY_e0T', '1W560zMNkxmCypqcnQlKVr7EDp8cvyN70'],
-            '2026': ['1Hn6r6RE2Qqbg8aKhUKQPhdXbUADKwYwK', '1VGkc97sPPYqziDFjPrxU6GBPOvD3KJw_', '1BtAjZs9deFd6msyDh5R7YoiSze9QWK9m', '1UrK2Nnl3QWYy4ZKZBi09q6CRenEa6WWU', '14UDJyipoEkBrctVyG6N3wxGrl92KxWVr', '15Xkq1bW9UAtWgGmmXD9cOlONkdT6XQ8L', '1QPyOmtp-o6AhlungallWXLu8H6KBQd12', '10MpeVj51Bff3roXE_tM79v5NlKdM_NtJ', '1u9Lh_R_KOZLc8TA3iAF1WWNJ3DZcbSB8', '1RiXeFNjCyvz7LM-NHRglBlmewitvAcx8', '1ZteOxnO1OJ2rGz_DpwJeCQcjYh8hUUYD', '1N8ZdxSYAkxE3AMxn6pl4AQddGlwU5ium'],
-            'archive1': ['1Jv1kgdVE-LT7bJy51OJBN00LvyNXG5qs'],
-            'archive2': ['1DGVQTrzpeb0psf20F44_gggRQMfQdgsx', '1SXz_MbKx6tJFd2k07qwc7XF1B1uo_1JV'],
-            'archive3': ['1flTZVeux92GsaHcs1MOcBMuM08_QZICV', '1MRBbo1LSXifJ3_q19sopqShsedYHyBEp', '1q5OY9iHulyUTKa3nSoqjLe36Ckwxl92C', '1r8omgtSLCfdmQmLDSRGGHRlDoyaOserc', '183Rwo2bBl6IyMOpsaS_OhOkCdgYFFLhU', '1oK1Vh4WDft35bvj2SIu70hH3SszpNsBG', '1j_apQ91rLKbG5P35ux9nc5LWNOvPVfJe']
-        };
-        let currentSlide = { '2023': 0, '2024': 0, '2025': 0, '2026': 0, 'archive1': 0, 'archive2': 0, 'archive3': 0 };
-        let touchStartX = 0, touchEndX = 0;
 
-        // 자동 재생 타이머
+        /* ================================================
+           4. 슬라이더
+        ================================================ */
+        const images = {
+            '2023':    ['1p6PZxTKRD5CD7Bsn-4GBIdua8SXnq2X2','1oicnoeqiKautvJ9Jigldh3hjmmV2J77R','18iFtU2OafU-eO98C7qQwayWHOD-9ioBM','1KrXSX_kHJHCdmL_AWy9oBgFX5t9L9gTy','1gSV6heehSsdV1TE-kA_-iZpoUrCMWxgW','1XvIE7-Pj8aBBav6tapT-kPAmye4BhNug','17LebIxJA3-25Zv0jLDqcEm8q-9T6ScpY','1Jzj6AAypp4RrprUgG1v-R8kJgx5R_dk1','1dn8-Ln36lha5NolxOpVP5scmMht9prLG','1xNpvPaixBtGmoDuFfI7uoYVGHq8OIJPj','10awSVGmK6Eiq6oPmUwZP_PHzFxozEzIw'],
+            '2024':    ['1k_3_z8ujfQfRGfqJHVnr5oG2WwRSLbgm','1LXw5_AaX6qyrVrVrMTLiaI9tAsrQ7uMf','1djqpX29I4MYvbOZUxWUw-vghvA9yXoxX','1w49od96-CG_MCxvxhI7ajGGG4MvghofB','1LFswUDUn8K9FiD7KD4Mc7CvjO6WPEBh9','1RMQPja41SnwPu-4xcAZmTMiOicxBibio','1Z1CMv2bCFjaXev0FP5VJzGy-f27S-3y9','1NI7ElywBHX4Tg-yTbL3eCfJ0al9zIJ6S','1br82iSJieixG3RBqeIDFL7WutD4uAvIU','1O7C54rCzHRTU2MCcOJu0l2lXBOPSG0BP'],
+            '2025':    ['1WklQ1hmqxJDgI0XLaRvNk8hxLsDM7_1P','1mB2_LN1QDE46J8loHGWGp6zKRRmpxeob','1hO-NBfLS6J92SJqN3Nq49jm0ZLgtnSUB','1xftK0qkdlEPxk5u1s_rglzjCArRAU4-C','1fSKmyOI4knyCSwM57ck7nCTC4wa2Eo4Q','1ysgAVxUPYOAFnZNC6s1jiof36d_04JHL','1BJ-rCrvTUkDpiAxmX7X3hcbH3y7tgXFc','16xxo4XJMBGm6T9e8uRgx4CuGT0Xh3K0N','1EC5J9RPJ3GXXTMxS5-OWmmLBoIcY_e0T','1W560zMNkxmCypqcnQlKVr7EDp8cvyN70'],
+            '2026':    ['1Hn6r6RE2Qqbg8aKhUKQPhdXbUADKwYwK','1VGkc97sPPYqziDFjPrxU6GBPOvD3KJw_','1BtAjZs9deFd6msyDh5R7YoiSze9QWK9m','1UrK2Nnl3QWYy4ZKZBi09q6CRenEa6WWU','14UDJyipoEkBrctVyG6N3wxGrl92KxWVr','15Xkq1bW9UAtWgGmmXD9cOlONkdT6XQ8L','1QPyOmtp-o6AhlungallWXLu8H6KBQd12','10MpeVj51Bff3roXE_tM79v5NlKdM_NtJ','1u9Lh_R_KOZLc8TA3iAF1WWNJ3DZcbSB8','1RiXeFNjCyvz7LM-NHRglBlmewitvAcx8','1ZteOxnO1OJ2rGz_DpwJeCQcjYh8hUUYD','1N8ZdxSYAkxE3AMxn6pl4AQddGlwU5ium'],
+            'archive1':['1Jv1kgdVE-LT7bJy51OJBN00LvyNXG5qs'],
+            'archive2':['1DGVQTrzpeb0psf20F44_gggRQMfQdgsx','1SXz_MbKx6tJFd2k07qwc7XF1B1uo_1JV'],
+            'archive3':['1flTZVeux92GsaHcs1MOcBMuM08_QZICV','1MRBbo1LSXifJ3_q19sopqShsedYHyBEp','1q5OY9iHulyUTKa3nSoqjLe36Ckwxl92C','1r8omgtSLCfdmQmLDSRGGHRlDoyaOserc','183Rwo2bBl6IyMOpsaS_OhOkCdgYFFLhU','1oK1Vh4WDft35bvj2SIu70hH3SszpNsBG','1j_apQ91rLKbG5P35ux9nc5LWNOvPVfJe']
+        };
+        const currentSlide   = { '2023':0,'2024':0,'2025':0,'2026':0,'archive1':0,'archive2':0,'archive3':0 };
         const autoplayTimers = {};
-        
+        let touchStartX = 0;
+
         function initSlider(year) {
-            const sc = document.getElementById(`slides-${year}`), dc = document.getElementById(`dots-${year}`);
-            const imageCount = images[year].length;
-            
-            images[year].forEach((id, i) => {
+            const sc = document.getElementById('slides-' + year);
+            const dc = document.getElementById('dots-'   + year);
+            if (!sc || !dc) return;
+            const count = images[year].length;
+
+            images[year].forEach(function(id, i) {
                 const s = document.createElement('div');
                 s.className = 'slide';
-                s.innerHTML = `<img src="https://drive.google.com/thumbnail?id=${id}&sz=w1200" alt="${year} ${i + 1}" loading="lazy">`;
+                s.innerHTML = '<img src="https://drive.google.com/thumbnail?id=' + id + '&sz=w1200" alt="' + year + ' ' + (i+1) + '" loading="lazy">';
                 sc.appendChild(s);
+
                 const d = document.createElement('span');
-                d.className = `dot ${i === 0 ? 'active' : ''}`;
-                d.onclick = () => {
-                    goToSlide(year, i);
-                    // 2장 이상이면 타이머 리셋
-                    if (imageCount > 1) {
-                        resetAutoplay(year);
-                    }
-                };
+                d.className = 'dot' + (i === 0 ? ' active' : '');
+                d.onclick = function() { goToSlide(year, i); if (count > 1) resetAutoplay(year); };
                 dc.appendChild(d);
             });
-            const sliderEl = sc.parentElement;
-            sliderEl.addEventListener('touchstart', e => touchStartX = e.changedTouches[0].screenX, { passive: true });
-            sliderEl.addEventListener('touchend', e => {
-                touchEndX = e.changedTouches[0].screenX;
-                const diff = touchStartX - touchEndX;
-                if (Math.abs(diff) > 50) {
-                    changeSlide(year, diff > 0 ? 1 : -1);
-                    // 2장 이상이면 타이머 리셋
-                    if (imageCount > 1) {
-                        resetAutoplay(year);
-                    }
-                }
+
+            const slider = sc.parentElement;
+            slider.addEventListener('touchstart', function(e) { touchStartX = e.changedTouches[0].screenX; }, { passive: true });
+            slider.addEventListener('touchend',   function(e) {
+                const diff = touchStartX - e.changedTouches[0].screenX;
+                if (Math.abs(diff) > 50) { changeSlide(year, diff > 0 ? 1 : -1); if (count > 1) resetAutoplay(year); }
             }, { passive: true });
-            
-            // 2장 이상이면 자동 재생 시작
-            if (imageCount > 1) {
-                startAutoplay(year);
-            }
+
+            if (count > 1) startAutoplay(year);
         }
-        
+
         function startAutoplay(year) {
-            // 기존 타이머 제거
-            if (autoplayTimers[year]) {
-                clearInterval(autoplayTimers[year]);
-            }
-            // 4초마다 다음 슬라이드로
-            autoplayTimers[year] = setInterval(() => {
-                changeSlide(year, 1);
-            }, 4000);
+            if (autoplayTimers[year]) clearInterval(autoplayTimers[year]);
+            autoplayTimers[year] = setInterval(function() { changeSlide(year, 1); }, 4000);
         }
-        
-        function resetAutoplay(year) {
-            // 타이머 리셋
-            startAutoplay(year);
-        }
+        function resetAutoplay(year) { startAutoplay(year); }
 
         function changeSlide(year, dir) {
             const total = images[year].length;
-            currentSlide[year] += dir;
-            if (currentSlide[year] < 0) currentSlide[year] = total - 1;
-            if (currentSlide[year] >= total) currentSlide[year] = 0;
+            currentSlide[year] = (currentSlide[year] + dir + total) % total;
             updateSlider(year);
         }
-
-        function goToSlide(year, i) {
-            currentSlide[year] = i;
-            updateSlider(year);
-        }
-
+        function goToSlide(year, i) { currentSlide[year] = i; updateSlider(year); }
         function updateSlider(year) {
-            const slides = document.getElementById(`slides-${year}`);
-            const dots = document.querySelectorAll(`#dots-${year} .dot`);
-            slides.style.transform = `translateX(-${currentSlide[year] * 100}%)`;
-            dots.forEach((d, i) => d.className = i === currentSlide[year] ? 'dot active' : 'dot');
-        }
-        
-        // 비디오 재생 함수
-        function playVideo(playerId, videoId) {
-            const playerDiv = document.getElementById(playerId);
-            // 기존 innerHTML을 유지하면서 iframe만 추가
-            playerDiv.innerHTML = `<iframe style="width: 100%; height: 100%; border: none;" src="https://www.youtube.com/embed/${videoId}?autoplay=1" allow="autoplay; encrypted-media" allowfullscreen="" loading="lazy"></iframe>`;
-        }
-        
-        // 비디오가 보이지 않으면 자동으로 정지 (Intersection Observer)
-        let videoObserver;
-        function initVideoObserver() {
-            videoObserver = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (!entry.isIntersecting) {
-                        // 비디오가 뷰포트에서 벗어나면 정지
-                        const iframe = entry.target.querySelector('iframe');
-                        if (iframe) {
-                            iframe.src = iframe.src.replace('?autoplay=1', '');
-                        }
-                    }
-                });
-            }, { threshold: 0.5 });
-            
-            document.querySelectorAll('.youtube-player, .youtube-embed').forEach(el => {
-                videoObserver.observe(el);
-            });
-        }
-        
-        // 사진 갤러리가 스크롤되면 자동으로 닫기
-        function initGalleryAutoClose() {
-            // 각 섹션이 완전히 벗어나면 갤러리 닫기
-            const galleryObserver = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (!entry.isIntersecting) {
-                        // 갤러리 섹션이 보이지 않으면 자동으로 닫기
-                        const accordion = entry.target.querySelector('.accordion-content.active');
-                        if (accordion) {
-                            const header = accordion.previousElementSibling;
-                            const icon = header.querySelector('.accordion-icon');
-                            accordion.classList.remove('active');
-                            icon.classList.remove('active');
-                        }
-                    }
-                });
-            }, { threshold: 0 });
-            
-            // 모든 갤러리 섹션을 옵저버
-            document.querySelectorAll('.gallery-section').forEach(section => {
-                galleryObserver.observe(section);
-            });
-        }
-
-        function showPage(id) {
-            console.log('showPage called with id:', id); // 디버깅용
-            
-            // 모든 재생 중인 영상 정지
-            document.querySelectorAll('.youtube-player iframe, .youtube-embed iframe').forEach(iframe => {
-                iframe.src = iframe.src.split('?')[0];
-            });
-            
-            // 홈 네비게이션 버튼 active 상태 업데이트
-            const pageMap = { 'about': 0, 'projects': 1, 'ticket': 2 };
-            const allNavButtonsContainers = document.querySelectorAll('.home-nav-buttons');
-            const allButtons = document.querySelectorAll('.home-nav-btn');
-            
-            console.log('Total button containers found:', allNavButtonsContainers.length); // 디버깅용
-            console.log('Total buttons found:', allButtons.length); // 디버깅용
-            
-            // 먼저 모든 버튼의 active 제거
-            allButtons.forEach((btn, idx) => {
-                btn.classList.remove('active');
-                console.log(`Button ${idx} active removed`); // 디버깅용
-            });
-            
-            // 현재 페이지에 해당하는 버튼 활성화
-            if (id !== 'home' && pageMap[id] !== undefined) {
-                const activeIndex = pageMap[id];
-                
-                // 모든 버튼 그룹의 해당 인덱스 버튼에 active 클래스 추가
-                allNavButtonsContainers.forEach((container, containerIdx) => {
-                    const buttonsInContainer = container.querySelectorAll('.home-nav-btn');
-                    if (buttonsInContainer[activeIndex]) {
-                        buttonsInContainer[activeIndex].classList.add('active');
-                        console.log(`Container ${containerIdx}, Button ${activeIndex} activated`); // 디버깅용
-                    }
-                    
-                    // 슬라이딩 배경 위치 업데이트
-                    container.classList.remove('state-0', 'state-1', 'state-2');
-                    container.classList.add(`state-${activeIndex}`);
-                    console.log(`Container ${containerIdx} state class added: state-${activeIndex}`); // 디버깅용
-                });
-            } else {
-                // 홈 페이지일 때는 모든 컨테이너의 상태 클래스 제거
-                allNavButtonsContainers.forEach(container => {
-                    container.classList.remove('state-0', 'state-1', 'state-2');
-                });
-            }
-            
-            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-            setTimeout(() => {
-                document.getElementById(id).classList.add('active');
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-            }, 50);
-            window.history.pushState({ page: id }, '', `#${id}`);
-            
-            // extrans 페이지 진입 시 폼 초기화
-            if (id === 'extrans') resetExtransForm();
-            
-            // 모바일 홈 버튼 표시/숨김
-            const homeBtn = document.getElementById('homeBtn');
-            if (window.innerWidth <= 768) {
-                if (id === 'home') {
-                    homeBtn.classList.remove('show');
-                } else {
-                    homeBtn.classList.add('show');
-                }
-            }
-        }
-
-        window.addEventListener('load', () => {
-            const hash = window.location.hash.substring(1);
-            if (hash && document.getElementById(hash)) {
-                showPage(hash);
-            } else {
-                // 기본 상태(홈 페이지)에서는 어떤 버튼도 활성화하지 않음
-                const allNavButtons = document.querySelectorAll('.home-nav-buttons');
-                allNavButtons.forEach(navButtons => {
-                    navButtons.classList.remove('state-0', 'state-1', 'state-2');
-                });
-            }
-        });
-
-        // 브라우저 뒤로가기/앞으로가기 지원
-        window.addEventListener('popstate', (e) => {
-            if (e.state && e.state.page) {
-                const id = e.state.page;
-                // pushState 없이 UI만 업데이트
-                const pageMap = { 'about': 0, 'projects': 1, 'ticket': 2 };
-                const allNavButtonsContainers = document.querySelectorAll('.home-nav-buttons');
-                const allButtons = document.querySelectorAll('.home-nav-btn');
-                allButtons.forEach(btn => btn.classList.remove('active'));
-                if (id !== 'home' && pageMap[id] !== undefined) {
-                    const activeIndex = pageMap[id];
-                    allNavButtonsContainers.forEach(container => {
-                        const btns = container.querySelectorAll('.home-nav-btn');
-                        if (btns[activeIndex]) btns[activeIndex].classList.add('active');
-                        container.classList.remove('state-0', 'state-1', 'state-2');
-                        container.classList.add(`state-${activeIndex}`);
-                    });
-                } else {
-                    allNavButtonsContainers.forEach(container => {
-                        container.classList.remove('state-0', 'state-1', 'state-2');
-                    });
-                }
-                // 영상 정지
-                document.querySelectorAll('.youtube-player iframe, .youtube-embed iframe').forEach(iframe => {
-                    iframe.src = iframe.src.split('?')[0];
-                });
-                // 페이지 전환
-                document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-                setTimeout(() => {
-                    const target = document.getElementById(id);
-                    if (target) {
-                        target.classList.add('active');
-                        window.scrollTo({ top: 0, behavior: 'smooth' });
-                    }
-                }, 50);
-                // 모바일 홈 버튼
-                const homeBtn = document.getElementById('homeBtn');
-                if (window.innerWidth <= 768) {
-                    if (id === 'home') homeBtn.classList.remove('show');
-                    else homeBtn.classList.add('show');
-                }
-                // extrans 페이지로 뒤로가기 시 폼 초기화
-                if (id === 'extrans') resetExtransForm();
-            } else {
-                // 히스토리 state 없으면 홈으로
-                document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-                setTimeout(() => {
-                    document.getElementById('home').classList.add('active');
-                    window.scrollTo({ top: 0, behavior: 'smooth' });
-                }, 50);
-                document.querySelectorAll('.home-nav-buttons').forEach(c => {
-                    c.classList.remove('state-0', 'state-1', 'state-2');
-                });
-                document.querySelectorAll('.home-nav-btn').forEach(b => b.classList.remove('active'));
-                const homeBtn = document.getElementById('homeBtn');
-                if (homeBtn) homeBtn.classList.remove('show');
-            }
-        });
-
-        // EX:TRANS 폼 초기화 함수
-        function resetExtransForm() {
-            const form = document.getElementById('extransForm');
-            if (!form) return;
-
-            // 라디오/체크박스/텍스트 전부 초기화
-            form.reset();
-
-            // 일정 선택 영역 숨기기
-            const scheduleField = document.getElementById('scheduleField');
-            const slowSchedule = document.getElementById('slowSchedule');
-            const deepSchedule = document.getElementById('deepSchedule');
-            if (scheduleField) scheduleField.style.display = 'none';
-            if (slowSchedule) slowSchedule.style.display = 'none';
-            if (deepSchedule) deepSchedule.style.display = 'none';
-
-            // 에러 메시지 숨기기
-            const errorDiv = document.getElementById('scheduleError');
-            if (errorDiv) errorDiv.classList.remove('show');
-
-            // 제출 버튼 상태 복구
-            const submitBtn = document.getElementById('submitBtn');
-            if (submitBtn) {
-                submitBtn.disabled = false;
-                submitBtn.style.opacity = '';
-                const submitText = submitBtn.querySelector('.submit-text');
-                if (submitText) submitText.textContent = '참여하기 Join Workshop';
-            }
-
-            // 열려있는 프로그램 토글 닫기
-            document.querySelectorAll('.program-section.open').forEach(s => s.classList.remove('open'));
-            document.querySelectorAll('.program-toggle.active').forEach(b => b.classList.remove('active'));
-
-            // 열려있는 동의 상세 닫기
-            document.querySelectorAll('.agreement-details.open').forEach(d => d.classList.remove('open'));
-            document.querySelectorAll('.toggle-details.active').forEach(b => b.classList.remove('active'));
-
-            // 스크롤 맨 위로
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-
-        // Copy Account Number
-        // 전화번호 자동 하이픈 포맷 (한국 3-4-4)
-        function formatPhone(input) {
-            let digits = input.value.replace(/\D/g, '').slice(0, 11);
-            let formatted = '';
-            if (digits.length <= 3) {
-                formatted = digits;
-            } else if (digits.length <= 7) {
-                formatted = digits.slice(0, 3) + '-' + digits.slice(3);
-            } else {
-                formatted = digits.slice(0, 3) + '-' + digits.slice(3, 7) + '-' + digits.slice(7);
-            }
-            input.value = formatted;
-        }
-
-        function copyAccount() {
-            const accountNumber = document.getElementById('accountNumber').textContent.trim();
-            const btn = document.getElementById('copyBtn');
-            const copyText = btn.querySelector('.copy-text');
-            const copyIcon = btn.querySelector('.copy-btn-icon');
-
-            navigator.clipboard.writeText(accountNumber).then(() => {
-                copyText.textContent = '복사됨';
-                copyIcon.textContent = '✓';
-                btn.classList.add('copied');
-                setTimeout(() => {
-                    copyText.textContent = '복사';
-                    copyIcon.textContent = '⎘';
-                    btn.classList.remove('copied');
-                }, 2000);
-            }).catch(() => {
-                // fallback: execCommand (구형 브라우저/일부 모바일)
-                const el = document.createElement('textarea');
-                el.value = accountNumber;
-                el.style.position = 'fixed';
-                el.style.opacity = '0';
-                document.body.appendChild(el);
-                el.focus();
-                el.select();
-                try {
-                    document.execCommand('copy');
-                    copyText.textContent = '복사됨';
-                    copyIcon.textContent = '✓';
-                    btn.classList.add('copied');
-                    setTimeout(() => {
-                        copyText.textContent = '복사';
-                        copyIcon.textContent = '⎘';
-                        btn.classList.remove('copied');
-                    }, 2000);
-                } catch(e) {}
-                document.body.removeChild(el);
-            });
-        }
-
-        // Update Schedule Options based on Practice Type
-        function updateScheduleOptions(type) {
-            const scheduleField = document.getElementById('scheduleField');
-            const slowSchedule = document.getElementById('slowSchedule');
-            const deepSchedule = document.getElementById('deepSchedule');
-            const errorDiv = document.getElementById('scheduleError');
-            
-            // Clear all checkboxes
-            document.querySelectorAll('input[name="schedule[]"]').forEach(cb => {
-                cb.checked = false;
-            });
-            
-            // Hide error
-            errorDiv.classList.remove('show');
-            
-            // Show schedule field
-            scheduleField.style.display = 'block';
-            
-            // Show appropriate schedule
-            if (type === 'slow') {
-                slowSchedule.style.display = 'block';
-                deepSchedule.style.display = 'none';
-            } else if (type === 'deep') {
-                slowSchedule.style.display = 'none';
-                deepSchedule.style.display = 'block';
-            }
-        }
-
-        // Workshop Schedule Validation and Form Submission
-        const extransForm = document.getElementById('extransForm');
-        if (extransForm) {
-            extransForm.addEventListener('submit', function(e) {
-                e.preventDefault(); // Prevent default form submission
-                
-                const checkedSchedules = document.querySelectorAll('input[name="schedule[]"]:checked').length;
-                const errorDiv = document.getElementById('scheduleError');
-                
-                if (checkedSchedules < 2) {
-                    errorDiv.textContent = '최소 2회 이상 선택해주세요.';
-                    errorDiv.classList.add('show');
-                    
-                    // 스크롤 to error
-                    errorDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                    
-                    setTimeout(() => {
-                        errorDiv.classList.remove('show');
-                    }, 5000);
-                    return false;
-                } else {
-                    errorDiv.classList.remove('show');
-                    
-                    // Show loading state
-                    const submitBtn = document.getElementById('submitBtn');
-                    const originalText = submitBtn.querySelector('.submit-text').textContent;
-                    submitBtn.querySelector('.submit-text').textContent = '제출 중... Submitting...';
-                    submitBtn.disabled = true;
-                    submitBtn.style.opacity = '0.3';
-                    
-                    // Submit form via Ajax to Formspree
-                    const formData = new FormData(this);
-                    
-                    fetch(this.action, {
-                        method: 'POST',
-                        body: formData,
-                        headers: {
-                            'Accept': 'application/json'
-                        }
-                    }).then(response => {
-                        if (response.ok) {
-                            // Success - redirect to success page
-                            showPage('workshop-success');
-                        } else {
-                            // Error
-                            alert('신청 중 오류가 발생했습니다. 다시 시도해주세요.\nError occurred. Please try again.');
-                            submitBtn.querySelector('.submit-text').textContent = originalText;
-                            submitBtn.disabled = false;
-                            submitBtn.style.opacity = '0.4';
-                        }
-                    }).catch(error => {
-                        console.error('Error:', error);
-                        alert('신청 중 오류가 발생했습니다. 다시 시도해주세요.\nError occurred. Please try again.');
-                        submitBtn.querySelector('.submit-text').textContent = originalText;
-                        submitBtn.disabled = false;
-                        submitBtn.style.opacity = '0.4';
-                    });
-                }
-            });
-        }
-
-        // Agreement Toggle Function
-        function toggleAgreement(detailsId) {
-            const details = document.getElementById(detailsId);
-            const button = event.currentTarget;
-            
-            details.classList.toggle('open');
-            button.classList.toggle('active');
-        }
-
-        // Program Section Toggle Function
-        function toggleProgramSection(sectionId) {
-            const section = document.getElementById(sectionId);
-            const button = event.currentTarget;
-            
-            section.classList.toggle('open');
-            button.classList.toggle('active');
+            const slides = document.getElementById('slides-' + year);
+            const dots   = document.querySelectorAll('#dots-' + year + ' .dot');
+            slides.style.transform = 'translateX(-' + (currentSlide[year] * 100) + '%)';
+            dots.forEach(function(d, i) { d.className = i === currentSlide[year] ? 'dot active' : 'dot'; });
         }
 
         initSlider('2023');
@@ -3130,30 +2780,61 @@ US</a>
         initSlider('archive1');
         initSlider('archive2');
         initSlider('archive3');
-        
-        // 비디오 Intersection Observer와 갤러리 자동 닫기 초기화
+
+
+        /* ================================================
+           5. 비디오
+        ================================================ */
+        function playVideo(playerId, videoId) {
+            document.getElementById(playerId).innerHTML =
+                '<iframe style="width:100%;height:100%;border:none;" src="https://www.youtube.com/embed/' + videoId + '?autoplay=1" allow="autoplay; encrypted-media" allowfullscreen loading="lazy"></iframe>';
+        }
+
+        function initVideoObserver() {
+            const obs = new IntersectionObserver(function(entries) {
+                entries.forEach(function(entry) {
+                    if (!entry.isIntersecting) {
+                        const iframe = entry.target.querySelector('iframe');
+                        if (iframe) iframe.src = iframe.src.replace('?autoplay=1', '');
+                    }
+                });
+            }, { threshold: 0.5 });
+            document.querySelectorAll('.youtube-player, .youtube-embed').forEach(function(el) { obs.observe(el); });
+        }
+
+        function initGalleryAutoClose() {
+            const obs = new IntersectionObserver(function(entries) {
+                entries.forEach(function(entry) {
+                    if (!entry.isIntersecting) {
+                        const acc = entry.target.querySelector('.accordion-content.active');
+                        if (acc) {
+                            acc.classList.remove('active');
+                            acc.previousElementSibling.querySelector('.accordion-icon').classList.remove('active');
+                        }
+                    }
+                });
+            }, { threshold: 0 });
+            document.querySelectorAll('.gallery-section').forEach(function(s) { obs.observe(s); });
+        }
+
         initVideoObserver();
         initGalleryAutoClose();
-        
-        // 프로젝트로 이동하는 함수
+
+
+        /* ================================================
+           6. 프로젝트 탭 / 아코디언
+        ================================================ */
         function goToProject(year) {
             showPage('projects');
             showProjectTab('works');
-            setTimeout(() => {
-                // 슬라이더가 있는 프로젝트 찾기
-                let target = document.querySelector(`[id*="slides-${year}"]`);
-                
-                // 슬라이더가 없으면 연도로 찾기
+            setTimeout(function() {
+                let target = document.querySelector('[id*="slides-' + year + '"]');
                 if (!target) {
-                    const sections = document.querySelectorAll('#works-section .gallery-section');
-                    sections.forEach(section => {
-                        const yearEl = section.querySelector('.project-year');
-                        if (yearEl && yearEl.textContent.trim() === year) {
-                            target = section;
-                        }
+                    document.querySelectorAll('#works-section .gallery-section').forEach(function(s) {
+                        const y = s.querySelector('.project-year');
+                        if (y && y.textContent.trim() === year) target = s;
                     });
                 }
-                
                 if (target) {
                     const section = target.closest ? target.closest('.gallery-section') : target;
                     section.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -3162,9 +2843,8 @@ US</a>
         }
 
         function showProjectTab(tab) {
-            document.querySelectorAll('.project-tab').forEach(t => t.classList.remove('active'));
-            document.querySelectorAll('.project-section').forEach(s => s.classList.remove('active'));
-            
+            document.querySelectorAll('.project-tab').forEach(function(t) { t.classList.remove('active'); });
+            document.querySelectorAll('.project-section').forEach(function(s) { s.classList.remove('active'); });
             if (tab === 'works') {
                 document.querySelector('.project-tab:first-child').classList.add('active');
                 document.getElementById('works-section').classList.add('active');
@@ -3173,56 +2853,173 @@ US</a>
                 document.getElementById('archive-section').classList.add('active');
             }
         }
-        
-        // 아코디언 토글 함수
+
         function toggleAccordion(header) {
             const content = header.nextElementSibling;
-            const icon = header.querySelector('.accordion-icon');
-            
-            // 다른 아코디언이 열려있으면 닫기
-            const allContents = document.querySelectorAll('.accordion-content.active');
-            allContents.forEach(c => {
+            const icon    = header.querySelector('.accordion-icon');
+            document.querySelectorAll('.accordion-content.active').forEach(function(c) {
                 if (c !== content) {
                     c.classList.remove('active');
                     c.previousElementSibling.querySelector('.accordion-icon').classList.remove('active');
                 }
             });
-            
-            // 현재 아코디언 토글
             const isOpening = !content.classList.contains('active');
             content.classList.toggle('active');
             icon.classList.toggle('active');
-            
-            // 아코디언이 열릴 때 자동으로 스크롤
             if (isOpening) {
-                setTimeout(() => {
-                    const headerPosition = header.getBoundingClientRect().top + window.pageYOffset;
-                    window.scrollTo({
-                        top: headerPosition - 100,
-                        behavior: 'smooth'
-                    });
+                setTimeout(function() {
+                    window.scrollTo({ top: header.getBoundingClientRect().top + window.pageYOffset - 100, behavior: 'smooth' });
                 }, 100);
             }
         }
 
         function toggleMenu() {
-            const menu = document.getElementById('mobileMenu');
-            menu.classList.toggle('active');
+            document.getElementById('mobileMenu').classList.toggle('active');
         }
 
-        document.addEventListener('contextmenu', e => { if (e.target.tagName === 'IMG') e.preventDefault(); });
-        document.addEventListener('dragstart', e => { if (e.target.tagName === 'IMG') e.preventDefault(); });
-        
-        // 모바일 이미지 롱프레스 방지
-        document.addEventListener('touchstart', function(e) {
-            if (e.target.tagName === 'IMG') {
-                e.target.style.webkitTouchCallout = 'none';
+
+        /* ================================================
+           7. EX:TRANS 폼
+        ================================================ */
+        function resetExtransForm() {
+            const form = document.getElementById('extransForm');
+            if (!form) return;
+            form.reset();
+            const sf = document.getElementById('scheduleField');
+            const ss = document.getElementById('slowSchedule');
+            const ds = document.getElementById('deepSchedule');
+            const ed = document.getElementById('scheduleError');
+            if (sf) sf.style.display = 'none';
+            if (ss) ss.style.display = 'none';
+            if (ds) ds.style.display = 'none';
+            if (ed) ed.classList.remove('show');
+            const btn = document.getElementById('submitBtn');
+            if (btn) {
+                btn.disabled = false;
+                btn.style.opacity = '';
+                const t = btn.querySelector('.submit-text');
+                if (t) t.textContent = '참여하기 Join Workshop';
             }
+            document.querySelectorAll('.program-section.open').forEach(function(s) { s.classList.remove('open'); });
+            document.querySelectorAll('.program-toggle.active').forEach(function(b) { b.classList.remove('active'); });
+            document.querySelectorAll('.agreement-details.open').forEach(function(d) { d.classList.remove('open'); });
+            document.querySelectorAll('.toggle-details.active').forEach(function(b) { b.classList.remove('active'); });
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function updateScheduleOptions(type) {
+            const sf = document.getElementById('scheduleField');
+            const ss = document.getElementById('slowSchedule');
+            const ds = document.getElementById('deepSchedule');
+            const ed = document.getElementById('scheduleError');
+            document.querySelectorAll('input[name="schedule[]"]').forEach(function(cb) { cb.checked = false; });
+            ed.classList.remove('show');
+            sf.style.display = 'block';
+            if (type === 'slow') { ss.style.display = 'block'; ds.style.display = 'none'; }
+            else                 { ss.style.display = 'none';  ds.style.display = 'block'; }
+        }
+
+        function toggleAgreement(detailsId) {
+            const details = document.getElementById(detailsId);
+            details.classList.toggle('open');
+            event.currentTarget.classList.toggle('active');
+        }
+
+        function toggleProgramSection(sectionId) {
+            document.getElementById(sectionId).classList.toggle('open');
+            event.currentTarget.classList.toggle('active');
+        }
+
+        var extransForm = document.getElementById('extransForm');
+        if (extransForm) {
+            extransForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const checked  = document.querySelectorAll('input[name="schedule[]"]:checked').length;
+                const errorDiv = document.getElementById('scheduleError');
+                if (checked < 2) {
+                    errorDiv.textContent = '최소 2회 이상 선택해주세요.';
+                    errorDiv.classList.add('show');
+                    errorDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    setTimeout(function() { errorDiv.classList.remove('show'); }, 5000);
+                    return;
+                }
+                errorDiv.classList.remove('show');
+                const submitBtn  = document.getElementById('submitBtn');
+                const submitText = submitBtn.querySelector('.submit-text');
+                submitText.textContent = '제출 중... Submitting...';
+                submitBtn.disabled     = true;
+                submitBtn.style.opacity = '0.3';
+                fetch(this.action, { method: 'POST', body: new FormData(this), headers: { Accept: 'application/json' } })
+                    .then(function(r) {
+                        if (r.ok) { showPage('workshop-success'); }
+                        else {
+                            alert('신청 중 오류가 발생했습니다. 다시 시도해주세요.');
+                            submitText.textContent  = '참여하기 Join Workshop';
+                            submitBtn.disabled      = false;
+                            submitBtn.style.opacity = '0.4';
+                        }
+                    })
+                    .catch(function() {
+                        alert('신청 중 오류가 발생했습니다. 다시 시도해주세요.');
+                        submitText.textContent  = '참여하기 Join Workshop';
+                        submitBtn.disabled      = false;
+                        submitBtn.style.opacity = '0.4';
+                    });
+            });
+        }
+
+
+        /* ================================================
+           8. 계좌 복사
+        ================================================ */
+        function copyAccount() {
+            var number  = document.getElementById('accountNumber').textContent.trim();
+            var btn     = document.getElementById('copyBtn');
+            var text    = btn.querySelector('.copy-text');
+            var icon    = btn.querySelector('.copy-btn-icon');
+
+            function onSuccess() {
+                text.textContent = '복사됨'; icon.textContent = '✓'; btn.classList.add('copied');
+                setTimeout(function() { text.textContent = '복사'; icon.textContent = '⎘'; btn.classList.remove('copied'); }, 2000);
+            }
+
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(number).then(onSuccess).catch(fallback);
+            } else { fallback(); }
+
+            function fallback() {
+                var el = document.createElement('textarea');
+                el.value = number; el.style.cssText = 'position:fixed;opacity:0';
+                document.body.appendChild(el); el.focus(); el.select();
+                try { document.execCommand('copy'); onSuccess(); } catch(err) {}
+                document.body.removeChild(el);
+            }
+        }
+
+
+        /* ================================================
+           9. 전화번호 자동 하이픈 (한국 3-4-4)
+        ================================================ */
+        function formatPhone(input) {
+            var digits = input.value.replace(/\D/g, '').slice(0, 11);
+            if      (digits.length <= 3) input.value = digits;
+            else if (digits.length <= 7) input.value = digits.slice(0,3) + '-' + digits.slice(3);
+            else                         input.value = digits.slice(0,3) + '-' + digits.slice(3,7) + '-' + digits.slice(7);
+        }
+
+
+        /* ================================================
+           10. 이미지 보호
+        ================================================ */
+        document.addEventListener('contextmenu', function(e) { if (e.target.tagName === 'IMG') e.preventDefault(); });
+        document.addEventListener('dragstart',   function(e) { if (e.target.tagName === 'IMG') e.preventDefault(); });
+        document.addEventListener('touchstart',  function(e) {
+            if (e.target.tagName === 'IMG') e.target.style.webkitTouchCallout = 'none';
         }, { passive: true });
-        
-        document.querySelectorAll('img').forEach(img => {
-            img.addEventListener('contextmenu', e => e.preventDefault());
+        document.querySelectorAll('img').forEach(function(img) {
+            img.addEventListener('contextmenu', function(e) { e.preventDefault(); });
         });
+
     </script>
 </body>
 </html>
