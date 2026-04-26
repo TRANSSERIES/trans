@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -1750,6 +1751,183 @@
         .contact-text a:hover { opacity: 0.8; }
         footer { padding: 40px 40px 80px 40px; text-align: center; opacity: 0.4; font-size: 11px; letter-spacing: 2px; border-top: 1px solid rgba(255, 255, 255, 0.05); margin-bottom: 20px; }
         }
+
+        /* ─── EX:TRANS COMING SOON BANNER ─── */
+        .extrans-coming-banner {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 60px 20px;
+            z-index: 600;
+            pointer-events: none;
+        }
+        .coming-banner-label {
+            font-size: 8px;
+            letter-spacing: 6px;
+            opacity: 0.2;
+            margin-bottom: 18px;
+            text-transform: uppercase;
+            font-weight: 400;
+        }
+        .coming-banner-main {
+            font-size: 13px;
+            font-weight: 400;
+            letter-spacing: 0.2px;
+            opacity: 0.5;
+            margin-bottom: 10px;
+            line-height: 1.5;
+        }
+        .coming-banner-en {
+            font-size: 10px;
+            letter-spacing: 1.5px;
+            opacity: 0.18;
+            font-weight: 300;
+        }
+        .coming-banner-label {
+            font-size: 8px;
+            letter-spacing: 6px;
+            opacity: 0.2;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            font-weight: 400;
+        }
+        .coming-banner-main {
+            font-size: 13px;
+            font-weight: 400;
+            letter-spacing: 0.2px;
+            opacity: 0.5;
+            margin-bottom: 10px;
+            line-height: 1.5;
+        }
+        .coming-banner-en {
+            font-size: 10px;
+            letter-spacing: 1.5px;
+            opacity: 0.18;
+            font-weight: 300;
+        }
+
+        /* ─── ADMIN TOGGLE ─── */
+        .admin-toggle-wrap {
+            margin-top: 30px;
+        }
+        .admin-toggle-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: transparent;
+            border: 1px solid rgba(255,255,255,0.1);
+            color: rgba(255,255,255,0.4);
+            font-family: inherit;
+            font-size: 9px;
+            letter-spacing: 3px;
+            padding: 10px 18px;
+            cursor: pointer;
+            border-radius: 2px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+        }
+        .admin-toggle-btn:hover {
+            border-color: rgba(255,255,255,0.25);
+            color: rgba(255,255,255,0.7);
+        }
+        .admin-dot {
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.2);
+            transition: background 0.4s ease;
+            flex-shrink: 0;
+        }
+        .admin-dot.open-dot {
+            background: rgba(180,255,180,0.7);
+        }
+
+        /* ─── WORKSHOP COLLAPSIBLE ─── */
+        .workshop-collapsible {
+            transition: max-height 0.7s cubic-bezier(0.4, 0, 0.2, 1),
+                        opacity 0.5s ease;
+            overflow: hidden;
+        }
+        .workshop-collapsible.is-closed {
+            max-height: 0 !important;
+            opacity: 0;
+            pointer-events: none;
+        }
+        .workshop-collapsible.is-open {
+            max-height: 6000px;
+            opacity: 1;
+        }
+
+        /* ─── PROGRAM ARCHIVE ─── */
+        .program-archive-section {
+            margin-top: 50px;
+            padding-top: 40px;
+            border-top: 1px solid rgba(255,255,255,0.06);
+        }
+        .archive-section-eyebrow {
+            font-size: 8px;
+            letter-spacing: 4px;
+            opacity: 0.2;
+            margin-bottom: 28px;
+            text-transform: uppercase;
+        }
+        .archive-grid {
+            display: flex;
+            flex-direction: column;
+        }
+        .archive-card {
+            display: grid;
+            grid-template-columns: 56px 1fr 56px;
+            align-items: baseline;
+            gap: 20px;
+            padding: 20px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+        .archive-card:first-child {
+            border-top: 1px solid rgba(255,255,255,0.05);
+        }
+        .archive-card-year {
+            font-size: 9px;
+            letter-spacing: 1px;
+            opacity: 0.2;
+            line-height: 1.6;
+            font-family: monospace;
+        }
+        .archive-card-body {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+        .archive-card-title {
+            font-size: 13px;
+            font-weight: 400;
+            opacity: 0.6;
+            letter-spacing: -0.2px;
+            line-height: 1.4;
+        }
+        .archive-card-sub {
+            font-size: 9px;
+            letter-spacing: 1px;
+            opacity: 0.25;
+        }
+        .archive-card-status {
+            font-size: 8px;
+            letter-spacing: 2px;
+            opacity: 0.18;
+            text-transform: uppercase;
+            text-align: right;
+        }
+        @media (max-width: 768px) {
+            .coming-banner-main { font-size: 20px; }
+            .archive-card { grid-template-columns: 44px 1fr; }
+            .archive-card-status { display: none; }
+        }
     </style>
 </head>
 <body>
@@ -2171,6 +2349,8 @@ US</a>
 
     <!-- EX:TRANS 페이지 -->
     <div id="extrans" class="page">
+
+        <!-- 상단: 소개 + 아카이브 (max-width 컨테이너 안) -->
         <div class="page-content sub-page-content">
             <div class="sub-page-header">
                 <span class="sub-page-prefix">EX:</span><span class="sub-page-title">TRANS</span>
@@ -2180,271 +2360,276 @@ US</a>
                 <p class="sub-page-desc">EX:TRANS는 TRANS 시리즈에서 축적해온 구조와 방식을 작품의 형식에 한정하지 않고, 실제 환경에서 실행하고 확장하는 프로그램입니다.</p>
                 <p class="sub-page-desc">'EX'는 Execute(실행하다), Experiment(실험하다), Expand(확장하다)의 의미를 담고 있습니다. TRANS 안에서 발전해온 시스템을 결과가 아닌 구조로 다루며, 이를 다양한 환경 속에서 작동시키는 프로그램입니다.</p>
             </div>
-
-            <!-- Divider -->
-            <div class="section-divider"></div>
-
-            <!-- Workshop Program Info -->
-            <div class="workshop-program">
-                <h2 class="program-main-title">〈포옹의 구조 Embrace Structure〉</h2>
-                
-                <!-- Program Description Toggle -->
-                <button type="button" class="program-toggle" onclick="toggleProgramSection('program-desc')">
-                    <span class="toggle-label">프로그램 소개 About Program</span>
-                    <span class="toggle-arrow">▼</span>
-                </button>
-                <div class="program-section" id="program-desc">
-                    <p>TRANS 2와 TRANS 2.5를 통해 축적된 움직임의 구조를 바탕으로, 사랑과 폭력이라는 질문을 '포옹'이라는 단순한 행위로 압축했습니다. 그 안에서 발생하는 힘의 흐름과 관계의 변화를 단계적으로 다룹니다.</p>
-                    
-                    <p class="program-question">몸과 몸이 만나는 순간, 우리는 서로에게 어떤 힘을 전달하고 있을까요?</p>
-                    
-                    <p>EX:TRANS 〈포옹의 구조〉는 충돌, 보호와 피보호, 억압과 배려와 같은 관계의 상태를 '힘의 흐름'으로 경험하는 신체 기반 프로그램입니다.</p>
-                    
-                    <p>가볍게 닿는 순간부터 밀고, 기대고, 버티는 상태까지. 에너지의 밀도가 달라질수록 관계의 형태도 함께 변합니다.</p>
-                    
-                    <p class="program-essence">이 프로그램은 포옹을 감정이 아닌, 하나의 구조로 직접 경험하는 시간입니다.</p>
-                </div>
-
-                <!-- Practice Levels Toggle -->
-                <button type="button" class="program-toggle" onclick="toggleProgramSection('practice-levels')">
-                    <span class="toggle-label">참여 레벨 안내 Practice Levels</span>
-                    <span class="toggle-arrow">▼</span>
-                </button>
-                <div class="program-section" id="practice-levels">
-                    <p class="level-intro">참여자는 자신의 감각과 신체 상태에 따라 두 가지 방식 중 하나를 선택할 수 있습니다.</p>
-                    
-                    <div class="level-item">
-                        <h4 class="level-title">① Slow Practice — 감각을 세밀하게 배우는 과정</h4>
-                        <p class="level-desc">천천히 마주하고, 접촉하고, 중심을 탐색합니다. 힘의 전달을 미세하게 느끼며 움직임의 구조를 면밀하게 경험합니다. 처음 접하는 참여자에게 적합한 과정입니다.</p>
-                        <p class="level-note">※ 강한 충돌이나 고강도 움직임은 포함되지 않습니다.</p>
-                    </div>
-                    
-                    <div class="level-item">
-                        <h4 class="level-title">② Deep Practice — 퍼포머의 에너지에 가까워지는 과정</h4>
-                        <p class="level-desc">보다 강한 힘의 전달과 중심의 이동, 겹침과 충돌의 상태까지 확장합니다. 퍼포먼스에서 보여지는 밀도에 가까한 상태를 경험합니다.</p>
-                        <p class="level-note">※ 바닥 작업 및 높은 밀도의 에너지 확장이 포함됩니다.</p>
+            <div class="program-archive-section">
+                <p class="archive-section-eyebrow">Program Archive</p>
+                <div class="archive-grid">
+                    <div class="archive-card">
+                        <div class="archive-card-year">2026<br>APR</div>
+                        <div class="archive-card-body">
+                            <div class="archive-card-title">〈포옹의 구조 Embrace Structure〉</div>
+                            <div class="archive-card-sub">EX:TRANS — 첫 번째 워크숍</div>
+                        </div>
+                        <div class="archive-card-status ended">ENDED</div>
                     </div>
                 </div>
-
-                <!-- Workshop Details -->
-                <div class="workshop-details">
-                    <div class="detail-row">
-                        <span class="detail-label">장소 Venue</span>
-                        <span class="detail-value"><a href="https://map.naver.com/p/entry/place/2076136532?placePath=/home?entry=plt&from=map&fromPanelNum=1&additionalHeight=76&timestamp=202604010110&locale=ko&svcName=map_pcv5&searchType=place&lng=126.9639027&lat=37.5952220&c=15.00,0,0,0,dh" target="_blank" style="color:rgba(255,255,255,0.6);text-decoration:none;border-bottom:1px solid rgba(255,255,255,0.2);transition:all 0.3s;">BA HERE (비에이 히어)<br>종로구 자하문로 236 3층</a></span>
-                    </div>
-                    <div class="detail-row">
-                        <span class="detail-label">모집 인원 Capacity</span>
-                        <span class="detail-value">10명 (선착순 마감)</span>
-                    </div>
-                    <div class="detail-row">
-                        <span class="detail-label">비용 Fee</span>
-                        <span class="detail-value">
-                            <span class="fee-option">3DAY — 80,000원</span>
-                            <span class="fee-option">2DAY — 60,000원</span>
-                            <span class="fee-option">1DAY — 30,000원</span>
-                        </span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Workshop Application Form -->
-            <div class="workshop-application">
-                <div class="workshop-section-title">워크숍 신청 Workshop Application</div>
-                
-                <form class="workshop-form" id="extransForm" action="https://formspree.io/f/mqedyvaz" method="POST">
-                    <!-- Name -->
-                    <div class="form-field">
-                        <label class="field-label">이름 Name</label>
-                        <input type="text" class="field-input" name="name" required>
-                    </div>
-
-                    <!-- Contact -->
-                    <div class="form-field">
-                        <label class="field-label">연락처 Contact</label>
-                        <input type="tel" class="field-input" name="phone" id="phoneInput" placeholder="010-0000-0000" maxlength="13" required oninput="formatPhone(this)">
-                    </div>
-
-                    <!-- Performance Attendance -->
-                    <div class="form-field">
-                        <label class="field-label">TRANS 2.5 〈포옹 Embrace〉 공연 관람 여부</label>
-                        <div class="practice-selection">
-                            <label class="practice-option">
-                                <input type="radio" name="attended_performance" value="YES" required>
-                                <span class="practice-text">YES</span>
-                            </label>
-                            <label class="practice-option">
-                                <input type="radio" name="attended_performance" value="NO">
-                                <span class="practice-text">NO</span>
-                            </label>
-                        </div>
-                    </div>
-                    <div class="form-field">
-                        <label class="field-label">워크숍 파트 선택 Select Practice (하나만 선택 가능)</label>
-                        <div class="practice-selection">
-                            <label class="practice-option">
-                                <input type="radio" name="practice_type" value="Slow Practice" required onchange="updateScheduleOptions('slow')">
-                                <span class="practice-text">Slow Practice</span>
-                            </label>
-                            <label class="practice-option">
-                                <input type="radio" name="practice_type" value="Deep Practice" onchange="updateScheduleOptions('deep')">
-                                <span class="practice-text">Deep Practice</span>
-                            </label>
-                        </div>
-                    </div>
-
-                    <div class="form-field" id="scheduleField" style="display: none;">
-                        <label class="field-label">일정 선택 Schedule<br><span style="font-size:10px;opacity:0.5;letter-spacing:0.5px;">1회부터 참여 가능 · 2회 이상 참여를 권장드립니다</span></label>
-                        
-                        <!-- Slow Practice Schedule -->
-                        <div class="schedule-section" id="slowSchedule" style="display: none;">
-                            <div class="schedule-options">
-                                <label class="schedule-option">
-                                    <input type="checkbox" name="schedule[]" value="Slow Practice - 4/17 (금) 19:00-21:00">
-                                    <span class="schedule-text">4월 17일 (금) 19:00–21:00</span>
-                                </label>
-                                <label class="schedule-option">
-                                    <input type="checkbox" name="schedule[]" value="Slow Practice - 4/18 (토) 10:00-12:00">
-                                    <span class="schedule-text">4월 18일 (토) 10:00–12:00</span>
-                                </label>
-                                <label class="schedule-option">
-                                    <input type="checkbox" name="schedule[]" value="Slow Practice - 4/19 (일) 10:00-12:00">
-                                    <span class="schedule-text">4월 19일 (일) 10:00–12:00</span>
-                                </label>
-                            </div>
-                        </div>
-
-                        <!-- Deep Practice Schedule -->
-                        <div class="schedule-section" id="deepSchedule" style="display: none;">
-                            <div class="schedule-options">
-                                <label class="schedule-option">
-                                    <input type="checkbox" name="schedule[]" value="Deep Practice - 4/24 (금) 19:00-21:00">
-                                    <span class="schedule-text">4월 24일 (금) 19:00–21:00</span>
-                                </label>
-                                <label class="schedule-option">
-                                    <input type="checkbox" name="schedule[]" value="Deep Practice - 4/25 (토) 10:00-12:00">
-                                    <span class="schedule-text">4월 25일 (토) 10:00–12:00</span>
-                                </label>
-                                <label class="schedule-option">
-                                    <input type="checkbox" name="schedule[]" value="Deep Practice - 4/26 (일) 10:00-12:00">
-                                    <span class="schedule-text">4월 26일 (일) 10:00–12:00</span>
-                                </label>
-                            </div>
-                        </div>
-                        <div class="schedule-error" id="scheduleError"></div>
-                    </div>
-
-                    <!-- Bank Account Info -->
-                    <div class="form-field bank-info-field">
-                        <label class="field-label">계좌 정보 Bank Account</label>
-                        <div class="bank-info-box">
-                            <div class="bank-account-row" onclick="copyAccount()" title="눌러서 복사">
-                                <div class="bank-account-left">
-                                    <div class="bank-meta">
-                                        <span class="bank-name">카카오뱅크</span>
-                                        <span class="bank-meta-dot">·</span>
-                                        <span class="bank-holder">오현택(트랜스)</span>
-                                    </div>
-                                    <span class="account-number" id="accountNumber">3333-19-4545273</span>
-                                </div>
-                                <button type="button" class="copy-btn" id="copyBtn" onclick="event.stopPropagation(); copyAccount()">
-                                    <span class="copy-btn-icon">⎘</span>
-                                    <span class="copy-text">복사</span>
-                                </button>
-                            </div>
-                        </div>
-                        <p class="copy-hint">계좌번호를 눌러 복사하거나 복사 버튼을 이용하세요</p>
-                    </div>
-
-                    <!-- Agreements -->
-                    <div class="form-field agreements">
-                        <!-- 개인정보 동의 -->
-                        <div class="agreement-section">
-                            <label class="checkbox-option">
-                                <input type="checkbox" name="privacy" value="agreed" required>
-                                <span class="checkbox-text">개인정보 수집 및 이용에 동의합니다. (필수)</span>
-                            </label>
-                            <button type="button" class="toggle-details" onclick="toggleAgreement('privacy-details')">
-                                <span class="toggle-text">자세히 보기</span>
-                                <span class="toggle-icon">▼</span>
-                            </button>
-                            <div class="agreement-details" id="privacy-details">
-                                <p class="detail-intro">TRANS(이하 '대표')는 EX:TRANS 워크숍 운영을 위하여 다음과 같이 개인정보를 수집·이용합니다.</p>
-                                
-                                <div class="detail-section">
-                                    <h4>1. 수집 항목</h4>
-                                    <ul>
-                                        <li>성명</li>
-                                        <li>연락처(휴대전화 또는 이메일)</li>
-                                        <li>신청 클래스 및 일정</li>
-                                    </ul>
-                                </div>
-
-                                <div class="detail-section">
-                                    <h4>2. 수집 목적</h4>
-                                    <ul>
-                                        <li>워크숍 신청 접수 및 참가자 관리</li>
-                                        <li>일정 안내 및 공지 전달</li>
-                                        <li>프로그램 운영 및 관련 문의 응대</li>
-                                    </ul>
-                                </div>
-
-                                <div class="detail-section">
-                                    <h4>3. 보유 및 이용 기간</h4>
-                                    <p>워크숍 종료 후 3개월 이내 파기<br>
-                                    단, 관련 법령에 따라 보존이 필요한 경우 해당 기간 동안 보관합니다.</p>
-                                </div>
-
-                                <p class="detail-note">※ 귀하는 개인정보 수집·이용에 대한 동의를 거부할 권리가 있습니다.<br>
-                                다만, 동의를 거부할 경우 워크숍 신청이 제한될 수 있습니다.</p>
-                            </div>
-                        </div>
-
-                        <!-- 촬영 동의 -->
-                        <div class="agreement-section">
-                            <label class="checkbox-option">
-                                <input type="checkbox" name="documentation" value="agreed">
-                                <span class="checkbox-text">촬영 및 기록 활용에 동의합니다. (선택)</span>
-                            </label>
-                            <button type="button" class="toggle-details" onclick="toggleAgreement('doc-details')">
-                                <span class="toggle-text">자세히 보기</span>
-                                <span class="toggle-icon">▼</span>
-                            </button>
-                            <div class="agreement-details" id="doc-details">
-                                <div class="detail-section">
-                                    <p>EX:TRANS 워크숍 진행 중 사진 또는 영상 촬영이 이루어질 수 있습니다.<br>
-                                    촬영된 자료는 공식 웹사이트, SNS, 아카이브 및 홍보 목적 범위 내에서 활용될 수 있습니다.</p>
-                                </div>
-                                
-                                <p class="detail-note">동의하지 않을 경우 현장에서 촬영 제외 요청이 가능합니다.</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Formspree Hidden Fields -->
-                    <input type="hidden" name="_subject" value="EX:TRANS 워크숍 신청">
-                    <input type="hidden" name="_cc" value="transseries0819@gmail.com">
-                    <input type="text" name="_gotcha" style="display:none">
-
-                    <!-- Submit -->
-                    <div class="form-submit">
-                        <button type="submit" class="submit-btn" id="submitBtn">
-                            <span class="submit-text">참여하기 Join Workshop</span>
-                        </button>
-                    </div>
-
-                    <!-- Contact Info Below Submit -->
-                    <div class="form-contact">
-                        <p class="contact-label">문의 Contact</p>
-                        <div class="contact-links">
-                            <a href="https://www.instagram.com/trans_series" target="_blank">@trans_series DM</a>
-                            <span class="contact-separator">또는</span>
-                            <a href="tel:010-4740-3107">010-4740-3107</a>
-                        </div>
-                    </div>
-                </form>
             </div>
         </div>
-    </div>
+
+        <!-- COMING SOON 텍스트: 화면 중앙 -->
+        <div style="
+            width: 100%;
+            padding: 50px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            border-top: 1px solid rgba(255,255,255,0.06);
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+            margin-top: 20px;
+        ">
+            <p style="font-size:8px; letter-spacing:6px; opacity:0.2; margin-bottom:20px; text-transform:uppercase; font-weight:400;">COMING SOON</p>
+            <p style="font-size:13px; font-weight:400; letter-spacing:0.2px; opacity:0.5; margin-bottom:10px; line-height:1.5;">다음 회차가 곧 열립니다</p>
+            <p style="font-size:10px; letter-spacing:1.5px; opacity:0.18; font-weight:300;">The next session will open soon</p>
+        </div>
+
+        <!-- 하단: 관리자 토글 + 워크숍 내용 (max-width 컨테이너 안) -->
+        <div class="page-content sub-page-content" style="padding-top: 0;">
+
+                <!-- 관리자 토글 (숨김, URL에 ?admin 붙여야 보임) -->
+                <div class="admin-toggle-wrap" id="adminToggleWrap" style="display:none;">
+                    <button class="admin-toggle-btn" onclick="toggleWorkshopStatus()" id="workshopStatusBar">
+                        <span class="admin-dot" id="workshopDot"></span>
+                        <span id="workshopStatusLabel">CLOSED</span>
+                    </button>
+                </div>
+
+                <!-- Collapsible Workshop Content -->
+                <div class="workshop-collapsible is-closed" id="workshopCollapsible">
+
+                    <!-- Program Info -->
+                    <div class="workshop-program" style="margin-top:50px;">
+                        <h2 class="program-main-title">〈포옹의 구조 Embrace Structure〉</h2>
+
+                        <button type="button" class="program-toggle" onclick="toggleProgramSection('program-desc')">
+                            <span class="toggle-label">프로그램 소개 About Program</span>
+                            <span class="toggle-arrow">▼</span>
+                        </button>
+                        <div class="program-section" id="program-desc">
+                            <p>TRANS 2와 TRANS 2.5를 통해 축적된 움직임의 구조를 바탕으로, 사랑과 폭력이라는 질문을 '포옹'이라는 단순한 행위로 압축했습니다. 그 안에서 발생하는 힘의 흐름과 관계의 변화를 단계적으로 다룹니다.</p>
+                            <p class="program-question">몸과 몸이 만나는 순간, 우리는 서로에게 어떤 힘을 전달하고 있을까요?</p>
+                            <p>EX:TRANS 〈포옹의 구조〉는 충돌, 보호와 피보호, 억압과 배려와 같은 관계의 상태를 '힘의 흐름'으로 경험하는 신체 기반 프로그램입니다.</p>
+                            <p>가볍게 닿는 순간부터 밀고, 기대고, 버티는 상태까지. 에너지의 밀도가 달라질수록 관계의 형태도 함께 변합니다.</p>
+                            <p class="program-essence">이 프로그램은 포옹을 감정이 아닌, 하나의 구조로 직접 경험하는 시간입니다.</p>
+                        </div>
+
+                        <button type="button" class="program-toggle" onclick="toggleProgramSection('practice-levels')">
+                            <span class="toggle-label">참여 레벨 안내 Practice Levels</span>
+                            <span class="toggle-arrow">▼</span>
+                        </button>
+                        <div class="program-section" id="practice-levels">
+                            <p class="level-intro">참여자는 자신의 감각과 신체 상태에 따라 두 가지 방식 중 하나를 선택할 수 있습니다.</p>
+                            <div class="level-item">
+                                <h4 class="level-title">① Slow Practice — 감각을 세밀하게 배우는 과정</h4>
+                                <p class="level-desc">천천히 마주하고, 접촉하고, 중심을 탐색합니다. 힘의 전달을 미세하게 느끼며 움직임의 구조를 면밀하게 경험합니다. 처음 접하는 참여자에게 적합한 과정입니다.</p>
+                                <p class="level-note">※ 강한 충돌이나 고강도 움직임은 포함되지 않습니다.</p>
+                            </div>
+                            <div class="level-item">
+                                <h4 class="level-title">② Deep Practice — 퍼포머의 에너지에 가까워지는 과정</h4>
+                                <p class="level-desc">보다 강한 힘의 전달과 중심의 이동, 겹침과 충돌의 상태까지 확장합니다. 퍼포먼스에서 보여지는 밀도에 가까한 상태를 경험합니다.</p>
+                                <p class="level-note">※ 바닥 작업 및 높은 밀도의 에너지 확장이 포함됩니다.</p>
+                            </div>
+                        </div>
+
+                        <div class="workshop-details">
+                            <div class="detail-row">
+                                <span class="detail-label">장소 Venue</span>
+                                <span class="detail-value"><a href="https://map.naver.com/p/entry/place/2076136532?placePath=/home?entry=plt&from=map&fromPanelNum=1&additionalHeight=76&timestamp=202604010110&locale=ko&svcName=map_pcv5&searchType=place&lng=126.9639027&lat=37.5952220&c=15.00,0,0,0,dh" target="_blank" style="color:rgba(255,255,255,0.6);text-decoration:none;border-bottom:1px solid rgba(255,255,255,0.2);transition:all 0.3s;">BA HERE (비에이 히어)<br>종로구 자하문로 236 3층</a></span>
+                            </div>
+                            <div class="detail-row">
+                                <span class="detail-label">모집 인원 Capacity</span>
+                                <span class="detail-value">10명 (선착순 마감)</span>
+                            </div>
+                            <div class="detail-row">
+                                <span class="detail-label">비용 Fee</span>
+                                <span class="detail-value">
+                                    <span class="fee-option">3DAY — 80,000원</span>
+                                    <span class="fee-option">2DAY — 60,000원</span>
+                                    <span class="fee-option">1DAY — 30,000원</span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Workshop Application Form -->
+                    <div class="workshop-application">
+                        <div class="workshop-section-title">워크숍 신청 Workshop Application</div>
+                        <form class="workshop-form" id="extransForm" action="https://formspree.io/f/mqedyvaz" method="POST">
+                            <div class="form-field">
+                                <label class="field-label">이름 Name</label>
+                                <input type="text" class="field-input" name="name" required>
+                            </div>
+                            <div class="form-field">
+                                <label class="field-label">연락처 Contact</label>
+                                <input type="tel" class="field-input" name="phone" id="phoneInput" placeholder="010-0000-0000" maxlength="13" required oninput="formatPhone(this)">
+                            </div>
+                            <div class="form-field">
+                                <label class="field-label">TRANS 2.5 〈포옹 Embrace〉 공연 관람 여부</label>
+                                <div class="practice-selection">
+                                    <label class="practice-option">
+                                        <input type="radio" name="attended_performance" value="YES" required>
+                                        <span class="practice-text">YES</span>
+                                    </label>
+                                    <label class="practice-option">
+                                        <input type="radio" name="attended_performance" value="NO">
+                                        <span class="practice-text">NO</span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="form-field">
+                                <label class="field-label">워크숍 파트 선택 Select Practice (하나만 선택 가능)</label>
+                                <div class="practice-selection">
+                                    <label class="practice-option">
+                                        <input type="radio" name="practice_type" value="Slow Practice" required onchange="updateScheduleOptions('slow')">
+                                        <span class="practice-text">Slow Practice</span>
+                                    </label>
+                                    <label class="practice-option">
+                                        <input type="radio" name="practice_type" value="Deep Practice" onchange="updateScheduleOptions('deep')">
+                                        <span class="practice-text">Deep Practice</span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="form-field" id="scheduleField" style="display: none;">
+                                <label class="field-label">일정 선택 Schedule<br><span style="font-size:10px;opacity:0.5;letter-spacing:0.5px;">1회부터 참여 가능 · 2회 이상 참여를 권장드립니다</span></label>
+                                <div class="schedule-section" id="slowSchedule" style="display: none;">
+                                    <div class="schedule-options">
+                                        <label class="schedule-option">
+                                            <input type="checkbox" name="schedule[]" value="Slow Practice - 4/17 (금) 19:00-21:00">
+                                            <span class="schedule-text">4월 17일 (금) 19:00–21:00</span>
+                                        </label>
+                                        <label class="schedule-option">
+                                            <input type="checkbox" name="schedule[]" value="Slow Practice - 4/18 (토) 10:00-12:00">
+                                            <span class="schedule-text">4월 18일 (토) 10:00–12:00</span>
+                                        </label>
+                                        <label class="schedule-option">
+                                            <input type="checkbox" name="schedule[]" value="Slow Practice - 4/19 (일) 10:00-12:00">
+                                            <span class="schedule-text">4월 19일 (일) 10:00–12:00</span>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="schedule-section" id="deepSchedule" style="display: none;">
+                                    <div class="schedule-options">
+                                        <label class="schedule-option">
+                                            <input type="checkbox" name="schedule[]" value="Deep Practice - 4/24 (금) 19:00-21:00">
+                                            <span class="schedule-text">4월 24일 (금) 19:00–21:00</span>
+                                        </label>
+                                        <label class="schedule-option">
+                                            <input type="checkbox" name="schedule[]" value="Deep Practice - 4/25 (토) 10:00-12:00">
+                                            <span class="schedule-text">4월 25일 (토) 10:00–12:00</span>
+                                        </label>
+                                        <label class="schedule-option">
+                                            <input type="checkbox" name="schedule[]" value="Deep Practice - 4/26 (일) 10:00-12:00">
+                                            <span class="schedule-text">4월 26일 (일) 10:00–12:00</span>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="schedule-error" id="scheduleError"></div>
+                            </div>
+                            <div class="form-field bank-info-field">
+                                <label class="field-label">계좌 정보 Bank Account</label>
+                                <div class="bank-info-box">
+                                    <div class="bank-account-row" onclick="copyAccount()" title="눌러서 복사">
+                                        <div class="bank-account-left">
+                                            <div class="bank-meta">
+                                                <span class="bank-name">카카오뱅크</span>
+                                                <span class="bank-meta-dot">·</span>
+                                                <span class="bank-holder">오현택(트랜스)</span>
+                                            </div>
+                                            <span class="account-number" id="accountNumber">3333-19-4545273</span>
+                                        </div>
+                                        <button type="button" class="copy-btn" id="copyBtn" onclick="event.stopPropagation(); copyAccount()">
+                                            <span class="copy-btn-icon">⎘</span>
+                                            <span class="copy-text">복사</span>
+                                        </button>
+                                    </div>
+                                </div>
+                                <p class="copy-hint">계좌번호를 눌러 복사하거나 복사 버튼을 이용하세요</p>
+                            </div>
+                            <div class="form-field agreements">
+                                <div class="agreement-section">
+                                    <label class="checkbox-option">
+                                        <input type="checkbox" name="privacy" value="agreed" required>
+                                        <span class="checkbox-text">개인정보 수집 및 이용에 동의합니다. (필수)</span>
+                                    </label>
+                                    <button type="button" class="toggle-details" onclick="toggleAgreement('privacy-details')">
+                                        <span class="toggle-text">자세히 보기</span>
+                                        <span class="toggle-icon">▼</span>
+                                    </button>
+                                    <div class="agreement-details" id="privacy-details">
+                                        <p class="detail-intro">TRANS(이하 '대표')는 EX:TRANS 워크숍 운영을 위하여 다음과 같이 개인정보를 수집·이용합니다.</p>
+                                        <div class="detail-section">
+                                            <h4>1. 수집 항목</h4>
+                                            <ul>
+                                                <li>성명</li>
+                                                <li>연락처(휴대전화 또는 이메일)</li>
+                                                <li>신청 클래스 및 일정</li>
+                                            </ul>
+                                        </div>
+                                        <div class="detail-section">
+                                            <h4>2. 수집 목적</h4>
+                                            <ul>
+                                                <li>워크숍 신청 접수 및 참가자 관리</li>
+                                                <li>일정 안내 및 공지 전달</li>
+                                                <li>프로그램 운영 및 관련 문의 응대</li>
+                                            </ul>
+                                        </div>
+                                        <div class="detail-section">
+                                            <h4>3. 보유 및 이용 기간</h4>
+                                            <p>워크숍 종료 후 3개월 이내 파기<br>단, 관련 법령에 따라 보존이 필요한 경우 해당 기간 동안 보관합니다.</p>
+                                        </div>
+                                        <p class="detail-note">※ 귀하는 개인정보 수집·이용에 대한 동의를 거부할 권리가 있습니다.<br>다만, 동의를 거부할 경우 워크숍 신청이 제한될 수 있습니다.</p>
+                                    </div>
+                                </div>
+                                <div class="agreement-section">
+                                    <label class="checkbox-option">
+                                        <input type="checkbox" name="documentation" value="agreed">
+                                        <span class="checkbox-text">촬영 및 기록 활용에 동의합니다. (선택)</span>
+                                    </label>
+                                    <button type="button" class="toggle-details" onclick="toggleAgreement('doc-details')">
+                                        <span class="toggle-text">자세히 보기</span>
+                                        <span class="toggle-icon">▼</span>
+                                    </button>
+                                    <div class="agreement-details" id="doc-details">
+                                        <div class="detail-section">
+                                            <p>EX:TRANS 워크숍 진행 중 사진 또는 영상 촬영이 이루어질 수 있습니다.<br>촬영된 자료는 공식 웹사이트, SNS, 아카이브 및 홍보 목적 범위 내에서 활용될 수 있습니다.</p>
+                                        </div>
+                                        <p class="detail-note">동의하지 않을 경우 현장에서 촬영 제외 요청이 가능합니다.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <input type="hidden" name="_subject" value="EX:TRANS 워크숍 신청">
+                            <input type="hidden" name="_cc" value="transseries0819@gmail.com">
+                            <input type="text" name="_gotcha" style="display:none">
+                            <div class="form-submit">
+                                <button type="submit" class="submit-btn" id="submitBtn">
+                                    <span class="submit-text">참여하기 Join Workshop</span>
+                                </button>
+                            </div>
+                            <div class="form-contact">
+                                <p class="contact-label">문의 Contact</p>
+                                <div class="contact-links">
+                                    <a href="https://www.instagram.com/trans_series" target="_blank">@trans_series DM</a>
+                                    <span class="contact-separator">또는</span>
+                                    <a href="tel:010-4740-3107">010-4740-3107</a>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+                </div><!-- /.workshop-collapsible -->
+
+        </div><!-- /.sub-page-content (하단) -->
+    </div><!-- /#extrans -->
 
     <!-- Workshop Success Page -->
     <div id="workshop-success" class="page">
@@ -2567,6 +2752,12 @@ US</a>
             document.getElementById(id).classList.add('active');
             window.scrollTo({ top: 0, behavior: 'smooth' });
 
+            // EX:TRANS Coming Soon 배너 표시/숨김
+            var banner = document.getElementById('extransComingBanner');
+            if (banner) {
+                banner.style.display = (id === 'extrans') ? 'flex' : 'none';
+            }
+
             // 히스토리에 현재 페이지 기록
             if (!history.state || history.state.page !== id) {
                 window.history.pushState({ page: id }, '', '#' + id);
@@ -2586,6 +2777,12 @@ US</a>
             document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
             document.getElementById(id).classList.add('active');
             window.scrollTo({ top: 0, behavior: 'smooth' });
+
+            // EX:TRANS Coming Soon 배너 표시/숨김
+            var banner = document.getElementById('extransComingBanner');
+            if (banner) {
+                banner.style.display = (id === 'extrans') ? 'flex' : 'none';
+            }
 
             if (id === 'extrans') resetExtransForm();
         });
@@ -2882,6 +3079,34 @@ US</a>
         /* ================================================
            7. EX:TRANS 폼
         ================================================ */
+
+        /* 관리자 전용: URL에 ?admin 파라미터가 있을 때만 토글 버튼 노출 */
+        (function() {
+            if (window.location.search.indexOf('admin') !== -1) {
+                var wrap = document.getElementById('adminToggleWrap');
+                if (wrap) wrap.style.display = 'block';
+            }
+        })();
+
+        var _workshopOpen = false;
+        function toggleWorkshopStatus() {
+            _workshopOpen = !_workshopOpen;
+            var collapsible = document.getElementById('workshopCollapsible');
+            var dot         = document.getElementById('workshopDot');
+            var label       = document.getElementById('workshopStatusLabel');
+
+            if (_workshopOpen) {
+                collapsible.classList.remove('is-closed');
+                collapsible.classList.add('is-open');
+                dot.classList.add('open-dot');
+                label.textContent = 'OPEN';
+            } else {
+                collapsible.classList.add('is-closed');
+                collapsible.classList.remove('is-open');
+                dot.classList.remove('open-dot');
+                label.textContent = 'CLOSED';
+            }
+        }
         function resetExtransForm() {
             const form = document.getElementById('extransForm');
             if (!form) return;
