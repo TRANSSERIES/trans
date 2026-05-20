@@ -2405,14 +2405,21 @@ US</a>
                             <input type="email" class="field-input" name="email" required>
                         </div>
 
-                        <!-- 문서 파일 업로드 (다중) -->
+                        <!-- 서류 제출 안내 -->
                         <div class="form-field">
                             <label class="field-label">DOCUMENT</label>
-                            <label class="file-upload-label" id="retransFileLabel">
-                                <input type="file" name="document[]" id="retransFileInput" accept=".pdf,.doc,.docx,.hwp,.txt" multiple onchange="updateRetransFileName(this)">
-                                <span class="file-upload-text" id="retransFileText">파일을 선택하세요 (PDF, DOC, HWP)</span>
-                                <span class="file-upload-icon">↑</span>
-                            </label>
+                            <p style="
+                                font-size: 11px;
+                                opacity: 0.35;
+                                letter-spacing: 0.3px;
+                                line-height: 2;
+                                font-weight: 300;
+                                padding: 10px 0;
+                                border-bottom: 1px solid rgba(255,255,255,0.08);
+                            ">신청 완료 후 서류를 아래 이메일로 제출해 주세요.<br>
+                            <span onclick="copyEmail('transseries0819@gmail.com', 'copyHint1')" style="opacity: 1; letter-spacing: 0.5px; cursor: pointer; border-bottom: 1px solid rgba(255,255,255,0.5); color: #fff;">transseries0819@gmail.com</span>
+                            <span id="copyHint1" onclick="copyEmail('transseries0819@gmail.com', 'copyHint1')" style="font-size: 9px; letter-spacing: 2px; opacity: 0.6; margin-left: 12px; cursor: pointer; text-transform: uppercase; border: 1px solid rgba(255,255,255,0.3); padding: 2px 7px;">copy</span>
+                            </p>
                         </div>
 
                         <!-- 동의 -->
@@ -2486,7 +2493,10 @@ US</a>
                             line-height: 2;
                             font-weight: 300;
                             margin-bottom: 80px;
-                        ">입력하신 이메일로 확인 메일이 발송됩니다.<br>메일이 도착하지 않을 경우 스팸함을 확인해 주세요.</p>
+                        ">입력하신 이메일로 확인 메일이 발송됩니다.<br>메일이 도착하지 않을 경우 스팸함을 확인해 주세요.<br><br>
+                        서류는 아래 이메일로 별도 제출해 주세요.<br>
+                        <span onclick="copyEmail('transseries0819@gmail.com', 'copyHint2')" style="opacity: 1; letter-spacing: 0.5px; cursor: pointer; border-bottom: 1px solid rgba(255,255,255,0.5); color: #fff;">transseries0819@gmail.com</span>
+                        <span id="copyHint2" onclick="copyEmail('transseries0819@gmail.com', 'copyHint2')" style="font-size: 9px; letter-spacing: 2px; opacity: 0.6; margin-left: 12px; cursor: pointer; text-transform: uppercase; border: 1px solid rgba(255,255,255,0.3); padding: 2px 7px;">copy</span></p>
 
                         <!-- 홈으로 버튼 -->
                         <button class="submit-btn" onclick="showPage('home'); return false;">
@@ -3398,6 +3408,20 @@ US</a>
         });
 
 
+
+        function copyEmail(email, hintId) {
+            navigator.clipboard.writeText(email).then(function() {
+                var hint = document.getElementById(hintId);
+                if (hint) {
+                    hint.textContent = 'copied!';
+                    hint.style.opacity = '0.7';
+                    setTimeout(function() {
+                        hint.textContent = 'copy';
+                        hint.style.opacity = '0.3';
+                    }, 2000);
+                }
+            });
+        }
 
         /* ================================================
            11. RE:TRANS 폼
