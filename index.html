@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -1812,6 +1811,39 @@
             font-weight: 300;
         }
 
+        /* ─── FILE UPLOAD ─── */
+        .file-upload-label {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid rgba(255,255,255,0.15);
+            padding: 10px 0;
+            cursor: pointer;
+            transition: border-color 0.3s ease;
+        }
+        .file-upload-label:hover {
+            border-bottom-color: rgba(255,255,255,0.4);
+        }
+        .file-upload-label input[type="file"] {
+            display: none;
+        }
+        .file-upload-text {
+            font-size: 13px;
+            opacity: 0.35;
+            letter-spacing: 0.3px;
+            transition: opacity 0.3s ease;
+        }
+        .file-upload-label:hover .file-upload-text {
+            opacity: 0.6;
+        }
+        .file-upload-text.has-file {
+            opacity: 0.8;
+        }
+        .file-upload-icon {
+            font-size: 12px;
+            opacity: 0.3;
+        }
+
         /* ─── ADMIN TOGGLE ─── */
         .admin-toggle-wrap {
             margin-top: 30px;
@@ -2332,6 +2364,7 @@ US</a>
 
     <!-- RE:TRANS 페이지 -->
     <div id="retrans" class="page">
+        <!-- 소개 영역 -->
         <div class="page-content sub-page-content">
             <div class="sub-page-header">
                 <span class="sub-page-prefix">RE:</span><span class="sub-page-title">TRANS</span>
@@ -2340,12 +2373,81 @@ US</a>
             <div class="sub-page-body">
                 <p class="sub-page-desc">RE:TRANS는 무용, 음악, 영상, 시각예술 등 서로 다른 예술장르의 작업자들이 사용하는 언어와 개념이 어떻게 어긋나고 충돌하는지를 탐구하는 리서치 및 스터디입니다.</p>
                 <p class="sub-page-desc">합의나 정답을 만드는 것이 아니라, 같은 단어를 다르게 이해하고 있는 상태 자체를 드러내고 유지하는 대화의 구조를 실험합니다.<br>신체를 공통의 기반으로 삼아, 각자의 조건과 언어가 어떻게 전이, 변형되는지를 함께 관찰하고 경험합니다.</p>
-                <div class="sub-page-coming">
-                    <span>COMING SOON</span>
-                </div>
             </div>
         </div>
-    </div>
+
+        <!-- 신청서 영역: 구분선으로 분리 -->
+        <div class="page-content sub-page-content" style="padding-top: 70px; margin-top: 0;">
+            <div class="sub-page-divider"></div>
+            <!-- 섹션 레이블 -->
+            <p style="font-size: 9px; letter-spacing: 4px; opacity: 0.25; font-weight: 400; margin-bottom: 60px; text-transform: uppercase;">Application</p>
+
+            <!-- RE:TRANS 신청서 -->
+            <div id="retransWorkshopSection">
+                <form class="workshop-form" id="retransForm" action="https://formspree.io/f/mqedyvaz" method="POST" enctype="multipart/form-data">
+                    <div class="form-fields">
+
+                        <!-- 이름 -->
+                        <div class="form-field">
+                            <label class="field-label">NAME</label>
+                            <input type="text" class="field-input" name="name" required>
+                        </div>
+
+                        <!-- 전화번호 -->
+                        <div class="form-field">
+                            <label class="field-label">PHONE</label>
+                            <input type="tel" class="field-input" name="phone" placeholder="010-0000-0000" maxlength="13" required oninput="formatPhone(this)">
+                        </div>
+
+                        <!-- 이메일 -->
+                        <div class="form-field">
+                            <label class="field-label">EMAIL</label>
+                            <input type="email" class="field-input" name="email" required>
+                        </div>
+
+                        <!-- 문서 파일 업로드 (다중) -->
+                        <div class="form-field">
+                            <label class="field-label">DOCUMENT</label>
+                            <label class="file-upload-label" id="retransFileLabel">
+                                <input type="file" name="document[]" id="retransFileInput" accept=".pdf,.doc,.docx,.hwp,.txt" multiple onchange="updateRetransFileName(this)">
+                                <span class="file-upload-text" id="retransFileText">파일을 선택하세요 (PDF, DOC, HWP)</span>
+                                <span class="file-upload-icon">↑</span>
+                            </label>
+                        </div>
+
+                        <!-- 동의 -->
+                        <div class="agreements">
+                            <label class="checkbox-option">
+                                <input type="checkbox" name="privacy" value="agreed" required>
+                                <span class="checkbox-text checkbox-square">개인정보 수집 및 이용에 동의합니다. 수집된 정보는 RE:TRANS 운영 목적으로만 사용됩니다.</span>
+                            </label>
+                        </div>
+
+                    </div><!-- /.form-fields -->
+
+                    <input type="hidden" name="_subject" value="RE:TRANS 참가 신청">
+                    <input type="hidden" name="_cc" value="transseries0819@gmail.com">
+                    <input type="text" name="_gotcha" style="display:none">
+
+                    <div class="form-submit" style="margin-top: 70px;">
+                        <button type="submit" class="submit-btn" id="retransSubmitBtn">
+                            <span class="submit-text">신청하기</span>
+                        </button>
+                    </div>
+                </form>
+
+                <!-- 제출 완료 메시지 -->
+                <div class="form-success" id="retransSuccess" style="display:none; padding: 80px 0;">
+                    <p style="font-size: 9px; letter-spacing: 4px; opacity: 0.25; margin-bottom: 30px; text-transform: uppercase;">Submitted</p>
+                    <p class="success-main" style="font-size: 16px; opacity: 0.7; letter-spacing: 0.5px; margin-bottom: 10px; font-weight: 300;">신청이 완료되었습니다</p>
+                    <p class="success-sub" style="font-size: 11px; opacity: 0.3; letter-spacing: 1px; margin-bottom: 60px;">확인 이메일이 발송됩니다</p>
+                    <button class="submit-btn" onclick="showPage('home'); return false;">
+                        <span class="submit-text">홈으로 돌아가기</span>
+                    </button>
+                </div>
+            </div><!-- /#retransWorkshopSection -->
+        </div><!-- /.page-content 신청서 -->
+    </div><!-- /#retrans -->
 
     <!-- EX:TRANS 페이지 -->
     <div id="extrans" class="page">
@@ -3245,6 +3347,56 @@ US</a>
         document.querySelectorAll('img').forEach(function(img) {
             img.addEventListener('contextmenu', function(e) { e.preventDefault(); });
         });
+
+
+
+        /* ================================================
+           11. RE:TRANS 폼
+        ================================================ */
+        function updateRetransFileName(input) {
+            var text = document.getElementById('retransFileText');
+            if (input.files && input.files.length > 0) {
+                if (input.files.length === 1) {
+                    text.textContent = input.files[0].name;
+                } else {
+                    text.textContent = input.files.length + '개 파일 선택됨';
+                }
+                text.classList.add('has-file');
+            } else {
+                text.textContent = '파일을 선택하세요 (PDF, DOC, HWP)';
+                text.classList.remove('has-file');
+            }
+        }
+
+        var retransForm = document.getElementById('retransForm');
+        if (retransForm) {
+            retransForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                var btn = document.getElementById('retransSubmitBtn');
+                var submitText = btn.querySelector('.submit-text');
+                btn.disabled = true;
+                submitText.textContent = '제출 중...';
+                btn.style.opacity = '0.2';
+                fetch(this.action, { method: 'POST', body: new FormData(this), headers: { Accept: 'application/json' } })
+                    .then(function(r) {
+                        if (r.ok) {
+                            retransForm.style.display = 'none';
+                            document.getElementById('retransSuccess').style.display = 'block';
+                        } else {
+                            alert('신청 중 오류가 발생했습니다. 다시 시도해주세요.');
+                            btn.disabled = false;
+                            submitText.textContent = '신청하기';
+                            btn.style.opacity = '';
+                        }
+                    })
+                    .catch(function() {
+                        alert('신청 중 오류가 발생했습니다. 다시 시도해주세요.');
+                        btn.disabled = false;
+                        submitText.textContent = '신청하기';
+                        btn.style.opacity = '';
+                    });
+            });
+        }
 
     </script>
 </body>
