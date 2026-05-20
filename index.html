@@ -2384,7 +2384,7 @@ US</a>
 
             <!-- RE:TRANS 신청서 -->
             <div id="retransWorkshopSection">
-                <form class="workshop-form" id="retransForm" action="https://formspree.io/f/mqedyvaz" method="POST" enctype="multipart/form-data">
+                <form class="workshop-form" id="retransForm" action="https://formspree.io/f/xgoqodkd" method="POST" enctype="multipart/form-data">
                     <div class="form-fields">
 
                         <!-- 이름 -->
@@ -2427,6 +2427,7 @@ US</a>
 
                     <input type="hidden" name="_subject" value="RE:TRANS 참가 신청">
                     <input type="hidden" name="_cc" value="transseries0819@gmail.com">
+                    <input type="hidden" name="_replyto" value="">
                     <input type="text" name="_gotcha" style="display:none">
 
                     <div class="form-submit" style="margin-top: 70px;">
@@ -3372,6 +3373,11 @@ US</a>
         if (retransForm) {
             retransForm.addEventListener('submit', function(e) {
                 e.preventDefault();
+                // 신청자 이메일을 replyto에 연결
+                var emailInput = retransForm.querySelector('input[name="email"]');
+                var replyto = retransForm.querySelector('input[name="_replyto"]');
+                if (emailInput && replyto) replyto.value = emailInput.value;
+
                 var btn = document.getElementById('retransSubmitBtn');
                 var submitText = btn.querySelector('.submit-text');
                 btn.disabled = true;
