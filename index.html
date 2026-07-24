@@ -1394,14 +1394,56 @@
         /* ─── COLLAB. ─── */
         .collab-year-block { margin-bottom: 70px; }
         .collab-year-block:last-child { margin-bottom: 0; }
-        .collab-year { font-size: 11px; opacity: 0.5; letter-spacing: 1px; margin-bottom: 25px; }
-        .collab-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
-        .collab-col { border-top: 1px solid #222; padding-top: 20px; }
-        .collab-col-name { font-size: 17px; font-weight: 500; letter-spacing: 0.3px; margin-bottom: 18px; }
-        .collab-lines { display: flex; flex-direction: column; gap: 12px; }
-        .collab-line { font-size: 13px; opacity: 0.55; letter-spacing: 0.3px; line-height: 1.6; min-height: 20px; border-bottom: 1px dashed #222; padding-bottom: 10px; }
+        .collab-year { font-size: 11px; opacity: 0.4; letter-spacing: 3px; margin-bottom: 30px; }
+        .collab-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+        .collab-card {
+            position: relative;
+            aspect-ratio: 1 / 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255,255,255,0.025);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid rgba(255,255,255,0.035);
+            border-radius: 10px;
+            cursor: pointer;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .collab-card:hover {
+            background: rgba(255,255,255,0.045);
+            border-color: rgba(255,255,255,0.08);
+            transform: translateY(-3px);
+        }
+        .collab-card.empty {
+            cursor: default;
+            background: rgba(255,255,255,0.012);
+            border: 1px solid rgba(255,255,255,0.02);
+        }
+        .collab-card.empty:hover { transform: none; border-color: rgba(255,255,255,0.02); background: rgba(255,255,255,0.012); }
+        .collab-name { position: relative; z-index: 1; text-align: center; }
+        .collab-name-first {
+            font-size: 18px;
+            font-weight: 400;
+            letter-spacing: 0.2px;
+            color: #fff;
+            line-height: 1.4;
+        }
+        .collab-name-last {
+            font-size: 10px;
+            font-weight: 400;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: #fff;
+            opacity: 0.35;
+            margin-top: 7px;
+        }
         @media (max-width: 768px) {
-            .collab-grid { grid-template-columns: 1fr; gap: 30px; }
+            .collab-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+            .collab-name-first { font-size: 17px; }
+            .collab-name-last { font-size: 9px; letter-spacing: 2.5px; }
         }
         .slider-container {
             position: relative;
@@ -2320,24 +2362,20 @@ US</a>
                 <div class="collab-year-block">
                     <div class="collab-year">2026</div>
                     <div class="collab-grid">
-                        <div class="collab-col">
-                            <div class="collab-col-name">윤대원</div>
-                            <div class="collab-lines">
-                                <div class="collab-line"></div>
-                                <div class="collab-line"></div>
-                                <div class="collab-line"></div>
-                                <div class="collab-line"></div>
+                        <div class="collab-card">
+                            <div class="collab-name">
+                                <div class="collab-name-first">Daewon</div>
+                                <div class="collab-name-last">Yun</div>
                             </div>
                         </div>
-                        <div class="collab-col">
-                            <div class="collab-col-name">심규호</div>
-                            <div class="collab-lines">
-                                <div class="collab-line"></div>
-                                <div class="collab-line"></div>
-                                <div class="collab-line"></div>
-                                <div class="collab-line"></div>
+                        <div class="collab-card">
+                            <div class="collab-name">
+                                <div class="collab-name-first">Kyuho</div>
+                                <div class="collab-name-last">Shim</div>
                             </div>
                         </div>
+                        <div class="collab-card empty"></div>
+                        <div class="collab-card empty"></div>
                     </div>
                 </div>
             </div>
