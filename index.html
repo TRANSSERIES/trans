@@ -1454,7 +1454,42 @@
         }
         .slider { overflow: hidden; border-radius: 2px; }
         .slides { display: flex; transition: transform 0.4s ease; }
-        .slide { min-width: 100%; aspect-ratio: 3/2; }
+        .slide { min-width: 100%; aspect-ratio: 3/2; position: relative; }
+        .slide-caption-toggle {
+            position: absolute;
+            bottom: 14px;
+            right: 14px;
+            font-size: 9px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            padding: 7px 13px;
+            background: rgba(10,10,10,0.55);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 20px;
+            cursor: pointer;
+            color: #fff;
+            z-index: 5;
+            transition: background 0.3s, border-color 0.3s;
+        }
+        .slide-caption-toggle:hover { background: rgba(10,10,10,0.75); border-color: rgba(255,255,255,0.35); }
+        .slide-caption-box {
+            position: absolute;
+            left: 0; right: 0; bottom: 0;
+            background: rgba(8,8,8,0.88);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            padding: 18px 20px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
+            z-index: 4;
+        }
+        .slide-caption-box.active { opacity: 1; visibility: visible; transform: translateY(0); }
+        .slide-caption-box p { font-size: 12px; line-height: 1.65; opacity: 0.65; margin: 2px 0; color: #fff; letter-spacing: 0.2px; }
+        .slide-caption-box p:first-child { font-size: 14px; font-weight: 500; opacity: 1; margin-bottom: 8px; letter-spacing: 0.3px; }
         .slide img {
             width: 100%;
             height: 100%;
@@ -1479,6 +1514,34 @@
         .project-description p { font-size: 12px; line-height: 1.8; opacity: 0.7; margin-bottom: 12px; }
         .project-description p:last-child { margin-bottom: 0; }
         .project-highlight { font-size: 11px; opacity: 0.5; margin-top: 15px; font-style: italic; }
+        .desc-collapsible { position: relative; max-height: 232px; overflow: hidden; transition: max-height 0.6s ease; }
+        .desc-collapsible.expanded { max-height: 3000px; }
+        .desc-collapsible::after {
+            content: '';
+            position: absolute;
+            left: 0; right: 0; bottom: 0;
+            height: 64px;
+            background: linear-gradient(to bottom, rgba(0,0,0,0), #000 92%);
+            pointer-events: none;
+            transition: opacity 0.4s ease;
+        }
+        .desc-collapsible.expanded::after { opacity: 0; }
+        .desc-more-btn {
+            display: block;
+            margin: 16px auto 0;
+            font-size: 10px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            opacity: 0.5;
+            background: none;
+            border: none;
+            border-bottom: 1px solid rgba(255,255,255,0.25);
+            color: #fff;
+            cursor: pointer;
+            padding: 0 0 3px;
+            transition: opacity 0.3s;
+        }
+        .desc-more-btn:hover { opacity: 0.9; }
         .ticket-content { max-width: 600px; margin: 0 auto; }
         .ticket-info { margin-bottom: 50px; padding: 40px; background: #0a0a0a; border: 1px solid #222; border-radius: 2px; }
         .ticket-info h3 { font-size: 20px; letter-spacing: 1px; margin-bottom: 20px; font-weight: 600; }
@@ -2130,7 +2193,7 @@ US</a>
             <div class="performance-section">
                 <h3 class="performance-title">EXHIBITION</h3>
                 <div class="performance-list">
-                    <div class="perf-list-item disabled">
+                    <div class="perf-list-item" onclick="goToProject('onbodysenses')">
                         <div class="perf-list-content">
                             <div class="perf-list-title">"On Body Senses" - Culture Salon 5120, Seoul</div>
                         </div>
@@ -2352,7 +2415,39 @@ US</a>
                     <div class="project-item">
                         <div class="project-year">2026</div>
                         <div class="project-title">On Body Senses <span class="project-type">Exhibition</span></div>
-                        <div class="project-info">Upcoming</div>
+                    </div>
+                </div>
+
+                <!-- 갤러리 아코디언 -->
+                <div class="gallery-accordion">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <span class="accordion-title">OPEN</span>
+                        <span class="accordion-icon">▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="gallery-slider-wrapper">
+                            <div class="slider-container">
+                                <div class="slider"><div class="slides" id="slides-onbodysenses"></div></div>
+                                <button class="slider-btn prev" onclick="changeSlide('onbodysenses', -1)">‹</button>
+                                <button class="slider-btn next" onclick="changeSlide('onbodysenses', 1)">›</button>
+                                <div class="slider-dots" id="dots-onbodysenses"></div>
+                            </div>
+                        </div>
+                        <div class="project-description">
+                            <div class="project-meta">
+                                <span>일자: 2026년 7월 31일 - 9월 5일</span>
+                                <span>장소: 문화살롱5120</span>
+                                <span>참여자: 오현택, 김민우</span>
+                            </div>
+                            <div class="desc-collapsible">
+                                <p>《On Body Senses》는 시각예술가 김민우와 안무가 오현택이 도시 하천의 환경적 조건을 신체 움직임과 회화적 물질로 전이하는 협업 프로젝트다. 두 작업자는 묵동천에 반복적으로 진입하여 온도, 습도, 소음, 흐름, 압박, 마찰, 식생과 인공 구조물의 충돌 등 장소가 발생시키는 다양한 강도를 감각하고 기록했다.</p>
+                                <p>이 작업은 도시 하천을 외부에서 관찰하여 이미지로 재현하는 풍경화의 방식과 구별된다. 여기서 환경은 수동적인 배경이나 소재가 아니라 신체의 균형과 속도, 방향, 긴장, 호흡을 변화시키며 작업 형성에 직접 개입하는 조건이다. 작가의 몸 역시 환경을 해석하는 우월한 관찰자가 아니라, 인간과 비인간 요소의 얽힘을 수용하고 다른 물질적 형식으로 변환하는 감각 매질이자 전이 장치로 작동한다.</p>
+                                <p>두 작업자는 묵동천 전체를 하나의 균질한 장소로 다루지 않았다. 반복적인 답사 과정에서 각자가 감각적으로 이끌리거나 신체 반응이 집중된 구간을 임시로 분절하여 <strong>필드 유닛(Field Unit)</strong>으로 설정했다. 각 필드 유닛은 행정적·지리적 구획이 아니라 특정 환경 조건과 신체 반응이 집중된 감각 리서치의 현장 단위다.</p>
+                                <p>협업 과정에서 두 작업자의 감각 전환 방식은 서로 다른 방향으로 작동한다. 김민우는 환경의 구조와 움직임을 획, 방향, 레이어와 화면 구성으로 전환하는 경향이 있으며, 오현택은 외부 자극을 우선 신체의 긴장과 움직임으로 받아들인 뒤 이를 그리기 행위로 이동시킨다. 작업이 진행되면서 김민우는 회화적 결과를 즉시 예측하는 반응을 지연하고 몸으로 먼저 환경에 접근했으며, 오현택은 움직임이 평면 위의 획과 물질적 흔적으로 전환되는 방식을 탐구했다. 이러한 서로 다른 변환 경로가 교차하고 상대의 신체·도구·화면에 개입하면서, 어느 한 사람에게 귀속되지 않는 회화적 구조가 발생한다.</p>
+                                <p>현장에서 발견한 감각과 움직임은 반복 가능한 샘플 또는 스코어로 정리된다. 그러나 샘플은 결과를 고정하는 공식이나 정답이 아니다. 같은 조건과 지시가 주어지더라도 수행자의 신체 상태, 해석, 재료, 속도와 레이어의 순서에 따라 다른 결과가 발생하는 가변적 악보에 가깝다. 전시는 이러한 감각의 수집, 신체적 샘플링, 상호 개입, 회화적 전이의 전 과정을 회화·드로잉·사진·영상·퍼포먼스·워크숍으로 병렬 구성한다.</p>
+                            </div>
+                            <button class="desc-more-btn" onclick="toggleDesc(this)">READ MORE</button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -3167,7 +3262,18 @@ US</a>
             '2026':    ['1Hn6r6RE2Qqbg8aKhUKQPhdXbUADKwYwK','1VGkc97sPPYqziDFjPrxU6GBPOvD3KJw_','1BtAjZs9deFd6msyDh5R7YoiSze9QWK9m','1UrK2Nnl3QWYy4ZKZBi09q6CRenEa6WWU','14UDJyipoEkBrctVyG6N3wxGrl92KxWVr','15Xkq1bW9UAtWgGmmXD9cOlONkdT6XQ8L','1QPyOmtp-o6AhlungallWXLu8H6KBQd12','10MpeVj51Bff3roXE_tM79v5NlKdM_NtJ','1u9Lh_R_KOZLc8TA3iAF1WWNJ3DZcbSB8','1RiXeFNjCyvz7LM-NHRglBlmewitvAcx8','1ZteOxnO1OJ2rGz_DpwJeCQcjYh8hUUYD','1N8ZdxSYAkxE3AMxn6pl4AQddGlwU5ium'],
             'archive1':['1Jv1kgdVE-LT7bJy51OJBN00LvyNXG5qs'],
             'archive2':['1DGVQTrzpeb0psf20F44_gggRQMfQdgsx','1SXz_MbKx6tJFd2k07qwc7XF1B1uo_1JV'],
-            'archive3':['1flTZVeux92GsaHcs1MOcBMuM08_QZICV','1MRBbo1LSXifJ3_q19sopqShsedYHyBEp','1q5OY9iHulyUTKa3nSoqjLe36Ckwxl92C','1r8omgtSLCfdmQmLDSRGGHRlDoyaOserc','183Rwo2bBl6IyMOpsaS_OhOkCdgYFFLhU','1oK1Vh4WDft35bvj2SIu70hH3SszpNsBG','1j_apQ91rLKbG5P35ux9nc5LWNOvPVfJe']
+            'archive3':['1flTZVeux92GsaHcs1MOcBMuM08_QZICV','1MRBbo1LSXifJ3_q19sopqShsedYHyBEp','1q5OY9iHulyUTKa3nSoqjLe36Ckwxl92C','1r8omgtSLCfdmQmLDSRGGHRlDoyaOserc','183Rwo2bBl6IyMOpsaS_OhOkCdgYFFLhU','1oK1Vh4WDft35bvj2SIu70hH3SszpNsBG','1j_apQ91rLKbG5P35ux9nc5LWNOvPVfJe'],
+            'onbodysenses':['110QeJxSwjgWGHW1D5eqpKtois6fvIQXL','1Ys5z46qc82MH0OYox7F-4c6dXa5wdTlT','1mTIcUNGAHZe5CAh-y4ARYBvyvf9KZ0OD','1dFRSyOsioEnJLSL6DbsWRmBRw8RoesIU','1sHVB0KMigo6JjcCuk2pJroPHeFQ4A8dn','15UA3XHEmlK2WqJoCcnWyeFV7o5imUb6B']
+        };
+        const captions = {
+            'onbodysenses': [
+                '오현택\nFU-02 / EC-22 → SQ-23+SQ-33 → BM-14 → DA-24 / CI-11, 2026\nMixed media on canvas\n130.3 × 193.9 cm',
+                '김민우\nFU-02 / EC-11+EC-14+EC-21+EC-22 → SQ-14+SQ-23+SQ-32, 2026\nMixed media on canvas\n130.3 × 193.9 cm',
+                '오현택\nFU-02 / LC-33 / EC-12+EC-21 → SQ-13+SQ-31 → BM-13 → DA-12, 2026\nMixed media on canvas\n130.3 × 193.9 cm',
+                '김민우\nFU-02 / EC-14+EC-21+EC-31 → SQ-14+SQ-24+SQ-31 → DA-13, 2026\nMixed media on canvas\n130.3 × 193.9 cm',
+                '오현택\nFU-01 / LC-11 / EC-11+EC-32 → SQ-11+SQ-12 → BM-11 → DA-21, 2026\nMixed media on canvas\n116.8 × 91 cm',
+                '김민우\nFU-01 / EC-11+EC-21+EC-31+EC-32 → SQ-31+SQ-32+SQ-41, 2026\nMixed media on canvas\n91 × 116.8 cm'
+            ]
         };
         const currentSlide   = { '2023':0,'2024':0,'2025':0,'2026':0,'archive1':0,'archive2':0,'archive3':0 };
         const autoplayTimers = {};
@@ -3182,7 +3288,12 @@ US</a>
             images[year].forEach(function(id, i) {
                 const s = document.createElement('div');
                 s.className = 'slide';
-                s.innerHTML = '<img src="https://drive.google.com/thumbnail?id=' + id + '&sz=w1200" alt="' + year + ' ' + (i+1) + '" loading="lazy">';
+                let html = '<img src="https://drive.google.com/thumbnail?id=' + id + '&sz=w1200" alt="' + year + ' ' + (i+1) + '" loading="lazy">';
+                if (captions[year] && captions[year][i]) {
+                    const lines = captions[year][i].split('\n').map(function(line) { return '<p>' + line + '</p>'; }).join('');
+                    html += '<div class="slide-caption-toggle" onclick="toggleCaption(this)">Caption</div><div class="slide-caption-box">' + lines + '</div>';
+                }
+                s.innerHTML = html;
                 sc.appendChild(s);
 
                 const d = document.createElement('span');
@@ -3227,11 +3338,25 @@ US</a>
         initSlider('archive1');
         initSlider('archive2');
         initSlider('archive3');
+        initSlider('onbodysenses');
 
 
         /* ================================================
            5. 비디오
         ================================================ */
+        function toggleCaption(btn) {
+            const box = btn.nextElementSibling;
+            const wasActive = box.classList.contains('active');
+            document.querySelectorAll('.slide-caption-box.active').forEach(function(b) { b.classList.remove('active'); });
+            if (!wasActive) box.classList.add('active');
+        }
+
+        function toggleDesc(btn) {
+            const wrap = btn.previousElementSibling;
+            wrap.classList.toggle('expanded');
+            btn.textContent = wrap.classList.contains('expanded') ? 'CLOSE' : 'READ MORE';
+        }
+
         function playVideo(playerId, videoId) {
             document.getElementById(playerId).innerHTML =
                 '<iframe style="width:100%;height:100%;border:none;" src="https://www.youtube.com/embed/' + videoId + '?autoplay=1" allow="autoplay; encrypted-media" allowfullscreen loading="lazy"></iframe>';
