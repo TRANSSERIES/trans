@@ -2418,6 +2418,16 @@ US</a>
                     </div>
                 </div>
 
+                <!-- YouTube 썸네일과 재생 버튼 -->
+                <div class="video-section">
+                    <div class="youtube-player" id="video-onbodysenses">
+                        <img src="https://img.youtube.com/vi/BDyx0kGqP48/maxresdefault.jpg" alt="On Body Senses" class="youtube-thumbnail">
+                        <div class="play-overlay">
+                            <button class="play-btn-large" onclick="playVideo('video-onbodysenses', 'BDyx0kGqP48')"></button>
+                        </div>
+                    </div>
+                </div>
+
                 <!-- 갤러리 아코디언 -->
                 <div class="gallery-accordion">
                     <div class="accordion-header" onclick="toggleAccordion(this)">
@@ -3291,7 +3301,7 @@ US</a>
                 let html = '<img src="https://drive.google.com/thumbnail?id=' + id + '&sz=w1200" alt="' + year + ' ' + (i+1) + '" loading="lazy">';
                 if (captions[year] && captions[year][i]) {
                     const lines = captions[year][i].split('\n').map(function(line) { return '<p>' + line + '</p>'; }).join('');
-                    html += '<div class="slide-caption-toggle" onclick="toggleCaption(this)">Caption</div><div class="slide-caption-box">' + lines + '</div>';
+                    html += '<div class="slide-caption-toggle" onclick="event.stopPropagation(); toggleCaption(this)">Caption</div><div class="slide-caption-box">' + lines + '</div>';
                 }
                 s.innerHTML = html;
                 sc.appendChild(s);
@@ -3347,8 +3357,18 @@ US</a>
         function toggleCaption(btn) {
             const box = btn.nextElementSibling;
             const wasActive = box.classList.contains('active');
-            document.querySelectorAll('.slide-caption-box.active').forEach(function(b) { b.classList.remove('active'); });
-            if (!wasActive) box.classList.add('active');
+            document.querySelectorAll('.slide-caption-box.active').forEach(function(b) {
+                b.classList.remove('active');
+                const s = b.closest('.slides');
+                const y = s ? s.id.replace('slides-', '') : null;
+                if (y && images[y] && images[y].length > 1) startAutoplay(y);
+            });
+            if (!wasActive) {
+                box.classList.add('active');
+                const s = box.closest('.slides');
+                const y = s ? s.id.replace('slides-', '') : null;
+                if (y && autoplayTimers[y]) { clearInterval(autoplayTimers[y]); autoplayTimers[y] = null; }
+            }
         }
 
         function toggleDesc(btn) {
