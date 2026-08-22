@@ -167,6 +167,9 @@
         nav { display: flex; gap: 50px; }
         nav a { color: #fff; text-decoration: none; font-size: 12px; letter-spacing: 2px; font-weight: 500; transition: opacity 0.3s; }
         nav a:hover { opacity: 0.6; }
+        .lang-toggle { display: flex; align-items: center; gap: 6px; cursor: pointer; }
+        .lang-toggle i { font-size: 12px; opacity: 0.85; }
+        .lang-toggle .lang-toggle-label { font-variant-numeric: tabular-nums; }
         .home-btn {
             display: none;
             width: 40px;
@@ -2109,6 +2112,7 @@
         <nav>
             <a href="#" onclick="showPage('contact'); return false;">CONTACT
 US</a>
+            <a href="#" class="lang-toggle" onclick="toggleLanguage(); return false;" title="한국어 / English"><i class="fas fa-globe"></i><span class="lang-toggle-label" id="langToggleLabel">EN</span></a>
         </nav>
     </header>
 
@@ -2118,6 +2122,7 @@ US</a>
         <a href="#" onclick="showPage('projects'); toggleMenu(); return false;">PROJECTS</a>
         <a href="#" onclick="showPage('ticket'); toggleMenu(); return false;">TICKET</a>
         <a href="#" onclick="showPage('contact'); toggleMenu(); return false;">CONTACT US</a>
+        <a href="#" class="lang-toggle" onclick="toggleLanguage(); return false;" title="한국어 / English"><i class="fas fa-globe"></i><span class="lang-toggle-label" id="langToggleLabelMobile">EN</span></a>
     </div>
 
     <div id="home" class="page active">
@@ -2153,11 +2158,11 @@ US</a>
         <div class="page-content">
             <h1 class="page-title">ABOUT</h1>
             <div class="about-main">
-                <h2>TRANS = 變(변)<br>우리는 고정되기를 거부한다. 우리는 만남과 충돌을 상상한다.</h2>
+                <h2 data-en="TRANS = 變 (byeon)<br>We refuse to stay fixed. We imagine encounter and collision.">TRANS = 變(변)<br>우리는 고정되기를 거부한다. 우리는 만남과 충돌을 상상한다.</h2>
             </div>
             <div class="about-text">
-                <p>TRANS는 '변(變)–'의 뜻처럼, 고정되지 않고 끊임없이 움직이며 확장하는 예술 프로젝트입니다. 다양한 예술 장르가 만나 서로를 변화시키며, <strong>공명작업(Resonant Work)</strong>의 가능성을 탐구하고 있습니다.</p>
-                <p>단순한 협업을 넘어, 각자의 고유성이 충돌하고 교차하는 과정을 통해 '공존 가능한 예술 생태계'를 상상합니다. TRANS는 하나의 완성된 형태가 아닙니다. 과정 속에서 피어나는 질문, 실패, 충돌, 변화를 그대로 껴안으며 '어디로 튈지 모르는 가능성의 공간'을 확장해 나갑니다.</p>
+                <p data-en="Like the meaning of '變(byeon)–', TRANS is an art project that never settles, constantly moving and expanding. Different art genres meet and transform one another, exploring the possibilities of <strong>Resonant Work</strong>.">TRANS는 '변(變)–'의 뜻처럼, 고정되지 않고 끊임없이 움직이며 확장하는 예술 프로젝트입니다. 다양한 예술 장르가 만나 서로를 변화시키며, <strong>공명작업(Resonant Work)</strong>의 가능성을 탐구하고 있습니다.</p>
+                <p data-en="Beyond simple collaboration, we imagine a 'coexistent art ecosystem' through a process where each person's uniqueness collides and intersects. TRANS is not a single finished form. Embracing the questions, failures, collisions, and changes that bloom along the way, it keeps expanding a 'space of possibility that could go anywhere.'">단순한 협업을 넘어, 각자의 고유성이 충돌하고 교차하는 과정을 통해 '공존 가능한 예술 생태계'를 상상합니다. TRANS는 하나의 완성된 형태가 아닙니다. 과정 속에서 피어나는 질문, 실패, 충돌, 변화를 그대로 껴안으며 '어디로 튈지 모르는 가능성의 공간'을 확장해 나갑니다.</p>
             </div>
             
             <div class="performance-section">
@@ -2177,13 +2182,13 @@ US</a>
                     </div>
                     <div class="perf-list-item" onclick="goToProject('2025')">
                         <div class="perf-list-content">
-                            <div class="perf-list-title">"TRANS III: 주어 없는 움직임" - Sogang Univ. Mary Hall Grand Theater, Seoul</div>
+                            <div class="perf-list-title" data-en='"TRANS III: Movement Without a Subject" - Sogang Univ. Mary Hall Grand Theater, Seoul'>"TRANS III: 주어 없는 움직임" - Sogang Univ. Mary Hall Grand Theater, Seoul</div>
                         </div>
                         <div class="perf-list-year">2025</div>
                     </div>
                     <div class="perf-list-item" onclick="goToProject('2026')">
                         <div class="perf-list-content">
-                            <div class="perf-list-title">"포옹(Embrace)" - SeMA Seoseoul Art Museum, Seoul</div>
+                            <div class="perf-list-title" data-en='"Embrace" - SeMA Seoseoul Art Museum, Seoul'>"포옹(Embrace)" - SeMA Seoseoul Art Museum, Seoul</div>
                         </div>
                         <div class="perf-list-year">2026</div>
                     </div>
@@ -2250,15 +2255,15 @@ US</a>
                         </div>
                         <div class="project-description">
                             <div class="project-meta">
-                                <span>일자: 2023년 10월 21-22일</span>
-                                <span>장소: Studio Mong</span>
-                                <span>소요시간: 55분</span>
-                                <span>참여자: 오현택, 오명석, 이현석</span>
+                                <span data-en="Date: Oct 21–22, 2023">일자: 2023년 10월 21-22일</span>
+                                <span data-en="Venue: Studio Mong">장소: Studio Mong</span>
+                                <span data-en="Duration: 55 min">소요시간: 55분</span>
+                                <span data-en="Participants: Oh Hyeontaek, Oh Myeongseok, Lee Hyeonseok">참여자: 오현택, 오명석, 이현석</span>
                             </div>
-                            <p>변화하는 우리를 관찰하는 단계. 어떤 모습으로 우리가 변화하고 변신할지 확실하지 않지만, 우리가 변화하고 있는 상태를 인지하고 움직이는 몸과 소리에 집중합니다.</p>
-                            <p>시각으로 볼 수 있는 몸을 &lt;형체&gt;, 청각으로 들리는 소리를 &lt;음체&gt;로 정의합니다. 형체는 형체와, 형체는 음체와, 음체는 다시 형체와 마치 서로 소통하는 듯한 대화를 주고받으며, 청각적이고 시각적으로 모든 감각에 영향을 미치며 변화를 촉진합니다.</p>
-                            <p>이것은 마치 바이러스처럼 퍼지는 웃음과 같이 보입니다. 흥미롭게도 서로의 소통이 원활할 때도 있지만 오류가 발생하여 다른 방향이나 반대 방향으로 변화가 일어날 수도 있습니다. 그들은 어떤 형태로 변화하고 어느 방향으로 향하고 있을까요?</p>
-                            <p class="project-highlight">&lt;대화와 소통&gt; 각자만의 표현방법, 서로의 공통언어</p>
+                            <p data-en="A stage of observing ourselves as we change. We're not yet sure what shape or form we'll transform into, but we focus on the moving body and sound while staying aware that we are, in fact, changing.">변화하는 우리를 관찰하는 단계. 어떤 모습으로 우리가 변화하고 변신할지 확실하지 않지만, 우리가 변화하고 있는 상태를 인지하고 움직이는 몸과 소리에 집중합니다.</p>
+                            <p data-en="We define the body seen by sight as &lt;Form&gt;, and the sound heard by ear as &lt;Sound-body&gt;. Form speaks with form, form with sound-body, and sound-body again with form, as if carrying on a conversation — affecting every sense, both aural and visual, and driving change forward.">시각으로 볼 수 있는 몸을 &lt;형체&gt;, 청각으로 들리는 소리를 &lt;음체&gt;로 정의합니다. 형체는 형체와, 형체는 음체와, 음체는 다시 형체와 마치 서로 소통하는 듯한 대화를 주고받으며, 청각적이고 시각적으로 모든 감각에 영향을 미치며 변화를 촉진합니다.</p>
+                            <p data-en="It looks a bit like laughter spreading through a room, virus-like. Interestingly, the communication between them sometimes flows smoothly, but errors can also occur, sending the change off in a different or even opposite direction. What form will they change into, and which direction are they heading?">이것은 마치 바이러스처럼 퍼지는 웃음과 같이 보입니다. 흥미롭게도 서로의 소통이 원활할 때도 있지만 오류가 발생하여 다른 방향이나 반대 방향으로 변화가 일어날 수도 있습니다. 그들은 어떤 형태로 변화하고 어느 방향으로 향하고 있을까요?</p>
+                            <p class="project-highlight" data-en="&lt;Dialogue and Communication&gt; Each one's own way of expression, a shared language between us">&lt;대화와 소통&gt; 각자만의 표현방법, 서로의 공통언어</p>
                         </div>
                     </div>
                 </div>
@@ -2299,14 +2304,14 @@ US</a>
                         </div>
                         <div class="project-description">
                             <div class="project-meta">
-                                <span>일자: 2024년 9월 28-29일</span>
-                                <span>장소: 문래예술극장 박스시어터</span>
-                                <span>소요시간: 60분 (15분 pre-show)</span>
-                                <span>참여자: 이현석, 윤혜진, 조선재, 오현택, 김건우, 윤대원, 김지우</span>
+                                <span data-en="Date: Sep 28–29, 2024">일자: 2024년 9월 28-29일</span>
+                                <span data-en="Venue: Mullae Art Theater Box Theater">장소: 문래예술극장 박스시어터</span>
+                                <span data-en="Duration: 60 min (15 min pre-show)">소요시간: 60분 (15분 pre-show)</span>
+                                <span data-en="Participants: Lee Hyeonseok, Yoon Hyejin, Cho Seonjae, Oh Hyeontaek, Kim Geonwoo, Yun Daewon, Kim Jiwoo">참여자: 이현석, 윤혜진, 조선재, 오현택, 김건우, 윤대원, 김지우</span>
                             </div>
-                            <p>'사랑과 폭력은 매우 유사할 수 있지 않을까?'라는 질문을 대화의 시작으로 우리들의 관계, 대화의 모습과 방식, 이로 인해 충돌과 변화, 그리고 때로는 서로를 수용하는 우리들의 태도를 바라보는 것에서 출발합니다.</p>
-                            <p>트랜스 공연은 '사랑과 폭력'이라는 주제를 통해 대화와 관계에서 나타나는 복합적인 모습을 무대 위로 소환합니다.</p>
-                            <p>일상 대화를 바탕으로 개인의 의견 변화와 갈등을 탐구하며, 퍼포머의 몸(바디)을 중심으로 라이트, 사운드, 영상 등 다양한 매체를 활용하여 관객의 감각적 경험을 확장하고자 합니다. 관객은 무대 위 대화를 시각화한 퍼포밍을 통해 대화와 관계 속에서 어떻게 변화하는지를 보여주는 것이 바로 트랜스 작업이 추구하는 부분입니다.</p>
+                            <p data-en="Starting from the question 'Couldn't love and violence be very similar?', this piece begins by looking at our relationships, the shapes and manners of our dialogue, and the collisions and changes that follow — along with our sometimes willingness to accept one another.">'사랑과 폭력은 매우 유사할 수 있지 않을까?'라는 질문을 대화의 시작으로 우리들의 관계, 대화의 모습과 방식, 이로 인해 충돌과 변화, 그리고 때로는 서로를 수용하는 우리들의 태도를 바라보는 것에서 출발합니다.</p>
+                            <p data-en="Through the theme of 'love and violence,' the TRANS performance summons the complex faces that appear within dialogue and relationships onto the stage.">트랜스 공연은 '사랑과 폭력'이라는 주제를 통해 대화와 관계에서 나타나는 복합적인 모습을 무대 위로 소환합니다.</p>
+                            <p data-en="Building on everyday conversation, the piece explores shifting opinions and conflict between individuals. Centered on the performers' bodies, it draws on light, sound, video, and other media to expand the audience's sensory experience. Through performing that visualizes dialogue on stage, showing how we change within dialogue and relationship is exactly what the TRANS work pursues.">일상 대화를 바탕으로 개인의 의견 변화와 갈등을 탐구하며, 퍼포머의 몸(바디)을 중심으로 라이트, 사운드, 영상 등 다양한 매체를 활용하여 관객의 감각적 경험을 확장하고자 합니다. 관객은 무대 위 대화를 시각화한 퍼포밍을 통해 대화와 관계 속에서 어떻게 변화하는지를 보여주는 것이 바로 트랜스 작업이 추구하는 부분입니다.</p>
                         </div>
                     </div>
                 </div>
@@ -2316,7 +2321,7 @@ US</a>
                 <div class="projects-list">
                     <div class="project-item">
                         <div class="project-year">2025</div>
-                        <div class="project-title">TRANS III: 주어 없는 움직임 <span class="project-type">Performance</span></div>
+                        <div class="project-title" data-en='TRANS III: Movement Without a Subject <span class="project-type">Performance</span>'>TRANS III: 주어 없는 움직임 <span class="project-type">Performance</span></div>
                     </div>
                 </div>
                 
@@ -2347,15 +2352,15 @@ US</a>
                         </div>
                         <div class="project-description">
                             <div class="project-meta">
-                                <span>일자: 2025년 8월 5-6일</span>
-                                <span>장소: 서강대학교 메리홀 대극장</span>
-                                <span>소요시간: 45분 (10분 pre-open)</span>
-                                <span>참여자: 오현택, 오명석 (김민우)</span>
+                                <span data-en="Date: Aug 5–6, 2025">일자: 2025년 8월 5-6일</span>
+                                <span data-en="Venue: Sogang University Mary Hall Grand Theater">장소: 서강대학교 메리홀 대극장</span>
+                                <span data-en="Duration: 45 min (10 min pre-open)">소요시간: 45분 (10분 pre-open)</span>
+                                <span data-en="Participants: Oh Hyeontaek, Oh Myeongseok (Kim Minwoo)">참여자: 오현택, 오명석 (김민우)</span>
                             </div>
-                            <p>《TRANS III》는 개인의 리듬과 감각이 외부 구조와 어떻게 충돌하고 흔들리는지를 물리적으로 탐구하는 퍼포먼스다. "개별의 동일성"을 요구하는 현대 사회의 흐름 속에서, '효율'과 '표준화'라는 명분 아래 개인의 고유한 리듬과 선택이 얼마나 쉽게 동일화되는지를 바라본다.</p>
-                            <p>신체는 물리적인 작용을 통해 균형을 무너뜨리고, 다시 세우고, 반복하며 외부 조건에 반응하거나 무시하며 자신의 리듬을 지켜가려는 흔들림의 움직임을 이어간다. 동시에 사운드는 공간의 또 다른 층위를 구성해 눈에 보이지 않는 '두 번째 무대'를 만들어낸다.</p>
-                            <p>《TRANS III》는 관객에게 직접적으로 메시지를 전달하지 않고 다음과 같은 질문을 던진다.</p>
-                            <p class="project-highlight">"우리는 스스로 움직이고 있는가, 아니면 움직이게 되는가?"</p>
+                            <p data-en="《TRANS III》 is a performance that physically explores how an individual's rhythm and senses collide with and are shaken by external structures. Within a contemporary current that demands &quot;individual sameness,&quot; it looks at how easily a person's own rhythm and choices are homogenized under the banners of 'efficiency' and 'standardization.'">《TRANS III》는 개인의 리듬과 감각이 외부 구조와 어떻게 충돌하고 흔들리는지를 물리적으로 탐구하는 퍼포먼스다. "개별의 동일성"을 요구하는 현대 사회의 흐름 속에서, '효율'과 '표준화'라는 명분 아래 개인의 고유한 리듬과 선택이 얼마나 쉽게 동일화되는지를 바라본다.</p>
+                            <p data-en="Through physical action, the body breaks its balance, rebuilds it, and repeats — continuing a wavering movement that reacts to or ignores external conditions in an attempt to hold onto its own rhythm. At the same time, sound builds another layer of the space, creating an invisible 'second stage.'">신체는 물리적인 작용을 통해 균형을 무너뜨리고, 다시 세우고, 반복하며 외부 조건에 반응하거나 무시하며 자신의 리듬을 지켜가려는 흔들림의 움직임을 이어간다. 동시에 사운드는 공간의 또 다른 층위를 구성해 눈에 보이지 않는 '두 번째 무대'를 만들어낸다.</p>
+                            <p data-en="《TRANS III》 poses the following question to the audience, without delivering a message directly.">《TRANS III》는 관객에게 직접적으로 메시지를 전달하지 않고 다음과 같은 질문을 던진다.</p>
+                            <p class="project-highlight" data-en='"Are we moving by ourselves, or being made to move?"'>"우리는 스스로 움직이고 있는가, 아니면 움직이게 되는가?"</p>
                         </div>
                     </div>
                 </div>
@@ -2365,7 +2370,7 @@ US</a>
                 <div class="projects-list">
                     <div class="project-item">
                         <div class="project-year">2026</div>
-                        <div class="project-title">포옹 / Embrace <span class="project-type">SeMA performance</span></div>
+                        <div class="project-title" data-en='Embrace <span class="project-type">SeMA performance</span>'>포옹 / Embrace <span class="project-type">SeMA performance</span></div>
                     </div>
                 </div>
                 
@@ -2396,15 +2401,15 @@ US</a>
                         </div>
                         <div class="project-description">
                             <div class="project-meta">
-                                <span>일자: 2026년 3월 21-22일</span>
-                                <span>장소: 서서울미술관 지하1층 로비, 다목적홀</span>
-                                <span>소요시간: 40분</span>
-                                <span>참여자: 이현석, 윤혜진, 황숙영, 조선재, 류인웅, 배소현 (오현택 공하임 강성주)</span>
+                                <span data-en="Date: Mar 21–22, 2026">일자: 2026년 3월 21-22일</span>
+                                <span data-en="Venue: SeMA Seoseoul Art Museum, B1 Lobby &amp; Multipurpose Hall">장소: 서서울미술관 지하1층 로비, 다목적홀</span>
+                                <span data-en="Duration: 40 min">소요시간: 40분</span>
+                                <span data-en="Participants: Lee Hyeonseok, Yoon Hyejin, Hwang Sukyoung, Cho Seonjae, Ryu Inwoong, Bae Sohyun (Oh Hyeontaek, Gong Haim, Kang Seongju)">참여자: 이현석, 윤혜진, 황숙영, 조선재, 류인웅, 배소현 (오현택 공하임 강성주)</span>
                             </div>
-                            <p>〈포옹〉은 포옹이라는 행위를 통해 신체 간 접촉이 만들어내는 감정, 에너지, 힘의 구조를 재탐색하는 퍼포먼스이다. 출연자들은 미술관의 로비와 다목적홀에 분산되어, 관객의 일상적 이동과 관람 환경 속에 이질적인 장면으로 개입한다. 관람객은 출연자들의 포옹을 우연히 마주하거나, 혹은 그 흐름에 이끌려 퍼포먼스의 중심으로 휘말린다.</p>
-                            <p>공연은 두 사람의 대면에서 시작되어, 점차 여러 포옹으로 번지고, 출연자는 무리를 이루며 이들의 신체는 하나의 덩어리로 나아간다. 이 덩어리는 서로를 끌어안으며 굴러다니거나 밀고 당기고, 다시 흩어지면서 관계의 시작과 끝, 만남과 이별을 비가역적으로 반복한다.</p>
-                            <p>오현택은 '포옹'의 통상적인 의미를 벗어나 보호와 피보호, 폭력과 사랑을 오가는 새로운 힘의 균형을 발생시키는 일에 집중한다.</p>
-                            <p class="project-highlight">서서울미술관, 라이브 퍼포먼스</p>
+                            <p data-en="Through the act of embracing, &lt;Embrace&gt; is a performance that re-explores the emotion, energy, and structures of force created by physical contact between bodies. The performers are scattered through the museum's lobby and multipurpose hall, intervening as unfamiliar scenes within visitors' everyday movement and viewing environment. Audiences either happen upon the performers' embraces by chance, or are drawn along and pulled into the center of the performance.">〈포옹〉은 포옹이라는 행위를 통해 신체 간 접촉이 만들어내는 감정, 에너지, 힘의 구조를 재탐색하는 퍼포먼스이다. 출연자들은 미술관의 로비와 다목적홀에 분산되어, 관객의 일상적 이동과 관람 환경 속에 이질적인 장면으로 개입한다. 관람객은 출연자들의 포옹을 우연히 마주하거나, 혹은 그 흐름에 이끌려 퍼포먼스의 중심으로 휘말린다.</p>
+                            <p data-en="The performance begins with two people facing each other, gradually spreading into multiple embraces as the performers form a cluster, their bodies moving forward as a single mass. This mass rolls around holding onto each other, pushing and pulling, then scattering again — repeating the start and end of relationship, meeting and parting, in an irreversible cycle.">공연은 두 사람의 대면에서 시작되어, 점차 여러 포옹으로 번지고, 출연자는 무리를 이루며 이들의 신체는 하나의 덩어리로 나아간다. 이 덩어리는 서로를 끌어안으며 굴러다니거나 밀고 당기고, 다시 흩어지면서 관계의 시작과 끝, 만남과 이별을 비가역적으로 반복한다.</p>
+                            <p data-en="Oh Hyeontaek focuses on stepping outside the conventional meaning of 'embrace,' generating a new balance of force that moves between protection and being protected, violence and love.">오현택은 '포옹'의 통상적인 의미를 벗어나 보호와 피보호, 폭력과 사랑을 오가는 새로운 힘의 균형을 발생시키는 일에 집중한다.</p>
+                            <p class="project-highlight" data-en="SeMA Seoseoul Art Museum, Live Performance">서서울미술관, 라이브 퍼포먼스</p>
                         </div>
                     </div>
                 </div>
@@ -2445,16 +2450,16 @@ US</a>
                         </div>
                         <div class="project-description">
                             <div class="project-meta">
-                                <span>일자: 2026년 7월 31일 - 9월 5일</span>
-                                <span>장소: 문화살롱5120</span>
-                                <span>참여자: 오현택, 김민우</span>
+                                <span data-en="Date: Jul 31 – Sep 5, 2026">일자: 2026년 7월 31일 - 9월 5일</span>
+                                <span data-en="Venue: Culture Salon 5120">장소: 문화살롱5120</span>
+                                <span data-en="Participants: Oh Hyeontaek, Kim Minwoo">참여자: 오현택, 김민우</span>
                             </div>
                             <div class="desc-collapsible">
-                                <p>《On Body Senses》는 시각예술가 김민우와 안무가 오현택이 도시 하천의 환경적 조건을 신체 움직임과 회화적 물질로 전이하는 협업 프로젝트다. 두 작업자는 묵동천에 반복적으로 진입하여 온도, 습도, 소음, 흐름, 압박, 마찰, 식생과 인공 구조물의 충돌 등 장소가 발생시키는 다양한 강도를 감각하고 기록했다.</p>
-                                <p>이 작업은 도시 하천을 외부에서 관찰하여 이미지로 재현하는 풍경화의 방식과 구별된다. 여기서 환경은 수동적인 배경이나 소재가 아니라 신체의 균형과 속도, 방향, 긴장, 호흡을 변화시키며 작업 형성에 직접 개입하는 조건이다. 작가의 몸 역시 환경을 해석하는 우월한 관찰자가 아니라, 인간과 비인간 요소의 얽힘을 수용하고 다른 물질적 형식으로 변환하는 감각 매질이자 전이 장치로 작동한다.</p>
-                                <p>두 작업자는 묵동천 전체를 하나의 균질한 장소로 다루지 않았다. 반복적인 답사 과정에서 각자가 감각적으로 이끌리거나 신체 반응이 집중된 구간을 임시로 분절하여 <strong>필드 유닛(Field Unit)</strong>으로 설정했다. 각 필드 유닛은 행정적·지리적 구획이 아니라 특정 환경 조건과 신체 반응이 집중된 감각 리서치의 현장 단위다.</p>
-                                <p>협업 과정에서 두 작업자의 감각 전환 방식은 서로 다른 방향으로 작동한다. 김민우는 환경의 구조와 움직임을 획, 방향, 레이어와 화면 구성으로 전환하는 경향이 있으며, 오현택은 외부 자극을 우선 신체의 긴장과 움직임으로 받아들인 뒤 이를 그리기 행위로 이동시킨다. 작업이 진행되면서 김민우는 회화적 결과를 즉시 예측하는 반응을 지연하고 몸으로 먼저 환경에 접근했으며, 오현택은 움직임이 평면 위의 획과 물질적 흔적으로 전환되는 방식을 탐구했다. 이러한 서로 다른 변환 경로가 교차하고 상대의 신체·도구·화면에 개입하면서, 어느 한 사람에게 귀속되지 않는 회화적 구조가 발생한다.</p>
-                                <p>현장에서 발견한 감각과 움직임은 반복 가능한 샘플 또는 스코어로 정리된다. 그러나 샘플은 결과를 고정하는 공식이나 정답이 아니다. 같은 조건과 지시가 주어지더라도 수행자의 신체 상태, 해석, 재료, 속도와 레이어의 순서에 따라 다른 결과가 발생하는 가변적 악보에 가깝다. 전시는 이러한 감각의 수집, 신체적 샘플링, 상호 개입, 회화적 전이의 전 과정을 회화·드로잉·사진·영상·퍼포먼스·워크숍으로 병렬 구성한다.</p>
+                                <p data-en="《On Body Senses》 is a collaborative project in which visual artist Kim Minwoo and choreographer Oh Hyeontaek translate the environmental conditions of an urban stream into bodily movement and painterly material. The two repeatedly entered Mukdong Stream, sensing and recording the range of intensities the place produces — temperature, humidity, noise, current, pressure, friction, and the collision of vegetation with man-made structures.">《On Body Senses》는 시각예술가 김민우와 안무가 오현택이 도시 하천의 환경적 조건을 신체 움직임과 회화적 물질로 전이하는 협업 프로젝트다. 두 작업자는 묵동천에 반복적으로 진입하여 온도, 습도, 소음, 흐름, 압박, 마찰, 식생과 인공 구조물의 충돌 등 장소가 발생시키는 다양한 강도를 감각하고 기록했다.</p>
+                                <p data-en="This work is distinct from landscape painting's method of observing an urban stream from the outside and reproducing it as an image. Here, the environment is not a passive backdrop or subject matter, but a condition that directly intervenes in the work's formation by altering the body's balance, speed, direction, tension, and breath. The artists' bodies, too, act not as superior observers interpreting the environment, but as a sensory medium and transfer device — one that accepts the entanglement of human and non-human elements and converts it into another material form.">이 작업은 도시 하천을 외부에서 관찰하여 이미지로 재현하는 풍경화의 방식과 구별된다. 여기서 환경은 수동적인 배경이나 소재가 아니라 신체의 균형과 속도, 방향, 긴장, 호흡을 변화시키며 작업 형성에 직접 개입하는 조건이다. 작가의 몸 역시 환경을 해석하는 우월한 관찰자가 아니라, 인간과 비인간 요소의 얽힘을 수용하고 다른 물질적 형식으로 변환하는 감각 매질이자 전이 장치로 작동한다.</p>
+                                <p data-en="The two artists did not treat Mukdong Stream as a single, homogeneous place. Through repeated site visits, they temporarily divided the sections that sensorially drew them in or where bodily response concentrated, and set these apart as <strong>Field Units</strong>. Each Field Unit is not an administrative or geographic division, but an on-site unit of sensory research where specific environmental conditions and bodily responses concentrate.">두 작업자는 묵동천 전체를 하나의 균질한 장소로 다루지 않았다. 반복적인 답사 과정에서 각자가 감각적으로 이끌리거나 신체 반응이 집중된 구간을 임시로 분절하여 <strong>필드 유닛(Field Unit)</strong>으로 설정했다. 각 필드 유닛은 행정적·지리적 구획이 아니라 특정 환경 조건과 신체 반응이 집중된 감각 리서치의 현장 단위다.</p>
+                                <p data-en="In the collaborative process, the two artists' ways of converting sensation operate in different directions. Kim Minwoo tends to translate the structure and movement of the environment into strokes, direction, layers, and compositional structure, while Oh Hyeontaek first receives external stimuli as bodily tension and movement, then shifts that into the act of painting. As the work progressed, Kim Minwoo delayed the impulse to immediately predict a painterly outcome and approached the environment through the body first, while Oh Hyeontaek explored how movement converts into strokes and material traces on a flat surface. As these differing paths of conversion intersect and intervene in each other's bodies, tools, and surfaces, a painterly structure emerges that belongs to neither person alone.">협업 과정에서 두 작업자의 감각 전환 방식은 서로 다른 방향으로 작동한다. 김민우는 환경의 구조와 움직임을 획, 방향, 레이어와 화면 구성으로 전환하는 경향이 있으며, 오현택은 외부 자극을 우선 신체의 긴장과 움직임으로 받아들인 뒤 이를 그리기 행위로 이동시킨다. 작업이 진행되면서 김민우는 회화적 결과를 즉시 예측하는 반응을 지연하고 몸으로 먼저 환경에 접근했으며, 오현택은 움직임이 평면 위의 획과 물질적 흔적으로 전환되는 방식을 탐구했다. 이러한 서로 다른 변환 경로가 교차하고 상대의 신체·도구·화면에 개입하면서, 어느 한 사람에게 귀속되지 않는 회화적 구조가 발생한다.</p>
+                                <p data-en="The sensations and movements discovered on-site are organized into repeatable samples, or scores. Yet a sample is not a formula or a correct answer that fixes the outcome. Even given the same conditions and instructions, different results emerge depending on the performer's physical state, interpretation, materials, speed, and order of layers — closer to a variable score than a fixed recipe. The exhibition arranges this entire process of gathering sensation, bodily sampling, mutual intervention, and painterly transfer in parallel, across painting, drawing, photography, video, performance, and workshop.">현장에서 발견한 감각과 움직임은 반복 가능한 샘플 또는 스코어로 정리된다. 그러나 샘플은 결과를 고정하는 공식이나 정답이 아니다. 같은 조건과 지시가 주어지더라도 수행자의 신체 상태, 해석, 재료, 속도와 레이어의 순서에 따라 다른 결과가 발생하는 가변적 악보에 가깝다. 전시는 이러한 감각의 수집, 신체적 샘플링, 상호 개입, 회화적 전이의 전 과정을 회화·드로잉·사진·영상·퍼포먼스·워크숍으로 병렬 구성한다.</p>
                             </div>
                             <button class="desc-more-btn" onclick="toggleDesc(this)">READ MORE</button>
                         </div>
@@ -2510,7 +2515,7 @@ US</a>
                             <div class="project-year">2025 Book</div>
                             <div class="project-title">WORKS V.2 TRANS III : Gesture of the Lost Subject</div>
                             <div class="project-status">
-                                <a href="https://docs.google.com/forms/d/e/1FAIpQLScMUcb01CuLRD90xjreMD3NTxgekUis2CbytDm3yPYPvtcEiA/viewform" target="_blank" class="buy-link">구매하기</a>
+                                <a href="https://docs.google.com/forms/d/e/1FAIpQLScMUcb01CuLRD90xjreMD3NTxgekUis2CbytDm3yPYPvtcEiA/viewform" target="_blank" class="buy-link" data-en="Buy Now">구매하기</a>
                             </div>
                         </div>
                     </div>
@@ -2527,7 +2532,7 @@ US</a>
                     <div class="projects-list">
                         <div class="project-item">
                             <div class="project-year">2025 Artist Talk (Streaming)</div>
-                            <div class="project-title">TRANS III : 주어 없는 움직임</div>
+                            <div class="project-title" data-en="TRANS III : Movement Without a Subject">TRANS III : 주어 없는 움직임</div>
                         </div>
                     </div>
                     <div class="slider-container">
@@ -2547,10 +2552,10 @@ US</a>
             <div class="ticket-content">
                 <div class="coming-soon">COMING SOON</div>
                 <div class="ticket-info">
-                    <h3>포옹 / Embrace <span class="project-type">SeMA performance</span></h3>
-                    <p>2026년 3월 21일 - 3월 22일<br>서서울미술관 지하1층 로비, 다목적홀<br><br>티켓 예매 정보는 추후 공지 예정입니다.</p>
+                    <h3 data-en='Embrace <span class="project-type">SeMA performance</span>'>포옹 / Embrace <span class="project-type">SeMA performance</span></h3>
+                    <p data-en="Mar 21 – Mar 22, 2026<br>SeMA Seoseoul Art Museum, B1 Lobby &amp; Multipurpose Hall<br><br>Ticket booking information will be announced soon.">2026년 3월 21일 - 3월 22일<br>서서울미술관 지하1층 로비, 다목적홀<br><br>티켓 예매 정보는 추후 공지 예정입니다.</p>
                 </div>
-                <button class="ticket-btn disabled">예매 정보 준비중</button>
+                <button class="ticket-btn disabled" data-en="Booking Info Coming Soon">예매 정보 준비중</button>
             </div>
         </div>
     </div>
@@ -2564,8 +2569,8 @@ US</a>
             </div>
             <div class="sub-page-divider"></div>
             <div class="sub-page-body">
-                <p class="sub-page-desc">RE:TRANS는 무용, 음악, 영상, 시각예술 등 서로 다른 예술장르의 작업자들이 사용하는 언어와 개념이 어떻게 어긋나고 충돌하는지를 탐구하는 리서치 및 스터디입니다.</p>
-                <p class="sub-page-desc">합의나 정답을 만드는 것이 아니라, 같은 단어를 다르게 이해하고 있는 상태 자체를 드러내고 유지하는 대화의 구조를 실험합니다.<br>신체를 공통의 기반으로 삼아, 각자의 조건과 언어가 어떻게 전이, 변형되는지를 함께 관찰하고 경험합니다.</p>
+                <p class="sub-page-desc" data-en="RE:TRANS is a research and study exploring how the language and concepts used by practitioners across different art genres — dance, music, video, and visual art — diverge and collide with one another.">RE:TRANS는 무용, 음악, 영상, 시각예술 등 서로 다른 예술장르의 작업자들이 사용하는 언어와 개념이 어떻게 어긋나고 충돌하는지를 탐구하는 리서치 및 스터디입니다.</p>
+                <p class="sub-page-desc" data-en="Rather than reaching consensus or a correct answer, it experiments with a structure of dialogue that reveals and sustains the very state of understanding the same word differently.<br>Taking the body as a common ground, we observe and experience together how each person's conditions and language transfer and transform.">합의나 정답을 만드는 것이 아니라, 같은 단어를 다르게 이해하고 있는 상태 자체를 드러내고 유지하는 대화의 구조를 실험합니다.<br>신체를 공통의 기반으로 삼아, 각자의 조건과 언어가 어떻게 전이, 변형되는지를 함께 관찰하고 경험합니다.</p>
             </div>
         </div>
 
@@ -2609,7 +2614,7 @@ US</a>
                                 font-weight: 300;
                                 padding: 10px 0;
                                 border-bottom: 1px solid rgba(255,255,255,0.08);
-                            ">신청 완료 후 서류를 아래 이메일로 제출해 주세요.<br>
+                            "><span data-en="After submitting, please send your documents to the email below.">신청 완료 후 서류를 아래 이메일로 제출해 주세요.</span><br>
                             <span onclick="copyEmail('transseries0819@gmail.com', 'copyHint1')" style="opacity: 1; letter-spacing: 0.5px; cursor: pointer; border-bottom: 1px solid rgba(255,255,255,0.5); color: #fff;">transseries0819@gmail.com</span>
                             <span id="copyHint1" onclick="copyEmail('transseries0819@gmail.com', 'copyHint1')" style="font-size: 9px; letter-spacing: 2px; opacity: 0.6; margin-left: 12px; cursor: pointer; text-transform: uppercase; border: 1px solid rgba(255,255,255,0.3); padding: 2px 7px;">copy</span>
                             </p>
@@ -2619,7 +2624,7 @@ US</a>
                         <div class="agreements">
                             <label class="checkbox-option">
                                 <input type="checkbox" name="privacy" value="agreed" required>
-                                <span class="checkbox-text checkbox-square">개인정보 수집 및 이용에 동의합니다. 수집된 정보는 RE:TRANS 운영 목적으로만 사용됩니다.</span>
+                                <span class="checkbox-text checkbox-square" data-en="I agree to the collection and use of personal information. Collected information is used only for RE:TRANS operational purposes.">개인정보 수집 및 이용에 동의합니다. 수집된 정보는 RE:TRANS 운영 목적으로만 사용됩니다.</span>
                             </label>
                         </div>
 
@@ -2632,7 +2637,7 @@ US</a>
 
                     <div class="form-submit" style="margin-top: 70px;">
                         <button type="submit" class="submit-btn" id="retransSubmitBtn">
-                            <span class="submit-text">신청하기</span>
+                            <span class="submit-text" data-en="Apply">신청하기</span>
                         </button>
                     </div>
                 </form>
@@ -2665,7 +2670,7 @@ US</a>
                             opacity: 0.85;
                             line-height: 1.4;
                             margin-bottom: 6px;
-                        ">신청이<br>완료되었습니다</p>
+                        " data-en="Your Application<br>Has Been Submitted">신청이<br>완료되었습니다</p>
 
                         <!-- 영문 서브 -->
                         <p style="
@@ -2686,14 +2691,14 @@ US</a>
                             line-height: 2;
                             font-weight: 300;
                             margin-bottom: 80px;
-                        ">입력하신 이메일로 확인 메일이 발송됩니다.<br>메일이 도착하지 않을 경우 스팸함을 확인해 주세요.<br><br>
-                        서류는 아래 이메일로 별도 제출해 주세요.<br>
+                        "><span data-en="A confirmation email will be sent to the address you entered.&lt;br&gt;If it doesn't arrive, please check your spam folder.&lt;br&gt;&lt;br&gt;Please submit your documents separately to the email below.">입력하신 이메일로 확인 메일이 발송됩니다.<br>메일이 도착하지 않을 경우 스팸함을 확인해 주세요.<br><br>
+                        서류는 아래 이메일로 별도 제출해 주세요.</span><br>
                         <span onclick="copyEmail('transseries0819@gmail.com', 'copyHint2')" style="opacity: 1; letter-spacing: 0.5px; cursor: pointer; border-bottom: 1px solid rgba(255,255,255,0.5); color: #fff;">transseries0819@gmail.com</span>
                         <span id="copyHint2" onclick="copyEmail('transseries0819@gmail.com', 'copyHint2')" style="font-size: 9px; letter-spacing: 2px; opacity: 0.6; margin-left: 12px; cursor: pointer; text-transform: uppercase; border: 1px solid rgba(255,255,255,0.3); padding: 2px 7px;">copy</span></p>
 
                         <!-- 홈으로 버튼 -->
                         <button class="submit-btn" onclick="showPage('home'); return false;">
-                            <span class="submit-text">← 홈으로 돌아가기</span>
+                            <span class="submit-text" data-en="← Back to Home">← 홈으로 돌아가기</span>
                         </button>
                     </div>
                 </div>
@@ -2711,8 +2716,8 @@ US</a>
             </div>
             <div class="sub-page-divider"></div>
             <div class="sub-page-body">
-                <p class="sub-page-desc">EX:TRANS는 TRANS 시리즈에서 축적해온 구조와 방식을 작품의 형식에 한정하지 않고, 실제 환경에서 실행하고 확장하는 프로그램입니다.</p>
-                <p class="sub-page-desc">'EX'는 Execute(실행하다), Experiment(실험하다), Expand(확장하다)의 의미를 담고 있습니다. TRANS 안에서 발전해온 시스템을 결과가 아닌 구조로 다루며, 이를 다양한 환경 속에서 작동시키는 프로그램입니다.</p>
+                <p class="sub-page-desc" data-en="EX:TRANS is a program that runs and expands the structures and methods accumulated through the TRANS series in real-world environments, without confining them to the format of a single work.">EX:TRANS는 TRANS 시리즈에서 축적해온 구조와 방식을 작품의 형식에 한정하지 않고, 실제 환경에서 실행하고 확장하는 프로그램입니다.</p>
+                <p class="sub-page-desc" data-en="'EX' carries the meaning of Execute, Experiment, and Expand. It treats the system developed within TRANS as a structure rather than a fixed outcome, and puts it into motion across a variety of environments.">'EX'는 Execute(실행하다), Experiment(실험하다), Expand(확장하다)의 의미를 담고 있습니다. TRANS 안에서 발전해온 시스템을 결과가 아닌 구조로 다루며, 이를 다양한 환경 속에서 작동시키는 프로그램입니다.</p>
             </div>
             <div class="program-archive-section">
                 <p class="archive-section-eyebrow">Program Archive</p>
@@ -2720,8 +2725,8 @@ US</a>
                     <div class="archive-card">
                         <div class="archive-card-year">2026<br>APR</div>
                         <div class="archive-card-body">
-                            <div class="archive-card-title">〈포옹의 구조 Embrace Structure〉</div>
-                            <div class="archive-card-sub">EX:TRANS — 첫 번째 워크숍</div>
+                            <div class="archive-card-title" data-en="〈Embrace Structure〉">〈포옹의 구조 Embrace Structure〉</div>
+                            <div class="archive-card-sub" data-en="EX:TRANS — First Workshop">EX:TRANS — 첫 번째 워크숍</div>
                         </div>
                         <div class="archive-card-status ended">ENDED</div>
                     </div>
@@ -2743,7 +2748,7 @@ US</a>
             margin-top: 20px;
         ">
             <p style="font-size:8px; letter-spacing:6px; opacity:0.2; margin-bottom:20px; text-transform:uppercase; font-weight:400;">COMING SOON</p>
-            <p style="font-size:13px; font-weight:400; letter-spacing:0.2px; opacity:0.5; margin-bottom:10px; line-height:1.5;">다음 회차가 곧 열립니다</p>
+            <p style="font-size:13px; font-weight:400; letter-spacing:0.2px; opacity:0.5; margin-bottom:10px; line-height:1.5;" data-en="The next session is coming soon">다음 회차가 곧 열립니다</p>
             <p style="font-size:10px; letter-spacing:1.5px; opacity:0.18; font-weight:300;">The next session will open soon</p>
         </div>
 
@@ -2763,53 +2768,53 @@ US</a>
 
                     <!-- Program Info -->
                     <div class="workshop-program" style="margin-top:50px;">
-                        <h2 class="program-main-title">〈포옹의 구조 Embrace Structure〉</h2>
+                        <h2 class="program-main-title" data-en="〈Embrace Structure〉">〈포옹의 구조 Embrace Structure〉</h2>
 
                         <button type="button" class="program-toggle" onclick="toggleProgramSection('program-desc')">
-                            <span class="toggle-label">프로그램 소개 About Program</span>
+                            <span class="toggle-label" data-en="About Program">프로그램 소개 About Program</span>
                             <span class="toggle-arrow">▼</span>
                         </button>
                         <div class="program-section" id="program-desc">
-                            <p>TRANS 2와 TRANS 2.5를 통해 축적된 움직임의 구조를 바탕으로, 사랑과 폭력이라는 질문을 '포옹'이라는 단순한 행위로 압축했습니다. 그 안에서 발생하는 힘의 흐름과 관계의 변화를 단계적으로 다룹니다.</p>
-                            <p class="program-question">몸과 몸이 만나는 순간, 우리는 서로에게 어떤 힘을 전달하고 있을까요?</p>
-                            <p>EX:TRANS 〈포옹의 구조〉는 충돌, 보호와 피보호, 억압과 배려와 같은 관계의 상태를 '힘의 흐름'으로 경험하는 신체 기반 프로그램입니다.</p>
-                            <p>가볍게 닿는 순간부터 밀고, 기대고, 버티는 상태까지. 에너지의 밀도가 달라질수록 관계의 형태도 함께 변합니다.</p>
-                            <p class="program-essence">이 프로그램은 포옹을 감정이 아닌, 하나의 구조로 직접 경험하는 시간입니다.</p>
+                            <p data-en="Building on the movement structures accumulated through TRANS 2 and TRANS 2.5, this program compresses the question of love and violence into the simple act of 'embrace.' It deals step by step with the flow of force and shifts in relationship that arise within it.">TRANS 2와 TRANS 2.5를 통해 축적된 움직임의 구조를 바탕으로, 사랑과 폭력이라는 질문을 '포옹'이라는 단순한 행위로 압축했습니다. 그 안에서 발생하는 힘의 흐름과 관계의 변화를 단계적으로 다룹니다.</p>
+                            <p class="program-question" data-en="The moment body meets body, what force are we transmitting to each other?">몸과 몸이 만나는 순간, 우리는 서로에게 어떤 힘을 전달하고 있을까요?</p>
+                            <p data-en="EX:TRANS 〈Embrace Structure〉 is a body-based program that experiences relational states — collision, protection and being protected, oppression and care — as a 'flow of force.'">EX:TRANS 〈포옹의 구조〉는 충돌, 보호와 피보호, 억압과 배려와 같은 관계의 상태를 '힘의 흐름'으로 경험하는 신체 기반 프로그램입니다.</p>
+                            <p data-en="From a light touch to pushing, leaning, and holding your ground — as the density of energy changes, so does the shape of the relationship.">가볍게 닿는 순간부터 밀고, 기대고, 버티는 상태까지. 에너지의 밀도가 달라질수록 관계의 형태도 함께 변합니다.</p>
+                            <p class="program-essence" data-en="This program is a time to experience embrace directly as a structure, not as an emotion.">이 프로그램은 포옹을 감정이 아닌, 하나의 구조로 직접 경험하는 시간입니다.</p>
                         </div>
 
                         <button type="button" class="program-toggle" onclick="toggleProgramSection('practice-levels')">
-                            <span class="toggle-label">참여 레벨 안내 Practice Levels</span>
+                            <span class="toggle-label" data-en="Practice Levels">참여 레벨 안내 Practice Levels</span>
                             <span class="toggle-arrow">▼</span>
                         </button>
                         <div class="program-section" id="practice-levels">
-                            <p class="level-intro">참여자는 자신의 감각과 신체 상태에 따라 두 가지 방식 중 하나를 선택할 수 있습니다.</p>
+                            <p class="level-intro" data-en="Participants can choose one of two approaches based on their own senses and physical condition.">참여자는 자신의 감각과 신체 상태에 따라 두 가지 방식 중 하나를 선택할 수 있습니다.</p>
                             <div class="level-item">
-                                <h4 class="level-title">① Slow Practice — 감각을 세밀하게 배우는 과정</h4>
-                                <p class="level-desc">천천히 마주하고, 접촉하고, 중심을 탐색합니다. 힘의 전달을 미세하게 느끼며 움직임의 구조를 면밀하게 경험합니다. 처음 접하는 참여자에게 적합한 과정입니다.</p>
-                                <p class="level-note">※ 강한 충돌이나 고강도 움직임은 포함되지 않습니다.</p>
+                                <h4 class="level-title" data-en="① Slow Practice — A process of learning sensation in detail">① Slow Practice — 감각을 세밀하게 배우는 과정</h4>
+                                <p class="level-desc" data-en="Slowly facing, touching, and exploring the center. Finely feeling the transmission of force, you experience the structure of movement closely. A process suited to first-time participants.">천천히 마주하고, 접촉하고, 중심을 탐색합니다. 힘의 전달을 미세하게 느끼며 움직임의 구조를 면밀하게 경험합니다. 처음 접하는 참여자에게 적합한 과정입니다.</p>
+                                <p class="level-note" data-en="※ Does not include strong collisions or high-intensity movement.">※ 강한 충돌이나 고강도 움직임은 포함되지 않습니다.</p>
                             </div>
                             <div class="level-item">
-                                <h4 class="level-title">② Deep Practice — 퍼포머의 에너지에 가까워지는 과정</h4>
-                                <p class="level-desc">보다 강한 힘의 전달과 중심의 이동, 겹침과 충돌의 상태까지 확장합니다. 퍼포먼스에서 보여지는 밀도에 가까한 상태를 경험합니다.</p>
-                                <p class="level-note">※ 바닥 작업 및 높은 밀도의 에너지 확장이 포함됩니다.</p>
+                                <h4 class="level-title" data-en="② Deep Practice — A process of drawing closer to a performer's energy">② Deep Practice — 퍼포머의 에너지에 가까워지는 과정</h4>
+                                <p class="level-desc" data-en="Expands into stronger transmission of force, shifting the center, and states of overlap and collision. You experience a density close to what appears in performance.">보다 강한 힘의 전달과 중심의 이동, 겹침과 충돌의 상태까지 확장합니다. 퍼포먼스에서 보여지는 밀도에 가까한 상태를 경험합니다.</p>
+                                <p class="level-note" data-en="※ Includes floor work and higher-density energy expansion.">※ 바닥 작업 및 높은 밀도의 에너지 확장이 포함됩니다.</p>
                             </div>
                         </div>
 
                         <div class="workshop-details">
                             <div class="detail-row">
-                                <span class="detail-label">장소 Venue</span>
-                                <span class="detail-value"><a href="https://map.naver.com/p/entry/place/2076136532?placePath=/home?entry=plt&from=map&fromPanelNum=1&additionalHeight=76&timestamp=202604010110&locale=ko&svcName=map_pcv5&searchType=place&lng=126.9639027&lat=37.5952220&c=15.00,0,0,0,dh" target="_blank" style="color:rgba(255,255,255,0.6);text-decoration:none;border-bottom:1px solid rgba(255,255,255,0.2);transition:all 0.3s;">BA HERE (비에이 히어)<br>종로구 자하문로 236 3층</a></span>
+                                <span class="detail-label" data-en="Venue">장소 Venue</span>
+                                <span class="detail-value"><a href="https://map.naver.com/p/entry/place/2076136532?placePath=/home?entry=plt&from=map&fromPanelNum=1&additionalHeight=76&timestamp=202604010110&locale=ko&svcName=map_pcv5&searchType=place&lng=126.9639027&lat=37.5952220&c=15.00,0,0,0,dh" target="_blank" style="color:rgba(255,255,255,0.6);text-decoration:none;border-bottom:1px solid rgba(255,255,255,0.2);transition:all 0.3s;" data-en="BA HERE&lt;br&gt;3F, 236 Jahamun-ro, Jongno-gu">BA HERE (비에이 히어)<br>종로구 자하문로 236 3층</a></span>
                             </div>
                             <div class="detail-row">
-                                <span class="detail-label">모집 인원 Capacity</span>
-                                <span class="detail-value">10명 (선착순 마감)</span>
+                                <span class="detail-label" data-en="Capacity">모집 인원 Capacity</span>
+                                <span class="detail-value" data-en="10 people (first-come, first-served)">10명 (선착순 마감)</span>
                             </div>
                             <div class="detail-row">
-                                <span class="detail-label">비용 Fee</span>
+                                <span class="detail-label" data-en="Fee">비용 Fee</span>
                                 <span class="detail-value">
-                                    <span class="fee-option">3DAY — 80,000원</span>
-                                    <span class="fee-option">2DAY — 60,000원</span>
-                                    <span class="fee-option">1DAY — 30,000원</span>
+                                    <span class="fee-option" data-en="3DAY — ₩80,000">3DAY — 80,000원</span>
+                                    <span class="fee-option" data-en="2DAY — ₩60,000">2DAY — 60,000원</span>
+                                    <span class="fee-option" data-en="1DAY — ₩30,000">1DAY — 30,000원</span>
                                 </span>
                             </div>
                         </div>
@@ -2817,18 +2822,18 @@ US</a>
 
                     <!-- Workshop Application Form -->
                     <div class="workshop-application">
-                        <div class="workshop-section-title">워크숍 신청 Workshop Application</div>
+                        <div class="workshop-section-title" data-en="Workshop Application">워크숍 신청 Workshop Application</div>
                         <form class="workshop-form" id="extransForm" action="https://formspree.io/f/mqedyvaz" method="POST">
                             <div class="form-field">
-                                <label class="field-label">이름 Name</label>
+                                <label class="field-label" data-en="Name">이름 Name</label>
                                 <input type="text" class="field-input" name="name" required>
                             </div>
                             <div class="form-field">
-                                <label class="field-label">연락처 Contact</label>
+                                <label class="field-label" data-en="Contact">연락처 Contact</label>
                                 <input type="tel" class="field-input" name="phone" id="phoneInput" placeholder="010-0000-0000" maxlength="13" required oninput="formatPhone(this)">
                             </div>
                             <div class="form-field">
-                                <label class="field-label">TRANS 2.5 〈포옹 Embrace〉 공연 관람 여부</label>
+                                <label class="field-label" data-en="Did you attend the TRANS 2.5 〈Embrace〉 performance?">TRANS 2.5 〈포옹 Embrace〉 공연 관람 여부</label>
                                 <div class="practice-selection">
                                     <label class="practice-option">
                                         <input type="radio" name="attended_performance" value="YES" required>
@@ -2841,7 +2846,7 @@ US</a>
                                 </div>
                             </div>
                             <div class="form-field">
-                                <label class="field-label">워크숍 파트 선택 Select Practice (하나만 선택 가능)</label>
+                                <label class="field-label" data-en="Select Practice (choose one)">워크숍 파트 선택 Select Practice (하나만 선택 가능)</label>
                                 <div class="practice-selection">
                                     <label class="practice-option">
                                         <input type="radio" name="practice_type" value="Slow Practice" required onchange="updateScheduleOptions('slow')">
@@ -2854,20 +2859,20 @@ US</a>
                                 </div>
                             </div>
                             <div class="form-field" id="scheduleField" style="display: none;">
-                                <label class="field-label">일정 선택 Schedule<br><span style="font-size:10px;opacity:0.5;letter-spacing:0.5px;">1회부터 참여 가능 · 2회 이상 참여를 권장드립니다</span></label>
+                                <label class="field-label" data-en='Schedule&lt;br&gt;&lt;span style="font-size:10px;opacity:0.5;letter-spacing:0.5px;"&gt;You can join from a single session · 2 or more sessions recommended&lt;/span&gt;'>일정 선택 Schedule<br><span style="font-size:10px;opacity:0.5;letter-spacing:0.5px;">1회부터 참여 가능 · 2회 이상 참여를 권장드립니다</span></label>
                                 <div class="schedule-section" id="slowSchedule" style="display: none;">
                                     <div class="schedule-options">
                                         <label class="schedule-option">
                                             <input type="checkbox" name="schedule[]" value="Slow Practice - 4/17 (금) 19:00-21:00">
-                                            <span class="schedule-text">4월 17일 (금) 19:00–21:00</span>
+                                            <span class="schedule-text" data-en="Apr 17 (Fri) 19:00–21:00">4월 17일 (금) 19:00–21:00</span>
                                         </label>
                                         <label class="schedule-option">
                                             <input type="checkbox" name="schedule[]" value="Slow Practice - 4/18 (토) 10:00-12:00">
-                                            <span class="schedule-text">4월 18일 (토) 10:00–12:00</span>
+                                            <span class="schedule-text" data-en="Apr 18 (Sat) 10:00–12:00">4월 18일 (토) 10:00–12:00</span>
                                         </label>
                                         <label class="schedule-option">
                                             <input type="checkbox" name="schedule[]" value="Slow Practice - 4/19 (일) 10:00-12:00">
-                                            <span class="schedule-text">4월 19일 (일) 10:00–12:00</span>
+                                            <span class="schedule-text" data-en="Apr 19 (Sun) 10:00–12:00">4월 19일 (일) 10:00–12:00</span>
                                         </label>
                                     </div>
                                 </div>
@@ -2875,89 +2880,89 @@ US</a>
                                     <div class="schedule-options">
                                         <label class="schedule-option">
                                             <input type="checkbox" name="schedule[]" value="Deep Practice - 4/24 (금) 19:00-21:00">
-                                            <span class="schedule-text">4월 24일 (금) 19:00–21:00</span>
+                                            <span class="schedule-text" data-en="Apr 24 (Fri) 19:00–21:00">4월 24일 (금) 19:00–21:00</span>
                                         </label>
                                         <label class="schedule-option">
                                             <input type="checkbox" name="schedule[]" value="Deep Practice - 4/25 (토) 10:00-12:00">
-                                            <span class="schedule-text">4월 25일 (토) 10:00–12:00</span>
+                                            <span class="schedule-text" data-en="Apr 25 (Sat) 10:00–12:00">4월 25일 (토) 10:00–12:00</span>
                                         </label>
                                         <label class="schedule-option">
                                             <input type="checkbox" name="schedule[]" value="Deep Practice - 4/26 (일) 10:00-12:00">
-                                            <span class="schedule-text">4월 26일 (일) 10:00–12:00</span>
+                                            <span class="schedule-text" data-en="Apr 26 (Sun) 10:00–12:00">4월 26일 (일) 10:00–12:00</span>
                                         </label>
                                     </div>
                                 </div>
                                 <div class="schedule-error" id="scheduleError"></div>
                             </div>
                             <div class="form-field bank-info-field">
-                                <label class="field-label">계좌 정보 Bank Account</label>
+                                <label class="field-label" data-en="Bank Account">계좌 정보 Bank Account</label>
                                 <div class="bank-info-box">
-                                    <div class="bank-account-row" onclick="copyAccount()" title="눌러서 복사">
+                                    <div class="bank-account-row" onclick="copyAccount()" title="눌러서 복사" data-en-title="Tap to copy">
                                         <div class="bank-account-left">
                                             <div class="bank-meta">
-                                                <span class="bank-name">카카오뱅크</span>
+                                                <span class="bank-name" data-en="KakaoBank">카카오뱅크</span>
                                                 <span class="bank-meta-dot">·</span>
-                                                <span class="bank-holder">오현택(트랜스)</span>
+                                                <span class="bank-holder" data-en="Oh Hyeontaek (TRANS)">오현택(트랜스)</span>
                                             </div>
                                             <span class="account-number" id="accountNumber">3333-19-4545273</span>
                                         </div>
                                         <button type="button" class="copy-btn" id="copyBtn" onclick="event.stopPropagation(); copyAccount()">
                                             <span class="copy-btn-icon">⎘</span>
-                                            <span class="copy-text">복사</span>
+                                            <span class="copy-text" id="copyBtnText" data-en="Copy">복사</span>
                                         </button>
                                     </div>
                                 </div>
-                                <p class="copy-hint">계좌번호를 눌러 복사하거나 복사 버튼을 이용하세요</p>
+                                <p class="copy-hint" data-en="Tap the account number or use the copy button">계좌번호를 눌러 복사하거나 복사 버튼을 이용하세요</p>
                             </div>
                             <div class="form-field agreements">
                                 <div class="agreement-section">
                                     <label class="checkbox-option">
                                         <input type="checkbox" name="privacy" value="agreed" required>
-                                        <span class="checkbox-text">개인정보 수집 및 이용에 동의합니다. (필수)</span>
+                                        <span class="checkbox-text" data-en="I agree to the collection and use of personal information. (Required)">개인정보 수집 및 이용에 동의합니다. (필수)</span>
                                     </label>
                                     <button type="button" class="toggle-details" onclick="toggleAgreement('privacy-details')">
-                                        <span class="toggle-text">자세히 보기</span>
+                                        <span class="toggle-text" data-en="View Details">자세히 보기</span>
                                         <span class="toggle-icon">▼</span>
                                     </button>
                                     <div class="agreement-details" id="privacy-details">
-                                        <p class="detail-intro">TRANS(이하 '대표')는 EX:TRANS 워크숍 운영을 위하여 다음과 같이 개인정보를 수집·이용합니다.</p>
+                                        <p class="detail-intro" data-en="TRANS (hereafter the 'Organizer') collects and uses personal information as follows to operate the EX:TRANS workshop.">TRANS(이하 '대표')는 EX:TRANS 워크숍 운영을 위하여 다음과 같이 개인정보를 수집·이용합니다.</p>
                                         <div class="detail-section">
-                                            <h4>1. 수집 항목</h4>
+                                            <h4 data-en="1. Items Collected">1. 수집 항목</h4>
                                             <ul>
-                                                <li>성명</li>
-                                                <li>연락처(휴대전화 또는 이메일)</li>
-                                                <li>신청 클래스 및 일정</li>
+                                                <li data-en="Name">성명</li>
+                                                <li data-en="Contact (mobile phone or email)">연락처(휴대전화 또는 이메일)</li>
+                                                <li data-en="Class applied for and schedule">신청 클래스 및 일정</li>
                                             </ul>
                                         </div>
                                         <div class="detail-section">
-                                            <h4>2. 수집 목적</h4>
+                                            <h4 data-en="2. Purpose of Collection">2. 수집 목적</h4>
                                             <ul>
-                                                <li>워크숍 신청 접수 및 참가자 관리</li>
-                                                <li>일정 안내 및 공지 전달</li>
-                                                <li>프로그램 운영 및 관련 문의 응대</li>
+                                                <li data-en="Processing workshop applications and managing participants">워크숍 신청 접수 및 참가자 관리</li>
+                                                <li data-en="Sending schedule updates and notices">일정 안내 및 공지 전달</li>
+                                                <li data-en="Program operation and related inquiry response">프로그램 운영 및 관련 문의 응대</li>
                                             </ul>
                                         </div>
                                         <div class="detail-section">
-                                            <h4>3. 보유 및 이용 기간</h4>
-                                            <p>워크숍 종료 후 3개월 이내 파기<br>단, 관련 법령에 따라 보존이 필요한 경우 해당 기간 동안 보관합니다.</p>
+                                            <h4 data-en="3. Retention and Use Period">3. 보유 및 이용 기간</h4>
+                                            <p data-en="Destroyed within 3 months after the workshop ends.&lt;br&gt;However, where retention is required by law, information is kept for that period.">워크숍 종료 후 3개월 이내 파기<br>단, 관련 법령에 따라 보존이 필요한 경우 해당 기간 동안 보관합니다.</p>
                                         </div>
-                                        <p class="detail-note">※ 귀하는 개인정보 수집·이용에 대한 동의를 거부할 권리가 있습니다.<br>다만, 동의를 거부할 경우 워크숍 신청이 제한될 수 있습니다.</p>
+                                        <p class="detail-note" data-en="※ You have the right to refuse consent to the collection and use of personal information.&lt;br&gt;However, refusing consent may limit your workshop application.">※ 귀하는 개인정보 수집·이용에 대한 동의를 거부할 권리가 있습니다.<br>다만, 동의를 거부할 경우 워크숍 신청이 제한될 수 있습니다.</p>
                                     </div>
                                 </div>
                                 <div class="agreement-section">
                                     <label class="checkbox-option">
                                         <input type="checkbox" name="documentation" value="agreed">
-                                        <span class="checkbox-text">촬영 및 기록 활용에 동의합니다. (선택)</span>
+                                        <span class="checkbox-text" data-en="I agree to the use of photo/video documentation. (Optional)">촬영 및 기록 활용에 동의합니다. (선택)</span>
                                     </label>
                                     <button type="button" class="toggle-details" onclick="toggleAgreement('doc-details')">
-                                        <span class="toggle-text">자세히 보기</span>
+                                        <span class="toggle-text" data-en="View Details">자세히 보기</span>
                                         <span class="toggle-icon">▼</span>
                                     </button>
                                     <div class="agreement-details" id="doc-details">
                                         <div class="detail-section">
-                                            <p>EX:TRANS 워크숍 진행 중 사진 또는 영상 촬영이 이루어질 수 있습니다.<br>촬영된 자료는 공식 웹사이트, SNS, 아카이브 및 홍보 목적 범위 내에서 활용될 수 있습니다.</p>
+                                            <p data-en="Photos or videos may be taken during the EX:TRANS workshop.&lt;br&gt;Recorded material may be used on the official website, social media, archive, and for promotional purposes.">EX:TRANS 워크숍 진행 중 사진 또는 영상 촬영이 이루어질 수 있습니다.<br>촬영된 자료는 공식 웹사이트, SNS, 아카이브 및 홍보 목적 범위 내에서 활용될 수 있습니다.</p>
                                         </div>
-                                        <p class="detail-note">동의하지 않을 경우 현장에서 촬영 제외 요청이 가능합니다.</p>
+                                        <p class="detail-note" data-en="If you do not consent, you may request exclusion from filming on site.">동의하지 않을 경우 현장에서 촬영 제외 요청이 가능합니다.</p>
                                     </div>
                                 </div>
                             </div>
@@ -2966,14 +2971,14 @@ US</a>
                             <input type="text" name="_gotcha" style="display:none">
                             <div class="form-submit">
                                 <button type="submit" class="submit-btn" id="submitBtn">
-                                    <span class="submit-text">참여하기 Join Workshop</span>
+                                    <span class="submit-text" data-en="Join Workshop">참여하기 Join Workshop</span>
                                 </button>
                             </div>
                             <div class="form-contact">
-                                <p class="contact-label">문의 Contact</p>
+                                <p class="contact-label" data-en="Contact">문의 Contact</p>
                                 <div class="contact-links">
                                     <a href="https://www.instagram.com/trans_series" target="_blank">@trans_series DM</a>
-                                    <span class="contact-separator">또는</span>
+                                    <span class="contact-separator" data-en="or">또는</span>
                                     <a href="tel:010-4740-3107">010-4740-3107</a>
                                 </div>
                             </div>
@@ -2990,22 +2995,22 @@ US</a>
         <div class="page-content sub-page-content">
             <div class="success-header">
                 <div class="success-icon">✓</div>
-                <h2 class="success-title">신청이 완료되었습니다</h2>
+                <h2 class="success-title" data-en="Your Application Has Been Submitted">신청이 완료되었습니다</h2>
                 <p class="success-subtitle">Application Submitted</p>
             </div>
 
             <div class="payment-instruction">
-                <h3 class="instruction-title">다음 단계 Next Step</h3>
+                <h3 class="instruction-title" data-en="Next Step">다음 단계 Next Step</h3>
                 
                 <div class="instruction-box">
                     <div class="instruction-number">1</div>
                     <div class="instruction-content">
-                        <h4>계좌이체</h4>
-                        <p>아래 계좌로 참가비를 입금해주세요.</p>
+                        <h4 data-en="Bank Transfer">계좌이체</h4>
+                        <p data-en="Please transfer the participation fee to the account below.">아래 계좌로 참가비를 입금해주세요.</p>
                         <div class="payment-account">
-                            <div class="payment-bank">카카오뱅크</div>
+                            <div class="payment-bank" data-en="KakaoBank">카카오뱅크</div>
                             <div class="payment-number">3333-19-4545273</div>
-                            <div class="payment-holder">오현택(트랜스)</div>
+                            <div class="payment-holder" data-en="Oh Hyeontaek (TRANS)">오현택(트랜스)</div>
                         </div>
                     </div>
                 </div>
@@ -3013,23 +3018,23 @@ US</a>
                 <div class="instruction-box">
                     <div class="instruction-number">2</div>
                     <div class="instruction-content">
-                        <h4>입금 확인</h4>
-                        <p>입금자명과 입금액을 확인한 후<br>등록하신 연락처로 <strong>확인 문자를 개별 발송</strong>해드립니다.</p>
+                        <h4 data-en="Payment Confirmation">입금 확인</h4>
+                        <p data-en="Once we confirm the depositor's name and amount, we'll send an &lt;strong&gt;individual confirmation text&lt;/strong&gt; to your registered contact.">입금자명과 입금액을 확인한 후<br>등록하신 연락처로 <strong>확인 문자를 개별 발송</strong>해드립니다.</p>
                     </div>
                 </div>
 
                 <div class="instruction-box">
                     <div class="instruction-number">3</div>
                     <div class="instruction-content">
-                        <h4>워크숍 준비</h4>
-                        <p>워크숍 시작 1주일 전 상세 안내를 보내드립니다.</p>
+                        <h4 data-en="Workshop Preparation">워크숍 준비</h4>
+                        <p data-en="Detailed guidance will be sent one week before the workshop begins.">워크숍 시작 1주일 전 상세 안내를 보내드립니다.</p>
                     </div>
                 </div>
             </div>
 
             <div class="success-footer">
-                <p>문의사항이 있으시면 <a href="mailto:transseries0819@gmail.com">transseries0819@gmail.com</a>으로 연락주세요.</p>
-                <button class="back-home-btn" onclick="showPage('home')">홈으로 돌아가기 Back to Home</button>
+                <p><span data-en="For any questions, please contact us at">문의사항이 있으시면</span> <a href="mailto:transseries0819@gmail.com">transseries0819@gmail.com</a><span data-en=".">으로 연락주세요.</span></p>
+                <button class="back-home-btn" onclick="showPage('home')" data-en="Back to Home">홈으로 돌아가기</button>
             </div>
         </div>
     </div>
@@ -3045,7 +3050,7 @@ US</a>
                 </div>
                 <div class="contact-divider"></div>
                 <div class="contact-text">
-                    <p>공연 문의 및 협업 제안</p>
+                    <p data-en="Performance inquiries &amp; collaboration proposals">공연 문의 및 협업 제안</p>
                     <p style="margin-top: 15px;"><a href="mailto:transseries0819@gmail.com">transseries0819@gmail.com</a></p>
                 </div>
             </div>
@@ -3062,6 +3067,31 @@ US</a>
     <footer><p>© 2026 TRANS. ALL RIGHTS RESERVED.</p></footer>
 
     <script>
+
+        /* ================================================
+           0. 언어 전환 (KO / EN)
+        ================================================ */
+        let currentLang = 'ko';
+
+        function toggleLanguage() {
+            currentLang = currentLang === 'ko' ? 'en' : 'ko';
+            applyLanguage();
+        }
+
+        function applyLanguage() {
+            document.querySelectorAll('[data-en]').forEach(function(el) {
+                if (el.dataset.koOriginal === undefined) el.dataset.koOriginal = el.innerHTML;
+                el.innerHTML = currentLang === 'en' ? el.getAttribute('data-en') : el.dataset.koOriginal;
+            });
+            document.querySelectorAll('[data-en-placeholder]').forEach(function(el) {
+                if (el.dataset.koPlaceholder === undefined) el.dataset.koPlaceholder = el.getAttribute('placeholder') || '';
+                el.setAttribute('placeholder', currentLang === 'en' ? el.getAttribute('data-en-placeholder') : el.dataset.koPlaceholder);
+            });
+            document.documentElement.lang = currentLang;
+            const labelEls = [document.getElementById('langToggleLabel'), document.getElementById('langToggleLabelMobile')];
+            labelEls.forEach(function(el) { if (el) el.textContent = currentLang === 'en' ? 'KO' : 'EN'; });
+            document.body.classList.toggle('lang-en', currentLang === 'en');
+        }
 
         /* ================================================
            1. 페이지 라우팅 (showPage)
@@ -3294,13 +3324,17 @@ US</a>
             const dc = document.getElementById('dots-'   + year);
             if (!sc || !dc) return;
             const count = images[year].length;
+            const nameEN = { '오현택': 'Oh Hyeontaek', '김민우': 'Kim Minwoo' };
 
             images[year].forEach(function(id, i) {
                 const s = document.createElement('div');
                 s.className = 'slide';
                 let html = '<img src="https://drive.google.com/thumbnail?id=' + id + '&sz=w1200" alt="' + year + ' ' + (i+1) + '" loading="lazy">';
                 if (captions[year] && captions[year][i]) {
-                    const lines = captions[year][i].split('\n').map(function(line) { return '<p>' + line + '</p>'; }).join('');
+                    const lines = captions[year][i].split('\n').map(function(line) {
+                        if (nameEN[line]) return '<p data-en="' + nameEN[line] + '">' + line + '</p>';
+                        return '<p>' + line + '</p>';
+                    }).join('');
                     html += '<div class="slide-caption-toggle" onclick="event.stopPropagation(); toggleCaption(this)">Caption</div><div class="slide-caption-box">' + lines + '</div>';
                 }
                 s.innerHTML = html;
@@ -3513,7 +3547,7 @@ US</a>
                 btn.disabled = false;
                 btn.style.opacity = '';
                 const t = btn.querySelector('.submit-text');
-                if (t) t.textContent = '참여하기 Join Workshop';
+                if (t) t.textContent = currentLang === 'en' ? 'Join Workshop' : '참여하기 Join Workshop';
             }
             document.querySelectorAll('.program-section.open').forEach(function(s) { s.classList.remove('open'); });
             document.querySelectorAll('.program-toggle.active').forEach(function(b) { b.classList.remove('active'); });
@@ -3552,7 +3586,7 @@ US</a>
                 const checked  = document.querySelectorAll('input[name="schedule[]"]:checked').length;
                 const errorDiv = document.getElementById('scheduleError');
                 if (checked < 1) {
-                    errorDiv.textContent = '일정을 최소 1회 이상 선택해주세요.';
+                    errorDiv.textContent = currentLang === 'en' ? 'Please select at least one schedule.' : '일정을 최소 1회 이상 선택해주세요.';
                     errorDiv.classList.add('show');
                     errorDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
                     setTimeout(function() { errorDiv.classList.remove('show'); }, 5000);
@@ -3561,22 +3595,23 @@ US</a>
                 errorDiv.classList.remove('show');
                 const submitBtn  = document.getElementById('submitBtn');
                 const submitText = submitBtn.querySelector('.submit-text');
-                submitText.textContent = '제출 중... Submitting...';
+                const idleLabel  = currentLang === 'en' ? 'Join Workshop' : '참여하기 Join Workshop';
+                submitText.textContent = currentLang === 'en' ? 'Submitting...' : '제출 중... Submitting...';
                 submitBtn.disabled     = true;
                 submitBtn.style.opacity = '0.3';
                 fetch(this.action, { method: 'POST', body: new FormData(this), headers: { Accept: 'application/json' } })
                     .then(function(r) {
                         if (r.ok) { showPage('workshop-success'); }
                         else {
-                            alert('신청 중 오류가 발생했습니다. 다시 시도해주세요.');
-                            submitText.textContent  = '참여하기 Join Workshop';
+                            alert(currentLang === 'en' ? 'An error occurred while submitting. Please try again.' : '신청 중 오류가 발생했습니다. 다시 시도해주세요.');
+                            submitText.textContent  = idleLabel;
                             submitBtn.disabled      = false;
                             submitBtn.style.opacity = '0.4';
                         }
                     })
                     .catch(function() {
-                        alert('신청 중 오류가 발생했습니다. 다시 시도해주세요.');
-                        submitText.textContent  = '참여하기 Join Workshop';
+                        alert(currentLang === 'en' ? 'An error occurred while submitting. Please try again.' : '신청 중 오류가 발생했습니다. 다시 시도해주세요.');
+                        submitText.textContent  = idleLabel;
                         submitBtn.disabled      = false;
                         submitBtn.style.opacity = '0.4';
                     });
@@ -3594,8 +3629,10 @@ US</a>
             var icon    = btn.querySelector('.copy-btn-icon');
 
             function onSuccess() {
-                text.textContent = '복사됨'; icon.textContent = '✓'; btn.classList.add('copied');
-                setTimeout(function() { text.textContent = '복사'; icon.textContent = '⎘'; btn.classList.remove('copied'); }, 2000);
+                var copiedLabel = currentLang === 'en' ? 'Copied' : '복사됨';
+                var resetLabel  = currentLang === 'en' ? 'Copy' : '복사';
+                text.textContent = copiedLabel; icon.textContent = '✓'; btn.classList.add('copied');
+                setTimeout(function() { text.textContent = resetLabel; icon.textContent = '⎘'; btn.classList.remove('copied'); }, 2000);
             }
 
             if (navigator.clipboard) {
@@ -3681,7 +3718,7 @@ US</a>
                 var btn = document.getElementById('retransSubmitBtn');
                 var submitText = btn.querySelector('.submit-text');
                 btn.disabled = true;
-                submitText.textContent = '제출 중...';
+                submitText.textContent = currentLang === 'en' ? 'Submitting...' : '제출 중...';
                 btn.style.opacity = '0.2';
                 fetch(this.action, { method: 'POST', body: new FormData(this), headers: { Accept: 'application/json' } })
                     .then(function(r) {
@@ -3689,16 +3726,16 @@ US</a>
                             retransForm.style.display = 'none';
                             document.getElementById('retransSuccess').style.display = 'block';
                         } else {
-                            alert('신청 중 오류가 발생했습니다. 다시 시도해주세요.');
+                            alert(currentLang === 'en' ? 'An error occurred while submitting. Please try again.' : '신청 중 오류가 발생했습니다. 다시 시도해주세요.');
                             btn.disabled = false;
-                            submitText.textContent = '신청하기';
+                            submitText.textContent = currentLang === 'en' ? 'Apply' : '신청하기';
                             btn.style.opacity = '';
                         }
                     })
                     .catch(function() {
-                        alert('신청 중 오류가 발생했습니다. 다시 시도해주세요.');
+                        alert(currentLang === 'en' ? 'An error occurred while submitting. Please try again.' : '신청 중 오류가 발생했습니다. 다시 시도해주세요.');
                         btn.disabled = false;
-                        submitText.textContent = '신청하기';
+                        submitText.textContent = currentLang === 'en' ? 'Apply' : '신청하기';
                         btn.style.opacity = '';
                     });
             });
