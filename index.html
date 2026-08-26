@@ -1310,6 +1310,33 @@
         /* Performance 섹션 */
         .performance-section { max-width: 700px; margin: 80px auto 0; text-align: left; }
         .performance-title { font-size: 18px; font-weight: 600; letter-spacing: 2px; margin-bottom: 40px; opacity: 0.9; }
+
+        /* ─── TRANS IDENTITY DIAGRAM ─── */
+        .trans-identity { max-width: 920px; margin: 70px auto 0; }
+        .trans-identity-grid { display: flex; align-items: center; gap: 50px; }
+        .trans-acronym { flex: 0 0 160px; display: flex; flex-direction: column; gap: 22px; }
+        .trans-acronym-row { display: flex; align-items: baseline; gap: 7px; }
+        .trans-acronym-row .letter { font-size: 21px; font-weight: 700; letter-spacing: 0.5px; color: #fff; }
+        .trans-acronym-row .rest { font-size: 10px; font-weight: 400; letter-spacing: 2.5px; opacity: 0.38; text-transform: uppercase; }
+        .trans-symbol-wrap { position: relative; flex: 1; min-width: 0; }
+        .trans-symbol-wrap img { width: 60%; display: block; }
+        .trans-annotation { position: absolute; left: 0; width: 100%; height: 0; }
+        .trans-annotation .dot { position: absolute; top: 0; width: 5px; height: 5px; border-radius: 50%; background: rgba(255,255,255,0.5); transform: translate(-50%,-50%); }
+        .trans-annotation .line { position: absolute; top: 0; height: 1px; background: rgba(255,255,255,0.22); transform: translateY(-50%); }
+        .trans-annotation .label { position: absolute; top: 0; transform: translateY(-50%); white-space: nowrap; }
+        .trans-annotation .label .ko { font-size: 13px; opacity: 0.82; letter-spacing: 0.3px; margin-bottom: 4px; }
+        .trans-annotation .label .en { font-size: 10.5px; opacity: 0.4; letter-spacing: 1px; text-transform: uppercase; }
+        .trans-annotation-mobile-list { display: none; }
+        @media (max-width: 768px) {
+            .trans-identity-grid { flex-direction: column; gap: 34px; }
+            .trans-acronym { flex-direction: row; flex-wrap: wrap; justify-content: center; gap: 12px 22px; flex-basis: auto; }
+            .trans-symbol-wrap { width: 100%; }
+            .trans-symbol-wrap img { width: 58%; margin: 0 auto; }
+            .trans-annotation { display: none; }
+            .trans-annotation-mobile-list { display: flex; flex-direction: column; gap: 16px; margin-top: 26px; text-align: center; }
+            .trans-annotation-mobile-list .ko { font-size: 13px; opacity: 0.82; letter-spacing: 0.3px; margin-bottom: 3px; }
+            .trans-annotation-mobile-list .en { font-size: 10.5px; opacity: 0.4; letter-spacing: 1px; text-transform: uppercase; }
+        }
         .performance-list { display: flex; flex-direction: column; gap: 0; }
         .perf-list-item { 
             display: flex; 
@@ -2163,6 +2190,50 @@ US</a>
             <div class="about-text">
                 <p data-en="Like the meaning of '變(byeon)–', TRANS is an art project that never settles, constantly moving and expanding. Different art genres meet and transform one another, exploring the possibilities of <strong>Resonant Work</strong>.">TRANS는 '변(變)–'의 뜻처럼, 고정되지 않고 끊임없이 움직이며 확장하는 예술 프로젝트입니다. 다양한 예술 장르가 만나 서로를 변화시키며, <strong>공명작업(Resonant Work)</strong>의 가능성을 탐구하고 있습니다.</p>
                 <p data-en="Beyond simple collaboration, we imagine a 'coexistent art ecosystem' through a process where each person's uniqueness collides and intersects. TRANS is not a single finished form. Embracing the questions, failures, collisions, and changes that bloom along the way, it keeps expanding a 'space of possibility that could go anywhere.'">단순한 협업을 넘어, 각자의 고유성이 충돌하고 교차하는 과정을 통해 '공존 가능한 예술 생태계'를 상상합니다. TRANS는 하나의 완성된 형태가 아닙니다. 과정 속에서 피어나는 질문, 실패, 충돌, 변화를 그대로 껴안으며 '어디로 튈지 모르는 가능성의 공간'을 확장해 나갑니다.</p>
+            </div>
+
+            <div class="trans-identity">
+                <div class="trans-identity-grid">
+                    <div class="trans-acronym">
+                        <div class="trans-acronym-row"><span class="letter">T</span><span class="rest">RANSFORM</span></div>
+                        <div class="trans-acronym-row"><span class="letter">R</span><span class="rest">ESONATE</span></div>
+                        <div class="trans-acronym-row"><span class="letter">A</span><span class="rest">TTUNE</span></div>
+                        <div class="trans-acronym-row"><span class="letter">N</span><span class="rest">ETWORK</span></div>
+                        <div class="trans-acronym-row"><span class="letter">S</span><span class="rest">ENSE</span></div>
+                    </div>
+                    <div class="trans-symbol-wrap">
+                        <img src="https://lh3.googleusercontent.com/d/1iqYdEIGNIgghtFOk7ZVJAbqu7Nqmo8N3=w1200" alt="TRANS Symbol">
+                        <div class="trans-annotation" style="top:20%;">
+                            <span class="dot" style="left:36%;"></span>
+                            <span class="line" style="left:36%; width:30%;"></span>
+                            <div class="label" style="left:66%;">
+                                <div class="ko" data-en="Transform">변화 / 전환</div>
+                                <div class="en">Transform</div>
+                            </div>
+                        </div>
+                        <div class="trans-annotation" style="top:50%;">
+                            <span class="dot" style="left:60%;"></span>
+                            <span class="line" style="left:60%; width:6%;"></span>
+                            <div class="label" style="left:66%;">
+                                <div class="ko" data-en="Resonate">공명 / 울림</div>
+                                <div class="en">Resonate</div>
+                            </div>
+                        </div>
+                        <div class="trans-annotation" style="top:80%;">
+                            <span class="dot" style="left:36%;"></span>
+                            <span class="line" style="left:36%; width:30%;"></span>
+                            <div class="label" style="left:66%;">
+                                <div class="ko" data-en="Connect · Expand">연결 / 확장</div>
+                                <div class="en">Connect · Expand</div>
+                            </div>
+                        </div>
+                        <div class="trans-annotation-mobile-list">
+                            <div><div class="ko" data-en="Transform">변화 / 전환</div><div class="en">Transform</div></div>
+                            <div><div class="ko" data-en="Resonate">공명 / 울림</div><div class="en">Resonate</div></div>
+                            <div><div class="ko" data-en="Connect · Expand">연결 / 확장</div><div class="en">Connect · Expand</div></div>
+                        </div>
+                    </div>
+                </div>
             </div>
             
             <div class="performance-section">
