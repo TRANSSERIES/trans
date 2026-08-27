@@ -1313,12 +1313,12 @@
 
         /* ─── TRANS IDENTITY DIAGRAM ─── */
         .trans-identity { max-width: 700px; margin: 45px auto 0; }
-        .trans-identity-grid { display: flex; align-items: center; gap: 26px; }
+        .trans-identity-grid { display: flex; align-items: center; gap: 26px; width: fit-content; margin: 0 auto; }
         .trans-acronym { flex: 0 0 118px; display: flex; flex-direction: column; gap: 15px; }
         .trans-acronym-row { display: flex; align-items: baseline; gap: 5px; }
         .trans-acronym-row .letter { font-size: 15px; font-weight: 700; letter-spacing: 0.3px; color: #fff; }
         .trans-acronym-row .rest { font-size: 8px; font-weight: 400; letter-spacing: 1.8px; opacity: 0.38; text-transform: uppercase; }
-        .trans-symbol-wrap { position: relative; flex: 1; min-width: 0; }
+        .trans-symbol-wrap { position: relative; flex: 0 0 auto; width: 380px; }
         .trans-symbol-wrap img { width: 55%; display: block; }
         .trans-annotation { position: absolute; left: 0; width: 100%; height: 0; }
         .trans-annotation .dot { position: absolute; top: 0; width: 4px; height: 4px; border-radius: 50%; background: rgba(255,255,255,0.5); transform: translate(-50%,-50%); }
@@ -1334,6 +1334,7 @@
             .trans-acronym-row { gap: 3px; }
             .trans-acronym-row .letter { font-size: 11px; }
             .trans-acronym-row .rest { font-size: 6px; letter-spacing: 1px; }
+            .trans-symbol-wrap { width: calc(100vw - 62px - 12px - 64px); max-width: 260px; }
             .trans-annotation .label { white-space: normal; width: 34%; }
             .trans-annotation .label .ko { font-size: 8.5px; margin-bottom: 2px; }
             .trans-annotation .label .en { font-size: 6.5px; letter-spacing: 0.4px; }
