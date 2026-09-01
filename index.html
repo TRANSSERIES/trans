@@ -1456,7 +1456,31 @@
             border: 1px solid rgba(255,255,255,0.02);
         }
         .collab-card.empty:hover { transform: none; border-color: rgba(255,255,255,0.02); background: rgba(255,255,255,0.012); }
-        .collab-name { position: relative; z-index: 1; text-align: center; }
+        .collab-name { position: relative; z-index: 1; text-align: center; transition: opacity 0.35s ease; }
+        .collab-card.soon-active .collab-name { opacity: 0; }
+        .collab-soon {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 10px;
+            opacity: 0;
+            visibility: hidden;
+            transform: scale(0.96);
+            transition: opacity 0.35s ease, transform 0.35s ease, visibility 0.35s;
+            z-index: 2;
+        }
+        .collab-card.soon-active .collab-soon { opacity: 1; visibility: visible; transform: scale(1); }
+        .collab-soon-label { font-size: 10px; letter-spacing: 2.5px; text-transform: uppercase; color: #fff; opacity: 0.75; margin-bottom: 7px; }
+        .collab-soon-sub { font-size: 9px; letter-spacing: 0.3px; color: #fff; opacity: 0.35; line-height: 1.5; }
+        .collab-card.soon-highlight { animation: collabPulse 1.4s ease 2; }
+        @keyframes collabPulse {
+            0%, 100% { border-color: rgba(255,255,255,0.035); }
+            50% { border-color: rgba(255,255,255,0.4); }
+        }
         .collab-name-first {
             font-size: 18px;
             font-weight: 400;
@@ -2275,6 +2299,24 @@ US</a>
                     </div>
                 </div>
             </div>
+
+            <div class="performance-section">
+                <h3 class="performance-title" data-en="COLLABORATION">COLLABORATION</h3>
+                <div class="performance-list">
+                    <div class="perf-list-item" onclick="goToCollab('daewon')">
+                        <div class="perf-list-content">
+                            <div class="perf-list-title">"73°C" - Oksangfactory, 2026</div>
+                        </div>
+                        <div class="perf-list-year">2026</div>
+                    </div>
+                    <div class="perf-list-item" onclick="goToCollab('kyuho')">
+                        <div class="perf-list-content">
+                            <div class="perf-list-title">"OIKOS" - The Reference, 2027</div>
+                        </div>
+                        <div class="perf-list-year">2027</div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -2541,16 +2583,24 @@ US</a>
                 <div class="collab-year-block">
                     <div class="collab-year">2026</div>
                     <div class="collab-grid">
-                        <div class="collab-card">
+                        <div class="collab-card" data-person="daewon" onclick="toggleCollabSoon(this)">
                             <div class="collab-name">
                                 <div class="collab-name-first">Daewon</div>
                                 <div class="collab-name-last">Yun</div>
                             </div>
+                            <div class="collab-soon">
+                                <div class="collab-soon-label" data-en="Coming Soon">업데이트 예정</div>
+                                <div class="collab-soon-sub">"73°C" — Oksangfactory, 2026</div>
+                            </div>
                         </div>
-                        <div class="collab-card">
+                        <div class="collab-card" data-person="kyuho" onclick="toggleCollabSoon(this)">
                             <div class="collab-name">
                                 <div class="collab-name-first">Kyuho</div>
                                 <div class="collab-name-last">Shim</div>
+                            </div>
+                            <div class="collab-soon">
+                                <div class="collab-soon-label" data-en="Coming Soon">업데이트 예정</div>
+                                <div class="collab-soon-sub">"OIKOS" — The Reference, 2027</div>
                             </div>
                         </div>
                         <div class="collab-card empty"></div>
@@ -3535,6 +3585,25 @@ US</a>
                     section.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 }
             }, 100);
+        }
+
+        function goToCollab(person) {
+            showPage('projects');
+            showProjectTab('collab');
+            setTimeout(function() {
+                const card = document.querySelector('.collab-card[data-person="' + person + '"]');
+                if (card) {
+                    card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    card.classList.add('soon-active', 'soon-highlight');
+                    setTimeout(function() { card.classList.remove('soon-highlight'); }, 2800);
+                }
+            }, 150);
+        }
+
+        function toggleCollabSoon(card) {
+            const wasActive = card.classList.contains('soon-active');
+            document.querySelectorAll('.collab-card.soon-active').forEach(function(c) { c.classList.remove('soon-active'); });
+            if (!wasActive) card.classList.add('soon-active');
         }
 
         function showProjectTab(tab) {
