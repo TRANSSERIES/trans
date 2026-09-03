@@ -2680,6 +2680,22 @@ US</a>
                         <div class="slider-dots" id="dots-archive3"></div>
                     </div>
                 </div>
+
+                <!-- Vinyl -->
+                <div class="gallery-section">
+                    <div class="projects-list">
+                        <div class="project-item">
+                            <div class="project-year">2026 Vinyl</div>
+                            <div class="project-title">TRANS vol.2.5: Original Track</div>
+                        </div>
+                    </div>
+                    <div class="slider-container">
+                        <div class="slider"><div class="slides" id="slides-archive4"></div></div>
+                        <button class="slider-btn prev" onclick="changeSlide('archive4', -1)">‹</button>
+                        <button class="slider-btn next" onclick="changeSlide('archive4', 1)">›</button>
+                        <div class="slider-dots" id="dots-archive4"></div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -3431,6 +3447,7 @@ US</a>
             'archive1':['1Jv1kgdVE-LT7bJy51OJBN00LvyNXG5qs'],
             'archive2':['1DGVQTrzpeb0psf20F44_gggRQMfQdgsx','1SXz_MbKx6tJFd2k07qwc7XF1B1uo_1JV'],
             'archive3':['1flTZVeux92GsaHcs1MOcBMuM08_QZICV','1MRBbo1LSXifJ3_q19sopqShsedYHyBEp','1q5OY9iHulyUTKa3nSoqjLe36Ckwxl92C','1r8omgtSLCfdmQmLDSRGGHRlDoyaOserc','183Rwo2bBl6IyMOpsaS_OhOkCdgYFFLhU','1oK1Vh4WDft35bvj2SIu70hH3SszpNsBG','1j_apQ91rLKbG5P35ux9nc5LWNOvPVfJe'],
+            'archive4':['1DXXYvPSchoxxY-Sp2uKGwM5DoGWQT269','1y1ZhjovJ4hSxy0P7GEY4c9IxLNHDnmQ2','10JFf6AgsmEKNJprFxUWjVx0Zbz6Jn2kN','1oVwLrMS-jJAf6H0szjPv51EZRft0CAYB','1cMkS0PoMsn4U4mgYfdeMnRI3rlffwyNY','170MJpRNpuyt6Tt-JyV7cKbxPWxmxVwRf'],
             'onbodysenses':['110QeJxSwjgWGHW1D5eqpKtois6fvIQXL','1Ys5z46qc82MH0OYox7F-4c6dXa5wdTlT','1mTIcUNGAHZe5CAh-y4ARYBvyvf9KZ0OD','1dFRSyOsioEnJLSL6DbsWRmBRw8RoesIU','1sHVB0KMigo6JjcCuk2pJroPHeFQ4A8dn','15UA3XHEmlK2WqJoCcnWyeFV7o5imUb6B']
         };
         const captions = {
@@ -3443,7 +3460,7 @@ US</a>
                 'FU-01 / EC-11+EC-21+EC-31+EC-32 → SQ-31+SQ-32+SQ-41, 2026\n김민우\nMixed media on canvas\n91 × 116.8 cm'
             ]
         };
-        const currentSlide   = { '2023':0,'2024':0,'2025':0,'2026':0,'archive1':0,'archive2':0,'archive3':0,'onbodysenses':0 };
+        const currentSlide   = { '2023':0,'2024':0,'2025':0,'2026':0,'archive1':0,'archive2':0,'archive3':0,'archive4':0,'onbodysenses':0 };
         const autoplayTimers = {};
         let touchStartX = 0;
 
@@ -3510,6 +3527,7 @@ US</a>
         initSlider('archive1');
         initSlider('archive2');
         initSlider('archive3');
+        initSlider('archive4');
         initSlider('onbodysenses');
 
 
